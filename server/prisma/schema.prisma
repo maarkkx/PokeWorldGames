@@ -1,0 +1,107 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+//conexion con la bd
+datasource db {
+  provider = "postgresql"
+}
+
+//------------------------
+//-------- Tablas --------
+//------------------------
+
+model User {
+    id        Int      @id @default(autoincrement())
+    name      String
+    email     String   @unique
+    password  String   //Hasheada
+    level     Int
+    xp        Int
+    lootboxes Int
+    admin     Boolean  @default(false)
+
+    //relacion n:m con pokemon
+    pokemons UserPokemon[]
+
+    @@map("users")
+}
+
+model Pokemon {
+    id          Int     @id @default(autoincrement())
+    name        String  
+    generation  Int
+    urlImage    String? @map("url_images")
+
+    legendary Boolean @default(false)
+    myth      Boolean @default(false)
+
+    hp     Int
+    atk    Int
+    def    Int
+    spAtk  Int  @map("spatk")
+    spDef  Int  @map("spdef")
+    speed  Int
+
+    //n:m con User
+    owners UserPokemon[]
+
+    //n:m con Type
+    type  PokemonType[]
+
+    //Auto relacion
+    evolutionsFrom EvolutiveChain[] @relation("EvolutionFrom")
+    evolutionsTo   EvolutiveChain[] @relation("EvolutionTo")
+
+  @@map("pokemon")
+}
+
+model Type {
+    id      Int     @id @default(autoincrement())
+    name    String  @unique
+
+
+    Pokemon PokemonType[]
+
+    @@map("types")
+}
+
+//------------------------
+// Tablas Relaciones N:M -
+//------------------------
+model UserPokemon {
+    userId    Int @map("id_user")
+    pokemonId Int @map("id_pokemon")
+    
+    user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+    pokemon   Pokemon @relation(fields: [pokemonId], references: [id], onDelete: Cascade)
+
+    @@id([userId, pokemonId])
+    @@map("user_pokemon")
+}
+
+model PokemonType {
+  pokemonId Int @map("id_pokemon")
+  typeId    Int @map("id_type")
+
+  pokemon   Pokemon @relation(fields: [pokemonId], references: [id], onDelete: Cascade)
+  type      Type    @relation(fields: [typeId], references: [id], onDelete: Cascade)
+
+  @@id([pokemonId, typeId])
+  @@map("pokemon_type")
+}
+
+model EvolutiveChain {
+  evolutionChainId Int @map("id_evolution_chain")
+  fromPokemonId    Int @map("id_1")
+  toPokemonId      Int @map("id_2")
+
+  method    String?
+  condition String?
+
+  fromPokemon Pokemon @relation("EvolutionFrom", fields: [fromPokemonId], references: [id], onDelete: Cascade)
+  toPokemon   Pokemon @relation("EvolutionTo", fields: [toPokemonId], references: [id], onDelete: Cascade)
+
+  @@id([evolutionChainId, fromPokemonId, toPokemonId])
+  @@map("evolutive_chain")
+}
