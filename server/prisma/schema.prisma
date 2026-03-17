@@ -16,9 +16,9 @@ model User {
     name      String
     email     String   @unique
     password  String   //Hasheada
-    level     Int
-    xp        Int
-    lootboxes Int
+    level     Int      @default(1)
+    xp        Int      @default(0)
+    lootboxes Int      @default(0)
     admin     Boolean  @default(false)
 
     //relacion n:m con pokemon
@@ -32,6 +32,7 @@ model Pokemon {
     name        String  
     generation  Int
     urlImage    String? @map("url_images")
+    urlShiny    String? @map("url_shiny")
 
     legendary Boolean @default(false)
     myth      Boolean @default(false)
@@ -47,7 +48,7 @@ model Pokemon {
     owners UserPokemon[]
 
     //n:m con Type
-    type  PokemonType[]
+    types  PokemonType[]
 
     //Auto relacion
     evolutionsFrom EvolutiveChain[] @relation("EvolutionFrom")
