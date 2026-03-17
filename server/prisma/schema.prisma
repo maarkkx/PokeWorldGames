@@ -31,8 +31,9 @@ model Pokemon {
     id          Int     @id @default(autoincrement())
     name        String  
     generation  Int
-    urlImage    String? @map("url_images")
-    urlShiny    String? @map("url_shiny")
+
+    urlImage           String? @map("url_image")
+    urlShinyImage      String? @map("url_shiny_image")
 
     legendary Boolean @default(false)
     myth      Boolean @default(false)
