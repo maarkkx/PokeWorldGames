@@ -4,7 +4,13 @@ import * as repository from './repository'
 
 const router = Router();
 
-router.post('/start', );
+router.get('/start', () =>  {
+  return "Hola";
+});
+
+router.get('/', () =>  {
+  return "ruta base";
+});
 
 router.get('/random', repository.getRandomPokemon)
 
