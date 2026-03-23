@@ -79,6 +79,12 @@ async function placeLives(difficult: string) {
 //-----------Funciones para las respuestas------------
 //----------------------------------------------------
 export function manageAnswer(answer : string) {
+  if (lives = 0) {
+    return {
+      message: 'No tries remaining',
+      lives
+    }
+  }
   if (checkAnswer(answer)) {
     return {
       message: 'Correct answer!',
