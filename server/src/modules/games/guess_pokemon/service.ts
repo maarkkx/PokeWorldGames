@@ -40,7 +40,7 @@ async function randomPokemon() {
 //----------------------------------------------------
 
 export async function startGame(difficult: string): Promise<object> {
-  randomPokemon();
+  await randomPokemon();
   try {
     //validacion de que la dificultad no esta vacia
     if (!difficult) {
@@ -94,7 +94,7 @@ export function manageAnswer(answer : string) {
 }
 
 function checkAnswer(answer: string) : boolean {
-	if (answer == pokemon.name) {
+	if (answer.toLowerCase() == pokemon.name) {
     return true
   } else {
     return false
