@@ -1,47 +1,102 @@
-import { diff } from 'node:util';
-import * as repository from './repository'
+import { diff } from "node:util";
+import * as repository from "./repository";
 
-async function startGame(difficult : string) {
-    try {
-        //validacion de que la dificultad no esta vacia
-        if (!difficult) {
-            throw new Error("No difficulty selected")
-        }
+//Relacion dificultad vidas
+const livesDifficults : Record<string, number> = {
+  'hard': 1,
+  'medium': 2,
+  'easy': 3
+}
 
-        //validacion de que la dificultad existe
-        let difficulties : String[] = ["easy", "medium", "hard"] //dificultades disponibles
-        if (!difficulties.includes(difficult)) {
-            throw new Error('Difficulty does not exist');
-        }
+//Pokemon
+type Pokemon = {
+  id: number;
+  name: string;
+  urlImage: string | null;
+  hp: number;
+  atk: number;
+  def: number;
+  spAtk: number;
+  spDef: number;
+  speed: number;
+  types: any[];
+}
 
-        //llamar funciones de dificultades
-        switch (difficult) {
-            case 'easy':
-                startGameEasy()
-                break;
-        
-            case 'medium':
-                startGameMedium()
-                break;
+let pokemon : Pokemon;
 
-            case 'hard':
-                startGameHard()
-                break;    
-        }
+//vidas
+let lives : number;
 
-    } catch (error) {
-        console.log(error)
+async function randomPokemon() {
+  try {
+    pokemon = await repository.getRandomPokemon();
+  } catch {
+    console.log('Error getting pokemon')
+  }
+
+}
+//----------------------------------------------------
+//----------Funciones para empezar la partida----------
+//----------------------------------------------------
+
+export async function startGame(difficult: string): Promise<object> {
+  randomPokemon();
+  try {
+    //validacion de que la dificultad no esta vacia
+    if (!difficult) {
+      throw new Error("No difficulty selected");
     }
+
+    //validacion de que la dificultad existe
+    let difficulties: String[] = ["easy", "medium", "hard"]; //dificultades disponibles
+    if (!difficulties.includes(difficult)) {
+      throw new Error("Difficulty does not exist");
+    }
+
+    //llamar funcion de dificultad
+    placeLives(difficult);
+
+    let challenge = {
+        idChallenge: `challenge-${pokemon.id}`, //id
+        image: pokemon.urlImage, //url de la imagen del pokemon en la api
+        lives //intentos
+    }
+    return challenge;
+  } catch (error) {
+    let errorMessage = {
+      message: error,
+    };
+    console.log(error);
+    return errorMessage;
+  }
 }
 
-function startGameEasy() {
-
+async function placeLives(difficult: string) {
+  lives = livesDifficults[difficult];
 }
 
-function startGameMedium() {
-    
+//----------------------------------------------------
+//-----------Funciones para las respuestas------------
+//----------------------------------------------------
+export function manageAnswer(answer : string) {
+  if (checkAnswer(answer)) {
+    return {
+      message: 'Correct answer!',
+      lives
+    }
+  } else {
+    lives--;
+    return {
+      message: 'Incorrect answer',
+      lives
+    }
+  }
 }
 
-function startGameHard() {
-    
+function checkAnswer(answer: string) : boolean {
+	if (answer == pokemon.name) {
+    return true
+  } else {
+    return false
+  }
 }

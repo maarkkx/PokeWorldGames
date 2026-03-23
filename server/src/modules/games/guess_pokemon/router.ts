@@ -1,21 +1,17 @@
 import { Router } from 'express';
-import * as repository from './repository'
+import * as controller from './controller'
 
 
 const router = Router();
-
-router.get('/start', () =>  {
-  return "Hola";
+router.get('/', (_req, res) =>  {
+  res.send('ruta base');
 });
 
-router.get('/', () =>  {
-  return "ruta base";
-});
+//rutas del juego
+router.post('/start', controller.startGame);
+router.post('/answer', controller.answerGame);
 
-router.get('/random', repository.getRandomPokemon)
-
-router.post('/answer', (_req, res) => {
-  res.json({ message: '' });
-});
+//test random pokemon
+router.get('/random', controller.getRandomPokemon);
 
 export default router;
