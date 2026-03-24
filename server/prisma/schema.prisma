@@ -95,8 +95,8 @@ model PokemonType {
 
 model EvolutiveChain {
   evolutionChainId Int @map("id_evolution_chain")
-  fromPokemonId    Int @map("id_1")
-  toPokemonId      Int @map("id_2")
+  fromPokemonId    Int @map("from_pokemon_id")
+  toPokemonId      Int @map("to_pokemon_id")
 
   method    String?
   condition String?

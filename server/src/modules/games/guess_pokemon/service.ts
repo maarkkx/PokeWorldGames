@@ -35,6 +35,7 @@ async function randomPokemon() {
   }
 
 }
+
 //----------------------------------------------------
 //----------Funciones para empezar la partida----------
 //----------------------------------------------------
@@ -57,7 +58,6 @@ export async function startGame(difficult: string): Promise<object> {
     placeLives(difficult);
 
     let challenge = {
-        idChallenge: `challenge-${pokemon.id}`, //id
         image: pokemon.urlImage, //url de la imagen del pokemon en la api
         lives //intentos
     }
@@ -79,7 +79,7 @@ async function placeLives(difficult: string) {
 //-----------Funciones para las respuestas------------
 //----------------------------------------------------
 export function manageAnswer(answer : string) {
-  if (lives = 0) {
+  if (lives <= 0) {
     return {
       message: 'No tries remaining',
       lives
