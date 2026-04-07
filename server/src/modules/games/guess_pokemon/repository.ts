@@ -70,7 +70,6 @@ export const updateGame = async (gameId: string,
     lastGuess?: string;
     status?: GameStatus;
     xpEarned?: number;
-    lootboxesEarned?: number;
   }
 ) => {
   return prisma.guessPokemonGame.update({
@@ -84,10 +83,10 @@ export const getActiveGameByUserId = async (userId: number) => {
   return prisma.guessPokemonGame.findFirst({
     where: {
       userId,
-      status: 'ACTIVE', // solo partidas activas
+      status: 'ACTIVE', //solo partidas activas
     },
     orderBy: {
-      startedAt: 'desc', // opcional: la más reciente si hay varias (aunque no debería)
+      startedAt: 'desc',
     },
   });
 };
