@@ -9,8 +9,8 @@
  * 🟢 You can import this file directly.
  */
 import type * as runtime from "@prisma/client/runtime/client"
-import type * as $Enums from "../enums"
-import type * as Prisma from "../internal/prismaNamespace"
+import type * as $Enums from "../enums.js"
+import type * as Prisma from "../internal/prismaNamespace.js"
 
 /**
  * Model Pokemon
@@ -312,6 +312,9 @@ export type PokemonWhereInput = {
   types?: Prisma.PokemonTypeListRelationFilter
   evolutionsFrom?: Prisma.EvolutiveChainListRelationFilter
   evolutionsTo?: Prisma.EvolutiveChainListRelationFilter
+  guessPokemonGames?: Prisma.GuessPokemonGameListRelationFilter
+  guessShinyGames?: Prisma.GuessShinyGameListRelationFilter
+  pokedokuAnswerCells?: Prisma.PokedokuGameCellListRelationFilter
 }
 
 export type PokemonOrderByWithRelationInput = {
@@ -332,6 +335,9 @@ export type PokemonOrderByWithRelationInput = {
   types?: Prisma.PokemonTypeOrderByRelationAggregateInput
   evolutionsFrom?: Prisma.EvolutiveChainOrderByRelationAggregateInput
   evolutionsTo?: Prisma.EvolutiveChainOrderByRelationAggregateInput
+  guessPokemonGames?: Prisma.GuessPokemonGameOrderByRelationAggregateInput
+  guessShinyGames?: Prisma.GuessShinyGameOrderByRelationAggregateInput
+  pokedokuAnswerCells?: Prisma.PokedokuGameCellOrderByRelationAggregateInput
 }
 
 export type PokemonWhereUniqueInput = Prisma.AtLeast<{
@@ -355,6 +361,9 @@ export type PokemonWhereUniqueInput = Prisma.AtLeast<{
   types?: Prisma.PokemonTypeListRelationFilter
   evolutionsFrom?: Prisma.EvolutiveChainListRelationFilter
   evolutionsTo?: Prisma.EvolutiveChainListRelationFilter
+  guessPokemonGames?: Prisma.GuessPokemonGameListRelationFilter
+  guessShinyGames?: Prisma.GuessShinyGameListRelationFilter
+  pokedokuAnswerCells?: Prisma.PokedokuGameCellListRelationFilter
 }, "id">
 
 export type PokemonOrderByWithAggregationInput = {
@@ -414,6 +423,9 @@ export type PokemonCreateInput = {
   types?: Prisma.PokemonTypeCreateNestedManyWithoutPokemonInput
   evolutionsFrom?: Prisma.EvolutiveChainCreateNestedManyWithoutFromPokemonInput
   evolutionsTo?: Prisma.EvolutiveChainCreateNestedManyWithoutToPokemonInput
+  guessPokemonGames?: Prisma.GuessPokemonGameCreateNestedManyWithoutPokemonInput
+  guessShinyGames?: Prisma.GuessShinyGameCreateNestedManyWithoutPokemonInput
+  pokedokuAnswerCells?: Prisma.PokedokuGameCellCreateNestedManyWithoutAnswerPokemonInput
 }
 
 export type PokemonUncheckedCreateInput = {
@@ -434,6 +446,9 @@ export type PokemonUncheckedCreateInput = {
   types?: Prisma.PokemonTypeUncheckedCreateNestedManyWithoutPokemonInput
   evolutionsFrom?: Prisma.EvolutiveChainUncheckedCreateNestedManyWithoutFromPokemonInput
   evolutionsTo?: Prisma.EvolutiveChainUncheckedCreateNestedManyWithoutToPokemonInput
+  guessPokemonGames?: Prisma.GuessPokemonGameUncheckedCreateNestedManyWithoutPokemonInput
+  guessShinyGames?: Prisma.GuessShinyGameUncheckedCreateNestedManyWithoutPokemonInput
+  pokedokuAnswerCells?: Prisma.PokedokuGameCellUncheckedCreateNestedManyWithoutAnswerPokemonInput
 }
 
 export type PokemonUpdateInput = {
@@ -453,6 +468,9 @@ export type PokemonUpdateInput = {
   types?: Prisma.PokemonTypeUpdateManyWithoutPokemonNestedInput
   evolutionsFrom?: Prisma.EvolutiveChainUpdateManyWithoutFromPokemonNestedInput
   evolutionsTo?: Prisma.EvolutiveChainUpdateManyWithoutToPokemonNestedInput
+  guessPokemonGames?: Prisma.GuessPokemonGameUpdateManyWithoutPokemonNestedInput
+  guessShinyGames?: Prisma.GuessShinyGameUpdateManyWithoutPokemonNestedInput
+  pokedokuAnswerCells?: Prisma.PokedokuGameCellUpdateManyWithoutAnswerPokemonNestedInput
 }
 
 export type PokemonUncheckedUpdateInput = {
@@ -473,6 +491,9 @@ export type PokemonUncheckedUpdateInput = {
   types?: Prisma.PokemonTypeUncheckedUpdateManyWithoutPokemonNestedInput
   evolutionsFrom?: Prisma.EvolutiveChainUncheckedUpdateManyWithoutFromPokemonNestedInput
   evolutionsTo?: Prisma.EvolutiveChainUncheckedUpdateManyWithoutToPokemonNestedInput
+  guessPokemonGames?: Prisma.GuessPokemonGameUncheckedUpdateManyWithoutPokemonNestedInput
+  guessShinyGames?: Prisma.GuessShinyGameUncheckedUpdateManyWithoutPokemonNestedInput
+  pokedokuAnswerCells?: Prisma.PokedokuGameCellUncheckedUpdateManyWithoutAnswerPokemonNestedInput
 }
 
 export type PokemonCreateManyInput = {
@@ -597,8 +618,9 @@ export type PokemonScalarRelationFilter = {
   isNot?: Prisma.PokemonWhereInput
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
+export type PokemonNullableScalarRelationFilter = {
+  is?: Prisma.PokemonWhereInput | null
+  isNot?: Prisma.PokemonWhereInput | null
 }
 
 export type PokemonCreateNestedOneWithoutOwnersInput = {
@@ -657,6 +679,50 @@ export type PokemonUpdateOneRequiredWithoutEvolutionsToNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.PokemonUpdateToOneWithWhereWithoutEvolutionsToInput, Prisma.PokemonUpdateWithoutEvolutionsToInput>, Prisma.PokemonUncheckedUpdateWithoutEvolutionsToInput>
 }
 
+export type PokemonCreateNestedOneWithoutGuessPokemonGamesInput = {
+  create?: Prisma.XOR<Prisma.PokemonCreateWithoutGuessPokemonGamesInput, Prisma.PokemonUncheckedCreateWithoutGuessPokemonGamesInput>
+  connectOrCreate?: Prisma.PokemonCreateOrConnectWithoutGuessPokemonGamesInput
+  connect?: Prisma.PokemonWhereUniqueInput
+}
+
+export type PokemonUpdateOneRequiredWithoutGuessPokemonGamesNestedInput = {
+  create?: Prisma.XOR<Prisma.PokemonCreateWithoutGuessPokemonGamesInput, Prisma.PokemonUncheckedCreateWithoutGuessPokemonGamesInput>
+  connectOrCreate?: Prisma.PokemonCreateOrConnectWithoutGuessPokemonGamesInput
+  upsert?: Prisma.PokemonUpsertWithoutGuessPokemonGamesInput
+  connect?: Prisma.PokemonWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PokemonUpdateToOneWithWhereWithoutGuessPokemonGamesInput, Prisma.PokemonUpdateWithoutGuessPokemonGamesInput>, Prisma.PokemonUncheckedUpdateWithoutGuessPokemonGamesInput>
+}
+
+export type PokemonCreateNestedOneWithoutGuessShinyGamesInput = {
+  create?: Prisma.XOR<Prisma.PokemonCreateWithoutGuessShinyGamesInput, Prisma.PokemonUncheckedCreateWithoutGuessShinyGamesInput>
+  connectOrCreate?: Prisma.PokemonCreateOrConnectWithoutGuessShinyGamesInput
+  connect?: Prisma.PokemonWhereUniqueInput
+}
+
+export type PokemonUpdateOneRequiredWithoutGuessShinyGamesNestedInput = {
+  create?: Prisma.XOR<Prisma.PokemonCreateWithoutGuessShinyGamesInput, Prisma.PokemonUncheckedCreateWithoutGuessShinyGamesInput>
+  connectOrCreate?: Prisma.PokemonCreateOrConnectWithoutGuessShinyGamesInput
+  upsert?: Prisma.PokemonUpsertWithoutGuessShinyGamesInput
+  connect?: Prisma.PokemonWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PokemonUpdateToOneWithWhereWithoutGuessShinyGamesInput, Prisma.PokemonUpdateWithoutGuessShinyGamesInput>, Prisma.PokemonUncheckedUpdateWithoutGuessShinyGamesInput>
+}
+
+export type PokemonCreateNestedOneWithoutPokedokuAnswerCellsInput = {
+  create?: Prisma.XOR<Prisma.PokemonCreateWithoutPokedokuAnswerCellsInput, Prisma.PokemonUncheckedCreateWithoutPokedokuAnswerCellsInput>
+  connectOrCreate?: Prisma.PokemonCreateOrConnectWithoutPokedokuAnswerCellsInput
+  connect?: Prisma.PokemonWhereUniqueInput
+}
+
+export type PokemonUpdateOneWithoutPokedokuAnswerCellsNestedInput = {
+  create?: Prisma.XOR<Prisma.PokemonCreateWithoutPokedokuAnswerCellsInput, Prisma.PokemonUncheckedCreateWithoutPokedokuAnswerCellsInput>
+  connectOrCreate?: Prisma.PokemonCreateOrConnectWithoutPokedokuAnswerCellsInput
+  upsert?: Prisma.PokemonUpsertWithoutPokedokuAnswerCellsInput
+  disconnect?: Prisma.PokemonWhereInput | boolean
+  delete?: Prisma.PokemonWhereInput | boolean
+  connect?: Prisma.PokemonWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PokemonUpdateToOneWithWhereWithoutPokedokuAnswerCellsInput, Prisma.PokemonUpdateWithoutPokedokuAnswerCellsInput>, Prisma.PokemonUncheckedUpdateWithoutPokedokuAnswerCellsInput>
+}
+
 export type PokemonCreateWithoutOwnersInput = {
   name: string
   generation: number
@@ -673,6 +739,9 @@ export type PokemonCreateWithoutOwnersInput = {
   types?: Prisma.PokemonTypeCreateNestedManyWithoutPokemonInput
   evolutionsFrom?: Prisma.EvolutiveChainCreateNestedManyWithoutFromPokemonInput
   evolutionsTo?: Prisma.EvolutiveChainCreateNestedManyWithoutToPokemonInput
+  guessPokemonGames?: Prisma.GuessPokemonGameCreateNestedManyWithoutPokemonInput
+  guessShinyGames?: Prisma.GuessShinyGameCreateNestedManyWithoutPokemonInput
+  pokedokuAnswerCells?: Prisma.PokedokuGameCellCreateNestedManyWithoutAnswerPokemonInput
 }
 
 export type PokemonUncheckedCreateWithoutOwnersInput = {
@@ -692,6 +761,9 @@ export type PokemonUncheckedCreateWithoutOwnersInput = {
   types?: Prisma.PokemonTypeUncheckedCreateNestedManyWithoutPokemonInput
   evolutionsFrom?: Prisma.EvolutiveChainUncheckedCreateNestedManyWithoutFromPokemonInput
   evolutionsTo?: Prisma.EvolutiveChainUncheckedCreateNestedManyWithoutToPokemonInput
+  guessPokemonGames?: Prisma.GuessPokemonGameUncheckedCreateNestedManyWithoutPokemonInput
+  guessShinyGames?: Prisma.GuessShinyGameUncheckedCreateNestedManyWithoutPokemonInput
+  pokedokuAnswerCells?: Prisma.PokedokuGameCellUncheckedCreateNestedManyWithoutAnswerPokemonInput
 }
 
 export type PokemonCreateOrConnectWithoutOwnersInput = {
@@ -726,6 +798,9 @@ export type PokemonUpdateWithoutOwnersInput = {
   types?: Prisma.PokemonTypeUpdateManyWithoutPokemonNestedInput
   evolutionsFrom?: Prisma.EvolutiveChainUpdateManyWithoutFromPokemonNestedInput
   evolutionsTo?: Prisma.EvolutiveChainUpdateManyWithoutToPokemonNestedInput
+  guessPokemonGames?: Prisma.GuessPokemonGameUpdateManyWithoutPokemonNestedInput
+  guessShinyGames?: Prisma.GuessShinyGameUpdateManyWithoutPokemonNestedInput
+  pokedokuAnswerCells?: Prisma.PokedokuGameCellUpdateManyWithoutAnswerPokemonNestedInput
 }
 
 export type PokemonUncheckedUpdateWithoutOwnersInput = {
@@ -745,6 +820,9 @@ export type PokemonUncheckedUpdateWithoutOwnersInput = {
   types?: Prisma.PokemonTypeUncheckedUpdateManyWithoutPokemonNestedInput
   evolutionsFrom?: Prisma.EvolutiveChainUncheckedUpdateManyWithoutFromPokemonNestedInput
   evolutionsTo?: Prisma.EvolutiveChainUncheckedUpdateManyWithoutToPokemonNestedInput
+  guessPokemonGames?: Prisma.GuessPokemonGameUncheckedUpdateManyWithoutPokemonNestedInput
+  guessShinyGames?: Prisma.GuessShinyGameUncheckedUpdateManyWithoutPokemonNestedInput
+  pokedokuAnswerCells?: Prisma.PokedokuGameCellUncheckedUpdateManyWithoutAnswerPokemonNestedInput
 }
 
 export type PokemonCreateWithoutTypesInput = {
@@ -763,6 +841,9 @@ export type PokemonCreateWithoutTypesInput = {
   owners?: Prisma.UserPokemonCreateNestedManyWithoutPokemonInput
   evolutionsFrom?: Prisma.EvolutiveChainCreateNestedManyWithoutFromPokemonInput
   evolutionsTo?: Prisma.EvolutiveChainCreateNestedManyWithoutToPokemonInput
+  guessPokemonGames?: Prisma.GuessPokemonGameCreateNestedManyWithoutPokemonInput
+  guessShinyGames?: Prisma.GuessShinyGameCreateNestedManyWithoutPokemonInput
+  pokedokuAnswerCells?: Prisma.PokedokuGameCellCreateNestedManyWithoutAnswerPokemonInput
 }
 
 export type PokemonUncheckedCreateWithoutTypesInput = {
@@ -782,6 +863,9 @@ export type PokemonUncheckedCreateWithoutTypesInput = {
   owners?: Prisma.UserPokemonUncheckedCreateNestedManyWithoutPokemonInput
   evolutionsFrom?: Prisma.EvolutiveChainUncheckedCreateNestedManyWithoutFromPokemonInput
   evolutionsTo?: Prisma.EvolutiveChainUncheckedCreateNestedManyWithoutToPokemonInput
+  guessPokemonGames?: Prisma.GuessPokemonGameUncheckedCreateNestedManyWithoutPokemonInput
+  guessShinyGames?: Prisma.GuessShinyGameUncheckedCreateNestedManyWithoutPokemonInput
+  pokedokuAnswerCells?: Prisma.PokedokuGameCellUncheckedCreateNestedManyWithoutAnswerPokemonInput
 }
 
 export type PokemonCreateOrConnectWithoutTypesInput = {
@@ -816,6 +900,9 @@ export type PokemonUpdateWithoutTypesInput = {
   owners?: Prisma.UserPokemonUpdateManyWithoutPokemonNestedInput
   evolutionsFrom?: Prisma.EvolutiveChainUpdateManyWithoutFromPokemonNestedInput
   evolutionsTo?: Prisma.EvolutiveChainUpdateManyWithoutToPokemonNestedInput
+  guessPokemonGames?: Prisma.GuessPokemonGameUpdateManyWithoutPokemonNestedInput
+  guessShinyGames?: Prisma.GuessShinyGameUpdateManyWithoutPokemonNestedInput
+  pokedokuAnswerCells?: Prisma.PokedokuGameCellUpdateManyWithoutAnswerPokemonNestedInput
 }
 
 export type PokemonUncheckedUpdateWithoutTypesInput = {
@@ -835,6 +922,9 @@ export type PokemonUncheckedUpdateWithoutTypesInput = {
   owners?: Prisma.UserPokemonUncheckedUpdateManyWithoutPokemonNestedInput
   evolutionsFrom?: Prisma.EvolutiveChainUncheckedUpdateManyWithoutFromPokemonNestedInput
   evolutionsTo?: Prisma.EvolutiveChainUncheckedUpdateManyWithoutToPokemonNestedInput
+  guessPokemonGames?: Prisma.GuessPokemonGameUncheckedUpdateManyWithoutPokemonNestedInput
+  guessShinyGames?: Prisma.GuessShinyGameUncheckedUpdateManyWithoutPokemonNestedInput
+  pokedokuAnswerCells?: Prisma.PokedokuGameCellUncheckedUpdateManyWithoutAnswerPokemonNestedInput
 }
 
 export type PokemonCreateWithoutEvolutionsFromInput = {
@@ -853,6 +943,9 @@ export type PokemonCreateWithoutEvolutionsFromInput = {
   owners?: Prisma.UserPokemonCreateNestedManyWithoutPokemonInput
   types?: Prisma.PokemonTypeCreateNestedManyWithoutPokemonInput
   evolutionsTo?: Prisma.EvolutiveChainCreateNestedManyWithoutToPokemonInput
+  guessPokemonGames?: Prisma.GuessPokemonGameCreateNestedManyWithoutPokemonInput
+  guessShinyGames?: Prisma.GuessShinyGameCreateNestedManyWithoutPokemonInput
+  pokedokuAnswerCells?: Prisma.PokedokuGameCellCreateNestedManyWithoutAnswerPokemonInput
 }
 
 export type PokemonUncheckedCreateWithoutEvolutionsFromInput = {
@@ -872,6 +965,9 @@ export type PokemonUncheckedCreateWithoutEvolutionsFromInput = {
   owners?: Prisma.UserPokemonUncheckedCreateNestedManyWithoutPokemonInput
   types?: Prisma.PokemonTypeUncheckedCreateNestedManyWithoutPokemonInput
   evolutionsTo?: Prisma.EvolutiveChainUncheckedCreateNestedManyWithoutToPokemonInput
+  guessPokemonGames?: Prisma.GuessPokemonGameUncheckedCreateNestedManyWithoutPokemonInput
+  guessShinyGames?: Prisma.GuessShinyGameUncheckedCreateNestedManyWithoutPokemonInput
+  pokedokuAnswerCells?: Prisma.PokedokuGameCellUncheckedCreateNestedManyWithoutAnswerPokemonInput
 }
 
 export type PokemonCreateOrConnectWithoutEvolutionsFromInput = {
@@ -895,6 +991,9 @@ export type PokemonCreateWithoutEvolutionsToInput = {
   owners?: Prisma.UserPokemonCreateNestedManyWithoutPokemonInput
   types?: Prisma.PokemonTypeCreateNestedManyWithoutPokemonInput
   evolutionsFrom?: Prisma.EvolutiveChainCreateNestedManyWithoutFromPokemonInput
+  guessPokemonGames?: Prisma.GuessPokemonGameCreateNestedManyWithoutPokemonInput
+  guessShinyGames?: Prisma.GuessShinyGameCreateNestedManyWithoutPokemonInput
+  pokedokuAnswerCells?: Prisma.PokedokuGameCellCreateNestedManyWithoutAnswerPokemonInput
 }
 
 export type PokemonUncheckedCreateWithoutEvolutionsToInput = {
@@ -914,6 +1013,9 @@ export type PokemonUncheckedCreateWithoutEvolutionsToInput = {
   owners?: Prisma.UserPokemonUncheckedCreateNestedManyWithoutPokemonInput
   types?: Prisma.PokemonTypeUncheckedCreateNestedManyWithoutPokemonInput
   evolutionsFrom?: Prisma.EvolutiveChainUncheckedCreateNestedManyWithoutFromPokemonInput
+  guessPokemonGames?: Prisma.GuessPokemonGameUncheckedCreateNestedManyWithoutPokemonInput
+  guessShinyGames?: Prisma.GuessShinyGameUncheckedCreateNestedManyWithoutPokemonInput
+  pokedokuAnswerCells?: Prisma.PokedokuGameCellUncheckedCreateNestedManyWithoutAnswerPokemonInput
 }
 
 export type PokemonCreateOrConnectWithoutEvolutionsToInput = {
@@ -948,6 +1050,9 @@ export type PokemonUpdateWithoutEvolutionsFromInput = {
   owners?: Prisma.UserPokemonUpdateManyWithoutPokemonNestedInput
   types?: Prisma.PokemonTypeUpdateManyWithoutPokemonNestedInput
   evolutionsTo?: Prisma.EvolutiveChainUpdateManyWithoutToPokemonNestedInput
+  guessPokemonGames?: Prisma.GuessPokemonGameUpdateManyWithoutPokemonNestedInput
+  guessShinyGames?: Prisma.GuessShinyGameUpdateManyWithoutPokemonNestedInput
+  pokedokuAnswerCells?: Prisma.PokedokuGameCellUpdateManyWithoutAnswerPokemonNestedInput
 }
 
 export type PokemonUncheckedUpdateWithoutEvolutionsFromInput = {
@@ -967,6 +1072,9 @@ export type PokemonUncheckedUpdateWithoutEvolutionsFromInput = {
   owners?: Prisma.UserPokemonUncheckedUpdateManyWithoutPokemonNestedInput
   types?: Prisma.PokemonTypeUncheckedUpdateManyWithoutPokemonNestedInput
   evolutionsTo?: Prisma.EvolutiveChainUncheckedUpdateManyWithoutToPokemonNestedInput
+  guessPokemonGames?: Prisma.GuessPokemonGameUncheckedUpdateManyWithoutPokemonNestedInput
+  guessShinyGames?: Prisma.GuessShinyGameUncheckedUpdateManyWithoutPokemonNestedInput
+  pokedokuAnswerCells?: Prisma.PokedokuGameCellUncheckedUpdateManyWithoutAnswerPokemonNestedInput
 }
 
 export type PokemonUpsertWithoutEvolutionsToInput = {
@@ -996,6 +1104,9 @@ export type PokemonUpdateWithoutEvolutionsToInput = {
   owners?: Prisma.UserPokemonUpdateManyWithoutPokemonNestedInput
   types?: Prisma.PokemonTypeUpdateManyWithoutPokemonNestedInput
   evolutionsFrom?: Prisma.EvolutiveChainUpdateManyWithoutFromPokemonNestedInput
+  guessPokemonGames?: Prisma.GuessPokemonGameUpdateManyWithoutPokemonNestedInput
+  guessShinyGames?: Prisma.GuessShinyGameUpdateManyWithoutPokemonNestedInput
+  pokedokuAnswerCells?: Prisma.PokedokuGameCellUpdateManyWithoutAnswerPokemonNestedInput
 }
 
 export type PokemonUncheckedUpdateWithoutEvolutionsToInput = {
@@ -1015,6 +1126,315 @@ export type PokemonUncheckedUpdateWithoutEvolutionsToInput = {
   owners?: Prisma.UserPokemonUncheckedUpdateManyWithoutPokemonNestedInput
   types?: Prisma.PokemonTypeUncheckedUpdateManyWithoutPokemonNestedInput
   evolutionsFrom?: Prisma.EvolutiveChainUncheckedUpdateManyWithoutFromPokemonNestedInput
+  guessPokemonGames?: Prisma.GuessPokemonGameUncheckedUpdateManyWithoutPokemonNestedInput
+  guessShinyGames?: Prisma.GuessShinyGameUncheckedUpdateManyWithoutPokemonNestedInput
+  pokedokuAnswerCells?: Prisma.PokedokuGameCellUncheckedUpdateManyWithoutAnswerPokemonNestedInput
+}
+
+export type PokemonCreateWithoutGuessPokemonGamesInput = {
+  name: string
+  generation: number
+  urlImage?: string | null
+  urlShinyImage?: string | null
+  legendary?: boolean
+  myth?: boolean
+  hp: number
+  atk: number
+  def: number
+  spAtk: number
+  spDef: number
+  speed: number
+  owners?: Prisma.UserPokemonCreateNestedManyWithoutPokemonInput
+  types?: Prisma.PokemonTypeCreateNestedManyWithoutPokemonInput
+  evolutionsFrom?: Prisma.EvolutiveChainCreateNestedManyWithoutFromPokemonInput
+  evolutionsTo?: Prisma.EvolutiveChainCreateNestedManyWithoutToPokemonInput
+  guessShinyGames?: Prisma.GuessShinyGameCreateNestedManyWithoutPokemonInput
+  pokedokuAnswerCells?: Prisma.PokedokuGameCellCreateNestedManyWithoutAnswerPokemonInput
+}
+
+export type PokemonUncheckedCreateWithoutGuessPokemonGamesInput = {
+  id?: number
+  name: string
+  generation: number
+  urlImage?: string | null
+  urlShinyImage?: string | null
+  legendary?: boolean
+  myth?: boolean
+  hp: number
+  atk: number
+  def: number
+  spAtk: number
+  spDef: number
+  speed: number
+  owners?: Prisma.UserPokemonUncheckedCreateNestedManyWithoutPokemonInput
+  types?: Prisma.PokemonTypeUncheckedCreateNestedManyWithoutPokemonInput
+  evolutionsFrom?: Prisma.EvolutiveChainUncheckedCreateNestedManyWithoutFromPokemonInput
+  evolutionsTo?: Prisma.EvolutiveChainUncheckedCreateNestedManyWithoutToPokemonInput
+  guessShinyGames?: Prisma.GuessShinyGameUncheckedCreateNestedManyWithoutPokemonInput
+  pokedokuAnswerCells?: Prisma.PokedokuGameCellUncheckedCreateNestedManyWithoutAnswerPokemonInput
+}
+
+export type PokemonCreateOrConnectWithoutGuessPokemonGamesInput = {
+  where: Prisma.PokemonWhereUniqueInput
+  create: Prisma.XOR<Prisma.PokemonCreateWithoutGuessPokemonGamesInput, Prisma.PokemonUncheckedCreateWithoutGuessPokemonGamesInput>
+}
+
+export type PokemonUpsertWithoutGuessPokemonGamesInput = {
+  update: Prisma.XOR<Prisma.PokemonUpdateWithoutGuessPokemonGamesInput, Prisma.PokemonUncheckedUpdateWithoutGuessPokemonGamesInput>
+  create: Prisma.XOR<Prisma.PokemonCreateWithoutGuessPokemonGamesInput, Prisma.PokemonUncheckedCreateWithoutGuessPokemonGamesInput>
+  where?: Prisma.PokemonWhereInput
+}
+
+export type PokemonUpdateToOneWithWhereWithoutGuessPokemonGamesInput = {
+  where?: Prisma.PokemonWhereInput
+  data: Prisma.XOR<Prisma.PokemonUpdateWithoutGuessPokemonGamesInput, Prisma.PokemonUncheckedUpdateWithoutGuessPokemonGamesInput>
+}
+
+export type PokemonUpdateWithoutGuessPokemonGamesInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  generation?: Prisma.IntFieldUpdateOperationsInput | number
+  urlImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urlShinyImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legendary?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  myth?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hp?: Prisma.IntFieldUpdateOperationsInput | number
+  atk?: Prisma.IntFieldUpdateOperationsInput | number
+  def?: Prisma.IntFieldUpdateOperationsInput | number
+  spAtk?: Prisma.IntFieldUpdateOperationsInput | number
+  spDef?: Prisma.IntFieldUpdateOperationsInput | number
+  speed?: Prisma.IntFieldUpdateOperationsInput | number
+  owners?: Prisma.UserPokemonUpdateManyWithoutPokemonNestedInput
+  types?: Prisma.PokemonTypeUpdateManyWithoutPokemonNestedInput
+  evolutionsFrom?: Prisma.EvolutiveChainUpdateManyWithoutFromPokemonNestedInput
+  evolutionsTo?: Prisma.EvolutiveChainUpdateManyWithoutToPokemonNestedInput
+  guessShinyGames?: Prisma.GuessShinyGameUpdateManyWithoutPokemonNestedInput
+  pokedokuAnswerCells?: Prisma.PokedokuGameCellUpdateManyWithoutAnswerPokemonNestedInput
+}
+
+export type PokemonUncheckedUpdateWithoutGuessPokemonGamesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  generation?: Prisma.IntFieldUpdateOperationsInput | number
+  urlImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urlShinyImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legendary?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  myth?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hp?: Prisma.IntFieldUpdateOperationsInput | number
+  atk?: Prisma.IntFieldUpdateOperationsInput | number
+  def?: Prisma.IntFieldUpdateOperationsInput | number
+  spAtk?: Prisma.IntFieldUpdateOperationsInput | number
+  spDef?: Prisma.IntFieldUpdateOperationsInput | number
+  speed?: Prisma.IntFieldUpdateOperationsInput | number
+  owners?: Prisma.UserPokemonUncheckedUpdateManyWithoutPokemonNestedInput
+  types?: Prisma.PokemonTypeUncheckedUpdateManyWithoutPokemonNestedInput
+  evolutionsFrom?: Prisma.EvolutiveChainUncheckedUpdateManyWithoutFromPokemonNestedInput
+  evolutionsTo?: Prisma.EvolutiveChainUncheckedUpdateManyWithoutToPokemonNestedInput
+  guessShinyGames?: Prisma.GuessShinyGameUncheckedUpdateManyWithoutPokemonNestedInput
+  pokedokuAnswerCells?: Prisma.PokedokuGameCellUncheckedUpdateManyWithoutAnswerPokemonNestedInput
+}
+
+export type PokemonCreateWithoutGuessShinyGamesInput = {
+  name: string
+  generation: number
+  urlImage?: string | null
+  urlShinyImage?: string | null
+  legendary?: boolean
+  myth?: boolean
+  hp: number
+  atk: number
+  def: number
+  spAtk: number
+  spDef: number
+  speed: number
+  owners?: Prisma.UserPokemonCreateNestedManyWithoutPokemonInput
+  types?: Prisma.PokemonTypeCreateNestedManyWithoutPokemonInput
+  evolutionsFrom?: Prisma.EvolutiveChainCreateNestedManyWithoutFromPokemonInput
+  evolutionsTo?: Prisma.EvolutiveChainCreateNestedManyWithoutToPokemonInput
+  guessPokemonGames?: Prisma.GuessPokemonGameCreateNestedManyWithoutPokemonInput
+  pokedokuAnswerCells?: Prisma.PokedokuGameCellCreateNestedManyWithoutAnswerPokemonInput
+}
+
+export type PokemonUncheckedCreateWithoutGuessShinyGamesInput = {
+  id?: number
+  name: string
+  generation: number
+  urlImage?: string | null
+  urlShinyImage?: string | null
+  legendary?: boolean
+  myth?: boolean
+  hp: number
+  atk: number
+  def: number
+  spAtk: number
+  spDef: number
+  speed: number
+  owners?: Prisma.UserPokemonUncheckedCreateNestedManyWithoutPokemonInput
+  types?: Prisma.PokemonTypeUncheckedCreateNestedManyWithoutPokemonInput
+  evolutionsFrom?: Prisma.EvolutiveChainUncheckedCreateNestedManyWithoutFromPokemonInput
+  evolutionsTo?: Prisma.EvolutiveChainUncheckedCreateNestedManyWithoutToPokemonInput
+  guessPokemonGames?: Prisma.GuessPokemonGameUncheckedCreateNestedManyWithoutPokemonInput
+  pokedokuAnswerCells?: Prisma.PokedokuGameCellUncheckedCreateNestedManyWithoutAnswerPokemonInput
+}
+
+export type PokemonCreateOrConnectWithoutGuessShinyGamesInput = {
+  where: Prisma.PokemonWhereUniqueInput
+  create: Prisma.XOR<Prisma.PokemonCreateWithoutGuessShinyGamesInput, Prisma.PokemonUncheckedCreateWithoutGuessShinyGamesInput>
+}
+
+export type PokemonUpsertWithoutGuessShinyGamesInput = {
+  update: Prisma.XOR<Prisma.PokemonUpdateWithoutGuessShinyGamesInput, Prisma.PokemonUncheckedUpdateWithoutGuessShinyGamesInput>
+  create: Prisma.XOR<Prisma.PokemonCreateWithoutGuessShinyGamesInput, Prisma.PokemonUncheckedCreateWithoutGuessShinyGamesInput>
+  where?: Prisma.PokemonWhereInput
+}
+
+export type PokemonUpdateToOneWithWhereWithoutGuessShinyGamesInput = {
+  where?: Prisma.PokemonWhereInput
+  data: Prisma.XOR<Prisma.PokemonUpdateWithoutGuessShinyGamesInput, Prisma.PokemonUncheckedUpdateWithoutGuessShinyGamesInput>
+}
+
+export type PokemonUpdateWithoutGuessShinyGamesInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  generation?: Prisma.IntFieldUpdateOperationsInput | number
+  urlImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urlShinyImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legendary?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  myth?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hp?: Prisma.IntFieldUpdateOperationsInput | number
+  atk?: Prisma.IntFieldUpdateOperationsInput | number
+  def?: Prisma.IntFieldUpdateOperationsInput | number
+  spAtk?: Prisma.IntFieldUpdateOperationsInput | number
+  spDef?: Prisma.IntFieldUpdateOperationsInput | number
+  speed?: Prisma.IntFieldUpdateOperationsInput | number
+  owners?: Prisma.UserPokemonUpdateManyWithoutPokemonNestedInput
+  types?: Prisma.PokemonTypeUpdateManyWithoutPokemonNestedInput
+  evolutionsFrom?: Prisma.EvolutiveChainUpdateManyWithoutFromPokemonNestedInput
+  evolutionsTo?: Prisma.EvolutiveChainUpdateManyWithoutToPokemonNestedInput
+  guessPokemonGames?: Prisma.GuessPokemonGameUpdateManyWithoutPokemonNestedInput
+  pokedokuAnswerCells?: Prisma.PokedokuGameCellUpdateManyWithoutAnswerPokemonNestedInput
+}
+
+export type PokemonUncheckedUpdateWithoutGuessShinyGamesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  generation?: Prisma.IntFieldUpdateOperationsInput | number
+  urlImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urlShinyImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legendary?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  myth?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hp?: Prisma.IntFieldUpdateOperationsInput | number
+  atk?: Prisma.IntFieldUpdateOperationsInput | number
+  def?: Prisma.IntFieldUpdateOperationsInput | number
+  spAtk?: Prisma.IntFieldUpdateOperationsInput | number
+  spDef?: Prisma.IntFieldUpdateOperationsInput | number
+  speed?: Prisma.IntFieldUpdateOperationsInput | number
+  owners?: Prisma.UserPokemonUncheckedUpdateManyWithoutPokemonNestedInput
+  types?: Prisma.PokemonTypeUncheckedUpdateManyWithoutPokemonNestedInput
+  evolutionsFrom?: Prisma.EvolutiveChainUncheckedUpdateManyWithoutFromPokemonNestedInput
+  evolutionsTo?: Prisma.EvolutiveChainUncheckedUpdateManyWithoutToPokemonNestedInput
+  guessPokemonGames?: Prisma.GuessPokemonGameUncheckedUpdateManyWithoutPokemonNestedInput
+  pokedokuAnswerCells?: Prisma.PokedokuGameCellUncheckedUpdateManyWithoutAnswerPokemonNestedInput
+}
+
+export type PokemonCreateWithoutPokedokuAnswerCellsInput = {
+  name: string
+  generation: number
+  urlImage?: string | null
+  urlShinyImage?: string | null
+  legendary?: boolean
+  myth?: boolean
+  hp: number
+  atk: number
+  def: number
+  spAtk: number
+  spDef: number
+  speed: number
+  owners?: Prisma.UserPokemonCreateNestedManyWithoutPokemonInput
+  types?: Prisma.PokemonTypeCreateNestedManyWithoutPokemonInput
+  evolutionsFrom?: Prisma.EvolutiveChainCreateNestedManyWithoutFromPokemonInput
+  evolutionsTo?: Prisma.EvolutiveChainCreateNestedManyWithoutToPokemonInput
+  guessPokemonGames?: Prisma.GuessPokemonGameCreateNestedManyWithoutPokemonInput
+  guessShinyGames?: Prisma.GuessShinyGameCreateNestedManyWithoutPokemonInput
+}
+
+export type PokemonUncheckedCreateWithoutPokedokuAnswerCellsInput = {
+  id?: number
+  name: string
+  generation: number
+  urlImage?: string | null
+  urlShinyImage?: string | null
+  legendary?: boolean
+  myth?: boolean
+  hp: number
+  atk: number
+  def: number
+  spAtk: number
+  spDef: number
+  speed: number
+  owners?: Prisma.UserPokemonUncheckedCreateNestedManyWithoutPokemonInput
+  types?: Prisma.PokemonTypeUncheckedCreateNestedManyWithoutPokemonInput
+  evolutionsFrom?: Prisma.EvolutiveChainUncheckedCreateNestedManyWithoutFromPokemonInput
+  evolutionsTo?: Prisma.EvolutiveChainUncheckedCreateNestedManyWithoutToPokemonInput
+  guessPokemonGames?: Prisma.GuessPokemonGameUncheckedCreateNestedManyWithoutPokemonInput
+  guessShinyGames?: Prisma.GuessShinyGameUncheckedCreateNestedManyWithoutPokemonInput
+}
+
+export type PokemonCreateOrConnectWithoutPokedokuAnswerCellsInput = {
+  where: Prisma.PokemonWhereUniqueInput
+  create: Prisma.XOR<Prisma.PokemonCreateWithoutPokedokuAnswerCellsInput, Prisma.PokemonUncheckedCreateWithoutPokedokuAnswerCellsInput>
+}
+
+export type PokemonUpsertWithoutPokedokuAnswerCellsInput = {
+  update: Prisma.XOR<Prisma.PokemonUpdateWithoutPokedokuAnswerCellsInput, Prisma.PokemonUncheckedUpdateWithoutPokedokuAnswerCellsInput>
+  create: Prisma.XOR<Prisma.PokemonCreateWithoutPokedokuAnswerCellsInput, Prisma.PokemonUncheckedCreateWithoutPokedokuAnswerCellsInput>
+  where?: Prisma.PokemonWhereInput
+}
+
+export type PokemonUpdateToOneWithWhereWithoutPokedokuAnswerCellsInput = {
+  where?: Prisma.PokemonWhereInput
+  data: Prisma.XOR<Prisma.PokemonUpdateWithoutPokedokuAnswerCellsInput, Prisma.PokemonUncheckedUpdateWithoutPokedokuAnswerCellsInput>
+}
+
+export type PokemonUpdateWithoutPokedokuAnswerCellsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  generation?: Prisma.IntFieldUpdateOperationsInput | number
+  urlImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urlShinyImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legendary?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  myth?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hp?: Prisma.IntFieldUpdateOperationsInput | number
+  atk?: Prisma.IntFieldUpdateOperationsInput | number
+  def?: Prisma.IntFieldUpdateOperationsInput | number
+  spAtk?: Prisma.IntFieldUpdateOperationsInput | number
+  spDef?: Prisma.IntFieldUpdateOperationsInput | number
+  speed?: Prisma.IntFieldUpdateOperationsInput | number
+  owners?: Prisma.UserPokemonUpdateManyWithoutPokemonNestedInput
+  types?: Prisma.PokemonTypeUpdateManyWithoutPokemonNestedInput
+  evolutionsFrom?: Prisma.EvolutiveChainUpdateManyWithoutFromPokemonNestedInput
+  evolutionsTo?: Prisma.EvolutiveChainUpdateManyWithoutToPokemonNestedInput
+  guessPokemonGames?: Prisma.GuessPokemonGameUpdateManyWithoutPokemonNestedInput
+  guessShinyGames?: Prisma.GuessShinyGameUpdateManyWithoutPokemonNestedInput
+}
+
+export type PokemonUncheckedUpdateWithoutPokedokuAnswerCellsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  generation?: Prisma.IntFieldUpdateOperationsInput | number
+  urlImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urlShinyImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legendary?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  myth?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hp?: Prisma.IntFieldUpdateOperationsInput | number
+  atk?: Prisma.IntFieldUpdateOperationsInput | number
+  def?: Prisma.IntFieldUpdateOperationsInput | number
+  spAtk?: Prisma.IntFieldUpdateOperationsInput | number
+  spDef?: Prisma.IntFieldUpdateOperationsInput | number
+  speed?: Prisma.IntFieldUpdateOperationsInput | number
+  owners?: Prisma.UserPokemonUncheckedUpdateManyWithoutPokemonNestedInput
+  types?: Prisma.PokemonTypeUncheckedUpdateManyWithoutPokemonNestedInput
+  evolutionsFrom?: Prisma.EvolutiveChainUncheckedUpdateManyWithoutFromPokemonNestedInput
+  evolutionsTo?: Prisma.EvolutiveChainUncheckedUpdateManyWithoutToPokemonNestedInput
+  guessPokemonGames?: Prisma.GuessPokemonGameUncheckedUpdateManyWithoutPokemonNestedInput
+  guessShinyGames?: Prisma.GuessShinyGameUncheckedUpdateManyWithoutPokemonNestedInput
 }
 
 
@@ -1027,6 +1447,9 @@ export type PokemonCountOutputType = {
   types: number
   evolutionsFrom: number
   evolutionsTo: number
+  guessPokemonGames: number
+  guessShinyGames: number
+  pokedokuAnswerCells: number
 }
 
 export type PokemonCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1034,6 +1457,9 @@ export type PokemonCountOutputTypeSelect<ExtArgs extends runtime.Types.Extension
   types?: boolean | PokemonCountOutputTypeCountTypesArgs
   evolutionsFrom?: boolean | PokemonCountOutputTypeCountEvolutionsFromArgs
   evolutionsTo?: boolean | PokemonCountOutputTypeCountEvolutionsToArgs
+  guessPokemonGames?: boolean | PokemonCountOutputTypeCountGuessPokemonGamesArgs
+  guessShinyGames?: boolean | PokemonCountOutputTypeCountGuessShinyGamesArgs
+  pokedokuAnswerCells?: boolean | PokemonCountOutputTypeCountPokedokuAnswerCellsArgs
 }
 
 /**
@@ -1074,6 +1500,27 @@ export type PokemonCountOutputTypeCountEvolutionsToArgs<ExtArgs extends runtime.
   where?: Prisma.EvolutiveChainWhereInput
 }
 
+/**
+ * PokemonCountOutputType without action
+ */
+export type PokemonCountOutputTypeCountGuessPokemonGamesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GuessPokemonGameWhereInput
+}
+
+/**
+ * PokemonCountOutputType without action
+ */
+export type PokemonCountOutputTypeCountGuessShinyGamesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GuessShinyGameWhereInput
+}
+
+/**
+ * PokemonCountOutputType without action
+ */
+export type PokemonCountOutputTypeCountPokedokuAnswerCellsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PokedokuGameCellWhereInput
+}
+
 
 export type PokemonSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1093,6 +1540,9 @@ export type PokemonSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   types?: boolean | Prisma.Pokemon$typesArgs<ExtArgs>
   evolutionsFrom?: boolean | Prisma.Pokemon$evolutionsFromArgs<ExtArgs>
   evolutionsTo?: boolean | Prisma.Pokemon$evolutionsToArgs<ExtArgs>
+  guessPokemonGames?: boolean | Prisma.Pokemon$guessPokemonGamesArgs<ExtArgs>
+  guessShinyGames?: boolean | Prisma.Pokemon$guessShinyGamesArgs<ExtArgs>
+  pokedokuAnswerCells?: boolean | Prisma.Pokemon$pokedokuAnswerCellsArgs<ExtArgs>
   _count?: boolean | Prisma.PokemonCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["pokemon"]>
 
@@ -1150,6 +1600,9 @@ export type PokemonInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   types?: boolean | Prisma.Pokemon$typesArgs<ExtArgs>
   evolutionsFrom?: boolean | Prisma.Pokemon$evolutionsFromArgs<ExtArgs>
   evolutionsTo?: boolean | Prisma.Pokemon$evolutionsToArgs<ExtArgs>
+  guessPokemonGames?: boolean | Prisma.Pokemon$guessPokemonGamesArgs<ExtArgs>
+  guessShinyGames?: boolean | Prisma.Pokemon$guessShinyGamesArgs<ExtArgs>
+  pokedokuAnswerCells?: boolean | Prisma.Pokemon$pokedokuAnswerCellsArgs<ExtArgs>
   _count?: boolean | Prisma.PokemonCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PokemonIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1162,6 +1615,9 @@ export type $PokemonPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     types: Prisma.$PokemonTypePayload<ExtArgs>[]
     evolutionsFrom: Prisma.$EvolutiveChainPayload<ExtArgs>[]
     evolutionsTo: Prisma.$EvolutiveChainPayload<ExtArgs>[]
+    guessPokemonGames: Prisma.$GuessPokemonGamePayload<ExtArgs>[]
+    guessShinyGames: Prisma.$GuessShinyGamePayload<ExtArgs>[]
+    pokedokuAnswerCells: Prisma.$PokedokuGameCellPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1575,6 +2031,9 @@ export interface Prisma__PokemonClient<T, Null = never, ExtArgs extends runtime.
   types<T extends Prisma.Pokemon$typesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Pokemon$typesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PokemonTypePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   evolutionsFrom<T extends Prisma.Pokemon$evolutionsFromArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Pokemon$evolutionsFromArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EvolutiveChainPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   evolutionsTo<T extends Prisma.Pokemon$evolutionsToArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Pokemon$evolutionsToArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EvolutiveChainPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  guessPokemonGames<T extends Prisma.Pokemon$guessPokemonGamesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Pokemon$guessPokemonGamesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GuessPokemonGamePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  guessShinyGames<T extends Prisma.Pokemon$guessShinyGamesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Pokemon$guessShinyGamesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GuessShinyGamePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  pokedokuAnswerCells<T extends Prisma.Pokemon$pokedokuAnswerCellsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Pokemon$pokedokuAnswerCellsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PokedokuGameCellPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2103,6 +2562,78 @@ export type Pokemon$evolutionsToArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.EvolutiveChainScalarFieldEnum | Prisma.EvolutiveChainScalarFieldEnum[]
+}
+
+/**
+ * Pokemon.guessPokemonGames
+ */
+export type Pokemon$guessPokemonGamesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the GuessPokemonGame
+   */
+  select?: Prisma.GuessPokemonGameSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the GuessPokemonGame
+   */
+  omit?: Prisma.GuessPokemonGameOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GuessPokemonGameInclude<ExtArgs> | null
+  where?: Prisma.GuessPokemonGameWhereInput
+  orderBy?: Prisma.GuessPokemonGameOrderByWithRelationInput | Prisma.GuessPokemonGameOrderByWithRelationInput[]
+  cursor?: Prisma.GuessPokemonGameWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GuessPokemonGameScalarFieldEnum | Prisma.GuessPokemonGameScalarFieldEnum[]
+}
+
+/**
+ * Pokemon.guessShinyGames
+ */
+export type Pokemon$guessShinyGamesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the GuessShinyGame
+   */
+  select?: Prisma.GuessShinyGameSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the GuessShinyGame
+   */
+  omit?: Prisma.GuessShinyGameOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GuessShinyGameInclude<ExtArgs> | null
+  where?: Prisma.GuessShinyGameWhereInput
+  orderBy?: Prisma.GuessShinyGameOrderByWithRelationInput | Prisma.GuessShinyGameOrderByWithRelationInput[]
+  cursor?: Prisma.GuessShinyGameWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GuessShinyGameScalarFieldEnum | Prisma.GuessShinyGameScalarFieldEnum[]
+}
+
+/**
+ * Pokemon.pokedokuAnswerCells
+ */
+export type Pokemon$pokedokuAnswerCellsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PokedokuGameCell
+   */
+  select?: Prisma.PokedokuGameCellSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PokedokuGameCell
+   */
+  omit?: Prisma.PokedokuGameCellOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PokedokuGameCellInclude<ExtArgs> | null
+  where?: Prisma.PokedokuGameCellWhereInput
+  orderBy?: Prisma.PokedokuGameCellOrderByWithRelationInput | Prisma.PokedokuGameCellOrderByWithRelationInput[]
+  cursor?: Prisma.PokedokuGameCellWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PokedokuGameCellScalarFieldEnum | Prisma.PokedokuGameCellScalarFieldEnum[]
 }
 
 /**

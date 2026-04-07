@@ -12,14 +12,16 @@
 
 import * as process from 'node:process'
 import * as path from 'node:path'
+import { fileURLToPath } from 'node:url'
+globalThis['__dirname'] = path.dirname(fileURLToPath(import.meta.url))
 
 import * as runtime from "@prisma/client/runtime/client"
-import * as $Enums from "./enums"
-import * as $Class from "./internal/class"
-import * as Prisma from "./internal/prismaNamespace"
+import * as $Enums from "./enums.js"
+import * as $Class from "./internal/class.js"
+import * as Prisma from "./internal/prismaNamespace.js"
 
-export * as $Enums from './enums'
-export * from "./enums"
+export * as $Enums from './enums.js'
+export * from "./enums.js"
 /**
  * ## Prisma Client
  * 
@@ -69,3 +71,23 @@ export type PokemonType = Prisma.PokemonTypeModel
  * 
  */
 export type EvolutiveChain = Prisma.EvolutiveChainModel
+/**
+ * Model GuessPokemonGame
+ * 
+ */
+export type GuessPokemonGame = Prisma.GuessPokemonGameModel
+/**
+ * Model GuessShinyGame
+ * 
+ */
+export type GuessShinyGame = Prisma.GuessShinyGameModel
+/**
+ * Model PokedokuGame
+ * 
+ */
+export type PokedokuGame = Prisma.PokedokuGameModel
+/**
+ * Model PokedokuGameCell
+ * 
+ */
+export type PokedokuGameCell = Prisma.PokedokuGameCellModel

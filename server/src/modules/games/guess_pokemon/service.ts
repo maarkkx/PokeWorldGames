@@ -41,8 +41,8 @@ async function randomPokemon() {
 //----------------------------------------------------
 
 export async function startGame(difficult: string): Promise<object> {
-  await randomPokemon();
   try {
+    await randomPokemon();
     //validacion de que la dificultad no esta vacia
     if (!difficult) {
       throw new Error("No difficulty selected");

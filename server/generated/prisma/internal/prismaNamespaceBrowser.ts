@@ -17,8 +17,8 @@
 
 import * as runtime from "@prisma/client/runtime/index-browser"
 
-export type * from '../models'
-export type * from './prismaNamespace'
+export type * from '../models.js'
+export type * from './prismaNamespace.js'
 
 export const Decimal = runtime.Decimal
 
@@ -56,7 +56,11 @@ export const ModelName = {
   Type: 'Type',
   UserPokemon: 'UserPokemon',
   PokemonType: 'PokemonType',
-  EvolutiveChain: 'EvolutiveChain'
+  EvolutiveChain: 'EvolutiveChain',
+  GuessPokemonGame: 'GuessPokemonGame',
+  GuessShinyGame: 'GuessShinyGame',
+  PokedokuGame: 'PokedokuGame',
+  PokedokuGameCell: 'PokedokuGameCell'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -83,7 +87,8 @@ export const UserScalarFieldEnum = {
   level: 'level',
   xp: 'xp',
   lootboxes: 'lootboxes',
-  admin: 'admin'
+  admin: 'admin',
+  refreshToken: 'refreshToken'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -141,6 +146,72 @@ export const EvolutiveChainScalarFieldEnum = {
 } as const
 
 export type EvolutiveChainScalarFieldEnum = (typeof EvolutiveChainScalarFieldEnum)[keyof typeof EvolutiveChainScalarFieldEnum]
+
+
+export const GuessPokemonGameScalarFieldEnum = {
+  id: 'id',
+  gameId: 'gameId',
+  userId: 'userId',
+  pokemonId: 'pokemonId',
+  maxAttempts: 'maxAttempts',
+  remainingAttempts: 'remainingAttempts',
+  lastGuess: 'lastGuess',
+  status: 'status',
+  startedAt: 'startedAt',
+  finishedAt: 'finishedAt',
+  xpEarned: 'xpEarned',
+  lootboxesEarned: 'lootboxesEarned'
+} as const
+
+export type GuessPokemonGameScalarFieldEnum = (typeof GuessPokemonGameScalarFieldEnum)[keyof typeof GuessPokemonGameScalarFieldEnum]
+
+
+export const GuessShinyGameScalarFieldEnum = {
+  id: 'id',
+  gameId: 'gameId',
+  userId: 'userId',
+  pokemonId: 'pokemonId',
+  maxAttempts: 'maxAttempts',
+  remainingAttempts: 'remainingAttempts',
+  lastGuess: 'lastGuess',
+  status: 'status',
+  startedAt: 'startedAt',
+  finishedAt: 'finishedAt',
+  xpEarned: 'xpEarned',
+  lootboxesEarned: 'lootboxesEarned'
+} as const
+
+export type GuessShinyGameScalarFieldEnum = (typeof GuessShinyGameScalarFieldEnum)[keyof typeof GuessShinyGameScalarFieldEnum]
+
+
+export const PokedokuGameScalarFieldEnum = {
+  id: 'id',
+  gameId: 'gameId',
+  userId: 'userId',
+  status: 'status',
+  startedAt: 'startedAt',
+  finishedAt: 'finishedAt',
+  xpEarned: 'xpEarned',
+  lootboxesEarned: 'lootboxesEarned'
+} as const
+
+export type PokedokuGameScalarFieldEnum = (typeof PokedokuGameScalarFieldEnum)[keyof typeof PokedokuGameScalarFieldEnum]
+
+
+export const PokedokuGameCellScalarFieldEnum = {
+  id: 'id',
+  gameInternalId: 'gameInternalId',
+  position: 'position',
+  rowConditionType: 'rowConditionType',
+  rowConditionValue: 'rowConditionValue',
+  columnConditionType: 'columnConditionType',
+  columnConditionValue: 'columnConditionValue',
+  answerPokemonId: 'answerPokemonId',
+  isCorrect: 'isCorrect',
+  answeredAt: 'answeredAt'
+} as const
+
+export type PokedokuGameCellScalarFieldEnum = (typeof PokedokuGameCellScalarFieldEnum)[keyof typeof PokedokuGameCellScalarFieldEnum]
 
 
 export const SortOrder = {

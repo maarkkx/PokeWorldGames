@@ -375,7 +375,6 @@ async function replaceEvolutionChains(speciesNameToPokemonId: Map<string, number
 
   for (let i = 0; i < allEdges.length; i += 500) {
     const chunk = allEdges.slice(i, i + 500);
-
     await prisma.evolutiveChain.createMany({
       data: chunk,
       skipDuplicates: true,
