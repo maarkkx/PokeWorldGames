@@ -1,13 +1,10 @@
 import { Router } from 'express';
+import * as controller from './controller'
 
 const router = Router();
 
-router.post('/start', (_req, res) => {
-  res.json({ message: '' });
-});
+router.post('/start', controller.startShinyGame);
 
-router.post('/answer', (_req, res) => {
-  res.json({ message: '' });
-});
+router.post('/answer', controller.answerShinyGame);
 
 export default router;

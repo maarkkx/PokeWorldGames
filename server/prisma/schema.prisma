@@ -156,6 +156,7 @@ model GuessShinyGame {
   gameId            String     @unique @default(cuid()) @map("id_game")
   userId            Int        @map("id_user")
   pokemonId         Int        @map("id_pokemon")
+  correctPosition   Int        @default(1) //saber en que posicion va a estar la forma original (la respuesta correcta)
   maxAttempts       Int        @default(3) @map("max_attempts")
   remainingAttempts Int        @default(3) @map("remaining_attempts")
   lastGuess         String?    @map("last_guess")

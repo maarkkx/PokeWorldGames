@@ -191,6 +191,7 @@ exports.Prisma.GuessShinyGameScalarFieldEnum = {
   gameId: 'gameId',
   userId: 'userId',
   pokemonId: 'pokemonId',
+  correctPosition: 'correctPosition',
   maxAttempts: 'maxAttempts',
   remainingAttempts: 'remainingAttempts',
   lastGuess: 'lastGuess',

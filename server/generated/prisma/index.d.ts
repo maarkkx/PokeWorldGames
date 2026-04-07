@@ -10133,6 +10133,7 @@ export namespace Prisma {
     id: number | null
     userId: number | null
     pokemonId: number | null
+    correctPosition: number | null
     maxAttempts: number | null
     remainingAttempts: number | null
     xpEarned: number | null
@@ -10143,6 +10144,7 @@ export namespace Prisma {
     id: number | null
     userId: number | null
     pokemonId: number | null
+    correctPosition: number | null
     maxAttempts: number | null
     remainingAttempts: number | null
     xpEarned: number | null
@@ -10154,6 +10156,7 @@ export namespace Prisma {
     gameId: string | null
     userId: number | null
     pokemonId: number | null
+    correctPosition: number | null
     maxAttempts: number | null
     remainingAttempts: number | null
     lastGuess: string | null
@@ -10169,6 +10172,7 @@ export namespace Prisma {
     gameId: string | null
     userId: number | null
     pokemonId: number | null
+    correctPosition: number | null
     maxAttempts: number | null
     remainingAttempts: number | null
     lastGuess: string | null
@@ -10184,6 +10188,7 @@ export namespace Prisma {
     gameId: number
     userId: number
     pokemonId: number
+    correctPosition: number
     maxAttempts: number
     remainingAttempts: number
     lastGuess: number
@@ -10200,6 +10205,7 @@ export namespace Prisma {
     id?: true
     userId?: true
     pokemonId?: true
+    correctPosition?: true
     maxAttempts?: true
     remainingAttempts?: true
     xpEarned?: true
@@ -10210,6 +10216,7 @@ export namespace Prisma {
     id?: true
     userId?: true
     pokemonId?: true
+    correctPosition?: true
     maxAttempts?: true
     remainingAttempts?: true
     xpEarned?: true
@@ -10221,6 +10228,7 @@ export namespace Prisma {
     gameId?: true
     userId?: true
     pokemonId?: true
+    correctPosition?: true
     maxAttempts?: true
     remainingAttempts?: true
     lastGuess?: true
@@ -10236,6 +10244,7 @@ export namespace Prisma {
     gameId?: true
     userId?: true
     pokemonId?: true
+    correctPosition?: true
     maxAttempts?: true
     remainingAttempts?: true
     lastGuess?: true
@@ -10251,6 +10260,7 @@ export namespace Prisma {
     gameId?: true
     userId?: true
     pokemonId?: true
+    correctPosition?: true
     maxAttempts?: true
     remainingAttempts?: true
     lastGuess?: true
@@ -10353,6 +10363,7 @@ export namespace Prisma {
     gameId: string
     userId: number
     pokemonId: number
+    correctPosition: number
     maxAttempts: number
     remainingAttempts: number
     lastGuess: string | null
@@ -10387,6 +10398,7 @@ export namespace Prisma {
     gameId?: boolean
     userId?: boolean
     pokemonId?: boolean
+    correctPosition?: boolean
     maxAttempts?: boolean
     remainingAttempts?: boolean
     lastGuess?: boolean
@@ -10404,6 +10416,7 @@ export namespace Prisma {
     gameId?: boolean
     userId?: boolean
     pokemonId?: boolean
+    correctPosition?: boolean
     maxAttempts?: boolean
     remainingAttempts?: boolean
     lastGuess?: boolean
@@ -10421,6 +10434,7 @@ export namespace Prisma {
     gameId?: boolean
     userId?: boolean
     pokemonId?: boolean
+    correctPosition?: boolean
     maxAttempts?: boolean
     remainingAttempts?: boolean
     lastGuess?: boolean
@@ -10438,6 +10452,7 @@ export namespace Prisma {
     gameId?: boolean
     userId?: boolean
     pokemonId?: boolean
+    correctPosition?: boolean
     maxAttempts?: boolean
     remainingAttempts?: boolean
     lastGuess?: boolean
@@ -10448,7 +10463,7 @@ export namespace Prisma {
     lootboxesEarned?: boolean
   }
 
-  export type GuessShinyGameOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "gameId" | "userId" | "pokemonId" | "maxAttempts" | "remainingAttempts" | "lastGuess" | "status" | "startedAt" | "finishedAt" | "xpEarned" | "lootboxesEarned", ExtArgs["result"]["guessShinyGame"]>
+  export type GuessShinyGameOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "gameId" | "userId" | "pokemonId" | "correctPosition" | "maxAttempts" | "remainingAttempts" | "lastGuess" | "status" | "startedAt" | "finishedAt" | "xpEarned" | "lootboxesEarned", ExtArgs["result"]["guessShinyGame"]>
   export type GuessShinyGameInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     pokemon?: boolean | PokemonDefaultArgs<ExtArgs>
@@ -10473,6 +10488,7 @@ export namespace Prisma {
       gameId: string
       userId: number
       pokemonId: number
+      correctPosition: number
       maxAttempts: number
       remainingAttempts: number
       lastGuess: string | null
@@ -10910,6 +10926,7 @@ export namespace Prisma {
     readonly gameId: FieldRef<"GuessShinyGame", 'String'>
     readonly userId: FieldRef<"GuessShinyGame", 'Int'>
     readonly pokemonId: FieldRef<"GuessShinyGame", 'Int'>
+    readonly correctPosition: FieldRef<"GuessShinyGame", 'Int'>
     readonly maxAttempts: FieldRef<"GuessShinyGame", 'Int'>
     readonly remainingAttempts: FieldRef<"GuessShinyGame", 'Int'>
     readonly lastGuess: FieldRef<"GuessShinyGame", 'String'>
@@ -13822,6 +13839,7 @@ export namespace Prisma {
     gameId: 'gameId',
     userId: 'userId',
     pokemonId: 'pokemonId',
+    correctPosition: 'correctPosition',
     maxAttempts: 'maxAttempts',
     remainingAttempts: 'remainingAttempts',
     lastGuess: 'lastGuess',
@@ -14473,6 +14491,7 @@ export namespace Prisma {
     gameId?: StringFilter<"GuessShinyGame"> | string
     userId?: IntFilter<"GuessShinyGame"> | number
     pokemonId?: IntFilter<"GuessShinyGame"> | number
+    correctPosition?: IntFilter<"GuessShinyGame"> | number
     maxAttempts?: IntFilter<"GuessShinyGame"> | number
     remainingAttempts?: IntFilter<"GuessShinyGame"> | number
     lastGuess?: StringNullableFilter<"GuessShinyGame"> | string | null
@@ -14490,6 +14509,7 @@ export namespace Prisma {
     gameId?: SortOrder
     userId?: SortOrder
     pokemonId?: SortOrder
+    correctPosition?: SortOrder
     maxAttempts?: SortOrder
     remainingAttempts?: SortOrder
     lastGuess?: SortOrderInput | SortOrder
@@ -14510,6 +14530,7 @@ export namespace Prisma {
     NOT?: GuessShinyGameWhereInput | GuessShinyGameWhereInput[]
     userId?: IntFilter<"GuessShinyGame"> | number
     pokemonId?: IntFilter<"GuessShinyGame"> | number
+    correctPosition?: IntFilter<"GuessShinyGame"> | number
     maxAttempts?: IntFilter<"GuessShinyGame"> | number
     remainingAttempts?: IntFilter<"GuessShinyGame"> | number
     lastGuess?: StringNullableFilter<"GuessShinyGame"> | string | null
@@ -14527,6 +14548,7 @@ export namespace Prisma {
     gameId?: SortOrder
     userId?: SortOrder
     pokemonId?: SortOrder
+    correctPosition?: SortOrder
     maxAttempts?: SortOrder
     remainingAttempts?: SortOrder
     lastGuess?: SortOrderInput | SortOrder
@@ -14550,6 +14572,7 @@ export namespace Prisma {
     gameId?: StringWithAggregatesFilter<"GuessShinyGame"> | string
     userId?: IntWithAggregatesFilter<"GuessShinyGame"> | number
     pokemonId?: IntWithAggregatesFilter<"GuessShinyGame"> | number
+    correctPosition?: IntWithAggregatesFilter<"GuessShinyGame"> | number
     maxAttempts?: IntWithAggregatesFilter<"GuessShinyGame"> | number
     remainingAttempts?: IntWithAggregatesFilter<"GuessShinyGame"> | number
     lastGuess?: StringNullableWithAggregatesFilter<"GuessShinyGame"> | string | null
@@ -15215,6 +15238,7 @@ export namespace Prisma {
 
   export type GuessShinyGameCreateInput = {
     gameId?: string
+    correctPosition?: number
     maxAttempts?: number
     remainingAttempts?: number
     lastGuess?: string | null
@@ -15232,6 +15256,7 @@ export namespace Prisma {
     gameId?: string
     userId: number
     pokemonId: number
+    correctPosition?: number
     maxAttempts?: number
     remainingAttempts?: number
     lastGuess?: string | null
@@ -15244,6 +15269,7 @@ export namespace Prisma {
 
   export type GuessShinyGameUpdateInput = {
     gameId?: StringFieldUpdateOperationsInput | string
+    correctPosition?: IntFieldUpdateOperationsInput | number
     maxAttempts?: IntFieldUpdateOperationsInput | number
     remainingAttempts?: IntFieldUpdateOperationsInput | number
     lastGuess?: NullableStringFieldUpdateOperationsInput | string | null
@@ -15261,6 +15287,7 @@ export namespace Prisma {
     gameId?: StringFieldUpdateOperationsInput | string
     userId?: IntFieldUpdateOperationsInput | number
     pokemonId?: IntFieldUpdateOperationsInput | number
+    correctPosition?: IntFieldUpdateOperationsInput | number
     maxAttempts?: IntFieldUpdateOperationsInput | number
     remainingAttempts?: IntFieldUpdateOperationsInput | number
     lastGuess?: NullableStringFieldUpdateOperationsInput | string | null
@@ -15276,6 +15303,7 @@ export namespace Prisma {
     gameId?: string
     userId: number
     pokemonId: number
+    correctPosition?: number
     maxAttempts?: number
     remainingAttempts?: number
     lastGuess?: string | null
@@ -15288,6 +15316,7 @@ export namespace Prisma {
 
   export type GuessShinyGameUpdateManyMutationInput = {
     gameId?: StringFieldUpdateOperationsInput | string
+    correctPosition?: IntFieldUpdateOperationsInput | number
     maxAttempts?: IntFieldUpdateOperationsInput | number
     remainingAttempts?: IntFieldUpdateOperationsInput | number
     lastGuess?: NullableStringFieldUpdateOperationsInput | string | null
@@ -15303,6 +15332,7 @@ export namespace Prisma {
     gameId?: StringFieldUpdateOperationsInput | string
     userId?: IntFieldUpdateOperationsInput | number
     pokemonId?: IntFieldUpdateOperationsInput | number
+    correctPosition?: IntFieldUpdateOperationsInput | number
     maxAttempts?: IntFieldUpdateOperationsInput | number
     remainingAttempts?: IntFieldUpdateOperationsInput | number
     lastGuess?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16081,6 +16111,7 @@ export namespace Prisma {
     gameId?: SortOrder
     userId?: SortOrder
     pokemonId?: SortOrder
+    correctPosition?: SortOrder
     maxAttempts?: SortOrder
     remainingAttempts?: SortOrder
     lastGuess?: SortOrder
@@ -16095,6 +16126,7 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     pokemonId?: SortOrder
+    correctPosition?: SortOrder
     maxAttempts?: SortOrder
     remainingAttempts?: SortOrder
     xpEarned?: SortOrder
@@ -16106,6 +16138,7 @@ export namespace Prisma {
     gameId?: SortOrder
     userId?: SortOrder
     pokemonId?: SortOrder
+    correctPosition?: SortOrder
     maxAttempts?: SortOrder
     remainingAttempts?: SortOrder
     lastGuess?: SortOrder
@@ -16121,6 +16154,7 @@ export namespace Prisma {
     gameId?: SortOrder
     userId?: SortOrder
     pokemonId?: SortOrder
+    correctPosition?: SortOrder
     maxAttempts?: SortOrder
     remainingAttempts?: SortOrder
     lastGuess?: SortOrder
@@ -16135,6 +16169,7 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     pokemonId?: SortOrder
+    correctPosition?: SortOrder
     maxAttempts?: SortOrder
     remainingAttempts?: SortOrder
     xpEarned?: SortOrder
@@ -17331,6 +17366,7 @@ export namespace Prisma {
 
   export type GuessShinyGameCreateWithoutUserInput = {
     gameId?: string
+    correctPosition?: number
     maxAttempts?: number
     remainingAttempts?: number
     lastGuess?: string | null
@@ -17346,6 +17382,7 @@ export namespace Prisma {
     id?: number
     gameId?: string
     pokemonId: number
+    correctPosition?: number
     maxAttempts?: number
     remainingAttempts?: number
     lastGuess?: string | null
@@ -17479,6 +17516,7 @@ export namespace Prisma {
     gameId?: StringFilter<"GuessShinyGame"> | string
     userId?: IntFilter<"GuessShinyGame"> | number
     pokemonId?: IntFilter<"GuessShinyGame"> | number
+    correctPosition?: IntFilter<"GuessShinyGame"> | number
     maxAttempts?: IntFilter<"GuessShinyGame"> | number
     remainingAttempts?: IntFilter<"GuessShinyGame"> | number
     lastGuess?: StringNullableFilter<"GuessShinyGame"> | string | null
@@ -17642,6 +17680,7 @@ export namespace Prisma {
 
   export type GuessShinyGameCreateWithoutPokemonInput = {
     gameId?: string
+    correctPosition?: number
     maxAttempts?: number
     remainingAttempts?: number
     lastGuess?: string | null
@@ -17657,6 +17696,7 @@ export namespace Prisma {
     id?: number
     gameId?: string
     userId: number
+    correctPosition?: number
     maxAttempts?: number
     remainingAttempts?: number
     lastGuess?: string | null
@@ -19064,6 +19104,7 @@ export namespace Prisma {
     id?: number
     gameId?: string
     pokemonId: number
+    correctPosition?: number
     maxAttempts?: number
     remainingAttempts?: number
     lastGuess?: string | null
@@ -19139,6 +19180,7 @@ export namespace Prisma {
 
   export type GuessShinyGameUpdateWithoutUserInput = {
     gameId?: StringFieldUpdateOperationsInput | string
+    correctPosition?: IntFieldUpdateOperationsInput | number
     maxAttempts?: IntFieldUpdateOperationsInput | number
     remainingAttempts?: IntFieldUpdateOperationsInput | number
     lastGuess?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19154,6 +19196,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     gameId?: StringFieldUpdateOperationsInput | string
     pokemonId?: IntFieldUpdateOperationsInput | number
+    correctPosition?: IntFieldUpdateOperationsInput | number
     maxAttempts?: IntFieldUpdateOperationsInput | number
     remainingAttempts?: IntFieldUpdateOperationsInput | number
     lastGuess?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19168,6 +19211,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     gameId?: StringFieldUpdateOperationsInput | string
     pokemonId?: IntFieldUpdateOperationsInput | number
+    correctPosition?: IntFieldUpdateOperationsInput | number
     maxAttempts?: IntFieldUpdateOperationsInput | number
     remainingAttempts?: IntFieldUpdateOperationsInput | number
     lastGuess?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19249,6 +19293,7 @@ export namespace Prisma {
     id?: number
     gameId?: string
     userId: number
+    correctPosition?: number
     maxAttempts?: number
     remainingAttempts?: number
     lastGuess?: string | null
@@ -19380,6 +19425,7 @@ export namespace Prisma {
 
   export type GuessShinyGameUpdateWithoutPokemonInput = {
     gameId?: StringFieldUpdateOperationsInput | string
+    correctPosition?: IntFieldUpdateOperationsInput | number
     maxAttempts?: IntFieldUpdateOperationsInput | number
     remainingAttempts?: IntFieldUpdateOperationsInput | number
     lastGuess?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19395,6 +19441,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     gameId?: StringFieldUpdateOperationsInput | string
     userId?: IntFieldUpdateOperationsInput | number
+    correctPosition?: IntFieldUpdateOperationsInput | number
     maxAttempts?: IntFieldUpdateOperationsInput | number
     remainingAttempts?: IntFieldUpdateOperationsInput | number
     lastGuess?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19409,6 +19456,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     gameId?: StringFieldUpdateOperationsInput | string
     userId?: IntFieldUpdateOperationsInput | number
+    correctPosition?: IntFieldUpdateOperationsInput | number
     maxAttempts?: IntFieldUpdateOperationsInput | number
     remainingAttempts?: IntFieldUpdateOperationsInput | number
     lastGuess?: NullableStringFieldUpdateOperationsInput | string | null

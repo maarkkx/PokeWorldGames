@@ -32,12 +32,14 @@ export async function startGame(req: Request, res: Response) {
       message: 'Game started successfully',
       data: challenge
     });
+    
   } catch (error) {
     res.status(400).json({
       message: error instanceof Error ? error.message : 'Unexpected error'
     });
   }
 }
+
 
 export async function answerGame(req: Request, res: Response) {
   try {

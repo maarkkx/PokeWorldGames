@@ -139,7 +139,7 @@ export async function manageAnswer(userId: number, gameId: string, answer: strin
     remainingAttempts,
     lastGuess: answer,
     status,
-    xpEarned: xpEarned || undefined
+    xpEarned: xpEarned
   });
 
   return {
