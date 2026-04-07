@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import * as service from './service';
 import * as repository from './repository';
+import { diff } from 'util';
 
 //funcion para testear
 export const getRandomPokemon = async (_req: Request, res: Response, next: NextFunction
@@ -23,8 +24,9 @@ export const getRandomPokemon = async (_req: Request, res: Response, next: NextF
 export async function startGame(req: Request, res: Response) {
   try {
     const difficult = req.body.difficult; //Guardar la ificultad del la request
+    const userId = req.body.userId; //guardar el userid
 
-    const challenge = await service.startGame(difficult);
+    const challenge = await service.startGame(userId, difficult);
 
     res.status(200).json({
       message: 'Game started successfully',
@@ -40,8 +42,10 @@ export async function startGame(req: Request, res: Response) {
 export async function answerGame(req: Request, res: Response) {
   try {
     const answer = req.body.answer;
+    const userId = req.body.userId;
+    const gameId = req.body.gameId;
     
-    const response = await service.manageAnswer(answer);
+    const response = await service.manageAnswer(userId, gameId, answer);
 
     res.status(200).json({
       response
