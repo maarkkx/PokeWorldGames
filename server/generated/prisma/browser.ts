@@ -13,10 +13,10 @@
  * 🟢 You can import this file directly.
  */
 
-import * as Prisma from './internal/prismaNamespaceBrowser'
+import * as Prisma from './internal/prismaNamespaceBrowser.js'
 export { Prisma }
-export * as $Enums from './enums'
-export * from './enums';
+export * as $Enums from './enums.js'
+export * from './enums.js';
 /**
  * Model User
  * 
@@ -47,3 +47,23 @@ export type PokemonType = Prisma.PokemonTypeModel
  * 
  */
 export type EvolutiveChain = Prisma.EvolutiveChainModel
+/**
+ * Model GuessPokemonGame
+ * 
+ */
+export type GuessPokemonGame = Prisma.GuessPokemonGameModel
+/**
+ * Model GuessShinyGame
+ * 
+ */
+export type GuessShinyGame = Prisma.GuessShinyGameModel
+/**
+ * Model PokedokuGame
+ * 
+ */
+export type PokedokuGame = Prisma.PokedokuGameModel
+/**
+ * Model PokedokuGameCell
+ * 
+ */
+export type PokedokuGameCell = Prisma.PokedokuGameCellModel

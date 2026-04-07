@@ -16,10 +16,10 @@
  */
 
 import * as runtime from "@prisma/client/runtime/client"
-import type * as Prisma from "../models"
-import { type PrismaClient } from "./class"
+import type * as Prisma from "../models.js"
+import { type PrismaClient } from "./class.js"
 
-export type * from '../models'
+export type * from '../models.js'
 
 export type DMMF = typeof runtime.DMMF
 
@@ -389,7 +389,11 @@ export const ModelName = {
   Type: 'Type',
   UserPokemon: 'UserPokemon',
   PokemonType: 'PokemonType',
-  EvolutiveChain: 'EvolutiveChain'
+  EvolutiveChain: 'EvolutiveChain',
+  GuessPokemonGame: 'GuessPokemonGame',
+  GuessShinyGame: 'GuessShinyGame',
+  PokedokuGame: 'PokedokuGame',
+  PokedokuGameCell: 'PokedokuGameCell'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -405,7 +409,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "pokemon" | "type" | "userPokemon" | "pokemonType" | "evolutiveChain"
+    modelProps: "user" | "pokemon" | "type" | "userPokemon" | "pokemonType" | "evolutiveChain" | "guessPokemonGame" | "guessShinyGame" | "pokedokuGame" | "pokedokuGameCell"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -853,6 +857,302 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    GuessPokemonGame: {
+      payload: Prisma.$GuessPokemonGamePayload<ExtArgs>
+      fields: Prisma.GuessPokemonGameFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.GuessPokemonGameFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GuessPokemonGamePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.GuessPokemonGameFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GuessPokemonGamePayload>
+        }
+        findFirst: {
+          args: Prisma.GuessPokemonGameFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GuessPokemonGamePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.GuessPokemonGameFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GuessPokemonGamePayload>
+        }
+        findMany: {
+          args: Prisma.GuessPokemonGameFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GuessPokemonGamePayload>[]
+        }
+        create: {
+          args: Prisma.GuessPokemonGameCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GuessPokemonGamePayload>
+        }
+        createMany: {
+          args: Prisma.GuessPokemonGameCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.GuessPokemonGameCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GuessPokemonGamePayload>[]
+        }
+        delete: {
+          args: Prisma.GuessPokemonGameDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GuessPokemonGamePayload>
+        }
+        update: {
+          args: Prisma.GuessPokemonGameUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GuessPokemonGamePayload>
+        }
+        deleteMany: {
+          args: Prisma.GuessPokemonGameDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.GuessPokemonGameUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.GuessPokemonGameUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GuessPokemonGamePayload>[]
+        }
+        upsert: {
+          args: Prisma.GuessPokemonGameUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GuessPokemonGamePayload>
+        }
+        aggregate: {
+          args: Prisma.GuessPokemonGameAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateGuessPokemonGame>
+        }
+        groupBy: {
+          args: Prisma.GuessPokemonGameGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GuessPokemonGameGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.GuessPokemonGameCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GuessPokemonGameCountAggregateOutputType> | number
+        }
+      }
+    }
+    GuessShinyGame: {
+      payload: Prisma.$GuessShinyGamePayload<ExtArgs>
+      fields: Prisma.GuessShinyGameFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.GuessShinyGameFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GuessShinyGamePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.GuessShinyGameFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GuessShinyGamePayload>
+        }
+        findFirst: {
+          args: Prisma.GuessShinyGameFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GuessShinyGamePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.GuessShinyGameFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GuessShinyGamePayload>
+        }
+        findMany: {
+          args: Prisma.GuessShinyGameFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GuessShinyGamePayload>[]
+        }
+        create: {
+          args: Prisma.GuessShinyGameCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GuessShinyGamePayload>
+        }
+        createMany: {
+          args: Prisma.GuessShinyGameCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.GuessShinyGameCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GuessShinyGamePayload>[]
+        }
+        delete: {
+          args: Prisma.GuessShinyGameDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GuessShinyGamePayload>
+        }
+        update: {
+          args: Prisma.GuessShinyGameUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GuessShinyGamePayload>
+        }
+        deleteMany: {
+          args: Prisma.GuessShinyGameDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.GuessShinyGameUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.GuessShinyGameUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GuessShinyGamePayload>[]
+        }
+        upsert: {
+          args: Prisma.GuessShinyGameUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GuessShinyGamePayload>
+        }
+        aggregate: {
+          args: Prisma.GuessShinyGameAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateGuessShinyGame>
+        }
+        groupBy: {
+          args: Prisma.GuessShinyGameGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GuessShinyGameGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.GuessShinyGameCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GuessShinyGameCountAggregateOutputType> | number
+        }
+      }
+    }
+    PokedokuGame: {
+      payload: Prisma.$PokedokuGamePayload<ExtArgs>
+      fields: Prisma.PokedokuGameFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PokedokuGameFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PokedokuGamePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PokedokuGameFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PokedokuGamePayload>
+        }
+        findFirst: {
+          args: Prisma.PokedokuGameFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PokedokuGamePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PokedokuGameFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PokedokuGamePayload>
+        }
+        findMany: {
+          args: Prisma.PokedokuGameFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PokedokuGamePayload>[]
+        }
+        create: {
+          args: Prisma.PokedokuGameCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PokedokuGamePayload>
+        }
+        createMany: {
+          args: Prisma.PokedokuGameCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PokedokuGameCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PokedokuGamePayload>[]
+        }
+        delete: {
+          args: Prisma.PokedokuGameDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PokedokuGamePayload>
+        }
+        update: {
+          args: Prisma.PokedokuGameUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PokedokuGamePayload>
+        }
+        deleteMany: {
+          args: Prisma.PokedokuGameDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PokedokuGameUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PokedokuGameUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PokedokuGamePayload>[]
+        }
+        upsert: {
+          args: Prisma.PokedokuGameUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PokedokuGamePayload>
+        }
+        aggregate: {
+          args: Prisma.PokedokuGameAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePokedokuGame>
+        }
+        groupBy: {
+          args: Prisma.PokedokuGameGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PokedokuGameGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PokedokuGameCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PokedokuGameCountAggregateOutputType> | number
+        }
+      }
+    }
+    PokedokuGameCell: {
+      payload: Prisma.$PokedokuGameCellPayload<ExtArgs>
+      fields: Prisma.PokedokuGameCellFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PokedokuGameCellFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PokedokuGameCellPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PokedokuGameCellFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PokedokuGameCellPayload>
+        }
+        findFirst: {
+          args: Prisma.PokedokuGameCellFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PokedokuGameCellPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PokedokuGameCellFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PokedokuGameCellPayload>
+        }
+        findMany: {
+          args: Prisma.PokedokuGameCellFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PokedokuGameCellPayload>[]
+        }
+        create: {
+          args: Prisma.PokedokuGameCellCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PokedokuGameCellPayload>
+        }
+        createMany: {
+          args: Prisma.PokedokuGameCellCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PokedokuGameCellCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PokedokuGameCellPayload>[]
+        }
+        delete: {
+          args: Prisma.PokedokuGameCellDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PokedokuGameCellPayload>
+        }
+        update: {
+          args: Prisma.PokedokuGameCellUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PokedokuGameCellPayload>
+        }
+        deleteMany: {
+          args: Prisma.PokedokuGameCellDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PokedokuGameCellUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PokedokuGameCellUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PokedokuGameCellPayload>[]
+        }
+        upsert: {
+          args: Prisma.PokedokuGameCellUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PokedokuGameCellPayload>
+        }
+        aggregate: {
+          args: Prisma.PokedokuGameCellAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePokedokuGameCell>
+        }
+        groupBy: {
+          args: Prisma.PokedokuGameCellGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PokedokuGameCellGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PokedokuGameCellCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PokedokuGameCellCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -900,7 +1200,8 @@ export const UserScalarFieldEnum = {
   level: 'level',
   xp: 'xp',
   lootboxes: 'lootboxes',
-  admin: 'admin'
+  admin: 'admin',
+  refreshToken: 'refreshToken'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -958,6 +1259,72 @@ export const EvolutiveChainScalarFieldEnum = {
 } as const
 
 export type EvolutiveChainScalarFieldEnum = (typeof EvolutiveChainScalarFieldEnum)[keyof typeof EvolutiveChainScalarFieldEnum]
+
+
+export const GuessPokemonGameScalarFieldEnum = {
+  id: 'id',
+  gameId: 'gameId',
+  userId: 'userId',
+  pokemonId: 'pokemonId',
+  maxAttempts: 'maxAttempts',
+  remainingAttempts: 'remainingAttempts',
+  lastGuess: 'lastGuess',
+  status: 'status',
+  startedAt: 'startedAt',
+  finishedAt: 'finishedAt',
+  xpEarned: 'xpEarned',
+  lootboxesEarned: 'lootboxesEarned'
+} as const
+
+export type GuessPokemonGameScalarFieldEnum = (typeof GuessPokemonGameScalarFieldEnum)[keyof typeof GuessPokemonGameScalarFieldEnum]
+
+
+export const GuessShinyGameScalarFieldEnum = {
+  id: 'id',
+  gameId: 'gameId',
+  userId: 'userId',
+  pokemonId: 'pokemonId',
+  maxAttempts: 'maxAttempts',
+  remainingAttempts: 'remainingAttempts',
+  lastGuess: 'lastGuess',
+  status: 'status',
+  startedAt: 'startedAt',
+  finishedAt: 'finishedAt',
+  xpEarned: 'xpEarned',
+  lootboxesEarned: 'lootboxesEarned'
+} as const
+
+export type GuessShinyGameScalarFieldEnum = (typeof GuessShinyGameScalarFieldEnum)[keyof typeof GuessShinyGameScalarFieldEnum]
+
+
+export const PokedokuGameScalarFieldEnum = {
+  id: 'id',
+  gameId: 'gameId',
+  userId: 'userId',
+  status: 'status',
+  startedAt: 'startedAt',
+  finishedAt: 'finishedAt',
+  xpEarned: 'xpEarned',
+  lootboxesEarned: 'lootboxesEarned'
+} as const
+
+export type PokedokuGameScalarFieldEnum = (typeof PokedokuGameScalarFieldEnum)[keyof typeof PokedokuGameScalarFieldEnum]
+
+
+export const PokedokuGameCellScalarFieldEnum = {
+  id: 'id',
+  gameInternalId: 'gameInternalId',
+  position: 'position',
+  rowConditionType: 'rowConditionType',
+  rowConditionValue: 'rowConditionValue',
+  columnConditionType: 'columnConditionType',
+  columnConditionValue: 'columnConditionValue',
+  answerPokemonId: 'answerPokemonId',
+  isCorrect: 'isCorrect',
+  answeredAt: 'answeredAt'
+} as const
+
+export type PokedokuGameCellScalarFieldEnum = (typeof PokedokuGameCellScalarFieldEnum)[keyof typeof PokedokuGameCellScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1022,6 +1389,34 @@ export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMod
  * Reference to a field of type 'Boolean'
  */
 export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+/**
+ * Reference to a field of type 'GameStatus'
+ */
+export type EnumGameStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GameStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'GameStatus[]'
+ */
+export type ListEnumGameStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GameStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'DateTime'
+ */
+export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+/**
+ * Reference to a field of type 'DateTime[]'
+ */
+export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
     
 
 
@@ -1139,6 +1534,10 @@ export type GlobalOmitConfig = {
   userPokemon?: Prisma.UserPokemonOmit
   pokemonType?: Prisma.PokemonTypeOmit
   evolutiveChain?: Prisma.EvolutiveChainOmit
+  guessPokemonGame?: Prisma.GuessPokemonGameOmit
+  guessShinyGame?: Prisma.GuessShinyGameOmit
+  pokedokuGame?: Prisma.PokedokuGameOmit
+  pokedokuGameCell?: Prisma.PokedokuGameCellOmit
 }
 
 /* Types for Logging */

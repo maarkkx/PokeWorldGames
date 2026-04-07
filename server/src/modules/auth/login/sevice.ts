@@ -1,0 +1,5 @@
+//Funcion para comparar contraseñas
+const bcrypt = require('bcrypt');
+export async function comparePassword(plainPassword : string, hashedPassword :string) : Promise<boolean> {
+    return bcrypt.compare(plainPassword, hashedPassword); 
+}

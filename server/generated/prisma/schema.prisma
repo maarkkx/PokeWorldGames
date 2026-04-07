@@ -19,15 +19,15 @@ enum GameStatus {
 //------------------------
 
 model User {
-  id           Int      @id @default(autoincrement())
+  id           Int     @id @default(autoincrement())
   name         String
-  email        String   @unique
-  password     String   // Hasheada
-  level        Int      @default(1)
-  xp           Int      @default(0)
-  lootboxes    Int      @default(0)
-  admin        Boolean  @default(false)
-  refreshToken String?  @map("refresh_token") //para el jwt
+  email        String  @unique
+  password     String // Hasheada
+  level        Int     @default(1)
+  xp           Int     @default(0)
+  lootboxes    Int     @default(0)
+  admin        Boolean @default(false)
+  refreshToken String? @map("refresh_token") //para el jwt
 
   // relacion n:m con pokemon
   pokemons UserPokemon[]
@@ -69,8 +69,8 @@ model Pokemon {
   evolutionsTo   EvolutiveChain[] @relation("EvolutionTo")
 
   // partidas
-  guessPokemonGames GuessPokemonGame[]
-  guessShinyGames   GuessShinyGame[]
+  guessPokemonGames   GuessPokemonGame[]
+  guessShinyGames     GuessShinyGame[]
   pokedokuAnswerCells PokedokuGameCell[]
 
   @@map("pokemon")
@@ -179,14 +179,14 @@ model GuessShinyGame {
 // Tengo una tabla donde guardo al id del jeugo que tiene una relacion con otra tabla que guarda las 9 condiciones de cada partida
 // por lo tanto se harian 9 relaciones por cada partida
 model PokedokuGame {
-  id               Int        @id @default(autoincrement())
-  gameId           String     @unique @default(cuid()) @map("id_game")
-  userId           Int        @map("id_user")
-  status           GameStatus @default(ACTIVE)
-  startedAt        DateTime   @default(now()) @map("started_at")
-  finishedAt       DateTime?  @map("finished_at")
-  xpEarned         Int?       @map("xp_earned")
-  lootboxesEarned  Int?       @map("lootboxes_earned")
+  id              Int        @id @default(autoincrement())
+  gameId          String     @unique @default(cuid()) @map("id_game")
+  userId          Int        @map("id_user")
+  status          GameStatus @default(ACTIVE)
+  startedAt       DateTime   @default(now()) @map("started_at")
+  finishedAt      DateTime?  @map("finished_at")
+  xpEarned        Int?       @map("xp_earned")
+  lootboxesEarned Int?       @map("lootboxes_earned")
 
   user  User               @relation(fields: [userId], references: [id], onDelete: Cascade)
   cells PokedokuGameCell[]

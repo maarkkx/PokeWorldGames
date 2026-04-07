@@ -8,10 +8,14 @@
  *
  * 🟢 You can import this file directly.
  */
-export type * from './models/User'
-export type * from './models/Pokemon'
-export type * from './models/Type'
-export type * from './models/UserPokemon'
-export type * from './models/PokemonType'
-export type * from './models/EvolutiveChain'
-export type * from './commonInputTypes'
+export type * from './models/User.js'
+export type * from './models/Pokemon.js'
+export type * from './models/Type.js'
+export type * from './models/UserPokemon.js'
+export type * from './models/PokemonType.js'
+export type * from './models/EvolutiveChain.js'
+export type * from './models/GuessPokemonGame.js'
+export type * from './models/GuessShinyGame.js'
+export type * from './models/PokedokuGame.js'
+export type * from './models/PokedokuGameCell.js'
+export type * from './commonInputTypes.js'

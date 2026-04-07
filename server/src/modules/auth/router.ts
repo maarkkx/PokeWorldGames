@@ -7,9 +7,8 @@ router.get('/', (_req, res) =>  {
   res.send('ruta base');
 });
 
-//rutas del juego
-router.put('/register', controller.register);
+//register usuario
+router.post('/register', controller.register);
 
-//test random pokemon
 
 export default router;
