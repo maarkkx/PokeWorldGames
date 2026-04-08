@@ -27,7 +27,7 @@ export async function answerShinyGame(req: Request, res: Response) {
     const gameId = req.body.gameId;
     const selectedPosition = req.body.selectedPosition;
 
-    const result = await service.answerShinyGame(userId, gameId, selectedPosition);
+    const result = await service.answerShinyGame(userId, selectedPosition);
 
     res.status(200).json({
       message: result.message,

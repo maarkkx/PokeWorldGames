@@ -90,3 +90,16 @@ export const getActiveGameByUserId = async (userId: number) => {
     },
   });
 };
+
+export const getGameIdByUserId = async (userId : number) => {
+  return prisma.guessPokemonGame.findFirst({
+    where: {
+      userId,
+      status: 'ACTIVE'
+    },
+    select: {
+      userId: true,
+      gameId: true,
+    }
+  })
+}
