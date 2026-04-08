@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import * as controller from './register/controller'
 import * as loginController from './login/controller'
+import * as forgetController from './forget_password/controller'
 
 
 const router = Router();
@@ -13,6 +14,9 @@ router.post('/register', controller.register);
 
 //login usuario
 router.post('/login', loginController.login)
+
+//recuperar contraseña
+router.post('/forget_password', forgetController.resetPassword)
 
 
 export default router;
