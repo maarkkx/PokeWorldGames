@@ -18,5 +18,8 @@ router.post('/login', loginController.login)
 //recuperar contraseña
 router.post('/forget_password', forgetController.resetPassword)
 
+//cambiar contraseña
+router.post('/change_password', loginController.changePassword)
+
 
 export default router;
