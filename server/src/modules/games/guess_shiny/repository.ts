@@ -77,3 +77,16 @@ export async function getActiveShinyGameByUserId(userId: number) {
 		orderBy: { startedAt: 'desc' },
 	});
 }
+
+export async function getGameIdByUserId(userId: number) {
+	return prisma.guessShinyGame.findFirst({
+    where: {
+      userId,
+      status: 'ACTIVE'
+    },
+    select: {
+      userId: true,
+      gameId: true,
+    }
+  })
+}

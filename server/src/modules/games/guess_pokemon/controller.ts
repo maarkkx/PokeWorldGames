@@ -47,7 +47,7 @@ export async function answerGame(req: Request, res: Response) {
     const userId = req.body.userId;
     const gameId = req.body.gameId;
     
-    const response = await service.manageAnswer(userId, gameId, answer);
+    const response = await service.manageAnswer(userId, answer);
 
     res.status(200).json({
       response

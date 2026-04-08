@@ -15,25 +15,23 @@ const livesDifficults : Record<string, number> = {
 
 export async function startGame(userId: number, difficult: string): Promise<object> {
   try {
-    //validacion de que la dificultad no esta vacia
+    //validaciones
     if (!difficult) {
       throw new Error("No difficulty selected");
     }
-
-    //validacion de que la dificultad existe
     if (!(difficult in livesDifficults)) {
       console.log(livesDifficults);
       console.log(difficult); 
       throw new Error('Difficulty does not exist');
     }
 
-    //crear nou pokemon
+    //crear pokemon random
     const pokemon: types.Pokemon = await repository.getRandomPokemon();
     if (!pokemon) {
       throw new Error('Error getting pokemon')
     }
 
-    //llamar funcion de dificultad
+
     const lives = livesDifficults[difficult];
 
     //comprobar si el usuario tiene una partida activa
@@ -41,6 +39,7 @@ export async function startGame(userId: number, difficult: string): Promise<obje
     if (activeGame) {
       throw new Error('You already have an active game');
     }
+
     //crear partida
     const game = await repository.createGame(userId, pokemon.id, lives)
 
@@ -61,32 +60,35 @@ export async function startGame(userId: number, difficult: string): Promise<obje
 //----------------------------------------------------
 //-----------Funciones para las respuestas------------
 //----------------------------------------------------
-export async function manageAnswer(userId: number, gameId: string, answer: string) {
+export async function manageAnswer(userId: number, answer: string) {
 
 //------------------------
 //-----Comprobaciones-----
 //------------------------
   //check de los inputs:
-  if (!gameId) {
-    throw new Error('Game ID is null');
-  }
   if (!userId) {
     throw new Error('User Id is null')
   }
+  let gameId;
+  let gameInfo = await repository.getGameIdByUserId(userId);
+  if (!gameInfo) {
+    throw new Error('There is no active game')
+  } else {
+    gameId = gameInfo.gameId;
+  }
+
   //veure la partida
   const game = await repository.getGameById(gameId);
 
-  //comprobar si existe la partida
+  //Comprobaciones:
   if (!game) {
     throw new Error('Game not found');
   }
 
-  //comporbar si el usuario de la partida
   if (game.userId !== userId) {
     throw new Error('Not your game');
   }
 
-  //comprobar que la partida esta activa
   if (game.status !== 'ACTIVE') {
     return { message: 'Game already finished', status: game.status };
   }

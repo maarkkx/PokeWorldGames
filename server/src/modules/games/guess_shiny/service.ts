@@ -21,6 +21,7 @@ export async function startShinyGame(userId: number) {
   if (!pokemon) {
     throw new Error('Error getting shiny Pokémon');
   }
+
   //elegir la posicion donde estara la foto correcta
   const correctPosition = Math.floor(Math.random() * 4) + 1;
 
@@ -38,18 +39,23 @@ export async function startShinyGame(userId: number) {
 
 
 //comprobar respuestas
-export async function answerShinyGame(userId: number, gameId: string, selectedPosition: number) {
+export async function answerShinyGame(userId: number, selectedPosition: number) {
 	//comprobar que los parametros son correctos
   if (!userId) {
  		throw new Error('User ID is required');
-	}
-  if (!gameId) {
-		throw new Error('Game ID is required');
 	}
   if (!selectedPosition){
  		throw new Error('Selected position is required');
 	}
 
+  let gameInfo = await repository.getGameIdByUserId(userId)
+  let gameId;
+  if (!gameInfo) {
+    throw new Error('There is no active game')
+  } else {
+    gameId = gameInfo.gameId;
+  }
+  
 	//comprobaciones de la partida
   const game = await repository.getShinyGameById(gameId);
   if (!game) {
