@@ -181,9 +181,7 @@ exports.Prisma.GuessPokemonGameScalarFieldEnum = {
   lastGuess: 'lastGuess',
   status: 'status',
   startedAt: 'startedAt',
-  finishedAt: 'finishedAt',
-  xpEarned: 'xpEarned',
-  lootboxesEarned: 'lootboxesEarned'
+  xpEarned: 'xpEarned'
 };
 
 exports.Prisma.GuessShinyGameScalarFieldEnum = {
@@ -197,9 +195,7 @@ exports.Prisma.GuessShinyGameScalarFieldEnum = {
   lastGuess: 'lastGuess',
   status: 'status',
   startedAt: 'startedAt',
-  finishedAt: 'finishedAt',
-  xpEarned: 'xpEarned',
-  lootboxesEarned: 'lootboxesEarned'
+  xpEarned: 'xpEarned'
 };
 
 exports.Prisma.PokedokuGameScalarFieldEnum = {
@@ -208,9 +204,7 @@ exports.Prisma.PokedokuGameScalarFieldEnum = {
   userId: 'userId',
   status: 'status',
   startedAt: 'startedAt',
-  finishedAt: 'finishedAt',
-  xpEarned: 'xpEarned',
-  lootboxesEarned: 'lootboxesEarned'
+  xpEarned: 'xpEarned'
 };
 
 exports.Prisma.PokedokuGameCellScalarFieldEnum = {
@@ -224,6 +218,15 @@ exports.Prisma.PokedokuGameCellScalarFieldEnum = {
   answerPokemonId: 'answerPokemonId',
   isCorrect: 'isCorrect',
   answeredAt: 'answeredAt'
+};
+
+exports.Prisma.PasswordResetTokenScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  tokenHash: 'tokenHash',
+  expiresAt: 'expiresAt',
+  usedAt: 'usedAt',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -257,7 +260,8 @@ exports.Prisma.ModelName = {
   GuessPokemonGame: 'GuessPokemonGame',
   GuessShinyGame: 'GuessShinyGame',
   PokedokuGame: 'PokedokuGame',
-  PokedokuGameCell: 'PokedokuGameCell'
+  PokedokuGameCell: 'PokedokuGameCell',
+  PasswordResetToken: 'PasswordResetToken'
 };
 
 /**

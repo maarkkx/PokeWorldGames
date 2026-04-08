@@ -8,3 +8,9 @@ dist/
 .env
 .env.*
 !.env.example
+
+# Configs
+/server/src/config/mailer.ts
+
+# cosas
+tasks.md
