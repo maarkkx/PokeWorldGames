@@ -1,44 +1,89 @@
-import * as repository from "./repository";
-import crypto from "crypto";
-import { envs } from '../../../config/envs'
+import * as repository from './repository';
+import * as regex from '../constants/constants';
+import crypto from 'crypto';
+import { envs } from '../../../config/envs';
 import { sendResetPasswordEmail } from './sendResetEmail';
 
 const bcrypt = require('bcrypt');
 
-function generateToken(size: number = 16): string {
-  return crypto.randomBytes(size).toString('hex');;
+function generateToken(size: number = 32): string {
+  return crypto.randomBytes(size).toString('hex');
 }
 
+function hashResetToken(token: string): string {
+  return crypto.createHash('sha256').update(token).digest('hex');
+}
+
+//enviar email reset password
 export async function requestPasswordReset(email: string) {
   try {
-    //comprobaciones
     if (!email) {
       throw new Error('Email is required');
     }
 
     const user = await repository.getUserByEmail(email);
-    if (!user) {
-      throw new Error('Email send')
-    }
+
     
-    //creacion token + mail
+    if (!user) {
+      return { message: 'Email send' };
+    }
+
+    // crear token + enviar email
     const token = generateToken();
-    const tokenHash = await bcrypt.hash(token, envs.SALT_ROUNDS);
+    const tokenHash = hashResetToken(token);
     const expiresAt = new Date(Date.now() + 1000 * 60 * 30);
 
     await repository.createPasswordResetRequest(user.id, tokenHash, expiresAt);
-    await sendResetPasswordEmail(email, token)  
+    await sendResetPasswordEmail(email, token);
 
+    return { message: 'Email send' };
+  } catch (error) {
+    console.log(error);
     return {
-      message: "Email send"
+      message: error instanceof Error ? error.message : 'Unexpected error',
+    };
+  }
+}
+
+export async function confirmPasswordReset(token: string, newPassword: string) {
+  try {
+    if (!token) {
+      return { success: false, message: 'Token is required' };
     }
 
-  } catch (error) {
-    let errorMessage = {
-      message: error instanceof Error ? error.message : error
-    };
-    console.log(error);
-    return errorMessage;
-  }
+    if (!newPassword) {
+      return { success: false, message: 'Password is required' };
+    }
 
+    if (!regex.regexPasswd.test(newPassword)) {
+      return {
+        success: false,
+        message:
+          'The password must be at least 8 characters long, contain 1 uppercase letter, 1 number and 1 symbol',
+      };
+    }
+
+    const tokenHash = hashResetToken(token);
+    const resetRequest = await repository.getValidPasswordResetToken(tokenHash);
+
+    if (!resetRequest) {
+      return { success: false, message: 'Invalid or expired token' };
+    }
+
+    const newPasswordHash = await bcrypt.hash(newPassword, envs.SALT_ROUNDS);
+
+    await repository.resetUserPassword(
+      resetRequest.userId,
+      resetRequest.id,
+      newPasswordHash
+    );
+
+    return {
+      success: true,
+      message: 'Password updated successfully',
+    };
+  } catch (error) {
+    console.log(error);
+    return { success: false, message: 'Internal server error' };
+  }
 }
