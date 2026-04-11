@@ -89,6 +89,7 @@ model Type {
 model UserPokemon {
   userId    Int @map("id_user")
   pokemonId Int @map("id_pokemon")
+  quantity  Int @default(1)
 
   user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   pokemon Pokemon @relation(fields: [pokemonId], references: [id], onDelete: Cascade)
