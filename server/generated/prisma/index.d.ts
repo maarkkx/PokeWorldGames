@@ -5787,26 +5787,31 @@ export namespace Prisma {
   export type UserPokemonAvgAggregateOutputType = {
     userId: number | null
     pokemonId: number | null
+    quantity: number | null
   }
 
   export type UserPokemonSumAggregateOutputType = {
     userId: number | null
     pokemonId: number | null
+    quantity: number | null
   }
 
   export type UserPokemonMinAggregateOutputType = {
     userId: number | null
     pokemonId: number | null
+    quantity: number | null
   }
 
   export type UserPokemonMaxAggregateOutputType = {
     userId: number | null
     pokemonId: number | null
+    quantity: number | null
   }
 
   export type UserPokemonCountAggregateOutputType = {
     userId: number
     pokemonId: number
+    quantity: number
     _all: number
   }
 
@@ -5814,26 +5819,31 @@ export namespace Prisma {
   export type UserPokemonAvgAggregateInputType = {
     userId?: true
     pokemonId?: true
+    quantity?: true
   }
 
   export type UserPokemonSumAggregateInputType = {
     userId?: true
     pokemonId?: true
+    quantity?: true
   }
 
   export type UserPokemonMinAggregateInputType = {
     userId?: true
     pokemonId?: true
+    quantity?: true
   }
 
   export type UserPokemonMaxAggregateInputType = {
     userId?: true
     pokemonId?: true
+    quantity?: true
   }
 
   export type UserPokemonCountAggregateInputType = {
     userId?: true
     pokemonId?: true
+    quantity?: true
     _all?: true
   }
 
@@ -5926,6 +5936,7 @@ export namespace Prisma {
   export type UserPokemonGroupByOutputType = {
     userId: number
     pokemonId: number
+    quantity: number
     _count: UserPokemonCountAggregateOutputType | null
     _avg: UserPokemonAvgAggregateOutputType | null
     _sum: UserPokemonSumAggregateOutputType | null
@@ -5950,6 +5961,7 @@ export namespace Prisma {
   export type UserPokemonSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     userId?: boolean
     pokemonId?: boolean
+    quantity?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     pokemon?: boolean | PokemonDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["userPokemon"]>
@@ -5957,6 +5969,7 @@ export namespace Prisma {
   export type UserPokemonSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     userId?: boolean
     pokemonId?: boolean
+    quantity?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     pokemon?: boolean | PokemonDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["userPokemon"]>
@@ -5964,6 +5977,7 @@ export namespace Prisma {
   export type UserPokemonSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     userId?: boolean
     pokemonId?: boolean
+    quantity?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     pokemon?: boolean | PokemonDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["userPokemon"]>
@@ -5971,9 +5985,10 @@ export namespace Prisma {
   export type UserPokemonSelectScalar = {
     userId?: boolean
     pokemonId?: boolean
+    quantity?: boolean
   }
 
-  export type UserPokemonOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userId" | "pokemonId", ExtArgs["result"]["userPokemon"]>
+  export type UserPokemonOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userId" | "pokemonId" | "quantity", ExtArgs["result"]["userPokemon"]>
   export type UserPokemonInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     pokemon?: boolean | PokemonDefaultArgs<ExtArgs>
@@ -5996,6 +6011,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       userId: number
       pokemonId: number
+      quantity: number
     }, ExtArgs["result"]["userPokemon"]>
     composites: {}
   }
@@ -6423,6 +6439,7 @@ export namespace Prisma {
   interface UserPokemonFieldRefs {
     readonly userId: FieldRef<"UserPokemon", 'Int'>
     readonly pokemonId: FieldRef<"UserPokemon", 'Int'>
+    readonly quantity: FieldRef<"UserPokemon", 'Int'>
   }
     
 
@@ -14943,7 +14960,8 @@ export namespace Prisma {
 
   export const UserPokemonScalarFieldEnum: {
     userId: 'userId',
-    pokemonId: 'pokemonId'
+    pokemonId: 'pokemonId',
+    quantity: 'quantity'
   };
 
   export type UserPokemonScalarFieldEnum = (typeof UserPokemonScalarFieldEnum)[keyof typeof UserPokemonScalarFieldEnum]
@@ -15402,6 +15420,7 @@ export namespace Prisma {
     NOT?: UserPokemonWhereInput | UserPokemonWhereInput[]
     userId?: IntFilter<"UserPokemon"> | number
     pokemonId?: IntFilter<"UserPokemon"> | number
+    quantity?: IntFilter<"UserPokemon"> | number
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     pokemon?: XOR<PokemonScalarRelationFilter, PokemonWhereInput>
   }
@@ -15409,6 +15428,7 @@ export namespace Prisma {
   export type UserPokemonOrderByWithRelationInput = {
     userId?: SortOrder
     pokemonId?: SortOrder
+    quantity?: SortOrder
     user?: UserOrderByWithRelationInput
     pokemon?: PokemonOrderByWithRelationInput
   }
@@ -15420,6 +15440,7 @@ export namespace Prisma {
     NOT?: UserPokemonWhereInput | UserPokemonWhereInput[]
     userId?: IntFilter<"UserPokemon"> | number
     pokemonId?: IntFilter<"UserPokemon"> | number
+    quantity?: IntFilter<"UserPokemon"> | number
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     pokemon?: XOR<PokemonScalarRelationFilter, PokemonWhereInput>
   }, "userId_pokemonId">
@@ -15427,6 +15448,7 @@ export namespace Prisma {
   export type UserPokemonOrderByWithAggregationInput = {
     userId?: SortOrder
     pokemonId?: SortOrder
+    quantity?: SortOrder
     _count?: UserPokemonCountOrderByAggregateInput
     _avg?: UserPokemonAvgOrderByAggregateInput
     _max?: UserPokemonMaxOrderByAggregateInput
@@ -15440,6 +15462,7 @@ export namespace Prisma {
     NOT?: UserPokemonScalarWhereWithAggregatesInput | UserPokemonScalarWhereWithAggregatesInput[]
     userId?: IntWithAggregatesFilter<"UserPokemon"> | number
     pokemonId?: IntWithAggregatesFilter<"UserPokemon"> | number
+    quantity?: IntWithAggregatesFilter<"UserPokemon"> | number
   }
 
   export type PokemonTypeWhereInput = {
@@ -16212,6 +16235,7 @@ export namespace Prisma {
   }
 
   export type UserPokemonCreateInput = {
+    quantity?: number
     user: UserCreateNestedOneWithoutPokemonsInput
     pokemon: PokemonCreateNestedOneWithoutOwnersInput
   }
@@ -16219,9 +16243,11 @@ export namespace Prisma {
   export type UserPokemonUncheckedCreateInput = {
     userId: number
     pokemonId: number
+    quantity?: number
   }
 
   export type UserPokemonUpdateInput = {
+    quantity?: IntFieldUpdateOperationsInput | number
     user?: UserUpdateOneRequiredWithoutPokemonsNestedInput
     pokemon?: PokemonUpdateOneRequiredWithoutOwnersNestedInput
   }
@@ -16229,20 +16255,23 @@ export namespace Prisma {
   export type UserPokemonUncheckedUpdateInput = {
     userId?: IntFieldUpdateOperationsInput | number
     pokemonId?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
   }
 
   export type UserPokemonCreateManyInput = {
     userId: number
     pokemonId: number
+    quantity?: number
   }
 
   export type UserPokemonUpdateManyMutationInput = {
-
+    quantity?: IntFieldUpdateOperationsInput | number
   }
 
   export type UserPokemonUncheckedUpdateManyInput = {
     userId?: IntFieldUpdateOperationsInput | number
     pokemonId?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
   }
 
   export type PokemonTypeCreateInput = {
@@ -17072,26 +17101,31 @@ export namespace Prisma {
   export type UserPokemonCountOrderByAggregateInput = {
     userId?: SortOrder
     pokemonId?: SortOrder
+    quantity?: SortOrder
   }
 
   export type UserPokemonAvgOrderByAggregateInput = {
     userId?: SortOrder
     pokemonId?: SortOrder
+    quantity?: SortOrder
   }
 
   export type UserPokemonMaxOrderByAggregateInput = {
     userId?: SortOrder
     pokemonId?: SortOrder
+    quantity?: SortOrder
   }
 
   export type UserPokemonMinOrderByAggregateInput = {
     userId?: SortOrder
     pokemonId?: SortOrder
+    quantity?: SortOrder
   }
 
   export type UserPokemonSumOrderByAggregateInput = {
     userId?: SortOrder
     pokemonId?: SortOrder
+    quantity?: SortOrder
   }
 
   export type TypeScalarRelationFilter = {
@@ -18603,11 +18637,13 @@ export namespace Prisma {
   }
 
   export type UserPokemonCreateWithoutUserInput = {
+    quantity?: number
     pokemon: PokemonCreateNestedOneWithoutOwnersInput
   }
 
   export type UserPokemonUncheckedCreateWithoutUserInput = {
     pokemonId: number
+    quantity?: number
   }
 
   export type UserPokemonCreateOrConnectWithoutUserInput = {
@@ -18762,6 +18798,7 @@ export namespace Prisma {
     NOT?: UserPokemonScalarWhereInput | UserPokemonScalarWhereInput[]
     userId?: IntFilter<"UserPokemon"> | number
     pokemonId?: IntFilter<"UserPokemon"> | number
+    quantity?: IntFilter<"UserPokemon"> | number
   }
 
   export type GuessPokemonGameUpsertWithWhereUniqueWithoutUserInput = {
@@ -18886,11 +18923,13 @@ export namespace Prisma {
   }
 
   export type UserPokemonCreateWithoutPokemonInput = {
+    quantity?: number
     user: UserCreateNestedOneWithoutPokemonsInput
   }
 
   export type UserPokemonUncheckedCreateWithoutPokemonInput = {
     userId: number
+    quantity?: number
   }
 
   export type UserPokemonCreateOrConnectWithoutPokemonInput = {
@@ -20490,6 +20529,7 @@ export namespace Prisma {
 
   export type UserPokemonCreateManyUserInput = {
     pokemonId: number
+    quantity?: number
   }
 
   export type GuessPokemonGameCreateManyUserInput = {
@@ -20534,15 +20574,18 @@ export namespace Prisma {
   }
 
   export type UserPokemonUpdateWithoutUserInput = {
+    quantity?: IntFieldUpdateOperationsInput | number
     pokemon?: PokemonUpdateOneRequiredWithoutOwnersNestedInput
   }
 
   export type UserPokemonUncheckedUpdateWithoutUserInput = {
     pokemonId?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
   }
 
   export type UserPokemonUncheckedUpdateManyWithoutUserInput = {
     pokemonId?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
   }
 
   export type GuessPokemonGameUpdateWithoutUserInput = {
@@ -20668,6 +20711,7 @@ export namespace Prisma {
 
   export type UserPokemonCreateManyPokemonInput = {
     userId: number
+    quantity?: number
   }
 
   export type PokemonTypeCreateManyPokemonInput = {
@@ -20726,15 +20770,18 @@ export namespace Prisma {
   }
 
   export type UserPokemonUpdateWithoutPokemonInput = {
+    quantity?: IntFieldUpdateOperationsInput | number
     user?: UserUpdateOneRequiredWithoutPokemonsNestedInput
   }
 
   export type UserPokemonUncheckedUpdateWithoutPokemonInput = {
     userId?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
   }
 
   export type UserPokemonUncheckedUpdateManyWithoutPokemonInput = {
     userId?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
   }
 
   export type PokemonTypeUpdateWithoutPokemonInput = {

@@ -155,7 +155,8 @@ exports.Prisma.TypeScalarFieldEnum = {
 
 exports.Prisma.UserPokemonScalarFieldEnum = {
   userId: 'userId',
-  pokemonId: 'pokemonId'
+  pokemonId: 'pokemonId',
+  quantity: 'quantity'
 };
 
 exports.Prisma.PokemonTypeScalarFieldEnum = {
