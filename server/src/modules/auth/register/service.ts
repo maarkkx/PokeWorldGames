@@ -6,7 +6,7 @@ import { AuthResponse } from "../constants/types";
 const bcrypt = require('bcrypt');
 
 //Validra usuarios
-export async function validateUser(name: string, email: string, password: string) : Promise<AuthResponse> {
+export async function validateUser(name: string, email: string, password: string, confirmPassword :string) : Promise<AuthResponse> {
 	try {
 		//comprobaciones
 		if (!regex.regexUser.test(name)) {
@@ -25,6 +25,12 @@ export async function validateUser(name: string, email: string, password: string
 			return {
 				created: false,
 				message: "The password must be at least 8 characters long, contain 1 uppercase letter and 1 symbol"
+			}
+		}
+		if (password == confirmPassword) {
+			return {
+				created: false,
+				message: "The passwords must match"
 			}
 		}
 

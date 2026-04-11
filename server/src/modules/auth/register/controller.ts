@@ -3,11 +3,12 @@ import * as service from './service';
 
 export async function register(req : Request, res : Response) {
 	try {
-		const name = req.body.name; //guardar name
-		const email = req.body.email; //guardar email
-		const password = req.body.password; //guardar password
+		const name = req.body.name;
+		const email = req.body.email;
+		const password = req.body.password;
+		const confirmPassword = req.body.confirmPassword;
 
-		const user = await service.validateUser(name, email, password);
+		const user = await service.validateUser(name, email, password, confirmPassword);
 
 		res.status(200).json({
 			user
