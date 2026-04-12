@@ -3,7 +3,8 @@ import guessRouter from './modules/games/guess_pokemon/router';
 import shinyRouter from './modules/games/guess_shiny/router';
 import auth from './modules/auth/router';
 import lootbox from './modules/lootbox/router';
-import ranking from './modules/rankings/router'
+import ranking from './modules/rankings/router';
+import pokedex from './modules/pokedex/router'
 
 const app = express();
 
@@ -18,13 +19,16 @@ app.use('/guess-pokemon', guessRouter);
 app.use('/guess-shiny', shinyRouter);
 
 //User
-app.use('/auth', auth)
+app.use('/auth', auth);
 
 //lootbox
-app.use('/lootbox', lootbox)
+app.use('/lootbox', lootbox);
 
 //ranking
-app.use('/ranking', ranking)
+app.use('/ranking', ranking);
+
+//pokedex
+app.use('/pokedex', pokedex);
 
 app.use((_req, res) => {
   res.status(404).json({ message: 'Ruta no encontrada' });
