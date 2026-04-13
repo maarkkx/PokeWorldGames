@@ -4,7 +4,8 @@ import shinyRouter from './modules/games/guess_shiny/router';
 import auth from './modules/auth/router';
 import lootbox from './modules/lootbox/router';
 import ranking from './modules/rankings/router';
-import pokedex from './modules/pokedex/router'
+import pokedex from './modules/pokedex/router';
+import profile from './modules/profile/router'
 
 const app = express();
 
@@ -29,6 +30,9 @@ app.use('/ranking', ranking);
 
 //pokedex
 app.use('/pokedex', pokedex);
+
+//profile
+app.use('/profile', profile)
 
 app.use((_req, res) => {
   res.status(404).json({ message: 'Ruta no encontrada' });

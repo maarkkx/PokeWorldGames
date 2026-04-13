@@ -27,6 +27,7 @@ export async function loginUser(email: string, password: string) {
 	const token = jwt.sign(
 		{
 			id: user.id,
+			username: user.name,
 			email: user.email,
 			admin: user.admin
 		},
@@ -38,12 +39,7 @@ export async function loginUser(email: string, password: string) {
 
 	return {
 		success: true,
-		token,
-		user: {
-			id: user.id,
-			name: user.name,
-			email: user.email
-		}
+		token
 	};
 }
 
