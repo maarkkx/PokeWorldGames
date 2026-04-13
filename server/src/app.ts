@@ -6,6 +6,7 @@ import lootbox from './modules/lootbox/router';
 import ranking from './modules/rankings/router';
 import pokedex from './modules/pokedex/router';
 import profile from './modules/profile/router'
+import trade from './modules/trade/router';
 
 const app = express();
 
@@ -33,6 +34,9 @@ app.use('/pokedex', pokedex);
 
 //profile
 app.use('/profile', profile)
+
+//trade
+app.use('/trade', trade)
 
 app.use((_req, res) => {
   res.status(404).json({ message: 'Ruta no encontrada' });
