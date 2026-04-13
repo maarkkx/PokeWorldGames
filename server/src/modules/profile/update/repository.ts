@@ -1,4 +1,3 @@
-import { hash } from 'crypto';
 import prisma from '../../../../prisma/client';
 
 //get username para comprobar que no se repita

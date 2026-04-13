@@ -1,5 +1,6 @@
 import { Router } from 'express';
-import * as controllerUpdate from './update/controller'
+import * as controllerUpdate from './update/controller';
+import * as controllerShow from './show/controller';
 
 
 const router = Router();
@@ -11,7 +12,10 @@ router.get('/', (_req, res) =>  {
 router.post('/update-pwd', controllerUpdate.changePassword);
 
 //cambiar user
-router.post('/update-user', controllerUpdate.changeUsername)
+router.post('/update-user', controllerUpdate.changeUsername);
+
+//show details
+router.post('/show', controllerShow.getUserDetails)
 
 
 export default router;
