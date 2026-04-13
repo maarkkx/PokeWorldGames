@@ -19,8 +19,5 @@ router.post('/login', loginController.login)
 router.post('/forget_password', forgetController.resetPassword)
 router.post('/reset_password', forgetController.changePasswordWithToken)
 
-//cambiar contraseña
-router.post('/change_password', loginController.changePassword)
-
 
 export default router;
