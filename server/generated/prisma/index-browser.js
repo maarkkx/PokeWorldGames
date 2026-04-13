@@ -230,6 +230,24 @@ exports.Prisma.PasswordResetTokenScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.TradeScalarFieldEnum = {
+  id: 'id',
+  tradeId: 'tradeId',
+  fromUserId: 'fromUserId',
+  toUserId: 'toUserId',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TradeItemScalarFieldEnum = {
+  id: 'id',
+  tradeIdFk: 'tradeIdFk',
+  ownerUserId: 'ownerUserId',
+  pokemonId: 'pokemonId',
+  quantity: 'quantity'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -251,6 +269,13 @@ exports.GameStatus = exports.$Enums.GameStatus = {
   ABANDONED: 'ABANDONED'
 };
 
+exports.TradeStatus = exports.$Enums.TradeStatus = {
+  PENDING: 'PENDING',
+  ACCEPTED: 'ACCEPTED',
+  REJECTED: 'REJECTED',
+  CANCELLED: 'CANCELLED'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Pokemon: 'Pokemon',
@@ -262,7 +287,9 @@ exports.Prisma.ModelName = {
   GuessShinyGame: 'GuessShinyGame',
   PokedokuGame: 'PokedokuGame',
   PokedokuGameCell: 'PokedokuGameCell',
-  PasswordResetToken: 'PasswordResetToken'
+  PasswordResetToken: 'PasswordResetToken',
+  Trade: 'Trade',
+  TradeItem: 'TradeItem'
 };
 
 /**

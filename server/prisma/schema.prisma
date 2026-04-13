@@ -28,6 +28,8 @@ model User {
   lootboxes    Int     @default(0)
   admin        Boolean @default(false)
   refreshToken String? @map("refresh_token") //para el jwt
+  sentTrades     Trade[] @relation("TradeFromUser")
+  receivedTrades Trade[] @relation("TradeToUser")
 
   // relacion n:m con pokemon
   pokemons UserPokemon[]
@@ -70,6 +72,9 @@ model Pokemon {
   guessPokemonGames   GuessPokemonGame[]
   guessShinyGames     GuessShinyGame[]
   pokedokuAnswerCells PokedokuGameCell[]
+
+  //trades
+  tradeItems TradeItem[]
 
   @@map("pokemon")
 }
@@ -221,4 +226,42 @@ model PasswordResetToken {
   @@index([userId])
   @@index([expiresAt])
   @@map("password_reset_tokens")
+}
+
+enum TradeStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  CANCELLED
+}
+
+model Trade {
+  id         Int         @id @default(autoincrement())
+  tradeId    String      @unique @default(cuid()) @map("id_trade")
+  fromUserId Int         @map("from_user_id")
+  toUserId   Int         @map("to_user_id")
+  status     TradeStatus @default(PENDING)
+  createdAt  DateTime    @default(now()) @map("created_at")
+  updatedAt  DateTime    @updatedAt @map("updated_at")
+
+  fromUser   User        @relation("TradeFromUser", fields: [fromUserId], references: [id], onDelete: Cascade)
+  toUser     User        @relation("TradeToUser", fields: [toUserId], references: [id], onDelete: Cascade)
+  items      TradeItem[]
+
+  @@index([fromUserId, status])
+  @@index([toUserId, status])
+  @@map("trades")
+}
+
+model TradeItem {
+  id          Int   @id @default(autoincrement())
+  tradeIdFk   Int   @map("id_trade_fk")
+  ownerUserId Int   @map("owner_user_id")
+  pokemonId   Int   @map("id_pokemon")
+  quantity    Int
+
+  trade       Trade   @relation(fields: [tradeIdFk], references: [id], onDelete: Cascade)
+  pokemon     Pokemon @relation(fields: [pokemonId], references: [id], onDelete: Restrict)
+
+  @@map("trade_items")
 }
