@@ -33,7 +33,7 @@ export async function loginUser(email: string, password: string) {
 		},
 		envs.JWT_SECRET,
 		{
-			expiresIn: '1h'
+			expiresIn: '1d'
 		}
 	);
 
@@ -41,40 +41,4 @@ export async function loginUser(email: string, password: string) {
 		success: true,
 		token
 	};
-}
-
-export async function changePassword(id : number, password: string, newPassword: string, newPasswordConfirmation: string) {
-	try {
-		const passwordBD = await repository.getPasswordHash(id);
-		const hashPassword = <string>passwordBD?.password;
-		const isMatch = await bcrypt.compare(password, hashPassword);
-
-		if (!isMatch) {
-			throw new Error('Incorrect Password')
-		}
-
-		if (newPassword !== newPasswordConfirmation) {
-			throw new Error('The passwords do not match')
-		}
-
-		if (!regex.regexPasswd.test(newPassword)) {
-			return {
-				created: false,
-				message: "The password must be at least 8 characters long, contain 1 uppercase letter and 1 symbol"
-			}
-		}
-
-		await repository.changePassword(id, await bcrypt.hash(newPassword, envs.SALT_ROUNDS))
-		return {
-			message: 'Password successfully changed'
-		}
-
-	} catch (error) {
-		let errorMessage = {
-      message: error instanceof Error ? error.message : error
-    };
-    console.log(error);
-    return errorMessage;
-	}
-
 }
