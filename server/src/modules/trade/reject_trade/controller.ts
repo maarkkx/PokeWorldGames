@@ -3,7 +3,8 @@ import jwt from 'jsonwebtoken';
 import * as envs from '../../../config/envs';
 import * as service from './service';
 
-export async function acceptTrade(req: Request, res: Response) {
+export async function rejectTrade(req: Request,res: Response
+) {
   try {
     const authHeader = req.headers.authorization;
 
@@ -22,7 +23,7 @@ export async function acceptTrade(req: Request, res: Response) {
 
     const tradeId = req.params.tradeId as string;
 
-    const trade = await service.acceptTrade(tradeId, userId);
+    const trade = await service.rejectTrade(tradeId, userId);
 
     return res.status(200).json({ trade });
   } catch (error) {
