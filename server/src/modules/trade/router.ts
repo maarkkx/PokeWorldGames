@@ -2,6 +2,7 @@ import { Router } from 'express';
 import * as searchPokemonController from './search_pokemon_other_user/controller';
 import * as getUserTradesController from './get_user_trades/controller';
 import * as createTradeController from './create_trade/controller';
+import * as acceptTradeController from './accept_trade/controller';
 
 const router = Router();
 
@@ -13,5 +14,8 @@ router.get('/my-trades', getUserTradesController.getUserTrades);
 
 //crear trade
 router.post('/request', createTradeController.createTrade);
+
+//aceptar trade
+router.post('/:tradeId/accept', acceptTradeController.acceptTrade);
 
 export default router;
