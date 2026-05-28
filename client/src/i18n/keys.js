@@ -23,6 +23,8 @@ export const KEYS = {
     ranking: 'nav.ranking',
     trade: 'nav.trade',
     mainAria: 'nav.mainAria',
+    collapseSidebar: 'nav.collapseSidebar',
+    expandSidebar: 'nav.expandSidebar',
   },
   header: {
     level: 'header.level',

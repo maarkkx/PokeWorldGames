@@ -104,7 +104,6 @@ export default function HomePage() {
           <section className="featured-card" aria-label={t(KEYS.home.featuredAria)}>
             <div className="featured-card__head">
               <span className="badge badge--brand">{t(KEYS.home.recommended)}</span>
-              <span className="featured-card__rule">{t(KEYS.home.guessRule)}</span>
             </div>
 
             <div className="featured-card__content">
@@ -116,9 +115,6 @@ export default function HomePage() {
                   <Button className="featured-card__cta" to={ROUTES.guessPokemon}>
                     {t(KEYS.home.startChallengeShort)}
                   </Button>
-                  <Link className="featured-card__link" to={ROUTES.guessPokemonRules}>
-                    {t(KEYS.home.viewRules)}
-                  </Link>
                 </div>
               </div>
 
