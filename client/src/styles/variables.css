@@ -1,0 +1,33 @@
+:root {
+  --color-bg: #f1f1f1;
+  --color-header: #dc2828;
+  --color-header-bar-track: #c52e37;
+  --color-header-bar-fill: #fcf6f6;
+  --color-primary: #bb0000;
+  --color-primary-dark: #b9000a;
+  --color-brand-text: #bb0511;
+  --color-text: #1d1b1b;
+  --color-text-muted: #646464;
+  --color-nav-muted: #939292;
+  --color-card: #ffffff;
+  --color-progress-track: #e2e2e2;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-error-bg: #fde8e8;
+  --color-error-text: #9b0000;
+
+  --ui-scale: 0.82;
+
+  --sidebar-width: 284px;
+  --header-height: 88px;
+  --radius-card: 25px;
+  --radius-button: 25px;
+  --radius-nav-active: 15px;
+  --radius-input: 15px;
+
+  --shadow-sidebar: 0 4px 4px rgba(0, 0, 0, 0.7);
+  --shadow-card: 0 4px 4px rgba(0, 0, 0, 0.25);
+
+  --font-family: 'Inter', system-ui, sans-serif;
+  --content-max-width: 1200px;
+}
