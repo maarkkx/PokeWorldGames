@@ -42,9 +42,7 @@
   color: rgba(0, 0, 0, 0.55);
   display: grid;
   place-items: center;
-  padding: 0;
-  cursor: not-allowed;
-  opacity: 0.9;
+  cursor: default;
 }
 
 .app-footer__cols {
@@ -64,16 +62,11 @@
 
 .app-footer__link {
   display: block;
-  width: 100%;
-  border: none;
-  background: transparent;
   padding: 6px 0;
-  text-align: left;
   font-size: 13px;
   font-weight: 600;
   color: var(--color-text-muted);
-  cursor: not-allowed;
-  opacity: 0.9;
+  cursor: default;
 }
 
 .app-footer__bottom {

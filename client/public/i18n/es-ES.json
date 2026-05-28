@@ -21,7 +21,9 @@
     "profile": "Perfil",
     "ranking": "Ranking",
     "trade": "Intercambio",
-    "mainAria": "Navegación principal"
+    "mainAria": "Navegación principal",
+    "collapseSidebar": "Ocultar menú lateral",
+    "expandSidebar": "Mostrar menú lateral"
   },
   "header": {
     "level": "Nv. {{level}}"

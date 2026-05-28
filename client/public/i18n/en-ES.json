@@ -21,7 +21,9 @@
     "profile": "Profile",
     "ranking": "Ranking",
     "trade": "Trade",
-    "mainAria": "Main navigation"
+    "mainAria": "Main navigation",
+    "collapseSidebar": "Collapse sidebar",
+    "expandSidebar": "Expand sidebar"
   },
   "header": {
     "level": "Lv. {{level}}"

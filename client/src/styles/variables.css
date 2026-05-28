@@ -15,10 +15,12 @@
   --color-black: #000000;
   --color-error-bg: #fde8e8;
   --color-error-text: #9b0000;
+  --color-hover: #b64141;
 
   --ui-scale: 0.82;
 
   --sidebar-width: 284px;
+  --sidebar-width-collapsed: 72px;
   --header-height: 88px;
   --radius-card: 25px;
   --radius-button: 25px;
