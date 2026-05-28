@@ -27,7 +27,7 @@ export async function validateUser(name: string, email: string, password: string
 				message: "The password must be at least 8 characters long, contain 1 uppercase letter and 1 symbol"
 			}
 		}
-		if (password == confirmPassword) {
+		if (password !== confirmPassword) {
 			return {
 				created: false,
 				message: "The passwords must match"

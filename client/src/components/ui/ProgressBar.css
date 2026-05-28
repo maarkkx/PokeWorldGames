@@ -1,0 +1,29 @@
+.progress-bar {
+  width: 100%;
+  background: var(--color-progress-track);
+  border-radius: 1000px;
+  overflow: hidden;
+}
+
+.progress-bar--sm {
+  height: 4px;
+  background: var(--color-header-bar-track);
+}
+
+.progress-bar--sm .progress-bar__fill {
+  background: var(--color-header-bar-fill);
+}
+
+.progress-bar--md {
+  height: 18px;
+}
+
+.progress-bar--md .progress-bar__fill {
+  background: var(--color-primary-dark);
+}
+
+.progress-bar__fill {
+  height: 100%;
+  border-radius: 1000px;
+  transition: width 0.25s ease;
+}
