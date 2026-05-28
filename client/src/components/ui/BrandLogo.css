@@ -1,0 +1,84 @@
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.brand-logo__mark {
+  position: relative;
+  width: 77px;
+  height: 77px;
+  flex-shrink: 0;
+}
+
+.brand-logo__outer,
+.brand-logo__inner {
+  position: absolute;
+  object-fit: contain;
+}
+
+.brand-logo__outer {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.brand-logo__inner {
+  width: 54px;
+  height: 54px;
+  left: 11px;
+  top: 11px;
+}
+
+.brand-logo__title {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Header: white logo on red bar (slightly below full Figma size) */
+.brand-logo--header {
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.brand-logo--header .brand-logo__mark {
+  width: 64px;
+  height: 64px;
+}
+
+.brand-logo--header .brand-logo__inner {
+  width: 45px;
+  height: 45px;
+  left: 9px;
+  top: 9px;
+}
+
+.brand-logo--header .brand-logo__title {
+  font-size: 30px;
+  color: var(--color-white);
+}
+
+/* Auth: same mark as header, title for light background */
+.brand-logo--auth {
+  justify-content: center;
+}
+
+.brand-logo--auth .brand-logo__mark {
+  background: var(--color-header);
+  border-radius: 50%;
+}
+
+.brand-logo--auth .brand-logo__title {
+  color: var(--color-text);
+}
+
+.brand-logo--auth-center {
+  flex-direction: column;
+  gap: 16px;
+}
+
+.brand-logo--auth-center .brand-logo__title {
+  font-size: 32px;
+}

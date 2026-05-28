@@ -1,0 +1,37 @@
+import { KEYS } from '../i18n/keys.js';
+
+export const regexUser = /^[a-zA-Z0-9]{4,20}$/;
+export const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+export const regexPassword = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+export function validateRegisterForm({ name, email, password, confirmPassword }) {
+  if (!regexUser.test(name)) {
+    return KEYS.validation.usernameInvalid;
+  }
+
+  if (!regexEmail.test(email)) {
+    return KEYS.validation.emailInvalid;
+  }
+
+  if (!regexPassword.test(password)) {
+    return KEYS.validation.passwordInvalid;
+  }
+
+  if (password !== confirmPassword) {
+    return KEYS.validation.passwordsMismatch;
+  }
+
+  return null;
+}
+
+export function validateLoginForm({ email, password }) {
+  if (!regexEmail.test(email)) {
+    return KEYS.validation.emailInvalid;
+  }
+
+  if (!password) {
+    return KEYS.validation.passwordRequired;
+  }
+
+  return null;
+}

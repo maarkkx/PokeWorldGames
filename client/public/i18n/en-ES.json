@@ -1,0 +1,142 @@
+{
+  "common": {
+    "brand": "PokeWorldGames",
+    "loading": "Loading...",
+    "comingSoon": "Coming soon",
+    "userFallback": "User",
+    "trainerFallback": "Trainer",
+    "levelShort": "Lv. {{level}}",
+    "logout": "Log out",
+    "backToHome": "Back to home",
+    "browseGames": "Browse games",
+    "wipEyebrow": "Work in progress",
+    "wipDefaultDescription": "This section is under construction. Check back soon.",
+    "languageEs": "ES",
+    "languageEn": "EN",
+    "switchLanguage": "Change language"
+  },
+  "nav": {
+    "home": "Home",
+    "games": "Games",
+    "profile": "Profile",
+    "ranking": "Ranking",
+    "trade": "Trade",
+    "mainAria": "Main navigation"
+  },
+  "header": {
+    "level": "Lv. {{level}}"
+  },
+  "footer": {
+    "tagline": "The ultimate destination for Pokémon trainers to test their knowledge, trade rare items, and climb the global rankings.",
+    "socialAria": "Social links",
+    "quickLinks": "Quick links",
+    "support": "Support",
+    "legal": "Legal",
+    "dashboard": "Dashboard",
+    "gameModes": "Game modes",
+    "marketplace": "Marketplace",
+    "globalRankings": "Global rankings",
+    "helpCenter": "Help center",
+    "gameRules": "Game rules",
+    "tradeSafety": "Trade safety",
+    "bugReport": "Bug report",
+    "privacyPolicy": "Privacy policy",
+    "termsOfService": "Terms of service",
+    "cookiePolicy": "Cookie policy",
+    "copyright": "© 2026 PokeWorldGames. All rights reserved.",
+    "statusAria": "Footer information"
+  },
+  "auth": {
+    "signInSubtitle": "Sign in to continue your adventure",
+    "registerSubtitle": "Create your trainer account",
+    "email": "Email",
+    "password": "Password",
+    "username": "Username",
+    "confirmPassword": "Confirm password",
+    "emailPlaceholder": "user@example.com",
+    "passwordPlaceholder": "••••••••",
+    "usernamePlaceholder": "trainer123",
+    "signIn": "Sign in",
+    "signingIn": "Signing in...",
+    "signUp": "Sign up",
+    "creatingAccount": "Creating account...",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "signUpLink": "Sign up",
+    "signInLink": "Sign in",
+    "signInFailed": "Could not sign in.",
+    "registerFailed": "Registration could not be completed.",
+    "registerSuccess": "Account created. You can sign in now."
+  },
+  "validation": {
+    "usernameInvalid": "Username must be 4–20 alphanumeric characters.",
+    "emailInvalid": "Enter a valid email address.",
+    "passwordInvalid": "Password must be at least 8 characters with 1 uppercase letter, 1 number, and 1 symbol (@$!%*?&).",
+    "passwordsMismatch": "Passwords do not match.",
+    "passwordRequired": "Enter your password."
+  },
+  "home": {
+    "pageLabel": "Home",
+    "kicker": "PokeWorldGames",
+    "welcome": "Welcome, {{name}}",
+    "subtitle": "Level up by completing challenges, earn XP, unlock loot boxes, and climb the global leaderboard.",
+    "startChallenge": "Start a challenge",
+    "exploreGames": "Explore games",
+    "statsAria": "Your stats",
+    "statLevel": "Level",
+    "statXp": "XP",
+    "statLootBoxes": "Loot boxes",
+    "statNextGoal": "Next goal",
+    "xpToLevelUp": "{{count}} XP to level up",
+    "quickActions": "Quick actions",
+    "quickActionsHint": "Jump back in with one click.",
+    "guessPokemon": "Guess the Pokémon",
+    "guessAttempts": "3 attempts",
+    "trade": "Trade",
+    "tradeMeta": "Exchange Pokémon",
+    "ranking": "Ranking",
+    "rankingMeta": "Top trainers",
+    "profile": "Profile",
+    "profileMeta": "Your account",
+    "highlightsAria": "Highlights",
+    "featuredAria": "Featured game",
+    "recommended": "Recommended",
+    "guessRule": "Guess in 3 attempts",
+    "featuredTitle": "Guess the Pokémon",
+    "featuredDesc": "Identify the mystery Pokémon from its silhouette. Win to earn XP and loot boxes.",
+    "startChallengeShort": "Start challenge",
+    "viewRules": "View rules",
+    "progressAria": "Trainer progress",
+    "progressTitle": "Trainer Progress",
+    "lootBoxesBadge": "Loot boxes: {{count}}",
+    "xpLevel": "XP Level {{level}}",
+    "xpProgress": "{{current}} / {{max}} XP",
+    "nextGoal": "Your next goal: {{xp}} XP to reach Level {{level}}."
+  },
+  "wip": {
+    "games": {
+      "title": "Games",
+      "description": "Browse game modes and challenges. This hub is coming soon."
+    },
+    "guessPokemon": {
+      "title": "Guess the Pokémon",
+      "description": "The silhouette challenge is under development. Soon you will guess Pokémon in 3 attempts."
+    },
+    "guessPokemonRules": {
+      "title": "Guess the Pokémon — Rules",
+      "description": "Game rules and scoring will be published here soon."
+    },
+    "trade": {
+      "title": "Trade",
+      "description": "Trade Pokémon with other trainers. This feature is on the way."
+    },
+    "ranking": {
+      "title": "Ranking",
+      "description": "Global leaderboards and top trainers will appear here soon."
+    },
+    "profile": {
+      "title": "Profile",
+      "description": "Your trainer profile and account settings are coming soon."
+    }
+  }
+}
