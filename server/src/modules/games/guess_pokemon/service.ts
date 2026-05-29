@@ -58,6 +58,37 @@ export async function startGame(userId: number, difficult: string): Promise<obje
 }
 
 //----------------------------------------------------
+//----------Funciones para reanudar la partida----------
+//----------------------------------------------------
+
+export async function resumeGame(userId: number): Promise<object> {
+  try {
+    const activeGame = await repository.getActiveGameWithPokemonByUserId(userId);
+
+    if (!activeGame) {
+      throw new Error('There is no active game');
+    }
+
+    if (!activeGame.pokemon?.urlImage) {
+      throw new Error('Error getting pokemon');
+    }
+
+    return {
+      gameId: activeGame.gameId,
+      image: activeGame.pokemon.urlImage,
+      lives: activeGame.remainingAttempts,
+      maxAttempts: activeGame.maxAttempts,
+    };
+  } catch (error) {
+    let errorMessage = {
+      message: error instanceof Error ? error.message : error
+    };
+    console.log(error);
+    return errorMessage;
+  }
+}
+
+//----------------------------------------------------
 //-----------Funciones para las respuestas------------
 //----------------------------------------------------
 export async function manageAnswer(userId: number, answer: string) {
@@ -144,12 +175,41 @@ export async function manageAnswer(userId: number, answer: string) {
     xpEarned: xpEarned
   });
 
+  const revealName = status === 'WON' || status === 'LOST';
+
   return {
     message: isCorrect ? 'Correct answer!' : 'Incorrect answer',
     remainingAttempts,
     status,
-    xpEarned
+    xpEarned,
+    ...(revealName ? { pokemonName: pokemon.name } : {}),
   };
+}
+
+//----------------------------------------------------
+//----------Buscar nombres de pokemon (autocomplete)-----
+//----------------------------------------------------
+
+export async function searchPokemonNames(query: string): Promise<object> {
+  try {
+    const trimmed = query?.trim();
+
+    if (!trimmed || trimmed.length < 2) {
+      return { names: [] };
+    }
+
+    const results = await repository.searchPokemonByName(trimmed, 8);
+
+    return {
+      names: results.map((pokemon) => pokemon.name),
+    };
+  } catch (error) {
+    let errorMessage = {
+      message: error instanceof Error ? error.message : error,
+    };
+    console.log(error);
+    return errorMessage;
+  }
 }
 
 //----------------------------------------------------

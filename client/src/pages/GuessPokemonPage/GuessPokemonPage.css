@@ -1,0 +1,338 @@
+.guess-pokemon-page {
+  max-width: none;
+  width: 100%;
+}
+
+.guess-pokemon-page__label {
+  margin: 0 0 12px;
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+.guess-pokemon-page__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.guess-pokemon-page__title {
+  margin: 0 0 8px;
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--color-text);
+}
+
+.guess-pokemon-page__subtitle {
+  margin: 0;
+  max-width: 62ch;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+}
+
+.guess-pokemon-page__nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.guess-pokemon-page__nav-link {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.guess-pokemon-page__nav-link:hover {
+  text-decoration: underline;
+}
+
+.guess-pokemon-page__nav-link:focus-visible {
+  outline: 3px solid rgba(220, 40, 40, 0.28);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.guess-panel {
+  border-radius: 22px;
+  background: var(--color-card);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.07);
+  padding: 24px 28px;
+}
+
+.guess-panel__title {
+  margin: 0 0 14px;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--color-text);
+}
+
+.guess-panel--checking {
+  text-align: center;
+}
+
+.guess-panel__checking {
+  margin: 0;
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.guess-panel__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.guess-panel__actions .pwg-button {
+  text-decoration: none;
+}
+
+.difficulty-picker {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.difficulty-option {
+  text-align: left;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.72);
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.difficulty-option:hover:not(:disabled) {
+  border-color: rgba(220, 40, 40, 0.25);
+}
+
+.difficulty-option:focus-visible {
+  outline: 3px solid rgba(220, 40, 40, 0.28);
+  outline-offset: 2px;
+}
+
+.difficulty-option--selected {
+  border-color: rgba(220, 40, 40, 0.45);
+  background: rgba(220, 40, 40, 0.08);
+  box-shadow: 0 8px 20px rgba(220, 40, 40, 0.08);
+}
+
+.difficulty-option:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.difficulty-option__label {
+  display: block;
+  font-size: 15px;
+  font-weight: 900;
+  color: var(--color-text);
+  margin-bottom: 4px;
+}
+
+.difficulty-option__meta {
+  display: block;
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.guess-feedback {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.guess-feedback--error {
+  background: rgba(220, 40, 40, 0.08);
+  border-color: rgba(220, 40, 40, 0.15);
+}
+
+.guess-feedback__message {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.guess-feedback__hint {
+  margin: 8px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+.guess-game {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+  gap: 24px;
+  align-items: start;
+}
+
+.guess-game__image-wrap {
+  border-radius: 18px;
+  background: rgba(220, 40, 40, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  min-height: 320px;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+
+.guess-game__image-wrap--playing {
+  filter: brightness(0%);
+}
+
+.guess-game__image {
+  max-width: 100%;
+  max-height: 360px;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.12));
+}
+
+.guess-game__sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.guess-lives__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+
+.guess-lives__label {
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.guess-lives__value {
+  font-weight: 900;
+  color: var(--color-primary-dark);
+}
+
+.guess-answer-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.guess-answer-form__field {
+  position: relative;
+}
+
+.guess-suggestions {
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 4px);
+  z-index: 2;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: var(--color-card);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.guess-suggestions__item {
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: transparent;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.guess-suggestions__item:hover,
+.guess-suggestions__item:focus-visible {
+  background: rgba(220, 40, 40, 0.08);
+  outline: none;
+}
+
+.guess-answer-form__error {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.guess-panel--result {
+  text-align: center;
+}
+
+.guess-panel--won {
+  border-color: rgba(34, 150, 80, 0.2);
+}
+
+.guess-panel--lost {
+  border-color: rgba(220, 40, 40, 0.15);
+}
+
+.guess-result__title {
+  margin: 0 0 10px;
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--color-text);
+}
+
+.guess-result__message {
+  margin: 0 0 8px;
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.guess-result__pokemon-name {
+  margin: 0 0 14px;
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--color-text);
+}
+
+.guess-result__xp {
+  margin: 0 0 16px;
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--color-primary);
+}
+
+.guess-result__image-wrap {
+  margin: 0 auto 18px;
+  max-width: 280px;
+  border-radius: 16px;
+  background: rgba(220, 40, 40, 0.06);
+  padding: 12px;
+  filter: none;
+}
+
+.guess-result__image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.guess-panel--result .guess-panel__actions {
+  justify-content: center;
+}
