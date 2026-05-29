@@ -35,3 +35,11 @@ export function validateLoginForm({ email, password }) {
 
   return null;
 }
+
+export function validateGuessAnswer(answer) {
+  if (!answer?.trim()) {
+    return KEYS.validation.answerRequired;
+  }
+
+  return null;
+}

@@ -39,7 +39,6 @@
     "marketplace": "Mercado",
     "globalRankings": "Ranking global",
     "helpCenter": "Centro de ayuda",
-    "gameRules": "Reglas del juego",
     "tradeSafety": "Seguridad en intercambios",
     "bugReport": "Reportar error",
     "privacyPolicy": "Política de privacidad",
@@ -75,7 +74,8 @@
     "emailInvalid": "Introduce un correo electrónico válido.",
     "passwordInvalid": "La contraseña debe tener al menos 8 caracteres, 1 mayúscula, 1 número y 1 símbolo (@$!%*?&).",
     "passwordsMismatch": "Las contraseñas no coinciden.",
-    "passwordRequired": "Introduce tu contraseña."
+    "passwordRequired": "Introduce tu contraseña.",
+    "answerRequired": "Escribe el nombre del Pokémon antes de enviar."
   },
   "home": {
     "pageLabel": "Inicio",
@@ -107,13 +107,92 @@
     "featuredTitle": "Adivina el Pokémon",
     "featuredDesc": "Identifica el Pokémon misterioso por su silueta. Gana para obtener XP y cajas de botín.",
     "startChallengeShort": "Empezar reto",
-    "viewRules": "Ver reglas",
     "progressAria": "Progreso del entrenador",
     "progressTitle": "Progreso del entrenador",
     "lootBoxesBadge": "Cajas de botín: {{count}}",
     "xpLevel": "Nivel XP {{level}}",
     "xpProgress": "{{current}} / {{max}} XP",
     "nextGoal": "Tu próximo objetivo: {{xp}} XP para alcanzar el nivel {{level}}."
+  },
+  "games": {
+    "pageLabel": "Juegos",
+    "kicker": "Modos de juego",
+    "title": "Elige tu reto",
+    "subtitle": "Selecciona un modo para ganar XP y cajas de botín. Cada juego tiene sus propias reglas y dificultad.",
+    "introAria": "Introducción al hub de juegos",
+    "modesAria": "Modos de juego disponibles",
+    "helpAria": "Ayuda sobre partidas",
+    "play": "Jugar",
+    "activeGameNote": "Solo puedes tener una partida activa por modo a la vez. Termina o pierde la partida actual antes de empezar otra.",
+    "guessPokemon": {
+      "title": "Adivina el Pokémon",
+      "description": "Identifica el Pokémon por su imagen. Cada fallo consume una vida hasta ganar o quedarte sin intentos.",
+      "bulletDifficulties": "Dificultades: Fácil, Medio y Difícil",
+      "bulletLives": "Vidas por partida: 3 (Fácil), 2 (Medio), 1 (Difícil)",
+      "bulletXp": "XP al ganar: hasta 80 (Fácil), hasta 140 (Medio), 250 (Difícil)"
+    },
+    "guessShiny": {
+      "title": "Adivina el Shiny",
+      "description": "Aparecen cuatro Pokémon: solo uno es el shiny correcto. Elige la casilla acertada en un solo intento.",
+      "bulletPositions": "4 posiciones; una muestra el shiny correcto",
+      "bulletAttempts": "Un intento: acierto ganas, fallo pierdes la partida",
+      "bulletXp": "XP al ganar: 100"
+    }
+  },
+  "guessPokemon": {
+    "pageLabel": "Adivina el Pokémon",
+    "title": "Adivina el Pokémon",
+    "subtitle": "Identifica el Pokémon por su imagen. Cada fallo consume una vida.",
+    "navAria": "Navegación del juego",
+    "backToGames": "Volver a juegos",
+    "viewRules": "Ver reglas",
+    "difficultyAria": "Seleccionar dificultad",
+    "difficultyEasy": "Fácil",
+    "difficultyMedium": "Medio",
+    "difficultyHard": "Difícil",
+    "difficultyEasyMeta": "3 vidas · hasta 80 XP",
+    "difficultyMediumMeta": "2 vidas · hasta 140 XP",
+    "difficultyHardMeta": "1 vida · 250 XP",
+    "startGame": "Empezar partida",
+    "continueGame": "Continuar partida",
+    "starting": "Iniciando...",
+    "resuming": "Reanudando...",
+    "checkingResume": "Comprobando partida activa...",
+    "revealedName": "El Pokémon era {{name}}",
+    "suggestionsAria": "Sugerencias de nombres de Pokémon",
+    "gameAria": "Partida activa",
+    "pokemonImageAria": "Imagen del Pokémon misterioso",
+    "livesLabel": "Vidas",
+    "livesRemaining": "{{count}} restantes",
+    "answerLabel": "Tu respuesta",
+    "answerPlaceholder": "p. ej. Pikachu",
+    "submitAnswer": "Enviar respuesta",
+    "submitting": "Enviando...",
+    "feedbackAria": "Feedback de la última respuesta",
+    "wonTitle": "¡Correcto!",
+    "lostTitle": "Partida perdida",
+    "xpEarned": "+{{count}} XP",
+    "playAgain": "Jugar otra vez",
+    "activeGameHint": "Ya tienes una partida en curso. Pulsa Continuar partida para retomarla.",
+    "rules": {
+      "pageLabel": "Reglas",
+      "title": "Adivina el Pokémon — Reglas",
+      "intro": "Identifica el Pokémon de la imagen. Tienes un número limitado de vidas según la dificultad.",
+      "howToPlayTitle": "Cómo jugar",
+      "howToPlay1": "Elige una dificultad e inicia una partida.",
+      "howToPlay2": "Escribe el nombre del Pokémon (en inglés, sin distinguir mayúsculas) y envía.",
+      "howToPlay3": "Gana acertando antes de quedarte sin vidas.",
+      "difficultyTitle": "Dificultades",
+      "easyRule": "Fácil — 3 vidas. XP al ganar: 50 + 10 × vidas restantes (hasta 80).",
+      "mediumRule": "Medio — 2 vidas. XP al ganar: 100 + 20 × vidas restantes (hasta 140).",
+      "hardRule": "Difícil — 1 vida. XP al ganar: 250.",
+      "scoringTitle": "Recompensas",
+      "scoringNote": "Ganar otorga XP y puede subir de nivel (cajas de botín al subir). Solo una partida activa por usuario.",
+      "activeGameTitle": "Partidas activas",
+      "activeGameNote": "Si ya tienes una partida activa, termínala antes de empezar otra.",
+      "backToGame": "Volver al juego",
+      "backToGames": "Volver a juegos"
+    }
   },
   "wip": {
     "games": {
@@ -127,6 +206,10 @@
     "guessPokemonRules": {
       "title": "Adivina el Pokémon — Reglas",
       "description": "Las reglas y la puntuación se publicarán aquí pronto."
+    },
+    "guessShiny": {
+      "title": "Adivina el Shiny",
+      "description": "El reto de adivinar el shiny está en desarrollo. Pronto elegirás el shiny correcto entre cuatro posiciones."
     },
     "trade": {
       "title": "Intercambio",

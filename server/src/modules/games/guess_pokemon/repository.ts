@@ -103,3 +103,41 @@ export const getGameIdByUserId = async (userId : number) => {
     }
   })
 }
+
+//partida activa con imagen del pokemon (para reanudar)
+export const searchPokemonByName = async (query: string, limit = 8) => {
+  return prisma.pokemon.findMany({
+    where: {
+      name: {
+        contains: query,
+        mode: 'insensitive',
+      },
+    },
+    select: {
+      name: true,
+    },
+    take: limit,
+    orderBy: {
+      name: 'asc',
+    },
+  });
+};
+
+export const getActiveGameWithPokemonByUserId = async (userId: number) => {
+  return prisma.guessPokemonGame.findFirst({
+    where: {
+      userId,
+      status: 'ACTIVE',
+    },
+    orderBy: {
+      startedAt: 'desc',
+    },
+    include: {
+      pokemon: {
+        select: {
+          urlImage: true,
+        },
+      },
+    },
+  });
+};

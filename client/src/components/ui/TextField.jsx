@@ -9,6 +9,7 @@ export default function TextField({
   placeholder,
   autoComplete,
   required = false,
+  disabled = false,
 }) {
   return (
     <label className="text-field" htmlFor={id}>
@@ -22,6 +23,7 @@ export default function TextField({
         placeholder={placeholder}
         autoComplete={autoComplete}
         required={required}
+        disabled={disabled}
       />
     </label>
   );
