@@ -3,6 +3,7 @@ import { login as loginRequest } from '../api/auth.js';
 import { fetchProfile } from '../api/profile.js';
 import { clearStorage, readStorage, writeStorage } from '../utils/storage.js';
 
+//context para compartir datos con los componentes
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
@@ -16,6 +17,7 @@ export function AuthProvider({ children }) {
     return profile;
   }, []);
 
+  //Comprobar que la sesion es valida
   useEffect(() => {
     if (!token) {
       setLoading(false);
@@ -60,6 +62,7 @@ export function AuthProvider({ children }) {
     setLoading(false);
   }, []);
 
+  //objeto de user
   const value = useMemo(
     () => ({
       token,
