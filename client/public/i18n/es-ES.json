@@ -39,7 +39,6 @@
     "marketplace": "Mercado",
     "globalRankings": "Ranking global",
     "helpCenter": "Centro de ayuda",
-    "gameRules": "Reglas del juego",
     "tradeSafety": "Seguridad en intercambios",
     "bugReport": "Reportar error",
     "privacyPolicy": "Política de privacidad",
@@ -107,13 +106,37 @@
     "featuredTitle": "Adivina el Pokémon",
     "featuredDesc": "Identifica el Pokémon misterioso por su silueta. Gana para obtener XP y cajas de botín.",
     "startChallengeShort": "Empezar reto",
-    "viewRules": "Ver reglas",
     "progressAria": "Progreso del entrenador",
     "progressTitle": "Progreso del entrenador",
     "lootBoxesBadge": "Cajas de botín: {{count}}",
     "xpLevel": "Nivel XP {{level}}",
     "xpProgress": "{{current}} / {{max}} XP",
     "nextGoal": "Tu próximo objetivo: {{xp}} XP para alcanzar el nivel {{level}}."
+  },
+  "games": {
+    "pageLabel": "Juegos",
+    "kicker": "Modos de juego",
+    "title": "Elige tu reto",
+    "subtitle": "Selecciona un modo para ganar XP y cajas de botín. Cada juego tiene sus propias reglas y dificultad.",
+    "introAria": "Introducción al hub de juegos",
+    "modesAria": "Modos de juego disponibles",
+    "helpAria": "Ayuda sobre partidas",
+    "play": "Jugar",
+    "activeGameNote": "Solo puedes tener una partida activa por modo a la vez. Termina o pierde la partida actual antes de empezar otra.",
+    "guessPokemon": {
+      "title": "Adivina el Pokémon",
+      "description": "Identifica el Pokémon por su imagen. Cada fallo consume una vida hasta ganar o quedarte sin intentos.",
+      "bulletDifficulties": "Dificultades: Fácil, Medio y Difícil",
+      "bulletLives": "Vidas por partida: 3 (Fácil), 2 (Medio), 1 (Difícil)",
+      "bulletXp": "XP al ganar: hasta 80 (Fácil), hasta 140 (Medio), 250 (Difícil)"
+    },
+    "guessShiny": {
+      "title": "Adivina el Shiny",
+      "description": "Aparecen cuatro Pokémon: solo uno es el shiny correcto. Elige la casilla acertada en un solo intento.",
+      "bulletPositions": "4 posiciones; una muestra el shiny correcto",
+      "bulletAttempts": "Un intento: acierto ganas, fallo pierdes la partida",
+      "bulletXp": "XP al ganar: 100"
+    }
   },
   "wip": {
     "games": {
@@ -127,6 +150,10 @@
     "guessPokemonRules": {
       "title": "Adivina el Pokémon — Reglas",
       "description": "Las reglas y la puntuación se publicarán aquí pronto."
+    },
+    "guessShiny": {
+      "title": "Adivina el Shiny",
+      "description": "El reto de adivinar el shiny está en desarrollo. Pronto elegirás el shiny correcto entre cuatro posiciones."
     },
     "trade": {
       "title": "Intercambio",

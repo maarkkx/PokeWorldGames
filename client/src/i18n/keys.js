@@ -115,6 +115,32 @@ export const KEYS = {
     xpProgress: 'home.xpProgress',
     nextGoal: 'home.nextGoal',
   },
+  games: {
+    pageLabel: 'games.pageLabel',
+    kicker: 'games.kicker',
+    title: 'games.title',
+    subtitle: 'games.subtitle',
+    introAria: 'games.introAria',
+    modesAria: 'games.modesAria',
+    helpAria: 'games.helpAria',
+    play: 'games.play',
+    viewRules: 'games.viewRules',
+    activeGameNote: 'games.activeGameNote',
+    guessPokemon: {
+      title: 'games.guessPokemon.title',
+      description: 'games.guessPokemon.description',
+      bulletDifficulties: 'games.guessPokemon.bulletDifficulties',
+      bulletLives: 'games.guessPokemon.bulletLives',
+      bulletXp: 'games.guessPokemon.bulletXp',
+    },
+    guessShiny: {
+      title: 'games.guessShiny.title',
+      description: 'games.guessShiny.description',
+      bulletPositions: 'games.guessShiny.bulletPositions',
+      bulletAttempts: 'games.guessShiny.bulletAttempts',
+      bulletXp: 'games.guessShiny.bulletXp',
+    },
+  },
   wip: {
     games: {
       title: 'wip.games.title',
@@ -127,6 +153,10 @@ export const KEYS = {
     guessPokemonRules: {
       title: 'wip.guessPokemonRules.title',
       description: 'wip.guessPokemonRules.description',
+    },
+    guessShiny: {
+      title: 'wip.guessShiny.title',
+      description: 'wip.guessShiny.description',
     },
     trade: {
       title: 'wip.trade.title',
@@ -147,6 +177,7 @@ export const WIP_IDS = {
   games: 'games',
   guessPokemon: 'guessPokemon',
   guessPokemonRules: 'guessPokemonRules',
+  guessShiny: 'guessShiny',
   trade: 'trade',
   ranking: 'ranking',
   profile: 'profile',

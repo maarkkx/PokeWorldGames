@@ -39,7 +39,6 @@
     "marketplace": "Marketplace",
     "globalRankings": "Global rankings",
     "helpCenter": "Help center",
-    "gameRules": "Game rules",
     "tradeSafety": "Trade safety",
     "bugReport": "Bug report",
     "privacyPolicy": "Privacy policy",
@@ -107,13 +106,37 @@
     "featuredTitle": "Guess the Pokémon",
     "featuredDesc": "Identify the mystery Pokémon from its silhouette. Win to earn XP and loot boxes.",
     "startChallengeShort": "Start challenge",
-    "viewRules": "View rules",
     "progressAria": "Trainer progress",
     "progressTitle": "Trainer Progress",
     "lootBoxesBadge": "Loot boxes: {{count}}",
     "xpLevel": "XP Level {{level}}",
     "xpProgress": "{{current}} / {{max}} XP",
     "nextGoal": "Your next goal: {{xp}} XP to reach Level {{level}}."
+  },
+  "games": {
+    "pageLabel": "Games",
+    "kicker": "Game modes",
+    "title": "Choose your challenge",
+    "subtitle": "Pick a mode to earn XP and loot boxes. Each game has its own rules and difficulty.",
+    "introAria": "Games hub introduction",
+    "modesAria": "Available game modes",
+    "helpAria": "Game session help",
+    "play": "Play",
+    "activeGameNote": "You can only have one active game per mode at a time. Finish or lose your current run before starting another.",
+    "guessPokemon": {
+      "title": "Guess the Pokémon",
+      "description": "Identify the Pokémon from its image. Wrong answers cost lives until you win or run out.",
+      "bulletDifficulties": "Difficulties: Easy, Medium, and Hard",
+      "bulletLives": "Lives per run: 3 (Easy), 2 (Medium), 1 (Hard)",
+      "bulletXp": "XP on win: up to 80 (Easy), up to 140 (Medium), 250 (Hard)"
+    },
+    "guessShiny": {
+      "title": "Guess the Shiny",
+      "description": "Four Pokémon appear — only one is the correct shiny. Pick the right slot in a single attempt.",
+      "bulletPositions": "4 positions; one shows the correct shiny",
+      "bulletAttempts": "One attempt: correct guess wins, wrong guess ends the run",
+      "bulletXp": "XP on win: 100"
+    }
   },
   "wip": {
     "games": {
@@ -127,6 +150,10 @@
     "guessPokemonRules": {
       "title": "Guess the Pokémon — Rules",
       "description": "Game rules and scoring will be published here soon."
+    },
+    "guessShiny": {
+      "title": "Guess the Shiny",
+      "description": "The shiny guessing challenge is under development. Soon you will pick the correct shiny among four positions."
     },
     "trade": {
       "title": "Trade",

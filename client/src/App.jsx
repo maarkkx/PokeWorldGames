@@ -5,6 +5,7 @@ import PublicRoute from './components/routing/PublicRoute.jsx';
 import HomePage from './pages/HomePage/HomePage.jsx';
 import LoginPage from './pages/LoginPage/LoginPage.jsx';
 import RegisterPage from './pages/RegisterPage/RegisterPage.jsx';
+import GamesPage from './pages/GamesPage/GamesPage.jsx';
 import WipPage from './pages/WipPage/WipPage.jsx';
 import { WIP_IDS } from './i18n/keys.js';
 
@@ -25,7 +26,7 @@ export default function App() {
             path="/games"
             element={
               <ProtectedRoute>
-                <WipPage wipId={WIP_IDS.games} activeNav="games" />
+                <GamesPage />
               </ProtectedRoute>
             }
           />
@@ -42,6 +43,14 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <WipPage wipId={WIP_IDS.guessPokemonRules} activeNav="games" />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/games/guess-shiny"
+            element={
+              <ProtectedRoute>
+                <WipPage wipId={WIP_IDS.guessShiny} activeNav="games" />
               </ProtectedRoute>
             }
           />
