@@ -9,6 +9,8 @@ router.get('/', (_req, res) =>  {
 
 //rutas del juego
 router.post('/start', controller.startGame);
+router.post('/resume', controller.resumeGame);
+router.post('/search', controller.searchPokemon);
 router.post('/answer', controller.answerGame);
 
 //test random pokemon
