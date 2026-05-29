@@ -12,7 +12,6 @@ export const ROUTES = {
   home: '/',
   games: '/games',
   guessPokemon: '/games/guess-pokemon',
-  guessPokemonRules: '/games/guess-pokemon/rules',
   trade: '/trade',
   ranking: '/ranking',
   profile: '/profile',

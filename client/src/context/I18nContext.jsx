@@ -3,6 +3,7 @@ import { DEFAULT_LOCALE, LOCALE_EN, SUPPORTED_LOCALES } from '../i18n/locales.js
 import { getMessage, interpolate } from '../i18n/translate.js';
 import { readLocale, writeLocale } from '../utils/localeStorage.js';
 
+//compartir datos con los componentes
 const I18nContext = createContext(null);
 
 export function I18nProvider({ children }) {
@@ -10,6 +11,7 @@ export function I18nProvider({ children }) {
   const [messages, setMessages] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  //fetch del json de idoma correspondiente
   useEffect(() => {
     let cancelled = false;
 

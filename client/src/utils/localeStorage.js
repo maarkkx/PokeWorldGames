@@ -9,7 +9,7 @@ export function readLocale() {
       return stored;
     }
   } catch {
-    /* ignore */
+
   }
 
   const browser = navigator.language?.toLowerCase() ?? '';

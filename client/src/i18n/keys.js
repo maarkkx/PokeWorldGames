@@ -1,4 +1,3 @@
-/** Central translation key registry — use only these constants with t() */
 export const KEYS = {
   common: {
     brand: 'common.brand',
