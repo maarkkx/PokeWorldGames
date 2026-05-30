@@ -11,6 +11,7 @@ router.get('/', (_req, res) =>  {
 router.post('/start', controller.startGame);
 router.post('/resume', controller.resumeGame);
 router.post('/search', controller.searchPokemon);
+router.post('/cash-out', controller.cashOutGame);
 router.post('/answer', controller.answerGame);
 
 //test random pokemon

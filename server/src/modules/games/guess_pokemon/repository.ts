@@ -70,6 +70,7 @@ export const updateGame = async (gameId: string,
     lastGuess?: string;
     status?: GameStatus;
     xpEarned?: number;
+    pokemonId?: number;
   }
 ) => {
   return prisma.guessPokemonGame.update({
@@ -99,6 +100,7 @@ export const getGameIdByUserId = async (userId : number) => {
     },
     select: {
       userId: true,
+      maxAttempts: true,
       gameId: true,
     }
   })

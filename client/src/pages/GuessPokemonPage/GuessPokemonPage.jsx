@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ApiError } from '../../api/client.js';
 import {
+  cashOutInfinite,
   resumeGame,
   searchPokemonNames,
   startGame,
@@ -28,24 +29,27 @@ const PHASE = {
   ERROR: 'error',
 };
 
-const DIFFICULTIES = ['easy', 'medium', 'hard'];
+const DIFFICULTIES = ['easy', 'medium', 'hard', 'infinite'];
 
 const LIVES_BY_DIFFICULTY = {
   easy: 3,
   medium: 2,
   hard: 1,
+  infinite: 4,
 };
 
 const DIFFICULTY_LABEL_KEYS = {
   easy: KEYS.guessPokemon.difficultyEasy,
   medium: KEYS.guessPokemon.difficultyMedium,
   hard: KEYS.guessPokemon.difficultyHard,
+  infinite: KEYS.guessPokemon.difficultyInfinite,
 };
 
 const DIFFICULTY_META_KEYS = {
   easy: KEYS.guessPokemon.difficultyEasyMeta,
   medium: KEYS.guessPokemon.difficultyMediumMeta,
   hard: KEYS.guessPokemon.difficultyHardMeta,
+  infinite: KEYS.guessPokemon.difficultyInfiniteMeta,
 };
 
 const INITIAL_STATE = {
@@ -62,6 +66,11 @@ const INITIAL_STATE = {
   canResume: false,
   pokemonName: null,
   suggestions: [],
+  gameMode: 'classic',
+  streak: 0,
+  pendingXp: 0,
+  multiplier: 1,
+  pendingXpLost: 0,
 };
 
 const SEARCH_DEBOUNCE_MS = 300;
@@ -90,6 +99,10 @@ function applyGameSession(prev, result) {
     canResume: false,
     pokemonName: null,
     suggestions: [],
+    gameMode: result.mode ?? 'classic',
+    streak: result.streak ?? 0,
+    pendingXp: result.pendingXp ?? 0,
+    multiplier: result.multiplier ?? 1,
   };
 }
 
@@ -98,11 +111,13 @@ function applyFinishedState(prev, result, phase) {
     ...prev,
     phase,
     lives: phase === PHASE.LOST ? 0 : (result.remainingAttempts ?? prev.lives),
-    feedback: result.message,
+    feedback: result.feedback ?? result.message,
     lastXpEarned: result.xpEarned ?? 0,
     answer: '',
     pokemonName: result.pokemonName ?? null,
     suggestions: [],
+    pendingXpLost: result.pendingXpLost ?? 0,
+    gameMode: 'classic',
   };
 }
 
@@ -242,6 +257,36 @@ export default function GuessPokemonPage() {
     }
   }
 
+  async function handleCashOut() {
+    setState((prev) => ({
+      ...prev,
+      phase: PHASE.LOADING,
+      error: '',
+    }));
+
+    try {
+      const result = await cashOutInfinite(token);
+
+      if (result.xpEarned > 0) {
+        await refreshProfile();
+      }
+
+      setState((prev) =>
+        applyFinishedState(
+          prev,
+          {
+            ...result,
+            feedback: result.message,
+            pokemonName: null,
+          },
+          PHASE.WON,
+        ),
+      );
+    } catch (err) {
+      handleApiError(err);
+    }
+  }
+
   async function handleSubmitAnswer(event) {
     event.preventDefault();
 
@@ -259,6 +304,39 @@ export default function GuessPokemonPage() {
 
     try {
       const result = await submitAnswer(token, state.answer.trim());
+
+      if (result.mode === 'infinite' && result.status === 'ACTIVE') {
+        setState((prev) => ({
+          ...prev,
+          phase: PHASE.PLAYING,
+          image: result.image ?? prev.image,
+          lives: result.remainingAttempts ?? prev.lives,
+          streak: result.streak ?? prev.streak,
+          pendingXp: result.pendingXp ?? prev.pendingXp,
+          multiplier: result.multiplier ?? prev.multiplier,
+          feedback: result.message,
+          answer: '',
+          error: '',
+          suggestions: [],
+        }));
+        return;
+      }
+
+      if (result.mode === 'infinite' && result.status === 'LOST') {
+        setState((prev) =>
+          applyFinishedState(
+            prev,
+            {
+              ...result,
+              feedback: `${result.message} ${t(KEYS.guessPokemon.infiniteLostPending, {
+                count: result.pendingXpLost ?? 0,
+              })}`,
+            },
+            PHASE.LOST,
+          ),
+        );
+        return;
+      }
 
       if (result.status === 'WON') {
         if (result.xpEarned > 0) {
@@ -298,7 +376,14 @@ export default function GuessPokemonPage() {
   const isPlaying = state.phase === PHASE.PLAYING;
   const isFinished = state.phase === PHASE.WON || state.phase === PHASE.LOST;
   const showIdle = state.phase === PHASE.IDLE || state.phase === PHASE.ERROR;
+  const isInfiniteMode = state.gameMode === 'infinite';
   const livesProgress = state.maxLives > 0 ? state.lives / state.maxLives : 0;
+  const resultTitle =
+    state.phase === PHASE.WON && isInfiniteMode && state.lastXpEarned > 0
+      ? t(KEYS.guessPokemon.infiniteCashOutTitle)
+      : state.phase === PHASE.WON
+        ? t(KEYS.guessPokemon.wonTitle)
+        : t(KEYS.guessPokemon.lostTitle);
 
   return (
     <AppLayout activeNav="games">
@@ -395,15 +480,43 @@ export default function GuessPokemonPage() {
               </div>
 
               <div className="guess-game__sidebar">
-                <div className="guess-lives">
-                  <div className="guess-lives__head">
-                    <span className="guess-lives__label">{t(KEYS.guessPokemon.livesLabel)}</span>
-                    <span className="guess-lives__value">
-                      {t(KEYS.guessPokemon.livesRemaining, { count: state.lives })}
-                    </span>
+                {isInfiniteMode ? (
+                  <dl className="guess-infinite-stats">
+                    <div className="guess-infinite-stats__row">
+                      <dt>{t(KEYS.guessPokemon.streakLabel)}</dt>
+                      <dd>{state.streak}</dd>
+                    </div>
+                    <div className="guess-infinite-stats__row">
+                      <dt>{t(KEYS.guessPokemon.pendingXpLabel)}</dt>
+                      <dd>{state.pendingXp}</dd>
+                    </div>
+                    <div className="guess-infinite-stats__row">
+                      <dt>{t(KEYS.guessPokemon.multiplierLabel)}</dt>
+                      <dd>x{state.multiplier.toFixed(1)}</dd>
+                    </div>
+                  </dl>
+                ) : (
+                  <div className="guess-lives">
+                    <div className="guess-lives__head">
+                      <span className="guess-lives__label">{t(KEYS.guessPokemon.livesLabel)}</span>
+                      <span className="guess-lives__value">
+                        {t(KEYS.guessPokemon.livesRemaining, { count: state.lives })}
+                      </span>
+                    </div>
+                    <ProgressBar progress={livesProgress} size="md" />
                   </div>
-                  <ProgressBar progress={livesProgress} size="md" />
-                </div>
+                )}
+
+                {isInfiniteMode ? (
+                  <Button
+                    type="button"
+                    variant="primary-sm"
+                    disabled={isLoading}
+                    onClick={handleCashOut}
+                  >
+                    {isLoading ? t(KEYS.guessPokemon.cashingOut) : t(KEYS.guessPokemon.cashOut)}
+                  </Button>
+                ) : null}
 
                 {state.feedback ? (
                   <div
@@ -483,11 +596,7 @@ export default function GuessPokemonPage() {
                 : t(KEYS.guessPokemon.lostTitle)
             }
           >
-            <h2 className="guess-result__title">
-              {state.phase === PHASE.WON
-                ? t(KEYS.guessPokemon.wonTitle)
-                : t(KEYS.guessPokemon.lostTitle)}
-            </h2>
+            <h2 className="guess-result__title">{resultTitle}</h2>
             {state.feedback ? (
               <p className="guess-result__message">{state.feedback}</p>
             ) : null}
