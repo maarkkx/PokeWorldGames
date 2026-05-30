@@ -134,6 +134,47 @@ export async function searchPokemon(req: Request, res: Response) {
 }
 
 
+export async function cashOutGame(req: Request, res: Response) {
+  try {
+    const authHeader = req.headers.authorization;
+    if (!authHeader) {
+      return res.status(401).json({
+        message: 'Token not provided'
+      });
+    }
+
+    const token = authHeader.split(' ')[1];
+
+    if (!token) {
+      return res.status(401).json({
+        message: 'Invalid token format'
+      });
+    }
+
+    const decoded = jwt.verify(token, envs.envs.JWT_SECRET) as {
+      id: number;
+    };
+
+    const userId = decoded.id;
+    const result = await service.cashOutInfiniteGame(userId);
+
+    if (result && typeof result === 'object' && 'message' in result && !('status' in result)) {
+      return res.status(400).json({
+        message: (result as { message: string }).message,
+      });
+    }
+
+    res.status(200).json({
+      response: result,
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: error instanceof Error ? error.message : 'Unexpected error'
+    });
+  }
+}
+
+
 export async function answerGame(req: Request, res: Response) {
   try {
     const authHeader = req.headers.authorization;

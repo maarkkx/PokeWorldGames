@@ -1,12 +1,40 @@
 import * as repository from "./repository";
 import * as types from "../constants/types"
 import * as expManager from "../experience_manager/manager";
+import {
+  applyInfiniteMilestone,
+  getInfiniteMultiplier,
+  getStreakFromGame,
+  INFINITE_BASE_XP_PER_CORRECT,
+  INFINITE_LIVES,
+  INFINITE_MARKER_MAX_ATTEMPTS,
+  isInfiniteGame,
+} from "./infinite";
 
 //Relacion dificultad vidas
-const livesDifficults : Record<string, number> = {
+const livesDifficults: Record<string, number> = {
+  'infinite': INFINITE_MARKER_MAX_ATTEMPTS,
   'hard': 1,
   'medium': 2,
-  'easy': 3
+  'easy': 3,
+}
+
+function buildStartPayload(
+  difficult: string,
+  gameId: string,
+  image: string | null,
+  lives: number,
+) {
+  return {
+    gameId,
+    image,
+    lives,
+    maxAttempts: lives,
+    mode: difficult === 'infinite' ? 'infinite' : 'classic',
+    ...(difficult === 'infinite'
+      ? { streak: 0, pendingXp: 0, multiplier: 1 }
+      : {}),
+  };
 }
 
 //----------------------------------------------------
@@ -15,39 +43,40 @@ const livesDifficults : Record<string, number> = {
 
 export async function startGame(userId: number, difficult: string): Promise<object> {
   try {
-    //validaciones
     if (!difficult) {
       throw new Error("No difficulty selected");
     }
     if (!(difficult in livesDifficults)) {
-      console.log(livesDifficults);
-      console.log(difficult); 
       throw new Error('Difficulty does not exist');
     }
 
-    //crear pokemon random
     const pokemon: types.Pokemon = await repository.getRandomPokemon();
     if (!pokemon) {
       throw new Error('Error getting pokemon')
     }
 
-
     const lives = livesDifficults[difficult];
 
-    //comprobar si el usuario tiene una partida activa
     const activeGame = await repository.getActiveGameByUserId(userId);
     if (activeGame) {
       throw new Error('You already have an active game');
     }
 
-    //crear partida
-    const game = await repository.createGame(userId, pokemon.id, lives)
+    const game = await repository.createGame(userId, pokemon.id, lives);
 
-    return {
-      gameId: game.gameId,
-      image: pokemon.urlImage,
-      lives: game.remainingAttempts
-    };
+    if (difficult === 'infinite') {
+      await repository.updateGame(game.gameId, {
+        lastGuess: '0',
+        xpEarned: 0,
+      });
+    }
+
+    return buildStartPayload(
+      difficult,
+      game.gameId,
+      pokemon.urlImage,
+      game.remainingAttempts,
+    );
   } catch (error) {
     let errorMessage = {
       message: error instanceof Error ? error.message : error
@@ -73,11 +102,23 @@ export async function resumeGame(userId: number): Promise<object> {
       throw new Error('Error getting pokemon');
     }
 
+    const infinite = isInfiniteGame(activeGame.maxAttempts);
+    const streak = infinite ? getStreakFromGame(activeGame.lastGuess) : undefined;
+    const pendingXp = infinite ? (activeGame.xpEarned ?? 0) : undefined;
+
     return {
       gameId: activeGame.gameId,
       image: activeGame.pokemon.urlImage,
       lives: activeGame.remainingAttempts,
       maxAttempts: activeGame.maxAttempts,
+      mode: infinite ? 'infinite' : 'classic',
+      ...(infinite
+        ? {
+          streak,
+          pendingXp,
+          multiplier: getInfiniteMultiplier(streak ?? 0),
+        }
+        : {}),
     };
   } catch (error) {
     let errorMessage = {
@@ -91,27 +132,20 @@ export async function resumeGame(userId: number): Promise<object> {
 //----------------------------------------------------
 //-----------Funciones para las respuestas------------
 //----------------------------------------------------
-export async function manageAnswer(userId: number, answer: string) {
 
-//------------------------
-//-----Comprobaciones-----
-//------------------------
-  //check de los inputs:
+export async function manageAnswer(userId: number, answer: string) {
   if (!userId) {
     throw new Error('User Id is null')
   }
-  let gameId;
-  let gameInfo = await repository.getGameIdByUserId(userId);
+
+  const gameInfo = await repository.getGameIdByUserId(userId);
   if (!gameInfo) {
     throw new Error('There is no active game')
-  } else {
-    gameId = gameInfo.gameId;
   }
 
-  //veure la partida
+  const gameId = gameInfo.gameId;
   const game = await repository.getGameById(gameId);
 
-  //Comprobaciones:
   if (!game) {
     throw new Error('Game not found');
   }
@@ -124,55 +158,94 @@ export async function manageAnswer(userId: number, answer: string) {
     return { message: 'Game already finished', status: game.status };
   }
 
-//------------------------
-//-----Check Respuesta-----
-//------------------------
-
   const pokemon = await repository.getPokemonNameById(game.pokemonId);
-
-  //comprobar que el pokemon
   if (!pokemon) {
     throw new Error('Pokemon not found');
   }
 
-  //check respuesta
   const isCorrect = answer.toLowerCase() === pokemon.name.toLowerCase();
+  const infinite = isInfiniteGame(game.maxAttempts);
 
-//------------------------
-//-----Datos partida------
-//------------------------
+  //------------------------
+  //----- Modo infinito -----
+  //------------------------
+  if (infinite) {
+    if (!isCorrect) {
+      await repository.updateGame(gameId, {
+        remainingAttempts: 0,
+        lastGuess: answer,
+        status: 'LOST',
+        xpEarned: 0,
+      });
 
-  let remainingAttempts = game.remainingAttempts - (isCorrect ? 0 : 1); //restar vidas si es false
+      return {
+        message: 'Incorrect answer',
+        remainingAttempts: 0,
+        status: 'LOST',
+        xpEarned: 0,
+        pendingXpLost: game.xpEarned ?? 0,
+        mode: 'infinite',
+        pokemonName: pokemon.name,
+        streak: getStreakFromGame(game.lastGuess),
+      };
+    }
+
+    const oldStreak = getStreakFromGame(game.lastGuess);
+    const newStreak = oldStreak + 1;
+    let pendingXp = game.xpEarned ?? 0;
+    pendingXp = applyInfiniteMilestone(pendingXp, oldStreak, newStreak);
+    const multiplier = getInfiniteMultiplier(newStreak);
+    const roundXp = Math.floor(INFINITE_BASE_XP_PER_CORRECT * multiplier);
+    pendingXp += roundXp;
+
+    const nextPokemon = await repository.getRandomPokemon();
+    if (!nextPokemon?.urlImage) {
+      throw new Error('Error getting pokemon');
+    }
+
+    await repository.updateGame(gameId, {
+      pokemonId: nextPokemon.id,
+      remainingAttempts: INFINITE_LIVES,
+      lastGuess: String(newStreak),
+      status: 'ACTIVE',
+      xpEarned: pendingXp,
+    });
+
+    return {
+      message: 'Correct answer!',
+      remainingAttempts: INFINITE_LIVES,
+      status: 'ACTIVE',
+      xpEarned: 0,
+      mode: 'infinite',
+      streak: newStreak,
+      pendingXp,
+      multiplier,
+      roundXp,
+      image: nextPokemon.urlImage,
+    };
+  }
+
+  //------------------------
+  //----- Modos clasicos -----
+  //------------------------
+
+  let remainingAttempts = game.remainingAttempts - (isCorrect ? 0 : 1);
   let status: types.GameStatus = 'ACTIVE';
   let xpEarned = 0;
 
-//------------------------
-//--------Resultado--------
-//------------------------
-
   if (isCorrect) {
     status = 'WON';
-
-    //calcular experiencia segun dificultad
     xpEarned = calculateXP(game.maxAttempts, game.remainingAttempts);
-
-    //añadir la experiencia al usuario
     await expManager.addXP(userId, xpEarned);
-
   } else if (remainingAttempts <= 0) {
     status = 'LOST';
   }
 
-//------------------------
-//-----Actualizar DB------
-//------------------------
-
-  //actualizar los datos de la partida
   await repository.updateGame(gameId, {
     remainingAttempts,
     lastGuess: answer,
     status,
-    xpEarned: xpEarned
+    xpEarned: xpEarned,
   });
 
   const revealName = status === 'WON' || status === 'LOST';
@@ -182,8 +255,61 @@ export async function manageAnswer(userId: number, answer: string) {
     remainingAttempts,
     status,
     xpEarned,
+    mode: 'classic',
     ...(revealName ? { pokemonName: pokemon.name } : {}),
   };
+}
+
+//----------------------------------------------------
+//----------Cobrar XP y salir del modo infinito----------
+//----------------------------------------------------
+
+export async function cashOutInfiniteGame(userId: number): Promise<object> {
+  try {
+    const gameInfo = await repository.getGameIdByUserId(userId);
+    if (!gameInfo) {
+      throw new Error('There is no active game');
+    }
+
+    const game = await repository.getGameById(gameInfo.gameId);
+    if (!game) {
+      throw new Error('Game not found');
+    }
+
+    if (!isInfiniteGame(game.maxAttempts)) {
+      throw new Error('Not an infinite mode game');
+    }
+
+    if (game.status !== 'ACTIVE') {
+      throw new Error('Game already finished');
+    }
+
+    const pendingXp = game.xpEarned ?? 0;
+    const streak = getStreakFromGame(game.lastGuess);
+
+    if (pendingXp > 0) {
+      await expManager.addXP(userId, pendingXp);
+    }
+
+    await repository.updateGame(game.gameId, {
+      status: 'WON',
+      remainingAttempts: INFINITE_LIVES,
+    });
+
+    return {
+      status: 'WON',
+      xpEarned: pendingXp,
+      streak,
+      mode: 'infinite',
+      message: 'Infinite run cashed out successfully',
+    };
+  } catch (error) {
+    let errorMessage = {
+      message: error instanceof Error ? error.message : error,
+    };
+    console.log(error);
+    return errorMessage;
+  }
 }
 
 //----------------------------------------------------
@@ -216,18 +342,18 @@ export async function searchPokemonNames(query: string): Promise<object> {
 //-----------Funciones de experiencia------------------
 //----------------------------------------------------
 
-function calculateXP(maxAttempts : number, remainingAttempts : number): number {
+function calculateXP(maxAttempts: number, remainingAttempts: number): number {
   switch (maxAttempts) {
-    case 3: 
-      return 50 + 10 * remainingAttempts; //easy
+    case 3:
+      return 50 + 10 * remainingAttempts;
 
-    case 2: 
-      return 100 + 20 * remainingAttempts; //medium
+    case 2:
+      return 100 + 20 * remainingAttempts;
 
-    case 1: 
-      return 250;  //hard
+    case 1:
+      return 250;
 
-    default: 
+    default:
       return 0;
   }
 }
