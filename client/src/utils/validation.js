@@ -43,3 +43,31 @@ export function validateGuessAnswer(answer) {
 
   return null;
 }
+
+export function validateUpdateUsername(name) {
+  if (!regexUser.test(name?.trim() ?? '')) {
+    return KEYS.validation.usernameInvalid;
+  }
+
+  return null;
+}
+
+export function validateUpdatePassword({ password, newPwd, newPwdConf }) {
+  if (!password) {
+    return KEYS.validation.passwordRequired;
+  }
+
+  if (!newPwd) {
+    return KEYS.validation.newPasswordRequired;
+  }
+
+  if (!regexPassword.test(newPwd)) {
+    return KEYS.validation.passwordInvalid;
+  }
+
+  if (newPwd !== newPwdConf) {
+    return KEYS.validation.passwordsMismatch;
+  }
+
+  return null;
+}

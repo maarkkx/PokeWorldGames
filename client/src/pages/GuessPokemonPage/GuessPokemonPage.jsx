@@ -257,6 +257,29 @@ export default function GuessPokemonPage() {
     }
   }
 
+  async function handlePlayAgain() {
+    const { difficulty } = state;
+
+    setState({
+      ...INITIAL_STATE,
+      difficulty,
+      phase: PHASE.LOADING,
+    });
+
+    try {
+      const result = await startGame(token, difficulty);
+      const maxLives = LIVES_BY_DIFFICULTY[difficulty];
+
+      setState((prev) => ({
+        ...applyGameSession(prev, result),
+        lives: result.lives ?? maxLives,
+        maxLives: result.maxAttempts ?? maxLives,
+      }));
+    } catch (err) {
+      handleApiError(err);
+    }
+  }
+
   async function handleCashOut() {
     setState((prev) => ({
       ...prev,
@@ -626,8 +649,8 @@ export default function GuessPokemonPage() {
               </div>
             ) : null}
             <div className="guess-panel__actions">
-              <Button type="button" onClick={resetToIdle}>
-                {t(KEYS.guessPokemon.playAgain)}
+              <Button type="button" disabled={isLoading} onClick={handlePlayAgain}>
+                {isLoading ? t(KEYS.guessPokemon.starting) : t(KEYS.guessPokemon.playAgain)}
               </Button>
               <Button variant="primary-sm" to={ROUTES.games}>
                 {t(KEYS.guessPokemon.backToGames)}

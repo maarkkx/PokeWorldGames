@@ -8,6 +8,7 @@ import RegisterPage from './pages/RegisterPage/RegisterPage.jsx';
 import GamesPage from './pages/GamesPage/GamesPage.jsx';
 import GuessPokemonPage from './pages/GuessPokemonPage/GuessPokemonPage.jsx';
 import GuessShinyPage from './pages/GuessShinyPage/GuessShinyPage.jsx';
+import ProfilePage from './pages/ProfilePage/ProfilePage.jsx';
 import WipPage from './pages/WipPage/WipPage.jsx';
 import { WIP_IDS } from './i18n/keys.js';
 
@@ -68,7 +69,7 @@ export default function App() {
             path="/profile"
             element={
               <ProtectedRoute>
-                <WipPage wipId={WIP_IDS.profile} activeNav="profile" />
+                <ProfilePage />
               </ProtectedRoute>
             }
           />
