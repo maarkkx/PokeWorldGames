@@ -1,0 +1,203 @@
+.lootbox-page {
+  max-width: none;
+  width: 100%;
+}
+
+.lootbox-page__label {
+  margin: 0 0 12px;
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+.lootbox-intro {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 24px;
+  padding: 28px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.lootbox-intro__kicker {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.lootbox-intro__title {
+  margin: 0 0 10px;
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--color-text);
+}
+
+.lootbox-intro__subtitle {
+  margin: 0;
+  max-width: 72ch;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+}
+
+.lootbox-intro__nav {
+  flex-shrink: 0;
+}
+
+.lootbox-intro__link {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.lootbox-intro__link:hover {
+  text-decoration: underline;
+}
+
+.lootbox-status {
+  margin-bottom: 20px;
+  padding: 22px 24px;
+  border-radius: 18px;
+  background: var(--color-card);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-card);
+}
+
+.lootbox-status__count {
+  margin: 0 0 6px;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--color-text);
+}
+
+.lootbox-status__hint {
+  margin: 0 0 16px;
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.lootbox-status__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.lootbox-page__error {
+  margin: 0 0 16px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-error-text);
+  background: var(--color-error-bg);
+}
+
+.lootbox-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 24px;
+  padding: 28px 24px 32px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.lootbox-reveal {
+  width: 100%;
+  max-width: 720px;
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+}
+
+.lootbox-reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease;
+}
+
+.lootbox-reveal__title {
+  margin: 0 0 18px;
+  font-size: 18px;
+  font-weight: 800;
+  text-align: center;
+  color: var(--color-primary);
+}
+
+.lootbox-reveal__grid {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lootbox-reveal__grid--3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.lootbox-reveal__grid--4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.lootbox-reveal__grid--5 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.lootbox-reveal:has(.lootbox-reveal__grid--4),
+.lootbox-reveal:has(.lootbox-reveal__grid--5) {
+  max-width: 920px;
+}
+
+.lootbox-help {
+  padding: 20px 22px;
+  border-radius: 16px;
+  background: rgba(187, 0, 0, 0.05);
+  border: 1px dashed rgba(187, 0, 0, 0.25);
+}
+
+.lootbox-help__title {
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--color-text);
+}
+
+.lootbox-help__text {
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+.lootbox-help__link {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.lootbox-help__link:hover {
+  text-decoration: underline;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lootbox-reveal.is-visible {
+    transition: none;
+  }
+}

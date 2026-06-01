@@ -6,6 +6,7 @@ export const NAV_ITEMS = [
   { id: 'profile', labelKey: KEYS.nav.profile, path: '/profile', icon: '/assets/icon-profile.svg' },
   { id: 'ranking', labelKey: KEYS.nav.ranking, path: '/ranking', icon: '/assets/icon-ranking.svg' },
   { id: 'trade', labelKey: KEYS.nav.trade, path: '/trade', icon: '/assets/icon-trade.svg' },
+  { id: 'lootboxes', labelKey: KEYS.nav.lootboxes, path: '/lootboxes', icon: '/assets/icon-lootbox.svg' },
 ];
 
 export const ROUTES = {
@@ -15,6 +16,7 @@ export const ROUTES = {
   guessPokemonRules: '/games/guess-pokemon/rules',
   guessShiny: '/games/guess-shiny',
   trade: '/trade',
+  lootboxes: '/lootboxes',
   ranking: '/ranking',
   profile: '/profile',
 };

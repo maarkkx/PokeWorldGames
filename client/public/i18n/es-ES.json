@@ -21,6 +21,7 @@
     "profile": "Perfil",
     "ranking": "Ranking",
     "trade": "Intercambio",
+    "lootboxes": "Cajas",
     "mainAria": "Navegación principal",
     "collapseSidebar": "Ocultar menú lateral",
     "expandSidebar": "Mostrar menú lateral"
@@ -425,6 +426,30 @@
     "correctPositionReveal": "El shiny estaba en la posición {{position}}.",
     "playAgain": "Jugar otra vez",
     "activeGameHint": "Ya tienes una partida en curso en este navegador. Pulsa Continuar partida para retomarla."
+  },
+  "lootbox": {
+    "pageLabel": "Cajas de botín",
+    "kicker": "Recompensas",
+    "title": "Abre tus cajas",
+    "subtitle": "Cada caja te da 3 Pokémon aleatorios para tu colección. Si ya los tienes, aumenta la cantidad en tu inventario.",
+    "navAria": "Navegación de cajas",
+    "backToHome": "Volver al inicio",
+    "statusAria": "Estado de tus cajas",
+    "count": "Tienes {{count}} cajas",
+    "countHint": "Cada apertura consume 1 caja y revela 3 Pokémon.",
+    "openCta": "Abrir caja",
+    "opening": "Abriendo...",
+    "openAnother": "Abrir otra",
+    "stageAria": "Animación de apertura",
+    "idleHint": "Pulsa el botón para abrir una caja",
+    "openingHint": "¡La Pokéball está temblando!",
+    "revealTitle": "¡Has conseguido estos Pokémon!",
+    "helpTitle": "¿Cómo conseguir más cajas?",
+    "helpText": "Ganas 1 caja de botín cada vez que subes de nivel jugando a Adivina el Pokémon o Adivina el Shiny.",
+    "helpLink": "Ir a juegos",
+    "errors": {
+      "generic": "No se pudo abrir la caja. Inténtalo de nuevo."
+    }
   },
   "wip": {
     "games": {
