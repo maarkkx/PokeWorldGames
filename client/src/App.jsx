@@ -10,8 +10,7 @@ import GuessPokemonPage from './pages/GuessPokemonPage/GuessPokemonPage.jsx';
 import GuessShinyPage from './pages/GuessShinyPage/GuessShinyPage.jsx';
 import ProfilePage from './pages/ProfilePage/ProfilePage.jsx';
 import RankingPage from './pages/RankingPage/RankingPage.jsx';
-import WipPage from './pages/WipPage/WipPage.jsx';
-import { WIP_IDS } from './i18n/keys.js';
+import TradePage from './pages/TradePage/TradePage.jsx';
 
 export default function App() {
   return (
@@ -54,7 +53,7 @@ export default function App() {
             path="/trade"
             element={
               <ProtectedRoute>
-                <WipPage wipId={WIP_IDS.trade} activeNav="trade" />
+                <TradePage />
               </ProtectedRoute>
             }
           />

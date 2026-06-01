@@ -6,11 +6,8 @@
   border-radius: var(--radius-button);
   font-weight: 800;
   text-decoration: none;
-  transition: opacity 0.15s ease;
-}
-
-.pwg-button:hover:not(:disabled) {
-  opacity: 0.92;
+  cursor: pointer;
+  transition: background-color 0.25s ease, opacity 0.2s ease;
 }
 
 .pwg-button:focus-visible {
@@ -23,18 +20,25 @@
   cursor: not-allowed;
 }
 
-.pwg-button--primary {
+.pwg-button--primary,
+.pwg-button--primary-sm {
   background: var(--color-primary);
   color: var(--color-white);
+}
+
+.pwg-button--primary {
   font-size: 22px;
   padding: 18px 40px;
 }
 
 .pwg-button--primary-sm {
-  background: var(--color-primary);
-  color: var(--color-white);
   font-size: 20px;
   padding: 14px 32px;
+}
+
+.pwg-button--primary:hover:not(:disabled),
+.pwg-button--primary-sm:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--color-primary) 75%, #000);
 }
 
 .pwg-button--ghost {

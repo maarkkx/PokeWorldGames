@@ -19,6 +19,13 @@ export async function getUserPokemons(name: string) {
           id: true,
           name: true,
           urlImage: true,
+          types: {
+            select: {
+              type: {
+                select: { name: true },
+              },
+            },
+          },
         },
       },
     },

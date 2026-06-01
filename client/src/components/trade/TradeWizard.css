@@ -1,0 +1,170 @@
+.trade-wizard__steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+}
+
+.trade-wizard__steps-item {
+  display: flex;
+}
+
+.trade-wizard__step,
+.trade-wizard__step-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: var(--color-text-muted);
+}
+
+.trade-wizard__step-btn {
+  font: inherit;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.trade-wizard__step-btn:hover {
+  transform: translateY(-1px);
+  background: rgba(187, 0, 0, 0.08);
+  border-color: rgba(187, 0, 0, 0.3);
+}
+
+.trade-wizard__step-btn:focus-visible {
+  outline: 3px solid rgba(187, 0, 0, 0.35);
+  outline-offset: 2px;
+}
+
+.trade-wizard__step.is-current {
+  color: var(--color-white);
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.trade-wizard__step.is-done {
+  color: var(--color-primary);
+  border-color: rgba(187, 0, 0, 0.25);
+}
+
+.trade-wizard__step-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 800;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.trade-wizard__step.is-current .trade-wizard__step-num {
+  color: var(--color-primary);
+  background: var(--color-white);
+}
+
+.trade-wizard__step-label {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.trade-wizard__panel {
+  padding: 22px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.trade-wizard__hint {
+  margin: 0 0 16px;
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.trade-wizard__message {
+  margin: 0 0 14px;
+  padding: 12px 14px;
+  font-size: 14px;
+  color: var(--color-text-muted);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px dashed rgba(0, 0, 0, 0.1);
+}
+
+.trade-wizard__message--error {
+  padding: 12px 14px;
+  border-radius: 12px;
+  color: var(--color-error-text);
+  background: var(--color-error-bg);
+}
+
+.trade-wizard__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.trade-inventory-layout__main .trade-wizard__nav--sticky {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin-bottom: 16px;
+  padding: 12px 0;
+  background: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(8px);
+}
+
+.trade-inventory-layout__main .trade-wizard__nav--sticky .pwg-button--primary,
+.trade-inventory-layout__main .trade-wizard__nav--sticky .pwg-button--primary-sm {
+  font-size: 14px;
+  padding: 10px 20px;
+}
+
+.trade-inventory-layout {
+  display: grid;
+  grid-template-columns: minmax(240px, 280px) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+  margin-bottom: 16px;
+}
+
+.trade-inventory-layout__main {
+  min-width: 0;
+}
+
+.trade-inventory-layout__main .trade-pokemon-picker__grid {
+  grid-template-columns: repeat(var(--trade-grid-columns, 4), minmax(0, 1fr));
+  gap: 14px;
+  align-items: stretch;
+}
+
+.trade-inventory-layout__main .trade-pokemon-picker__grid > [role='listitem'] {
+  display: flex;
+  min-height: 0;
+}
+
+.trade-inventory-layout__main .trade-pokemon-picker__grid .pokemon-trade-card {
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 900px) {
+  .trade-inventory-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .trade-inventory-filters {
+    position: static;
+    z-index: auto;
+  }
+}

@@ -1,0 +1,83 @@
+.trade-inventory-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  position: sticky;
+  top: 16px;
+  z-index: 4;
+  align-self: start;
+}
+
+.trade-inventory-filters__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.trade-inventory-filters__type-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.trade-inventory-filters__type-block .type-multi-combobox {
+  min-width: 0;
+  width: 100%;
+}
+
+.trade-inventory-filters__exact {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.trade-inventory-filters__exact-input {
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+}
+
+.trade-inventory-filters__exact-label {
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.trade-inventory-filters__label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.trade-inventory-filters__input,
+.trade-inventory-filters__select {
+  width: 100%;
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: var(--radius-input);
+  font-size: 14px;
+  font-family: var(--font-family);
+  color: var(--color-text);
+  background: var(--color-card);
+}
+
+.trade-inventory-filters__input:focus,
+.trade-inventory-filters__select:focus {
+  outline: 3px solid rgba(187, 0, 0, 0.22);
+  border-color: var(--color-primary);
+}
