@@ -1,4 +1,5 @@
-import { formatPokemonDisplayName, formatTypeDisplayName } from '../../utils/pokemon.js';
+import TypePill from '../ui/TypePill.jsx';
+import { formatPokemonDisplayName } from '../../utils/pokemon.js';
 import './PokemonTradeCard.css';
 
 export default function PokemonTradeCard({
@@ -48,23 +49,20 @@ export default function PokemonTradeCard({
         <div className="pokemon-trade-card__body">
           <span className="pokemon-trade-card__id">#{formattedId}</span>
           <h3 className="pokemon-trade-card__name">{displayName}</h3>
-          {types.length > 0 ? (
-            <ul className="pokemon-trade-card__types" aria-label={typesAria}>
-              {types.map((typeEntry) => {
-                const typeName = typeEntry?.name ?? '';
-                const typeSlug = typeName.toLowerCase().replace(/\s+/g, '-');
+          <ul
+            className="pokemon-trade-card__types"
+            aria-label={types.length > 0 ? typesAria : undefined}
+          >
+            {types.map((typeEntry) => {
+              const typeName = typeEntry?.name ?? '';
 
-                return (
-                  <li
-                    key={typeName}
-                    className={`pokemon-trade-card__type pokemon-trade-card__type--${typeSlug}`}
-                  >
-                    {formatTypeDisplayName(typeName)}
-                  </li>
-                );
-              })}
-            </ul>
-          ) : null}
+              return (
+                <li key={typeName}>
+                  <TypePill typeName={typeName} />
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </button>
 

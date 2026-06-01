@@ -64,33 +64,8 @@
   text-decoration: underline;
 }
 
-.trade-page__tabs {
-  display: flex;
-  gap: 10px;
+.trade-page__tabs-wrap {
   margin-bottom: 20px;
-}
-
-.trade-page__tab {
-  padding: 12px 22px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 14px;
-  font-size: 14px;
-  font-weight: 800;
-  font-family: var(--font-family);
-  color: var(--color-text-muted);
-  background: var(--color-card);
-  cursor: pointer;
-}
-
-.trade-page__tab.is-active {
-  color: var(--color-white);
-  background: var(--color-primary);
-  border-color: var(--color-primary);
-}
-
-.trade-page__tab:focus-visible {
-  outline: 3px solid rgba(187, 0, 0, 0.28);
-  outline-offset: 2px;
 }
 
 .trade-page__success {

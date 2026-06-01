@@ -1,10 +1,13 @@
 import Button from '../ui/Button.jsx';
+import TypePill from '../ui/TypePill.jsx';
 import { useI18n } from '../../context/I18nContext.jsx';
 import { KEYS } from '../../i18n/keys.js';
 import { formatPokemonDisplayName } from '../../utils/pokemon.js';
 import './TradeSummary.css';
 
 function SummaryGrid({ title, items, emptyMessage, ariaLabel }) {
+  const { t } = useI18n();
+
   return (
     <section className="trade-summary-block" aria-label={ariaLabel}>
       <h3 className="trade-summary-block__title">{title}</h3>
@@ -12,23 +15,42 @@ function SummaryGrid({ title, items, emptyMessage, ariaLabel }) {
         <p className="trade-summary-block__empty">{emptyMessage}</p>
       ) : (
         <ul className="trade-summary-block__grid">
-          {items.map((item) => (
-            <li key={item.pokemonId} className="trade-summary-item">
-              <div className="trade-summary-item__visual">
-                {item.pokemon.urlImage ? (
-                  <img src={item.pokemon.urlImage} alt="" />
-                ) : (
-                  <span className="trade-summary-item__placeholder" aria-hidden="true" />
-                )}
-              </div>
-              <div className="trade-summary-item__meta">
-                <span className="trade-summary-item__name">
-                  {formatPokemonDisplayName(item.pokemon.name)}
-                </span>
-                <span className="trade-summary-item__qty">×{item.quantity}</span>
-              </div>
-            </li>
-          ))}
+          {items.map((item) => {
+            const displayName = formatPokemonDisplayName(item.pokemon.name);
+            const types = Array.isArray(item.pokemon.types) ? item.pokemon.types : [];
+
+            return (
+              <li key={item.pokemonId} className="trade-summary-item">
+                <div className="trade-summary-item__visual">
+                  {item.pokemon.urlImage ? (
+                    <img src={item.pokemon.urlImage} alt="" />
+                  ) : (
+                    <span className="trade-summary-item__placeholder" aria-hidden="true" />
+                  )}
+                </div>
+                <div className="trade-summary-item__meta">
+                  <span className="trade-summary-item__name">{displayName}</span>
+                  {types.length > 0 ? (
+                    <ul
+                      className="trade-summary-item__types"
+                      aria-label={t(KEYS.trade.typesAria, { name: displayName })}
+                    >
+                      {types.map((typeEntry) => {
+                        const typeName = typeEntry?.name ?? '';
+
+                        return (
+                          <li key={typeName}>
+                            <TypePill typeName={typeName} />
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  ) : null}
+                  <span className="trade-summary-item__qty">×{item.quantity}</span>
+                </div>
+              </li>
+            );
+          })}
         </ul>
       )}
     </section>
@@ -39,8 +61,6 @@ export default function TradeSummary({
   targetUsername,
   offered,
   requested,
-  onEditRequested,
-  onEditOffered,
   onSubmit,
   isSubmitting,
   error,
@@ -77,13 +97,7 @@ export default function TradeSummary({
       ) : null}
 
       <div className="trade-summary__actions">
-        <Button type="button" variant="primary-sm" onClick={onEditRequested}>
-          {t(KEYS.trade.editRequested)}
-        </Button>
-        <Button type="button" variant="primary-sm" onClick={onEditOffered}>
-          {t(KEYS.trade.editOffered)}
-        </Button>
-        <Button type="button" disabled={isSubmitting} onClick={onSubmit}>
+        <Button type="button" variant="primary-sm" disabled={isSubmitting} onClick={onSubmit}>
           {isSubmitting ? t(KEYS.trade.sendingTrade) : t(KEYS.trade.sendTrade)}
         </Button>
       </div>

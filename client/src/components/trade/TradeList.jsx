@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ApiError, acceptTrade, fetchMyTrades, rejectTrade } from '../../api/trade.js';
 import Button from '../ui/Button.jsx';
+import SegmentedControl from '../ui/SegmentedControl.jsx';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { useI18n } from '../../context/I18nContext.jsx';
 import { KEYS } from '../../i18n/keys.js';
@@ -199,19 +200,16 @@ export default function TradeList() {
 
   return (
     <div className="trade-list">
-      <div className="trade-list__filters" role="tablist" aria-label={t(KEYS.trade.listFilterAria)}>
-        {FILTERS.map((value) => (
-          <button
-            key={value}
-            type="button"
-            role="tab"
-            aria-selected={filter === value}
-            className={`trade-list__filter${filter === value ? ' is-active' : ''}`}
-            onClick={() => setFilter(value)}
-          >
-            {t(KEYS.trade.listFilter[value])}
-          </button>
-        ))}
+      <div className="trade-list__toolbar">
+        <SegmentedControl
+          ariaLabel={t(KEYS.trade.listFilterAria)}
+          value={filter}
+          onChange={setFilter}
+          options={FILTERS.map((value) => ({
+            value,
+            label: t(KEYS.trade.listFilter[value]),
+          }))}
+        />
         <Button
           type="button"
           variant="primary-sm"

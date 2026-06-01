@@ -1,30 +1,8 @@
-.trade-pokemon-picker__toolbar {
-  margin-bottom: 16px;
-}
-
-.trade-pokemon-picker__filter {
-  width: 100%;
-  max-width: 420px;
-  height: 44px;
-  padding: 0 16px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: var(--radius-input);
-  font-size: 14px;
-  font-family: var(--font-family);
-  color: var(--color-text);
-  background: var(--color-card);
-}
-
-.trade-pokemon-picker__filter:focus {
-  outline: 3px solid rgba(187, 0, 0, 0.22);
-  border-color: var(--color-primary);
-}
-
 .trade-pokemon-picker__grid {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 16px;
-  margin-bottom: 20px;
+  margin-bottom: 0;
 }
 
 .trade-pokemon-picker__empty {
@@ -39,6 +17,7 @@
 }
 
 .trade-selection-tray {
+  margin-bottom: 16px;
   padding: 18px 20px;
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.85);

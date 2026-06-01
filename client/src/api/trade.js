@@ -21,6 +21,27 @@ export async function fetchMyTrades(token) {
   return Array.isArray(data.trades) ? data.trades : [];
 }
 
+function parseSearchUsersPayload(users) {
+  if (users?.message) {
+    throw new Error(users.message);
+  }
+
+  if (!Array.isArray(users)) {
+    return [];
+  }
+
+  return users.map((entry) => entry.name).filter(Boolean);
+}
+
+export async function searchTradeUsers(query) {
+  const data = await api('/trade/search-users', {
+    method: 'POST',
+    body: { query },
+  });
+
+  return parseSearchUsersPayload(data.users);
+}
+
 export async function fetchUserPokemons(username) {
   const data = await api('/trade/user-pokemons', {
     method: 'POST',

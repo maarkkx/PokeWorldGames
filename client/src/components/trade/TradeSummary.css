@@ -80,14 +80,27 @@
 .trade-summary-item__meta {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  align-items: center;
+  gap: 6px;
   padding: 10px;
+  text-align: center;
 }
 
 .trade-summary-item__name {
   font-size: 12px;
   font-weight: 700;
+  line-height: 1.25;
   color: var(--color-text);
+}
+
+.trade-summary-item__types {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .trade-summary-item__qty {
@@ -108,5 +121,11 @@
 .trade-summary__actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px;
+}
+
+.trade-summary__actions .pwg-button--primary,
+.trade-summary__actions .pwg-button--primary-sm {
+  font-size: 14px;
+  padding: 10px 20px;
 }

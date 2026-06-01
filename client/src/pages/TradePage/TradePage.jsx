@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import AppLayout from '../../components/layout/AppLayout.jsx';
+import SegmentedControl from '../../components/ui/SegmentedControl.jsx';
 import TradeList from '../../components/trade/TradeList.jsx';
 import TradeWizard from '../../components/trade/TradeWizard.jsx';
 import { useI18n } from '../../context/I18nContext.jsx';
@@ -43,31 +44,19 @@ export default function TradePage() {
           </nav>
         </header>
 
-        <div className="trade-page__tabs" role="tablist" aria-label={t(KEYS.trade.sectionAria)}>
-          <button
-            type="button"
-            role="tab"
-            aria-selected={section === SECTIONS.LIST}
-            className={`trade-page__tab${section === SECTIONS.LIST ? ' is-active' : ''}`}
-            onClick={() => {
-              setSection(SECTIONS.LIST);
+        <div className="trade-page__tabs-wrap">
+          <SegmentedControl
+            ariaLabel={t(KEYS.trade.sectionAria)}
+            value={section}
+            onChange={(nextSection) => {
+              setSection(nextSection);
               setCreateSuccess('');
             }}
-          >
-            {t(KEYS.trade.tabList)}
-          </button>
-          <button
-            type="button"
-            role="tab"
-            aria-selected={section === SECTIONS.CREATE}
-            className={`trade-page__tab${section === SECTIONS.CREATE ? ' is-active' : ''}`}
-            onClick={() => {
-              setSection(SECTIONS.CREATE);
-              setCreateSuccess('');
-            }}
-          >
-            {t(KEYS.trade.tabCreate)}
-          </button>
+            options={[
+              { value: SECTIONS.LIST, label: t(KEYS.trade.tabList) },
+              { value: SECTIONS.CREATE, label: t(KEYS.trade.tabCreate) },
+            ]}
+          />
         </div>
 
         {createSuccess && section === SECTIONS.LIST ? (

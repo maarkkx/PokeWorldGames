@@ -1,7 +1,6 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ApiError, createTrade, fetchUserPokemons } from '../../api/trade.js';
 import Button from '../ui/Button.jsx';
-import TextField from '../ui/TextField.jsx';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { useI18n } from '../../context/I18nContext.jsx';
 import { KEYS } from '../../i18n/keys.js';
@@ -11,9 +10,18 @@ import {
   setSelectionQuantity,
   toggleSelection,
 } from '../../utils/tradeSelections.js';
+import {
+  DEFAULT_INVENTORY_FILTERS,
+  PERSPECTIVE,
+  applyInventoryFilters,
+  buildPokemonIdSet,
+} from '../../utils/tradeInventoryFilters.js';
+import { readTradeGridColumns, writeTradeGridColumns } from '../../utils/tradeGridColumns.js';
 import { regexUser } from '../../utils/validation.js';
+import TradeInventoryFilters from './TradeInventoryFilters.jsx';
 import TradePokemonPicker from './TradePokemonPicker.jsx';
 import TradeSummary from './TradeSummary.jsx';
+import TradeUserSearch from './TradeUserSearch.jsx';
 import './TradeWizard.css';
 
 const STEPS = {
@@ -34,8 +42,8 @@ export default function TradeWizard({ onTradeCreated }) {
   const [myInventory, setMyInventory] = useState([]);
   const [requested, setRequested] = useState(createEmptySelections);
   const [offered, setOffered] = useState(createEmptySelections);
-  const [requestFilter, setRequestFilter] = useState('');
-  const [offerFilter, setOfferFilter] = useState('');
+  const [requestFilters, setRequestFilters] = useState({ ...DEFAULT_INVENTORY_FILTERS });
+  const [offerFilters, setOfferFilters] = useState({ ...DEFAULT_INVENTORY_FILTERS });
   const [searchError, setSearchError] = useState('');
   const [stepError, setStepError] = useState('');
   const [submitError, setSubmitError] = useState('');
@@ -43,6 +51,34 @@ export default function TradeWizard({ onTradeCreated }) {
   const [isLoadingOffer, setIsLoadingOffer] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [inventoryLoaded, setInventoryLoaded] = useState(false);
+  const [gridColumns, setGridColumns] = useState(readTradeGridColumns);
+
+  useEffect(() => {
+    writeTradeGridColumns(gridColumns);
+  }, [gridColumns]);
+
+  const myPokemonIds = useMemo(() => buildPokemonIdSet(myInventory), [myInventory]);
+  const theirPokemonIds = useMemo(() => buildPokemonIdSet(targetInventory), [targetInventory]);
+
+  const filteredTargetInventory = useMemo(
+    () =>
+      applyInventoryFilters(targetInventory, {
+        ...requestFilters,
+        perspective: PERSPECTIVE.TARGET,
+        myPokemonIds,
+      }),
+    [targetInventory, requestFilters, myPokemonIds],
+  );
+
+  const filteredMyInventory = useMemo(
+    () =>
+      applyInventoryFilters(myInventory, {
+        ...offerFilters,
+        perspective: PERSPECTIVE.OWN,
+        theirPokemonIds,
+      }),
+    [myInventory, offerFilters, theirPokemonIds],
+  );
 
   const handleApiError = useCallback(
     (err) => {
@@ -76,14 +112,22 @@ export default function TradeWizard({ onTradeCreated }) {
     setInventoryLoaded(false);
     setRequested(createEmptySelections());
     setTargetInventory([]);
+    setMyInventory([]);
+    setRequestFilters({ ...DEFAULT_INVENTORY_FILTERS });
+    setOfferFilters({ ...DEFAULT_INVENTORY_FILTERS });
 
     try {
-      const pokemons = await fetchUserPokemons(trimmed);
+      const [targetPokemons, ownPokemons] = await Promise.all([
+        fetchUserPokemons(trimmed),
+        fetchUserPokemons(user.name),
+      ]);
+
       setTargetUsername(trimmed);
-      setTargetInventory(pokemons);
+      setTargetInventory(targetPokemons);
+      setMyInventory(ownPokemons);
       setInventoryLoaded(true);
 
-      if (pokemons.length === 0) {
+      if (targetPokemons.length === 0) {
         setSearchError(t(KEYS.trade.targetNoPokemon));
       }
     } catch (err) {
@@ -112,22 +156,26 @@ export default function TradeWizard({ onTradeCreated }) {
       return;
     }
 
-    setIsLoadingOffer(true);
-
-    try {
-      const pokemons = await fetchUserPokemons(user.name);
-      setMyInventory(pokemons);
-      setOffered(createEmptySelections());
-      setStep(STEPS.OFFER);
-
-      if (pokemons.length === 0) {
-        setStepError(t(KEYS.trade.ownNoPokemon));
+    if (myInventory.length === 0) {
+      setIsLoadingOffer(true);
+      try {
+        const pokemons = await fetchUserPokemons(user.name);
+        setMyInventory(pokemons);
+        if (pokemons.length === 0) {
+          setStepError(t(KEYS.trade.ownNoPokemon));
+          return;
+        }
+      } catch (err) {
+        setStepError(handleApiError(err));
+        return;
+      } finally {
+        setIsLoadingOffer(false);
       }
-    } catch (err) {
-      setStepError(handleApiError(err));
-    } finally {
-      setIsLoadingOffer(false);
     }
+
+    setOffered(createEmptySelections());
+    setOfferFilters({ ...DEFAULT_INVENTORY_FILTERS });
+    setStep(STEPS.OFFER);
   }
 
   function goToSummaryStep() {
@@ -192,77 +240,113 @@ export default function TradeWizard({ onTradeCreated }) {
 
   const currentStepIndex = STEP_ORDER.indexOf(step);
 
+  function goToStep(stepId) {
+    const targetIndex = STEP_ORDER.indexOf(stepId);
+    if (targetIndex === currentStepIndex || targetIndex > currentStepIndex) {
+      return;
+    }
+
+    setStepError('');
+    setSubmitError('');
+    setStep(stepId);
+  }
+
   return (
     <div className="trade-wizard">
       <ol className="trade-wizard__steps" aria-label={t(KEYS.trade.wizardStepsAria)}>
-        {STEP_ORDER.map((stepId, index) => (
-          <li
-            key={stepId}
-            className={`trade-wizard__step${
-              index === currentStepIndex ? ' is-current' : ''
-            }${index < currentStepIndex ? ' is-done' : ''}`}
-          >
-            <span className="trade-wizard__step-num">{index + 1}</span>
-            <span className="trade-wizard__step-label">
-              {t(KEYS.trade.wizardStep[stepId])}
-            </span>
-          </li>
-        ))}
+        {STEP_ORDER.map((stepId, index) => {
+          const isCurrent = index === currentStepIndex;
+          const isDone = index < currentStepIndex;
+          const stepLabel = t(KEYS.trade.wizardStep[stepId]);
+          const stepClassName = `trade-wizard__step${
+            isCurrent ? ' is-current' : ''
+          }${isDone ? ' is-done' : ''}`;
+
+          return (
+            <li key={stepId} className="trade-wizard__steps-item">
+              {isDone ? (
+                <button
+                  type="button"
+                  className={`${stepClassName} trade-wizard__step-btn`}
+                  onClick={() => goToStep(stepId)}
+                  aria-label={t(KEYS.trade.wizardStepGoTo, { step: stepLabel })}
+                >
+                  <span className="trade-wizard__step-num">{index + 1}</span>
+                  <span className="trade-wizard__step-label">{stepLabel}</span>
+                </button>
+              ) : (
+                <span
+                  className={stepClassName}
+                  aria-current={isCurrent ? 'step' : undefined}
+                >
+                  <span className="trade-wizard__step-num">{index + 1}</span>
+                  <span className="trade-wizard__step-label">{stepLabel}</span>
+                </span>
+              )}
+            </li>
+          );
+        })}
       </ol>
 
       {step === STEPS.REQUEST ? (
         <section className="trade-wizard__panel" aria-label={t(KEYS.trade.stepRequestAria)}>
-          <form className="trade-wizard__search" onSubmit={handleSearchUser}>
-            <TextField
-              id="trade-target-user"
-              label={t(KEYS.trade.targetUserLabel)}
-              value={targetUsername}
-              onChange={(event) => {
-                setTargetUsername(event.target.value);
-                setSearchError('');
-              }}
-              placeholder={t(KEYS.trade.targetUserPlaceholder)}
-              autoComplete="username"
-              disabled={isSearching}
-              required
-            />
-            <Button type="submit" disabled={isSearching}>
-              {isSearching ? t(KEYS.trade.searchingUser) : t(KEYS.trade.searchUser)}
-            </Button>
-          </form>
-
-          {searchError ? (
-            <p className="trade-wizard__message trade-wizard__message--error" role="alert">
-              {searchError}
-            </p>
-          ) : null}
+          <TradeUserSearch
+            value={targetUsername}
+            onChange={setTargetUsername}
+            onSubmit={handleSearchUser}
+            disabled={isSearching}
+            error={searchError}
+            currentUsername={user?.name}
+          />
 
           {inventoryLoaded && targetInventory.length > 0 ? (
             <>
-              <TradePokemonPicker
-                inventory={targetInventory}
-                filter={requestFilter}
-                onFilterChange={setRequestFilter}
-                selections={requested}
-                onToggle={handleToggleRequested}
-                onQuantityChange={handleRequestedQuantity}
-                trayTitle={t(KEYS.trade.trayRequested)}
-                trayAria={t(KEYS.trade.trayRequestedAria)}
-                emptyInventoryMessage={t(KEYS.trade.targetNoPokemon)}
-                emptyFilterMessage={t(KEYS.trade.filterNoResults)}
-                gridAria={t(KEYS.trade.requestGridAria)}
-                filterPlaceholder={t(KEYS.trade.pokemonFilterPlaceholder)}
-                filterAria={t(KEYS.trade.pokemonFilterAria)}
-              />
-              {stepError ? (
-                <p className="trade-wizard__message trade-wizard__message--error" role="alert">
-                  {stepError}
-                </p>
-              ) : null}
-              <div className="trade-wizard__nav">
-                <Button type="button" disabled={isLoadingOffer} onClick={goToOfferStep}>
-                  {isLoadingOffer ? t(KEYS.trade.loadingOfferStep) : t(KEYS.trade.continueToOffer)}
-                </Button>
+              <div className="trade-inventory-layout">
+                <TradeInventoryFilters
+                  filters={requestFilters}
+                  onChange={setRequestFilters}
+                  perspective={PERSPECTIVE.TARGET}
+                  targetUsername={targetUsername}
+                  gridColumns={gridColumns}
+                  onGridColumnsChange={setGridColumns}
+                />
+
+                <div className="trade-inventory-layout__main">
+                  <div className="trade-wizard__nav trade-wizard__nav--sticky">
+                    <Button
+                      type="button"
+                      variant="primary-sm"
+                      disabled={isLoadingOffer}
+                      onClick={goToOfferStep}
+                    >
+                      {isLoadingOffer
+                        ? t(KEYS.trade.loadingOfferStep)
+                        : t(KEYS.trade.continueToOffer)}
+                    </Button>
+                  </div>
+
+                  {stepError ? (
+                    <p className="trade-wizard__message trade-wizard__message--error" role="alert">
+                      {stepError}
+                    </p>
+                  ) : null}
+
+                  {filteredTargetInventory.length === 0 ? (
+                    <p className="trade-wizard__message">{t(KEYS.trade.filterNoResults)}</p>
+                  ) : (
+                    <TradePokemonPicker
+                      inventory={filteredTargetInventory}
+                      selections={requested}
+                      onToggle={handleToggleRequested}
+                      onQuantityChange={handleRequestedQuantity}
+                      trayTitle={t(KEYS.trade.trayRequested)}
+                      trayAria={t(KEYS.trade.trayRequestedAria)}
+                      emptyInventoryMessage={t(KEYS.trade.targetNoPokemon)}
+                      gridAria={t(KEYS.trade.requestGridAria)}
+                      gridColumns={gridColumns}
+                    />
+                  )}
+                </div>
               </div>
             </>
           ) : null}
@@ -274,33 +358,49 @@ export default function TradeWizard({ onTradeCreated }) {
           <p className="trade-wizard__hint">
             {t(KEYS.trade.offerHint, { name: targetUsername })}
           </p>
-          <TradePokemonPicker
-            inventory={myInventory}
-            filter={offerFilter}
-            onFilterChange={setOfferFilter}
-            selections={offered}
-            onToggle={handleToggleOffered}
-            onQuantityChange={handleOfferedQuantity}
-            trayTitle={t(KEYS.trade.trayOffered)}
-            trayAria={t(KEYS.trade.trayOfferedAria)}
-            emptyInventoryMessage={t(KEYS.trade.ownNoPokemon)}
-            emptyFilterMessage={t(KEYS.trade.filterNoResults)}
-            gridAria={t(KEYS.trade.offerGridAria)}
-            filterPlaceholder={t(KEYS.trade.pokemonFilterPlaceholder)}
-            filterAria={t(KEYS.trade.pokemonFilterAria)}
-          />
-          {stepError ? (
-            <p className="trade-wizard__message trade-wizard__message--error" role="alert">
-              {stepError}
-            </p>
-          ) : null}
-          <div className="trade-wizard__nav">
-            <Button type="button" variant="primary-sm" onClick={() => setStep(STEPS.REQUEST)}>
-              {t(KEYS.trade.backToRequest)}
-            </Button>
-            <Button type="button" onClick={goToSummaryStep}>
-              {t(KEYS.trade.continueToSummary)}
-            </Button>
+
+          <div className="trade-inventory-layout">
+            <TradeInventoryFilters
+              filters={offerFilters}
+              onChange={setOfferFilters}
+              perspective={PERSPECTIVE.OWN}
+              targetUsername={targetUsername}
+              gridColumns={gridColumns}
+              onGridColumnsChange={setGridColumns}
+            />
+
+            <div className="trade-inventory-layout__main">
+              <div className="trade-wizard__nav trade-wizard__nav--sticky">
+                <Button type="button" variant="primary-sm" onClick={() => setStep(STEPS.REQUEST)}>
+                  {t(KEYS.trade.backToRequest)}
+                </Button>
+                <Button type="button" variant="primary-sm" onClick={goToSummaryStep}>
+                  {t(KEYS.trade.continueToSummary)}
+                </Button>
+              </div>
+
+              {stepError ? (
+                <p className="trade-wizard__message trade-wizard__message--error" role="alert">
+                  {stepError}
+                </p>
+              ) : null}
+
+              {filteredMyInventory.length === 0 ? (
+                <p className="trade-wizard__message">{t(KEYS.trade.filterNoResults)}</p>
+              ) : (
+                <TradePokemonPicker
+                  inventory={filteredMyInventory}
+                  selections={offered}
+                  onToggle={handleToggleOffered}
+                  onQuantityChange={handleOfferedQuantity}
+                  trayTitle={t(KEYS.trade.trayOffered)}
+                  trayAria={t(KEYS.trade.trayOfferedAria)}
+                  emptyInventoryMessage={t(KEYS.trade.ownNoPokemon)}
+                  gridAria={t(KEYS.trade.offerGridAria)}
+                  gridColumns={gridColumns}
+                />
+              )}
+            </div>
           </div>
         </section>
       ) : null}
@@ -311,8 +411,6 @@ export default function TradeWizard({ onTradeCreated }) {
             targetUsername={targetUsername}
             offered={offered}
             requested={requested}
-            onEditRequested={() => setStep(STEPS.REQUEST)}
-            onEditOffered={() => setStep(STEPS.OFFER)}
             onSubmit={handleSubmitTrade}
             isSubmitting={isSubmitting}
             error={submitError}
