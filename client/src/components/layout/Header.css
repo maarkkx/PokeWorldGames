@@ -32,6 +32,22 @@
   flex-shrink: 0;
 }
 
+.app-header__trainer-link {
+  text-decoration: none;
+  color: inherit;
+  border-radius: 10px;
+  transition: background 0.15s ease;
+}
+
+.app-header__trainer-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.app-header__trainer-link:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.45);
+  outline-offset: 2px;
+}
+
 .app-header__trainer-main {
   display: flex;
   flex-direction: column;
@@ -39,6 +55,7 @@
   justify-content: center;
   gap: 6px;
   min-width: 140px;
+  pointer-events: none;
 }
 
 .app-header__trainer-row {

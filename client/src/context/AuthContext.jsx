@@ -62,7 +62,14 @@ export function AuthProvider({ children }) {
     setLoading(false);
   }, []);
 
-  //objeto de user
+  const refreshProfile = useCallback(() => {
+    if (!token) {
+      return Promise.resolve(null);
+    }
+
+    return loadProfile(token);
+  }, [token, loadProfile]);
+
   const value = useMemo(
     () => ({
       token,
@@ -71,9 +78,9 @@ export function AuthProvider({ children }) {
       isAuthenticated: Boolean(token),
       login,
       logout,
-      refreshProfile: () => (token ? loadProfile(token) : Promise.resolve(null)),
+      refreshProfile,
     }),
-    [token, user, loading, login, logout, loadProfile],
+    [token, user, loading, login, logout, refreshProfile],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
