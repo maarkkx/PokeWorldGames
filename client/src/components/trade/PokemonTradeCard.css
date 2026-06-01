@@ -1,0 +1,222 @@
+.pokemon-trade-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: 16px;
+  background: var(--color-card);
+  border: 2px solid rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  transition:
+    border-color 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.4s cubic-bezier(0.34, 1.15, 0.64, 1),
+    transform 0.4s cubic-bezier(0.34, 1.15, 0.64, 1);
+}
+
+.pokemon-trade-card:hover:not(.is-disabled) {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.12);
+}
+
+.pokemon-trade-card.is-selected:hover:not(.is-disabled) {
+  box-shadow:
+    0 0 0 1px var(--color-primary),
+    0 14px 32px rgba(187, 0, 0, 0.22);
+}
+
+.pokemon-trade-card.is-selected {
+  border-color: var(--color-primary);
+  box-shadow:
+    0 0 0 1px var(--color-primary),
+    0 8px 20px rgba(187, 0, 0, 0.18);
+}
+
+.pokemon-trade-card.is-disabled {
+  opacity: 0.55;
+}
+
+.pokemon-trade-card__main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: center;
+  font: inherit;
+  color: inherit;
+}
+
+.pokemon-trade-card__main:focus-visible {
+  outline: 3px solid rgba(187, 0, 0, 0.35);
+  outline-offset: 2px;
+}
+
+.pokemon-trade-card__visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  padding: 12px;
+  background: radial-gradient(
+    circle at 50% 35%,
+    rgba(220, 40, 40, 0.12) 0%,
+    rgba(241, 241, 241, 0.9) 55%,
+    #f5f5f5 100%
+  );
+}
+
+.pokemon-trade-card__visual img {
+  width: 88px;
+  height: 88px;
+  object-fit: contain;
+}
+
+.pokemon-trade-card__placeholder {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.pokemon-trade-card__qty-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--color-white);
+  background: var(--color-primary);
+}
+
+.pokemon-trade-card__check {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--color-white);
+  background: var(--color-primary);
+}
+
+.pokemon-trade-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 14px 14px;
+  text-align: center;
+  background: var(--color-card);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.pokemon-trade-card__id {
+  display: block;
+  width: 100%;
+  margin-bottom: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.pokemon-trade-card__name {
+  width: 100%;
+  margin: 0 0 10px;
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--color-text);
+  min-height: 2.6em;
+}
+
+.pokemon-trade-card__types {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  min-height: 28px;
+  margin: 0;
+  margin-top: auto;
+  padding: 0;
+  list-style: none;
+}
+
+.pokemon-trade-card__types li {
+  display: flex;
+  justify-content: center;
+}
+
+.pokemon-trade-card__stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 12px 12px;
+  border-top: 1px dashed rgba(0, 0, 0, 0.08);
+  background: rgba(187, 0, 0, 0.04);
+}
+
+.pokemon-trade-card__stepper-btn {
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 10px;
+  background: var(--color-card);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-primary);
+  cursor: pointer;
+}
+
+.pokemon-trade-card__stepper-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pokemon-trade-card__stepper-input {
+  width: 52px;
+  height: 32px;
+  padding: 0 6px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  color: var(--color-text);
+}
+
+.pokemon-trade-card__stepper-input::-webkit-outer-spin-button,
+.pokemon-trade-card__stepper-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.pokemon-trade-card__stepper-input {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pokemon-trade-card {
+    transition-duration: 0.01ms;
+  }
+
+  .pokemon-trade-card:hover:not(.is-disabled) {
+    transform: none;
+  }
+}
