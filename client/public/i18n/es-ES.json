@@ -203,6 +203,33 @@
       "backToGames": "Volver a juegos"
     }
   },
+  "guessShiny": {
+    "pageLabel": "Adivina el Shiny",
+    "title": "Adivina el Shiny",
+    "subtitle": "Cuatro Pokémon en una cuadrícula 2×2: solo uno es el shiny real. Elige la casilla correcta en un solo intento.",
+    "navAria": "Navegación del juego",
+    "backToGames": "Volver a juegos",
+    "startAria": "Iniciar juego shiny",
+    "howToPlayTitle": "Cómo jugar",
+    "howToPlay1": "Las posiciones van del 1 al 4: fila superior (1, 2), fila inferior (3, 4).",
+    "howToPlay2": "Una casilla muestra el shiny real; las demás son la forma normal o variantes con filtros.",
+    "howToPlay3": "Un solo intento: acierto ganas 100 XP; fallo pierdes la partida.",
+    "startGame": "Empezar partida",
+    "continueGame": "Continuar partida",
+    "starting": "Iniciando...",
+    "checkingSession": "Restaurando tu sesión...",
+    "gameAria": "Partida shiny activa",
+    "gridAria": "Opciones shiny",
+    "positionAria": "Posición {{position}}",
+    "pickPrompt": "Pulsa la casilla que creas que es el Pokémon shiny.",
+    "feedbackAria": "Feedback de la última respuesta",
+    "wonTitle": "¡Shiny encontrado!",
+    "lostTitle": "Elección incorrecta",
+    "xpEarned": "+{{count}} XP",
+    "correctPositionReveal": "El shiny estaba en la posición {{position}}.",
+    "playAgain": "Jugar otra vez",
+    "activeGameHint": "Ya tienes una partida en curso en este navegador. Pulsa Continuar partida para retomarla."
+  },
   "wip": {
     "games": {
       "title": "Juegos",
