@@ -1,0 +1,97 @@
+.trade-wizard__steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+}
+
+.trade-wizard__step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: var(--color-text-muted);
+}
+
+.trade-wizard__step.is-current {
+  color: var(--color-white);
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.trade-wizard__step.is-done {
+  color: var(--color-primary);
+  border-color: rgba(187, 0, 0, 0.25);
+}
+
+.trade-wizard__step-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 800;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.trade-wizard__step.is-current .trade-wizard__step-num {
+  color: var(--color-primary);
+  background: var(--color-white);
+}
+
+.trade-wizard__step-label {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.trade-wizard__panel {
+  padding: 22px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.trade-wizard__search {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.trade-wizard__search .text-field {
+  flex: 1;
+  min-width: 220px;
+}
+
+.trade-wizard__hint {
+  margin: 0 0 16px;
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.trade-wizard__message {
+  margin: 0 0 14px;
+  font-size: 14px;
+}
+
+.trade-wizard__message--error {
+  padding: 12px 14px;
+  border-radius: 12px;
+  color: var(--color-error-text);
+  background: var(--color-error-bg);
+}
+
+.trade-wizard__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+}

@@ -1,0 +1,112 @@
+.trade-summary__target {
+  margin: 0 0 20px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.trade-summary__columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.trade-summary-block {
+  padding: 20px;
+  border-radius: 18px;
+  background: var(--color-card);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-card);
+}
+
+.trade-summary-block__title {
+  margin: 0 0 14px;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+.trade-summary-block__empty {
+  margin: 0;
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.trade-summary-block__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.trade-summary-item {
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--color-bg);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.trade-summary-item__visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+  padding: 8px;
+  background: radial-gradient(
+    circle at 50% 40%,
+    rgba(220, 40, 40, 0.1) 0%,
+    #f3f3f3 70%
+  );
+}
+
+.trade-summary-item__visual img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+
+.trade-summary-item__placeholder {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.trade-summary-item__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px;
+}
+
+.trade-summary-item__name {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.trade-summary-item__qty {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+.trade-summary__error {
+  margin: 0 0 16px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  color: var(--color-error-text);
+  background: var(--color-error-bg);
+}
+
+.trade-summary__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
