@@ -4,6 +4,22 @@
   gap: 13px;
 }
 
+.brand-logo--link {
+  text-decoration: none;
+  color: inherit;
+  border-radius: 10px;
+  transition: opacity 0.15s ease;
+}
+
+.brand-logo--link:hover {
+  opacity: 0.92;
+}
+
+.brand-logo--link:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.45);
+  outline-offset: 3px;
+}
+
 .brand-logo__mark {
   position: relative;
   width: 77px;

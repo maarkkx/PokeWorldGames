@@ -147,6 +147,24 @@ export default function GuessShinyPage() {
     }
   }
 
+  async function handlePlayAgain() {
+    clearShinySession();
+
+    setState({
+      ...INITIAL_STATE,
+      phase: PHASE.LOADING,
+    });
+
+    try {
+      const result = await startGame(token);
+      const session = createSessionFromStart(result);
+      saveShinySession(session);
+      setState((prev) => applyPlayingState(prev, session));
+    } catch (err) {
+      handleApiError(err);
+    }
+  }
+
   async function handlePickPosition(position) {
     if (state.phase !== PHASE.PLAYING) {
       return;
@@ -355,8 +373,8 @@ export default function GuessShinyPage() {
             ) : null}
 
             <div className="guess-shiny-panel__actions">
-              <Button type="button" onClick={resetToIdle}>
-                {t(KEYS.guessShiny.playAgain)}
+              <Button type="button" disabled={isLoading} onClick={handlePlayAgain}>
+                {isLoading ? t(KEYS.guessShiny.starting) : t(KEYS.guessShiny.playAgain)}
               </Button>
               <Button variant="primary-sm" to={ROUTES.games}>
                 {t(KEYS.guessShiny.backToGames)}
