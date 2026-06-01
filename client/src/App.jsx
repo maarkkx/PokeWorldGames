@@ -9,6 +9,7 @@ import GamesPage from './pages/GamesPage/GamesPage.jsx';
 import GuessPokemonPage from './pages/GuessPokemonPage/GuessPokemonPage.jsx';
 import GuessShinyPage from './pages/GuessShinyPage/GuessShinyPage.jsx';
 import ProfilePage from './pages/ProfilePage/ProfilePage.jsx';
+import RankingPage from './pages/RankingPage/RankingPage.jsx';
 import WipPage from './pages/WipPage/WipPage.jsx';
 import { WIP_IDS } from './i18n/keys.js';
 
@@ -61,7 +62,7 @@ export default function App() {
             path="/ranking"
             element={
               <ProtectedRoute>
-                <WipPage wipId={WIP_IDS.ranking} activeNav="ranking" />
+                <RankingPage />
               </ProtectedRoute>
             }
           />
