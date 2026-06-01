@@ -11,6 +11,7 @@ import GuessShinyPage from './pages/GuessShinyPage/GuessShinyPage.jsx';
 import ProfilePage from './pages/ProfilePage/ProfilePage.jsx';
 import RankingPage from './pages/RankingPage/RankingPage.jsx';
 import TradePage from './pages/TradePage/TradePage.jsx';
+import LootboxPage from './pages/LootboxPage/LootboxPage.jsx';
 
 export default function App() {
   return (
@@ -54,6 +55,14 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <TradePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/lootboxes"
+            element={
+              <ProtectedRoute>
+                <LootboxPage />
               </ProtectedRoute>
             }
           />
