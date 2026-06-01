@@ -21,6 +21,7 @@
     "profile": "Profile",
     "ranking": "Ranking",
     "trade": "Trade",
+    "lootboxes": "Loot boxes",
     "mainAria": "Main navigation",
     "collapseSidebar": "Collapse sidebar",
     "expandSidebar": "Expand sidebar"
@@ -425,6 +426,30 @@
     "correctPositionReveal": "The shiny was in position {{position}}.",
     "playAgain": "Play again",
     "activeGameHint": "You already have a game in progress in this browser. Use Continue game to pick up where you left off."
+  },
+  "lootbox": {
+    "pageLabel": "Loot boxes",
+    "kicker": "Rewards",
+    "title": "Open your boxes",
+    "subtitle": "Each box grants 3 random Pokémon for your collection. Duplicates increase quantity in your inventory.",
+    "navAria": "Loot box navigation",
+    "backToHome": "Back to home",
+    "statusAria": "Your loot box status",
+    "count": "You have {{count}} boxes",
+    "countHint": "Each open uses 1 box and reveals 3 Pokémon.",
+    "openCta": "Open loot box",
+    "opening": "Opening...",
+    "openAnother": "Open another",
+    "stageAria": "Opening animation",
+    "idleHint": "Press the button to open a box",
+    "openingHint": "The Pokéball is shaking!",
+    "revealTitle": "You got these Pokémon!",
+    "helpTitle": "How to earn more boxes",
+    "helpText": "You earn 1 loot box every time you level up by playing Guess the Pokémon or Guess the Shiny.",
+    "helpLink": "Go to games",
+    "errors": {
+      "generic": "Could not open the loot box. Please try again."
+    }
   },
   "wip": {
     "games": {
