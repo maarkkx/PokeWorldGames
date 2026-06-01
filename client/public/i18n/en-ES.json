@@ -203,6 +203,33 @@
       "backToGames": "Back to games"
     }
   },
+  "guessShiny": {
+    "pageLabel": "Guess the Shiny",
+    "title": "Guess the Shiny",
+    "subtitle": "Four Pokémon appear in a 2×2 grid — only one is the real shiny. Pick the correct slot in a single attempt.",
+    "navAria": "Game navigation",
+    "backToGames": "Back to games",
+    "startAria": "Start shiny game",
+    "howToPlayTitle": "How to play",
+    "howToPlay1": "Positions are numbered 1–4: top row (1, 2), bottom row (3, 4).",
+    "howToPlay2": "One slot shows the true shiny; the others are the normal form or tinted variants.",
+    "howToPlay3": "One attempt only — correct pick wins 100 XP; a wrong pick ends the run.",
+    "startGame": "Start game",
+    "continueGame": "Continue game",
+    "starting": "Starting...",
+    "checkingSession": "Restoring your session...",
+    "gameAria": "Active shiny game",
+    "gridAria": "Shiny choices",
+    "positionAria": "Position {{position}}",
+    "pickPrompt": "Tap the slot you think is the shiny Pokémon.",
+    "feedbackAria": "Last answer feedback",
+    "wonTitle": "Shiny found!",
+    "lostTitle": "Wrong pick",
+    "xpEarned": "+{{count}} XP",
+    "correctPositionReveal": "The shiny was in position {{position}}.",
+    "playAgain": "Play again",
+    "activeGameHint": "You already have a game in progress in this browser. Use Continue game to pick up where you left off."
+  },
   "wip": {
     "games": {
       "title": "Games",
