@@ -1,4 +1,6 @@
 import express from 'express';
+import { corsMiddleware } from './middleware/cors';
+import { registerClientApp } from './middleware/serveClient';
 import guessRouter from './modules/games/guess_pokemon/router';
 import shinyRouter from './modules/games/guess_shiny/router';
 import auth from './modules/auth/router';
@@ -10,6 +12,7 @@ import trade from './modules/trade/router';
 
 const app = express();
 
+app.use(corsMiddleware);
 app.use(express.json());
 
 app.get('/', (_req, res) => {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
@@ -37,6 +40,8 @@ app.use('/profile', profile)
 
 //trade
 app.use('/trade', trade)
+
+registerClientApp(app);
 
 app.use((_req, res) => {
   res.status(404).json({ message: 'Ruta no encontrada' });
