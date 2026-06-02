@@ -22,6 +22,7 @@
     "ranking": "Ranking",
     "trade": "Trade",
     "lootboxes": "Loot boxes",
+    "pokedex": "Pokédex",
     "mainAria": "Main navigation",
     "collapseSidebar": "Collapse sidebar",
     "expandSidebar": "Expand sidebar"
@@ -426,6 +427,39 @@
     "correctPositionReveal": "The shiny was in position {{position}}.",
     "playAgain": "Play again",
     "activeGameHint": "You already have a game in progress in this browser. Use Continue game to pick up where you left off."
+  },
+  "pokedex": {
+    "pageLabel": "Pokédex",
+    "kicker": "National collection",
+    "title": "Your Pokédex",
+    "subtitle": "Browse every species by region. Pokémon you own appear in full color; the rest stay grey until you catch them.",
+    "navAria": "Pokédex navigation",
+    "backToHome": "Back to home",
+    "regionAria": "Pokédex region",
+    "globalProgress": "National progress: {{caught}} / {{total}} caught",
+    "regionProgress": "Caught in this region: {{caught}} / {{total}}",
+    "regionCatalogGap": "{{missing}} species in this range are not in the server catalog yet.",
+    "gridAria": "Pokémon in the selected region",
+    "loading": "Loading Pokédex...",
+    "emptyRegion": "No Pokémon in the catalog for this region.",
+    "typesAria": "Pokémon types",
+    "cardCaughtAria": "{{name}}, caught",
+    "cardUncaughtAria": "{{name}}, not caught",
+    "regions": {
+      "kanto": "Kanto",
+      "johto": "Johto",
+      "hoenn": "Hoenn",
+      "sinnoh": "Sinnoh",
+      "teselia": "Unova",
+      "kalos": "Kalos",
+      "alola": "Alola",
+      "galar": "Galar",
+      "hisui": "Hisui",
+      "paldea": "Paldea"
+    },
+    "errors": {
+      "generic": "Could not load the Pokédex. Please try again."
+    }
   },
   "lootbox": {
     "pageLabel": "Loot boxes",

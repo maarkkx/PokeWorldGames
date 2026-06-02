@@ -12,6 +12,7 @@ import ProfilePage from './pages/ProfilePage/ProfilePage.jsx';
 import RankingPage from './pages/RankingPage/RankingPage.jsx';
 import TradePage from './pages/TradePage/TradePage.jsx';
 import LootboxPage from './pages/LootboxPage/LootboxPage.jsx';
+import PokedexPage from './pages/PokedexPage/PokedexPage.jsx';
 
 export default function App() {
   return (
@@ -63,6 +64,14 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <LootboxPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/pokedex"
+            element={
+              <ProtectedRoute>
+                <PokedexPage />
               </ProtectedRoute>
             }
           />

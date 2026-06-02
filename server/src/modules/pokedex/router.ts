@@ -3,6 +3,7 @@ import * as controller from './controller'
 
 const router = Router();
 
-router.post('/', controller.pokedex)
+router.post('/catalog', controller.catalog);
+router.post('/', controller.pokedex);
 
 export default router;

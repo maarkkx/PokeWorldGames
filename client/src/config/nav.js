@@ -7,6 +7,7 @@ export const NAV_ITEMS = [
   { id: 'ranking', labelKey: KEYS.nav.ranking, path: '/ranking', icon: '/assets/icon-ranking.svg' },
   { id: 'trade', labelKey: KEYS.nav.trade, path: '/trade', icon: '/assets/icon-trade.svg' },
   { id: 'lootboxes', labelKey: KEYS.nav.lootboxes, path: '/lootboxes', icon: '/assets/icon-lootbox.svg' },
+  { id: 'pokedex', labelKey: KEYS.nav.pokedex, path: '/pokedex', icon: '/assets/icon-pokedex.svg' },
 ];
 
 export const ROUTES = {
@@ -17,6 +18,7 @@ export const ROUTES = {
   guessShiny: '/games/guess-shiny',
   trade: '/trade',
   lootboxes: '/lootboxes',
+  pokedex: '/pokedex',
   ranking: '/ranking',
   profile: '/profile',
 };
