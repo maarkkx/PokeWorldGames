@@ -59,6 +59,14 @@
   text-align: center;
 }
 
+.segmented-control--scroll {
+  flex-wrap: nowrap;
+}
+
+.segmented-control--scroll .segmented-control__option {
+  flex: 0 0 auto;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .segmented-control__glider {
     transition-duration: 0.01ms;

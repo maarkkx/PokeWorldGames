@@ -22,6 +22,7 @@
     "ranking": "Ranking",
     "trade": "Intercambio",
     "lootboxes": "Cajas",
+    "pokedex": "Pokédex",
     "mainAria": "Navegación principal",
     "collapseSidebar": "Ocultar menú lateral",
     "expandSidebar": "Mostrar menú lateral"
@@ -426,6 +427,39 @@
     "correctPositionReveal": "El shiny estaba en la posición {{position}}.",
     "playAgain": "Jugar otra vez",
     "activeGameHint": "Ya tienes una partida en curso en este navegador. Pulsa Continuar partida para retomarla."
+  },
+  "pokedex": {
+    "pageLabel": "Pokédex",
+    "kicker": "Colección nacional",
+    "title": "Tu Pokédex",
+    "subtitle": "Explora todas las especies por región. Las que ya tienes se muestran a color; el resto aparecen en gris hasta que las captures.",
+    "navAria": "Navegación de la Pokédex",
+    "backToHome": "Volver al inicio",
+    "regionAria": "Región de la Pokédex",
+    "globalProgress": "Progreso nacional: {{caught}} / {{total}} capturados",
+    "regionProgress": "Capturados en esta región: {{caught}} / {{total}}",
+    "regionCatalogGap": "{{missing}} especies de este rango aún no están en el catálogo del servidor.",
+    "gridAria": "Pokémon de la región seleccionada",
+    "loading": "Cargando Pokédex...",
+    "emptyRegion": "No hay Pokémon en el catálogo para esta región.",
+    "typesAria": "Tipos del Pokémon",
+    "cardCaughtAria": "{{name}}, capturado",
+    "cardUncaughtAria": "{{name}}, no capturado",
+    "regions": {
+      "kanto": "Kanto",
+      "johto": "Johto",
+      "hoenn": "Hoenn",
+      "sinnoh": "Sinnoh",
+      "teselia": "Teselia",
+      "kalos": "Kalos",
+      "alola": "Alola",
+      "galar": "Galar",
+      "hisui": "Hisui",
+      "paldea": "Paldea"
+    },
+    "errors": {
+      "generic": "No se pudo cargar la Pokédex. Inténtalo de nuevo."
+    }
   },
   "lootbox": {
     "pageLabel": "Cajas de botín",

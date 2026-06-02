@@ -1,9 +1,8 @@
 import * as repository from './repository';
 
-/** 5% por apertura: un hueco aleatorio es legendario/mítico. */
-const LOOTBOX_LEGENDARY_BONUS_CHANCE = 0.05;
-/** 0,05% adicional por cada hueco. */
-const LEGENDARY_MYTHIC_PER_SLOT_CHANCE = 0.0005;
+/** 0,5% por apertura: un hueco aleatorio es legendario/mítico. */
+const LOOTBOX_LEGENDARY_BONUS_CHANCE = 0.005;
+const LEGENDARY_MYTHIC_PER_SLOT_CHANCE = 0.00005;
 
 type LootboxPokemon = {
   id: number;
