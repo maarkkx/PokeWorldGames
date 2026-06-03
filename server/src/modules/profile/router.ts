@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import * as controllerUpdate from './update/controller';
 import * as controllerShow from './show/controller';
-import * as controllerUpdateAppearance from './update-appearance/controller';
-import * as controllerUpdatePinned from './update-pinned/controller';
-import * as controllerAvatarOptions from './avatar-options/controller';
+import * as controllerUpdateAppearance from './update_appearance/controller';
+import * as controllerUpdatePinned from './update_pinned/controller';
+import * as controllerAvatarOptions from './avatar_options/controller';
 
 const router = Router();
 router.get('/', (_req, res) => {
