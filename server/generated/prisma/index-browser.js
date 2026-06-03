@@ -129,7 +129,9 @@ exports.Prisma.UserScalarFieldEnum = {
   xp: 'xp',
   lootboxes: 'lootboxes',
   admin: 'admin',
-  refreshToken: 'refreshToken'
+  refreshToken: 'refreshToken',
+  profilePokemonId: 'profilePokemonId',
+  profileBgColor: 'profileBgColor'
 };
 
 exports.Prisma.PokemonScalarFieldEnum = {
@@ -157,6 +159,12 @@ exports.Prisma.UserPokemonScalarFieldEnum = {
   userId: 'userId',
   pokemonId: 'pokemonId',
   quantity: 'quantity'
+};
+
+exports.Prisma.UserPinnedPokemonScalarFieldEnum = {
+  userId: 'userId',
+  slot: 'slot',
+  pokemonId: 'pokemonId'
 };
 
 exports.Prisma.PokemonTypeScalarFieldEnum = {
@@ -281,6 +289,7 @@ exports.Prisma.ModelName = {
   Pokemon: 'Pokemon',
   Type: 'Type',
   UserPokemon: 'UserPokemon',
+  UserPinnedPokemon: 'UserPinnedPokemon',
   PokemonType: 'PokemonType',
   EvolutiveChain: 'EvolutiveChain',
   GuessPokemonGame: 'GuessPokemonGame',

@@ -1,7 +1,7 @@
 import prisma from '../../../../prisma/client';
 
-export async function getUserDetails(id : number) {
-  return await prisma.user.findFirst({
+export async function getUserDetails(id: number) {
+  return prisma.user.findFirst({
     where: { id },
     select: {
       id: true,
@@ -9,7 +9,22 @@ export async function getUserDetails(id : number) {
       email: true,
       level: true,
       xp: true,
-      lootboxes: true
-    }
-  })
+      lootboxes: true,
+      profilePokemonId: true,
+      profileBgColor: true,
+      pinnedPokemons: {
+        orderBy: { slot: 'asc' },
+        select: {
+          slot: true,
+          pokemon: {
+            select: {
+              id: true,
+              name: true,
+              urlImage: true,
+            },
+          },
+        },
+      },
+    },
+  });
 }

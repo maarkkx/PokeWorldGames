@@ -34,6 +34,11 @@ export type Type = $Result.DefaultSelection<Prisma.$TypePayload>
  */
 export type UserPokemon = $Result.DefaultSelection<Prisma.$UserPokemonPayload>
 /**
+ * Model UserPinnedPokemon
+ * 
+ */
+export type UserPinnedPokemon = $Result.DefaultSelection<Prisma.$UserPinnedPokemonPayload>
+/**
  * Model PokemonType
  * 
  */
@@ -272,6 +277,16 @@ export class PrismaClient<
     * ```
     */
   get userPokemon(): Prisma.UserPokemonDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.userPinnedPokemon`: Exposes CRUD operations for the **UserPinnedPokemon** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserPinnedPokemon
+    * const userPinnedPokemon = await prisma.userPinnedPokemon.findMany()
+    * ```
+    */
+  get userPinnedPokemon(): Prisma.UserPinnedPokemonDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.pokemonType`: Exposes CRUD operations for the **PokemonType** model.
@@ -800,6 +815,7 @@ export namespace Prisma {
     Pokemon: 'Pokemon',
     Type: 'Type',
     UserPokemon: 'UserPokemon',
+    UserPinnedPokemon: 'UserPinnedPokemon',
     PokemonType: 'PokemonType',
     EvolutiveChain: 'EvolutiveChain',
     GuessPokemonGame: 'GuessPokemonGame',
@@ -824,7 +840,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "pokemon" | "type" | "userPokemon" | "pokemonType" | "evolutiveChain" | "guessPokemonGame" | "guessShinyGame" | "pokedokuGame" | "pokedokuGameCell" | "passwordResetToken" | "trade" | "tradeItem"
+      modelProps: "user" | "pokemon" | "type" | "userPokemon" | "userPinnedPokemon" | "pokemonType" | "evolutiveChain" | "guessPokemonGame" | "guessShinyGame" | "pokedokuGame" | "pokedokuGameCell" | "passwordResetToken" | "trade" | "tradeItem"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1121,6 +1137,80 @@ export namespace Prisma {
           count: {
             args: Prisma.UserPokemonCountArgs<ExtArgs>
             result: $Utils.Optional<UserPokemonCountAggregateOutputType> | number
+          }
+        }
+      }
+      UserPinnedPokemon: {
+        payload: Prisma.$UserPinnedPokemonPayload<ExtArgs>
+        fields: Prisma.UserPinnedPokemonFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserPinnedPokemonFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPinnedPokemonPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserPinnedPokemonFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPinnedPokemonPayload>
+          }
+          findFirst: {
+            args: Prisma.UserPinnedPokemonFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPinnedPokemonPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserPinnedPokemonFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPinnedPokemonPayload>
+          }
+          findMany: {
+            args: Prisma.UserPinnedPokemonFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPinnedPokemonPayload>[]
+          }
+          create: {
+            args: Prisma.UserPinnedPokemonCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPinnedPokemonPayload>
+          }
+          createMany: {
+            args: Prisma.UserPinnedPokemonCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UserPinnedPokemonCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPinnedPokemonPayload>[]
+          }
+          delete: {
+            args: Prisma.UserPinnedPokemonDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPinnedPokemonPayload>
+          }
+          update: {
+            args: Prisma.UserPinnedPokemonUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPinnedPokemonPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserPinnedPokemonDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserPinnedPokemonUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.UserPinnedPokemonUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPinnedPokemonPayload>[]
+          }
+          upsert: {
+            args: Prisma.UserPinnedPokemonUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPinnedPokemonPayload>
+          }
+          aggregate: {
+            args: Prisma.UserPinnedPokemonAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserPinnedPokemon>
+          }
+          groupBy: {
+            args: Prisma.UserPinnedPokemonGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserPinnedPokemonGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserPinnedPokemonCountArgs<ExtArgs>
+            result: $Utils.Optional<UserPinnedPokemonCountAggregateOutputType> | number
           }
         }
       }
@@ -1902,6 +1992,7 @@ export namespace Prisma {
     pokemon?: PokemonOmit
     type?: TypeOmit
     userPokemon?: UserPokemonOmit
+    userPinnedPokemon?: UserPinnedPokemonOmit
     pokemonType?: PokemonTypeOmit
     evolutiveChain?: EvolutiveChainOmit
     guessPokemonGame?: GuessPokemonGameOmit
@@ -1994,6 +2085,7 @@ export namespace Prisma {
     sentTrades: number
     receivedTrades: number
     pokemons: number
+    pinnedPokemons: number
     guessPokemonGames: number
     guessShinyGames: number
     pokedokuGames: number
@@ -2004,6 +2096,7 @@ export namespace Prisma {
     sentTrades?: boolean | UserCountOutputTypeCountSentTradesArgs
     receivedTrades?: boolean | UserCountOutputTypeCountReceivedTradesArgs
     pokemons?: boolean | UserCountOutputTypeCountPokemonsArgs
+    pinnedPokemons?: boolean | UserCountOutputTypeCountPinnedPokemonsArgs
     guessPokemonGames?: boolean | UserCountOutputTypeCountGuessPokemonGamesArgs
     guessShinyGames?: boolean | UserCountOutputTypeCountGuessShinyGamesArgs
     pokedokuGames?: boolean | UserCountOutputTypeCountPokedokuGamesArgs
@@ -2040,6 +2133,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountPokemonsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserPokemonWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountPinnedPokemonsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserPinnedPokemonWhereInput
   }
 
   /**
@@ -2084,6 +2184,7 @@ export namespace Prisma {
     guessShinyGames: number
     pokedokuAnswerCells: number
     tradeItems: number
+    pinnedByUsers: number
   }
 
   export type PokemonCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2095,6 +2196,7 @@ export namespace Prisma {
     guessShinyGames?: boolean | PokemonCountOutputTypeCountGuessShinyGamesArgs
     pokedokuAnswerCells?: boolean | PokemonCountOutputTypeCountPokedokuAnswerCellsArgs
     tradeItems?: boolean | PokemonCountOutputTypeCountTradeItemsArgs
+    pinnedByUsers?: boolean | PokemonCountOutputTypeCountPinnedByUsersArgs
   }
 
   // Custom InputTypes
@@ -2162,6 +2264,13 @@ export namespace Prisma {
    */
   export type PokemonCountOutputTypeCountTradeItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TradeItemWhereInput
+  }
+
+  /**
+   * PokemonCountOutputType without action
+   */
+  export type PokemonCountOutputTypeCountPinnedByUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserPinnedPokemonWhereInput
   }
 
 
@@ -2279,6 +2388,7 @@ export namespace Prisma {
     level: number | null
     xp: number | null
     lootboxes: number | null
+    profilePokemonId: number | null
   }
 
   export type UserSumAggregateOutputType = {
@@ -2286,6 +2396,7 @@ export namespace Prisma {
     level: number | null
     xp: number | null
     lootboxes: number | null
+    profilePokemonId: number | null
   }
 
   export type UserMinAggregateOutputType = {
@@ -2298,6 +2409,8 @@ export namespace Prisma {
     lootboxes: number | null
     admin: boolean | null
     refreshToken: string | null
+    profilePokemonId: number | null
+    profileBgColor: string | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -2310,6 +2423,8 @@ export namespace Prisma {
     lootboxes: number | null
     admin: boolean | null
     refreshToken: string | null
+    profilePokemonId: number | null
+    profileBgColor: string | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -2322,6 +2437,8 @@ export namespace Prisma {
     lootboxes: number
     admin: number
     refreshToken: number
+    profilePokemonId: number
+    profileBgColor: number
     _all: number
   }
 
@@ -2331,6 +2448,7 @@ export namespace Prisma {
     level?: true
     xp?: true
     lootboxes?: true
+    profilePokemonId?: true
   }
 
   export type UserSumAggregateInputType = {
@@ -2338,6 +2456,7 @@ export namespace Prisma {
     level?: true
     xp?: true
     lootboxes?: true
+    profilePokemonId?: true
   }
 
   export type UserMinAggregateInputType = {
@@ -2350,6 +2469,8 @@ export namespace Prisma {
     lootboxes?: true
     admin?: true
     refreshToken?: true
+    profilePokemonId?: true
+    profileBgColor?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -2362,6 +2483,8 @@ export namespace Prisma {
     lootboxes?: true
     admin?: true
     refreshToken?: true
+    profilePokemonId?: true
+    profileBgColor?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -2374,6 +2497,8 @@ export namespace Prisma {
     lootboxes?: true
     admin?: true
     refreshToken?: true
+    profilePokemonId?: true
+    profileBgColor?: true
     _all?: true
   }
 
@@ -2473,6 +2598,8 @@ export namespace Prisma {
     lootboxes: number
     admin: boolean
     refreshToken: string | null
+    profilePokemonId: number
+    profileBgColor: string
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -2504,9 +2631,12 @@ export namespace Prisma {
     lootboxes?: boolean
     admin?: boolean
     refreshToken?: boolean
+    profilePokemonId?: boolean
+    profileBgColor?: boolean
     sentTrades?: boolean | User$sentTradesArgs<ExtArgs>
     receivedTrades?: boolean | User$receivedTradesArgs<ExtArgs>
     pokemons?: boolean | User$pokemonsArgs<ExtArgs>
+    pinnedPokemons?: boolean | User$pinnedPokemonsArgs<ExtArgs>
     guessPokemonGames?: boolean | User$guessPokemonGamesArgs<ExtArgs>
     guessShinyGames?: boolean | User$guessShinyGamesArgs<ExtArgs>
     pokedokuGames?: boolean | User$pokedokuGamesArgs<ExtArgs>
@@ -2524,6 +2654,8 @@ export namespace Prisma {
     lootboxes?: boolean
     admin?: boolean
     refreshToken?: boolean
+    profilePokemonId?: boolean
+    profileBgColor?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2536,6 +2668,8 @@ export namespace Prisma {
     lootboxes?: boolean
     admin?: boolean
     refreshToken?: boolean
+    profilePokemonId?: boolean
+    profileBgColor?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -2548,13 +2682,16 @@ export namespace Prisma {
     lootboxes?: boolean
     admin?: boolean
     refreshToken?: boolean
+    profilePokemonId?: boolean
+    profileBgColor?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "level" | "xp" | "lootboxes" | "admin" | "refreshToken", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "level" | "xp" | "lootboxes" | "admin" | "refreshToken" | "profilePokemonId" | "profileBgColor", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sentTrades?: boolean | User$sentTradesArgs<ExtArgs>
     receivedTrades?: boolean | User$receivedTradesArgs<ExtArgs>
     pokemons?: boolean | User$pokemonsArgs<ExtArgs>
+    pinnedPokemons?: boolean | User$pinnedPokemonsArgs<ExtArgs>
     guessPokemonGames?: boolean | User$guessPokemonGamesArgs<ExtArgs>
     guessShinyGames?: boolean | User$guessShinyGamesArgs<ExtArgs>
     pokedokuGames?: boolean | User$pokedokuGamesArgs<ExtArgs>
@@ -2570,6 +2707,7 @@ export namespace Prisma {
       sentTrades: Prisma.$TradePayload<ExtArgs>[]
       receivedTrades: Prisma.$TradePayload<ExtArgs>[]
       pokemons: Prisma.$UserPokemonPayload<ExtArgs>[]
+      pinnedPokemons: Prisma.$UserPinnedPokemonPayload<ExtArgs>[]
       guessPokemonGames: Prisma.$GuessPokemonGamePayload<ExtArgs>[]
       guessShinyGames: Prisma.$GuessShinyGamePayload<ExtArgs>[]
       pokedokuGames: Prisma.$PokedokuGamePayload<ExtArgs>[]
@@ -2585,6 +2723,8 @@ export namespace Prisma {
       lootboxes: number
       admin: boolean
       refreshToken: string | null
+      profilePokemonId: number
+      profileBgColor: string
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -2982,6 +3122,7 @@ export namespace Prisma {
     sentTrades<T extends User$sentTradesArgs<ExtArgs> = {}>(args?: Subset<T, User$sentTradesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TradePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     receivedTrades<T extends User$receivedTradesArgs<ExtArgs> = {}>(args?: Subset<T, User$receivedTradesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TradePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     pokemons<T extends User$pokemonsArgs<ExtArgs> = {}>(args?: Subset<T, User$pokemonsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPokemonPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    pinnedPokemons<T extends User$pinnedPokemonsArgs<ExtArgs> = {}>(args?: Subset<T, User$pinnedPokemonsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPinnedPokemonPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     guessPokemonGames<T extends User$guessPokemonGamesArgs<ExtArgs> = {}>(args?: Subset<T, User$guessPokemonGamesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GuessPokemonGamePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     guessShinyGames<T extends User$guessShinyGamesArgs<ExtArgs> = {}>(args?: Subset<T, User$guessShinyGamesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GuessShinyGamePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     pokedokuGames<T extends User$pokedokuGamesArgs<ExtArgs> = {}>(args?: Subset<T, User$pokedokuGamesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PokedokuGamePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -3024,6 +3165,8 @@ export namespace Prisma {
     readonly lootboxes: FieldRef<"User", 'Int'>
     readonly admin: FieldRef<"User", 'Boolean'>
     readonly refreshToken: FieldRef<"User", 'String'>
+    readonly profilePokemonId: FieldRef<"User", 'Int'>
+    readonly profileBgColor: FieldRef<"User", 'String'>
   }
     
 
@@ -3489,6 +3632,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.pinnedPokemons
+   */
+  export type User$pinnedPokemonsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPinnedPokemon
+     */
+    select?: UserPinnedPokemonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserPinnedPokemon
+     */
+    omit?: UserPinnedPokemonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPinnedPokemonInclude<ExtArgs> | null
+    where?: UserPinnedPokemonWhereInput
+    orderBy?: UserPinnedPokemonOrderByWithRelationInput | UserPinnedPokemonOrderByWithRelationInput[]
+    cursor?: UserPinnedPokemonWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserPinnedPokemonScalarFieldEnum | UserPinnedPokemonScalarFieldEnum[]
+  }
+
+  /**
    * User.guessPokemonGames
    */
   export type User$guessPokemonGamesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3901,6 +4068,7 @@ export namespace Prisma {
     guessShinyGames?: boolean | Pokemon$guessShinyGamesArgs<ExtArgs>
     pokedokuAnswerCells?: boolean | Pokemon$pokedokuAnswerCellsArgs<ExtArgs>
     tradeItems?: boolean | Pokemon$tradeItemsArgs<ExtArgs>
+    pinnedByUsers?: boolean | Pokemon$pinnedByUsersArgs<ExtArgs>
     _count?: boolean | PokemonCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["pokemon"]>
 
@@ -3962,6 +4130,7 @@ export namespace Prisma {
     guessShinyGames?: boolean | Pokemon$guessShinyGamesArgs<ExtArgs>
     pokedokuAnswerCells?: boolean | Pokemon$pokedokuAnswerCellsArgs<ExtArgs>
     tradeItems?: boolean | Pokemon$tradeItemsArgs<ExtArgs>
+    pinnedByUsers?: boolean | Pokemon$pinnedByUsersArgs<ExtArgs>
     _count?: boolean | PokemonCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PokemonIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3978,6 +4147,7 @@ export namespace Prisma {
       guessShinyGames: Prisma.$GuessShinyGamePayload<ExtArgs>[]
       pokedokuAnswerCells: Prisma.$PokedokuGameCellPayload<ExtArgs>[]
       tradeItems: Prisma.$TradeItemPayload<ExtArgs>[]
+      pinnedByUsers: Prisma.$UserPinnedPokemonPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -4395,6 +4565,7 @@ export namespace Prisma {
     guessShinyGames<T extends Pokemon$guessShinyGamesArgs<ExtArgs> = {}>(args?: Subset<T, Pokemon$guessShinyGamesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GuessShinyGamePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     pokedokuAnswerCells<T extends Pokemon$pokedokuAnswerCellsArgs<ExtArgs> = {}>(args?: Subset<T, Pokemon$pokedokuAnswerCellsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PokedokuGameCellPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     tradeItems<T extends Pokemon$tradeItemsArgs<ExtArgs> = {}>(args?: Subset<T, Pokemon$tradeItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TradeItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    pinnedByUsers<T extends Pokemon$pinnedByUsersArgs<ExtArgs> = {}>(args?: Subset<T, Pokemon$pinnedByUsersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPinnedPokemonPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5019,6 +5190,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: TradeItemScalarFieldEnum | TradeItemScalarFieldEnum[]
+  }
+
+  /**
+   * Pokemon.pinnedByUsers
+   */
+  export type Pokemon$pinnedByUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPinnedPokemon
+     */
+    select?: UserPinnedPokemonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserPinnedPokemon
+     */
+    omit?: UserPinnedPokemonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPinnedPokemonInclude<ExtArgs> | null
+    where?: UserPinnedPokemonWhereInput
+    orderBy?: UserPinnedPokemonOrderByWithRelationInput | UserPinnedPokemonOrderByWithRelationInput[]
+    cursor?: UserPinnedPokemonWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserPinnedPokemonScalarFieldEnum | UserPinnedPokemonScalarFieldEnum[]
   }
 
   /**
@@ -7194,6 +7389,1093 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: UserPokemonInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model UserPinnedPokemon
+   */
+
+  export type AggregateUserPinnedPokemon = {
+    _count: UserPinnedPokemonCountAggregateOutputType | null
+    _avg: UserPinnedPokemonAvgAggregateOutputType | null
+    _sum: UserPinnedPokemonSumAggregateOutputType | null
+    _min: UserPinnedPokemonMinAggregateOutputType | null
+    _max: UserPinnedPokemonMaxAggregateOutputType | null
+  }
+
+  export type UserPinnedPokemonAvgAggregateOutputType = {
+    userId: number | null
+    slot: number | null
+    pokemonId: number | null
+  }
+
+  export type UserPinnedPokemonSumAggregateOutputType = {
+    userId: number | null
+    slot: number | null
+    pokemonId: number | null
+  }
+
+  export type UserPinnedPokemonMinAggregateOutputType = {
+    userId: number | null
+    slot: number | null
+    pokemonId: number | null
+  }
+
+  export type UserPinnedPokemonMaxAggregateOutputType = {
+    userId: number | null
+    slot: number | null
+    pokemonId: number | null
+  }
+
+  export type UserPinnedPokemonCountAggregateOutputType = {
+    userId: number
+    slot: number
+    pokemonId: number
+    _all: number
+  }
+
+
+  export type UserPinnedPokemonAvgAggregateInputType = {
+    userId?: true
+    slot?: true
+    pokemonId?: true
+  }
+
+  export type UserPinnedPokemonSumAggregateInputType = {
+    userId?: true
+    slot?: true
+    pokemonId?: true
+  }
+
+  export type UserPinnedPokemonMinAggregateInputType = {
+    userId?: true
+    slot?: true
+    pokemonId?: true
+  }
+
+  export type UserPinnedPokemonMaxAggregateInputType = {
+    userId?: true
+    slot?: true
+    pokemonId?: true
+  }
+
+  export type UserPinnedPokemonCountAggregateInputType = {
+    userId?: true
+    slot?: true
+    pokemonId?: true
+    _all?: true
+  }
+
+  export type UserPinnedPokemonAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserPinnedPokemon to aggregate.
+     */
+    where?: UserPinnedPokemonWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserPinnedPokemon to fetch.
+     */
+    orderBy?: UserPinnedPokemonOrderByWithRelationInput | UserPinnedPokemonOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserPinnedPokemonWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserPinnedPokemon from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserPinnedPokemon.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UserPinnedPokemon
+    **/
+    _count?: true | UserPinnedPokemonCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: UserPinnedPokemonAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserPinnedPokemonSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserPinnedPokemonMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserPinnedPokemonMaxAggregateInputType
+  }
+
+  export type GetUserPinnedPokemonAggregateType<T extends UserPinnedPokemonAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserPinnedPokemon]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserPinnedPokemon[P]>
+      : GetScalarType<T[P], AggregateUserPinnedPokemon[P]>
+  }
+
+
+
+
+  export type UserPinnedPokemonGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserPinnedPokemonWhereInput
+    orderBy?: UserPinnedPokemonOrderByWithAggregationInput | UserPinnedPokemonOrderByWithAggregationInput[]
+    by: UserPinnedPokemonScalarFieldEnum[] | UserPinnedPokemonScalarFieldEnum
+    having?: UserPinnedPokemonScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserPinnedPokemonCountAggregateInputType | true
+    _avg?: UserPinnedPokemonAvgAggregateInputType
+    _sum?: UserPinnedPokemonSumAggregateInputType
+    _min?: UserPinnedPokemonMinAggregateInputType
+    _max?: UserPinnedPokemonMaxAggregateInputType
+  }
+
+  export type UserPinnedPokemonGroupByOutputType = {
+    userId: number
+    slot: number
+    pokemonId: number
+    _count: UserPinnedPokemonCountAggregateOutputType | null
+    _avg: UserPinnedPokemonAvgAggregateOutputType | null
+    _sum: UserPinnedPokemonSumAggregateOutputType | null
+    _min: UserPinnedPokemonMinAggregateOutputType | null
+    _max: UserPinnedPokemonMaxAggregateOutputType | null
+  }
+
+  type GetUserPinnedPokemonGroupByPayload<T extends UserPinnedPokemonGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserPinnedPokemonGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserPinnedPokemonGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserPinnedPokemonGroupByOutputType[P]>
+            : GetScalarType<T[P], UserPinnedPokemonGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserPinnedPokemonSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    userId?: boolean
+    slot?: boolean
+    pokemonId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    pokemon?: boolean | PokemonDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userPinnedPokemon"]>
+
+  export type UserPinnedPokemonSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    userId?: boolean
+    slot?: boolean
+    pokemonId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    pokemon?: boolean | PokemonDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userPinnedPokemon"]>
+
+  export type UserPinnedPokemonSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    userId?: boolean
+    slot?: boolean
+    pokemonId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    pokemon?: boolean | PokemonDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userPinnedPokemon"]>
+
+  export type UserPinnedPokemonSelectScalar = {
+    userId?: boolean
+    slot?: boolean
+    pokemonId?: boolean
+  }
+
+  export type UserPinnedPokemonOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userId" | "slot" | "pokemonId", ExtArgs["result"]["userPinnedPokemon"]>
+  export type UserPinnedPokemonInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    pokemon?: boolean | PokemonDefaultArgs<ExtArgs>
+  }
+  export type UserPinnedPokemonIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    pokemon?: boolean | PokemonDefaultArgs<ExtArgs>
+  }
+  export type UserPinnedPokemonIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    pokemon?: boolean | PokemonDefaultArgs<ExtArgs>
+  }
+
+  export type $UserPinnedPokemonPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UserPinnedPokemon"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      pokemon: Prisma.$PokemonPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      userId: number
+      slot: number
+      pokemonId: number
+    }, ExtArgs["result"]["userPinnedPokemon"]>
+    composites: {}
+  }
+
+  type UserPinnedPokemonGetPayload<S extends boolean | null | undefined | UserPinnedPokemonDefaultArgs> = $Result.GetResult<Prisma.$UserPinnedPokemonPayload, S>
+
+  type UserPinnedPokemonCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UserPinnedPokemonFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UserPinnedPokemonCountAggregateInputType | true
+    }
+
+  export interface UserPinnedPokemonDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserPinnedPokemon'], meta: { name: 'UserPinnedPokemon' } }
+    /**
+     * Find zero or one UserPinnedPokemon that matches the filter.
+     * @param {UserPinnedPokemonFindUniqueArgs} args - Arguments to find a UserPinnedPokemon
+     * @example
+     * // Get one UserPinnedPokemon
+     * const userPinnedPokemon = await prisma.userPinnedPokemon.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserPinnedPokemonFindUniqueArgs>(args: SelectSubset<T, UserPinnedPokemonFindUniqueArgs<ExtArgs>>): Prisma__UserPinnedPokemonClient<$Result.GetResult<Prisma.$UserPinnedPokemonPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one UserPinnedPokemon that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UserPinnedPokemonFindUniqueOrThrowArgs} args - Arguments to find a UserPinnedPokemon
+     * @example
+     * // Get one UserPinnedPokemon
+     * const userPinnedPokemon = await prisma.userPinnedPokemon.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserPinnedPokemonFindUniqueOrThrowArgs>(args: SelectSubset<T, UserPinnedPokemonFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserPinnedPokemonClient<$Result.GetResult<Prisma.$UserPinnedPokemonPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserPinnedPokemon that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserPinnedPokemonFindFirstArgs} args - Arguments to find a UserPinnedPokemon
+     * @example
+     * // Get one UserPinnedPokemon
+     * const userPinnedPokemon = await prisma.userPinnedPokemon.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserPinnedPokemonFindFirstArgs>(args?: SelectSubset<T, UserPinnedPokemonFindFirstArgs<ExtArgs>>): Prisma__UserPinnedPokemonClient<$Result.GetResult<Prisma.$UserPinnedPokemonPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserPinnedPokemon that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserPinnedPokemonFindFirstOrThrowArgs} args - Arguments to find a UserPinnedPokemon
+     * @example
+     * // Get one UserPinnedPokemon
+     * const userPinnedPokemon = await prisma.userPinnedPokemon.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserPinnedPokemonFindFirstOrThrowArgs>(args?: SelectSubset<T, UserPinnedPokemonFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserPinnedPokemonClient<$Result.GetResult<Prisma.$UserPinnedPokemonPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more UserPinnedPokemon that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserPinnedPokemonFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserPinnedPokemon
+     * const userPinnedPokemon = await prisma.userPinnedPokemon.findMany()
+     * 
+     * // Get first 10 UserPinnedPokemon
+     * const userPinnedPokemon = await prisma.userPinnedPokemon.findMany({ take: 10 })
+     * 
+     * // Only select the `userId`
+     * const userPinnedPokemonWithUserIdOnly = await prisma.userPinnedPokemon.findMany({ select: { userId: true } })
+     * 
+     */
+    findMany<T extends UserPinnedPokemonFindManyArgs>(args?: SelectSubset<T, UserPinnedPokemonFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPinnedPokemonPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a UserPinnedPokemon.
+     * @param {UserPinnedPokemonCreateArgs} args - Arguments to create a UserPinnedPokemon.
+     * @example
+     * // Create one UserPinnedPokemon
+     * const UserPinnedPokemon = await prisma.userPinnedPokemon.create({
+     *   data: {
+     *     // ... data to create a UserPinnedPokemon
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserPinnedPokemonCreateArgs>(args: SelectSubset<T, UserPinnedPokemonCreateArgs<ExtArgs>>): Prisma__UserPinnedPokemonClient<$Result.GetResult<Prisma.$UserPinnedPokemonPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many UserPinnedPokemon.
+     * @param {UserPinnedPokemonCreateManyArgs} args - Arguments to create many UserPinnedPokemon.
+     * @example
+     * // Create many UserPinnedPokemon
+     * const userPinnedPokemon = await prisma.userPinnedPokemon.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserPinnedPokemonCreateManyArgs>(args?: SelectSubset<T, UserPinnedPokemonCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UserPinnedPokemon and returns the data saved in the database.
+     * @param {UserPinnedPokemonCreateManyAndReturnArgs} args - Arguments to create many UserPinnedPokemon.
+     * @example
+     * // Create many UserPinnedPokemon
+     * const userPinnedPokemon = await prisma.userPinnedPokemon.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UserPinnedPokemon and only return the `userId`
+     * const userPinnedPokemonWithUserIdOnly = await prisma.userPinnedPokemon.createManyAndReturn({
+     *   select: { userId: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UserPinnedPokemonCreateManyAndReturnArgs>(args?: SelectSubset<T, UserPinnedPokemonCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPinnedPokemonPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a UserPinnedPokemon.
+     * @param {UserPinnedPokemonDeleteArgs} args - Arguments to delete one UserPinnedPokemon.
+     * @example
+     * // Delete one UserPinnedPokemon
+     * const UserPinnedPokemon = await prisma.userPinnedPokemon.delete({
+     *   where: {
+     *     // ... filter to delete one UserPinnedPokemon
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserPinnedPokemonDeleteArgs>(args: SelectSubset<T, UserPinnedPokemonDeleteArgs<ExtArgs>>): Prisma__UserPinnedPokemonClient<$Result.GetResult<Prisma.$UserPinnedPokemonPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one UserPinnedPokemon.
+     * @param {UserPinnedPokemonUpdateArgs} args - Arguments to update one UserPinnedPokemon.
+     * @example
+     * // Update one UserPinnedPokemon
+     * const userPinnedPokemon = await prisma.userPinnedPokemon.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserPinnedPokemonUpdateArgs>(args: SelectSubset<T, UserPinnedPokemonUpdateArgs<ExtArgs>>): Prisma__UserPinnedPokemonClient<$Result.GetResult<Prisma.$UserPinnedPokemonPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more UserPinnedPokemon.
+     * @param {UserPinnedPokemonDeleteManyArgs} args - Arguments to filter UserPinnedPokemon to delete.
+     * @example
+     * // Delete a few UserPinnedPokemon
+     * const { count } = await prisma.userPinnedPokemon.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserPinnedPokemonDeleteManyArgs>(args?: SelectSubset<T, UserPinnedPokemonDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserPinnedPokemon.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserPinnedPokemonUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserPinnedPokemon
+     * const userPinnedPokemon = await prisma.userPinnedPokemon.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserPinnedPokemonUpdateManyArgs>(args: SelectSubset<T, UserPinnedPokemonUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserPinnedPokemon and returns the data updated in the database.
+     * @param {UserPinnedPokemonUpdateManyAndReturnArgs} args - Arguments to update many UserPinnedPokemon.
+     * @example
+     * // Update many UserPinnedPokemon
+     * const userPinnedPokemon = await prisma.userPinnedPokemon.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more UserPinnedPokemon and only return the `userId`
+     * const userPinnedPokemonWithUserIdOnly = await prisma.userPinnedPokemon.updateManyAndReturn({
+     *   select: { userId: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends UserPinnedPokemonUpdateManyAndReturnArgs>(args: SelectSubset<T, UserPinnedPokemonUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPinnedPokemonPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one UserPinnedPokemon.
+     * @param {UserPinnedPokemonUpsertArgs} args - Arguments to update or create a UserPinnedPokemon.
+     * @example
+     * // Update or create a UserPinnedPokemon
+     * const userPinnedPokemon = await prisma.userPinnedPokemon.upsert({
+     *   create: {
+     *     // ... data to create a UserPinnedPokemon
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserPinnedPokemon we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserPinnedPokemonUpsertArgs>(args: SelectSubset<T, UserPinnedPokemonUpsertArgs<ExtArgs>>): Prisma__UserPinnedPokemonClient<$Result.GetResult<Prisma.$UserPinnedPokemonPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of UserPinnedPokemon.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserPinnedPokemonCountArgs} args - Arguments to filter UserPinnedPokemon to count.
+     * @example
+     * // Count the number of UserPinnedPokemon
+     * const count = await prisma.userPinnedPokemon.count({
+     *   where: {
+     *     // ... the filter for the UserPinnedPokemon we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserPinnedPokemonCountArgs>(
+      args?: Subset<T, UserPinnedPokemonCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserPinnedPokemonCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserPinnedPokemon.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserPinnedPokemonAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserPinnedPokemonAggregateArgs>(args: Subset<T, UserPinnedPokemonAggregateArgs>): Prisma.PrismaPromise<GetUserPinnedPokemonAggregateType<T>>
+
+    /**
+     * Group by UserPinnedPokemon.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserPinnedPokemonGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserPinnedPokemonGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserPinnedPokemonGroupByArgs['orderBy'] }
+        : { orderBy?: UserPinnedPokemonGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserPinnedPokemonGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserPinnedPokemonGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UserPinnedPokemon model
+   */
+  readonly fields: UserPinnedPokemonFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserPinnedPokemon.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserPinnedPokemonClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    pokemon<T extends PokemonDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PokemonDefaultArgs<ExtArgs>>): Prisma__PokemonClient<$Result.GetResult<Prisma.$PokemonPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UserPinnedPokemon model
+   */
+  interface UserPinnedPokemonFieldRefs {
+    readonly userId: FieldRef<"UserPinnedPokemon", 'Int'>
+    readonly slot: FieldRef<"UserPinnedPokemon", 'Int'>
+    readonly pokemonId: FieldRef<"UserPinnedPokemon", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UserPinnedPokemon findUnique
+   */
+  export type UserPinnedPokemonFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPinnedPokemon
+     */
+    select?: UserPinnedPokemonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserPinnedPokemon
+     */
+    omit?: UserPinnedPokemonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPinnedPokemonInclude<ExtArgs> | null
+    /**
+     * Filter, which UserPinnedPokemon to fetch.
+     */
+    where: UserPinnedPokemonWhereUniqueInput
+  }
+
+  /**
+   * UserPinnedPokemon findUniqueOrThrow
+   */
+  export type UserPinnedPokemonFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPinnedPokemon
+     */
+    select?: UserPinnedPokemonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserPinnedPokemon
+     */
+    omit?: UserPinnedPokemonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPinnedPokemonInclude<ExtArgs> | null
+    /**
+     * Filter, which UserPinnedPokemon to fetch.
+     */
+    where: UserPinnedPokemonWhereUniqueInput
+  }
+
+  /**
+   * UserPinnedPokemon findFirst
+   */
+  export type UserPinnedPokemonFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPinnedPokemon
+     */
+    select?: UserPinnedPokemonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserPinnedPokemon
+     */
+    omit?: UserPinnedPokemonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPinnedPokemonInclude<ExtArgs> | null
+    /**
+     * Filter, which UserPinnedPokemon to fetch.
+     */
+    where?: UserPinnedPokemonWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserPinnedPokemon to fetch.
+     */
+    orderBy?: UserPinnedPokemonOrderByWithRelationInput | UserPinnedPokemonOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserPinnedPokemon.
+     */
+    cursor?: UserPinnedPokemonWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserPinnedPokemon from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserPinnedPokemon.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserPinnedPokemon.
+     */
+    distinct?: UserPinnedPokemonScalarFieldEnum | UserPinnedPokemonScalarFieldEnum[]
+  }
+
+  /**
+   * UserPinnedPokemon findFirstOrThrow
+   */
+  export type UserPinnedPokemonFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPinnedPokemon
+     */
+    select?: UserPinnedPokemonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserPinnedPokemon
+     */
+    omit?: UserPinnedPokemonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPinnedPokemonInclude<ExtArgs> | null
+    /**
+     * Filter, which UserPinnedPokemon to fetch.
+     */
+    where?: UserPinnedPokemonWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserPinnedPokemon to fetch.
+     */
+    orderBy?: UserPinnedPokemonOrderByWithRelationInput | UserPinnedPokemonOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserPinnedPokemon.
+     */
+    cursor?: UserPinnedPokemonWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserPinnedPokemon from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserPinnedPokemon.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserPinnedPokemon.
+     */
+    distinct?: UserPinnedPokemonScalarFieldEnum | UserPinnedPokemonScalarFieldEnum[]
+  }
+
+  /**
+   * UserPinnedPokemon findMany
+   */
+  export type UserPinnedPokemonFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPinnedPokemon
+     */
+    select?: UserPinnedPokemonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserPinnedPokemon
+     */
+    omit?: UserPinnedPokemonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPinnedPokemonInclude<ExtArgs> | null
+    /**
+     * Filter, which UserPinnedPokemon to fetch.
+     */
+    where?: UserPinnedPokemonWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserPinnedPokemon to fetch.
+     */
+    orderBy?: UserPinnedPokemonOrderByWithRelationInput | UserPinnedPokemonOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UserPinnedPokemon.
+     */
+    cursor?: UserPinnedPokemonWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserPinnedPokemon from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserPinnedPokemon.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserPinnedPokemon.
+     */
+    distinct?: UserPinnedPokemonScalarFieldEnum | UserPinnedPokemonScalarFieldEnum[]
+  }
+
+  /**
+   * UserPinnedPokemon create
+   */
+  export type UserPinnedPokemonCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPinnedPokemon
+     */
+    select?: UserPinnedPokemonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserPinnedPokemon
+     */
+    omit?: UserPinnedPokemonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPinnedPokemonInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UserPinnedPokemon.
+     */
+    data: XOR<UserPinnedPokemonCreateInput, UserPinnedPokemonUncheckedCreateInput>
+  }
+
+  /**
+   * UserPinnedPokemon createMany
+   */
+  export type UserPinnedPokemonCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UserPinnedPokemon.
+     */
+    data: UserPinnedPokemonCreateManyInput | UserPinnedPokemonCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UserPinnedPokemon createManyAndReturn
+   */
+  export type UserPinnedPokemonCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPinnedPokemon
+     */
+    select?: UserPinnedPokemonSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserPinnedPokemon
+     */
+    omit?: UserPinnedPokemonOmit<ExtArgs> | null
+    /**
+     * The data used to create many UserPinnedPokemon.
+     */
+    data: UserPinnedPokemonCreateManyInput | UserPinnedPokemonCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPinnedPokemonIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserPinnedPokemon update
+   */
+  export type UserPinnedPokemonUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPinnedPokemon
+     */
+    select?: UserPinnedPokemonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserPinnedPokemon
+     */
+    omit?: UserPinnedPokemonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPinnedPokemonInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UserPinnedPokemon.
+     */
+    data: XOR<UserPinnedPokemonUpdateInput, UserPinnedPokemonUncheckedUpdateInput>
+    /**
+     * Choose, which UserPinnedPokemon to update.
+     */
+    where: UserPinnedPokemonWhereUniqueInput
+  }
+
+  /**
+   * UserPinnedPokemon updateMany
+   */
+  export type UserPinnedPokemonUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UserPinnedPokemon.
+     */
+    data: XOR<UserPinnedPokemonUpdateManyMutationInput, UserPinnedPokemonUncheckedUpdateManyInput>
+    /**
+     * Filter which UserPinnedPokemon to update
+     */
+    where?: UserPinnedPokemonWhereInput
+    /**
+     * Limit how many UserPinnedPokemon to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserPinnedPokemon updateManyAndReturn
+   */
+  export type UserPinnedPokemonUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPinnedPokemon
+     */
+    select?: UserPinnedPokemonSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserPinnedPokemon
+     */
+    omit?: UserPinnedPokemonOmit<ExtArgs> | null
+    /**
+     * The data used to update UserPinnedPokemon.
+     */
+    data: XOR<UserPinnedPokemonUpdateManyMutationInput, UserPinnedPokemonUncheckedUpdateManyInput>
+    /**
+     * Filter which UserPinnedPokemon to update
+     */
+    where?: UserPinnedPokemonWhereInput
+    /**
+     * Limit how many UserPinnedPokemon to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPinnedPokemonIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserPinnedPokemon upsert
+   */
+  export type UserPinnedPokemonUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPinnedPokemon
+     */
+    select?: UserPinnedPokemonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserPinnedPokemon
+     */
+    omit?: UserPinnedPokemonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPinnedPokemonInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UserPinnedPokemon to update in case it exists.
+     */
+    where: UserPinnedPokemonWhereUniqueInput
+    /**
+     * In case the UserPinnedPokemon found by the `where` argument doesn't exist, create a new UserPinnedPokemon with this data.
+     */
+    create: XOR<UserPinnedPokemonCreateInput, UserPinnedPokemonUncheckedCreateInput>
+    /**
+     * In case the UserPinnedPokemon was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserPinnedPokemonUpdateInput, UserPinnedPokemonUncheckedUpdateInput>
+  }
+
+  /**
+   * UserPinnedPokemon delete
+   */
+  export type UserPinnedPokemonDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPinnedPokemon
+     */
+    select?: UserPinnedPokemonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserPinnedPokemon
+     */
+    omit?: UserPinnedPokemonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPinnedPokemonInclude<ExtArgs> | null
+    /**
+     * Filter which UserPinnedPokemon to delete.
+     */
+    where: UserPinnedPokemonWhereUniqueInput
+  }
+
+  /**
+   * UserPinnedPokemon deleteMany
+   */
+  export type UserPinnedPokemonDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserPinnedPokemon to delete
+     */
+    where?: UserPinnedPokemonWhereInput
+    /**
+     * Limit how many UserPinnedPokemon to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserPinnedPokemon without action
+   */
+  export type UserPinnedPokemonDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPinnedPokemon
+     */
+    select?: UserPinnedPokemonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserPinnedPokemon
+     */
+    omit?: UserPinnedPokemonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPinnedPokemonInclude<ExtArgs> | null
   }
 
 
@@ -17553,7 +18835,9 @@ export namespace Prisma {
     xp: 'xp',
     lootboxes: 'lootboxes',
     admin: 'admin',
-    refreshToken: 'refreshToken'
+    refreshToken: 'refreshToken',
+    profilePokemonId: 'profilePokemonId',
+    profileBgColor: 'profileBgColor'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -17593,6 +18877,15 @@ export namespace Prisma {
   };
 
   export type UserPokemonScalarFieldEnum = (typeof UserPokemonScalarFieldEnum)[keyof typeof UserPokemonScalarFieldEnum]
+
+
+  export const UserPinnedPokemonScalarFieldEnum: {
+    userId: 'userId',
+    slot: 'slot',
+    pokemonId: 'pokemonId'
+  };
+
+  export type UserPinnedPokemonScalarFieldEnum = (typeof UserPinnedPokemonScalarFieldEnum)[keyof typeof UserPinnedPokemonScalarFieldEnum]
 
 
   export const PokemonTypeScalarFieldEnum: {
@@ -17847,9 +19140,12 @@ export namespace Prisma {
     lootboxes?: IntFilter<"User"> | number
     admin?: BoolFilter<"User"> | boolean
     refreshToken?: StringNullableFilter<"User"> | string | null
+    profilePokemonId?: IntFilter<"User"> | number
+    profileBgColor?: StringFilter<"User"> | string
     sentTrades?: TradeListRelationFilter
     receivedTrades?: TradeListRelationFilter
     pokemons?: UserPokemonListRelationFilter
+    pinnedPokemons?: UserPinnedPokemonListRelationFilter
     guessPokemonGames?: GuessPokemonGameListRelationFilter
     guessShinyGames?: GuessShinyGameListRelationFilter
     pokedokuGames?: PokedokuGameListRelationFilter
@@ -17866,9 +19162,12 @@ export namespace Prisma {
     lootboxes?: SortOrder
     admin?: SortOrder
     refreshToken?: SortOrderInput | SortOrder
+    profilePokemonId?: SortOrder
+    profileBgColor?: SortOrder
     sentTrades?: TradeOrderByRelationAggregateInput
     receivedTrades?: TradeOrderByRelationAggregateInput
     pokemons?: UserPokemonOrderByRelationAggregateInput
+    pinnedPokemons?: UserPinnedPokemonOrderByRelationAggregateInput
     guessPokemonGames?: GuessPokemonGameOrderByRelationAggregateInput
     guessShinyGames?: GuessShinyGameOrderByRelationAggregateInput
     pokedokuGames?: PokedokuGameOrderByRelationAggregateInput
@@ -17888,9 +19187,12 @@ export namespace Prisma {
     lootboxes?: IntFilter<"User"> | number
     admin?: BoolFilter<"User"> | boolean
     refreshToken?: StringNullableFilter<"User"> | string | null
+    profilePokemonId?: IntFilter<"User"> | number
+    profileBgColor?: StringFilter<"User"> | string
     sentTrades?: TradeListRelationFilter
     receivedTrades?: TradeListRelationFilter
     pokemons?: UserPokemonListRelationFilter
+    pinnedPokemons?: UserPinnedPokemonListRelationFilter
     guessPokemonGames?: GuessPokemonGameListRelationFilter
     guessShinyGames?: GuessShinyGameListRelationFilter
     pokedokuGames?: PokedokuGameListRelationFilter
@@ -17907,6 +19209,8 @@ export namespace Prisma {
     lootboxes?: SortOrder
     admin?: SortOrder
     refreshToken?: SortOrderInput | SortOrder
+    profilePokemonId?: SortOrder
+    profileBgColor?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -17927,6 +19231,8 @@ export namespace Prisma {
     lootboxes?: IntWithAggregatesFilter<"User"> | number
     admin?: BoolWithAggregatesFilter<"User"> | boolean
     refreshToken?: StringNullableWithAggregatesFilter<"User"> | string | null
+    profilePokemonId?: IntWithAggregatesFilter<"User"> | number
+    profileBgColor?: StringWithAggregatesFilter<"User"> | string
   }
 
   export type PokemonWhereInput = {
@@ -17954,6 +19260,7 @@ export namespace Prisma {
     guessShinyGames?: GuessShinyGameListRelationFilter
     pokedokuAnswerCells?: PokedokuGameCellListRelationFilter
     tradeItems?: TradeItemListRelationFilter
+    pinnedByUsers?: UserPinnedPokemonListRelationFilter
   }
 
   export type PokemonOrderByWithRelationInput = {
@@ -17978,6 +19285,7 @@ export namespace Prisma {
     guessShinyGames?: GuessShinyGameOrderByRelationAggregateInput
     pokedokuAnswerCells?: PokedokuGameCellOrderByRelationAggregateInput
     tradeItems?: TradeItemOrderByRelationAggregateInput
+    pinnedByUsers?: UserPinnedPokemonOrderByRelationAggregateInput
   }
 
   export type PokemonWhereUniqueInput = Prisma.AtLeast<{
@@ -18005,6 +19313,7 @@ export namespace Prisma {
     guessShinyGames?: GuessShinyGameListRelationFilter
     pokedokuAnswerCells?: PokedokuGameCellListRelationFilter
     tradeItems?: TradeItemListRelationFilter
+    pinnedByUsers?: UserPinnedPokemonListRelationFilter
   }, "id">
 
   export type PokemonOrderByWithAggregationInput = {
@@ -18138,6 +19447,57 @@ export namespace Prisma {
     userId?: IntWithAggregatesFilter<"UserPokemon"> | number
     pokemonId?: IntWithAggregatesFilter<"UserPokemon"> | number
     quantity?: IntWithAggregatesFilter<"UserPokemon"> | number
+  }
+
+  export type UserPinnedPokemonWhereInput = {
+    AND?: UserPinnedPokemonWhereInput | UserPinnedPokemonWhereInput[]
+    OR?: UserPinnedPokemonWhereInput[]
+    NOT?: UserPinnedPokemonWhereInput | UserPinnedPokemonWhereInput[]
+    userId?: IntFilter<"UserPinnedPokemon"> | number
+    slot?: IntFilter<"UserPinnedPokemon"> | number
+    pokemonId?: IntFilter<"UserPinnedPokemon"> | number
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    pokemon?: XOR<PokemonScalarRelationFilter, PokemonWhereInput>
+  }
+
+  export type UserPinnedPokemonOrderByWithRelationInput = {
+    userId?: SortOrder
+    slot?: SortOrder
+    pokemonId?: SortOrder
+    user?: UserOrderByWithRelationInput
+    pokemon?: PokemonOrderByWithRelationInput
+  }
+
+  export type UserPinnedPokemonWhereUniqueInput = Prisma.AtLeast<{
+    userId_slot?: UserPinnedPokemonUserIdSlotCompoundUniqueInput
+    AND?: UserPinnedPokemonWhereInput | UserPinnedPokemonWhereInput[]
+    OR?: UserPinnedPokemonWhereInput[]
+    NOT?: UserPinnedPokemonWhereInput | UserPinnedPokemonWhereInput[]
+    userId?: IntFilter<"UserPinnedPokemon"> | number
+    slot?: IntFilter<"UserPinnedPokemon"> | number
+    pokemonId?: IntFilter<"UserPinnedPokemon"> | number
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    pokemon?: XOR<PokemonScalarRelationFilter, PokemonWhereInput>
+  }, "userId_slot">
+
+  export type UserPinnedPokemonOrderByWithAggregationInput = {
+    userId?: SortOrder
+    slot?: SortOrder
+    pokemonId?: SortOrder
+    _count?: UserPinnedPokemonCountOrderByAggregateInput
+    _avg?: UserPinnedPokemonAvgOrderByAggregateInput
+    _max?: UserPinnedPokemonMaxOrderByAggregateInput
+    _min?: UserPinnedPokemonMinOrderByAggregateInput
+    _sum?: UserPinnedPokemonSumOrderByAggregateInput
+  }
+
+  export type UserPinnedPokemonScalarWhereWithAggregatesInput = {
+    AND?: UserPinnedPokemonScalarWhereWithAggregatesInput | UserPinnedPokemonScalarWhereWithAggregatesInput[]
+    OR?: UserPinnedPokemonScalarWhereWithAggregatesInput[]
+    NOT?: UserPinnedPokemonScalarWhereWithAggregatesInput | UserPinnedPokemonScalarWhereWithAggregatesInput[]
+    userId?: IntWithAggregatesFilter<"UserPinnedPokemon"> | number
+    slot?: IntWithAggregatesFilter<"UserPinnedPokemon"> | number
+    pokemonId?: IntWithAggregatesFilter<"UserPinnedPokemon"> | number
   }
 
   export type PokemonTypeWhereInput = {
@@ -18777,9 +20137,12 @@ export namespace Prisma {
     lootboxes?: number
     admin?: boolean
     refreshToken?: string | null
+    profilePokemonId?: number
+    profileBgColor?: string
     sentTrades?: TradeCreateNestedManyWithoutFromUserInput
     receivedTrades?: TradeCreateNestedManyWithoutToUserInput
     pokemons?: UserPokemonCreateNestedManyWithoutUserInput
+    pinnedPokemons?: UserPinnedPokemonCreateNestedManyWithoutUserInput
     guessPokemonGames?: GuessPokemonGameCreateNestedManyWithoutUserInput
     guessShinyGames?: GuessShinyGameCreateNestedManyWithoutUserInput
     pokedokuGames?: PokedokuGameCreateNestedManyWithoutUserInput
@@ -18796,9 +20159,12 @@ export namespace Prisma {
     lootboxes?: number
     admin?: boolean
     refreshToken?: string | null
+    profilePokemonId?: number
+    profileBgColor?: string
     sentTrades?: TradeUncheckedCreateNestedManyWithoutFromUserInput
     receivedTrades?: TradeUncheckedCreateNestedManyWithoutToUserInput
     pokemons?: UserPokemonUncheckedCreateNestedManyWithoutUserInput
+    pinnedPokemons?: UserPinnedPokemonUncheckedCreateNestedManyWithoutUserInput
     guessPokemonGames?: GuessPokemonGameUncheckedCreateNestedManyWithoutUserInput
     guessShinyGames?: GuessShinyGameUncheckedCreateNestedManyWithoutUserInput
     pokedokuGames?: PokedokuGameUncheckedCreateNestedManyWithoutUserInput
@@ -18814,9 +20180,12 @@ export namespace Prisma {
     lootboxes?: IntFieldUpdateOperationsInput | number
     admin?: BoolFieldUpdateOperationsInput | boolean
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePokemonId?: IntFieldUpdateOperationsInput | number
+    profileBgColor?: StringFieldUpdateOperationsInput | string
     sentTrades?: TradeUpdateManyWithoutFromUserNestedInput
     receivedTrades?: TradeUpdateManyWithoutToUserNestedInput
     pokemons?: UserPokemonUpdateManyWithoutUserNestedInput
+    pinnedPokemons?: UserPinnedPokemonUpdateManyWithoutUserNestedInput
     guessPokemonGames?: GuessPokemonGameUpdateManyWithoutUserNestedInput
     guessShinyGames?: GuessShinyGameUpdateManyWithoutUserNestedInput
     pokedokuGames?: PokedokuGameUpdateManyWithoutUserNestedInput
@@ -18833,9 +20202,12 @@ export namespace Prisma {
     lootboxes?: IntFieldUpdateOperationsInput | number
     admin?: BoolFieldUpdateOperationsInput | boolean
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePokemonId?: IntFieldUpdateOperationsInput | number
+    profileBgColor?: StringFieldUpdateOperationsInput | string
     sentTrades?: TradeUncheckedUpdateManyWithoutFromUserNestedInput
     receivedTrades?: TradeUncheckedUpdateManyWithoutToUserNestedInput
     pokemons?: UserPokemonUncheckedUpdateManyWithoutUserNestedInput
+    pinnedPokemons?: UserPinnedPokemonUncheckedUpdateManyWithoutUserNestedInput
     guessPokemonGames?: GuessPokemonGameUncheckedUpdateManyWithoutUserNestedInput
     guessShinyGames?: GuessShinyGameUncheckedUpdateManyWithoutUserNestedInput
     pokedokuGames?: PokedokuGameUncheckedUpdateManyWithoutUserNestedInput
@@ -18852,6 +20224,8 @@ export namespace Prisma {
     lootboxes?: number
     admin?: boolean
     refreshToken?: string | null
+    profilePokemonId?: number
+    profileBgColor?: string
   }
 
   export type UserUpdateManyMutationInput = {
@@ -18863,6 +20237,8 @@ export namespace Prisma {
     lootboxes?: IntFieldUpdateOperationsInput | number
     admin?: BoolFieldUpdateOperationsInput | boolean
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePokemonId?: IntFieldUpdateOperationsInput | number
+    profileBgColor?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -18875,6 +20251,8 @@ export namespace Prisma {
     lootboxes?: IntFieldUpdateOperationsInput | number
     admin?: BoolFieldUpdateOperationsInput | boolean
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePokemonId?: IntFieldUpdateOperationsInput | number
+    profileBgColor?: StringFieldUpdateOperationsInput | string
   }
 
   export type PokemonCreateInput = {
@@ -18898,6 +20276,7 @@ export namespace Prisma {
     guessShinyGames?: GuessShinyGameCreateNestedManyWithoutPokemonInput
     pokedokuAnswerCells?: PokedokuGameCellCreateNestedManyWithoutAnswerPokemonInput
     tradeItems?: TradeItemCreateNestedManyWithoutPokemonInput
+    pinnedByUsers?: UserPinnedPokemonCreateNestedManyWithoutPokemonInput
   }
 
   export type PokemonUncheckedCreateInput = {
@@ -18922,6 +20301,7 @@ export namespace Prisma {
     guessShinyGames?: GuessShinyGameUncheckedCreateNestedManyWithoutPokemonInput
     pokedokuAnswerCells?: PokedokuGameCellUncheckedCreateNestedManyWithoutAnswerPokemonInput
     tradeItems?: TradeItemUncheckedCreateNestedManyWithoutPokemonInput
+    pinnedByUsers?: UserPinnedPokemonUncheckedCreateNestedManyWithoutPokemonInput
   }
 
   export type PokemonUpdateInput = {
@@ -18945,6 +20325,7 @@ export namespace Prisma {
     guessShinyGames?: GuessShinyGameUpdateManyWithoutPokemonNestedInput
     pokedokuAnswerCells?: PokedokuGameCellUpdateManyWithoutAnswerPokemonNestedInput
     tradeItems?: TradeItemUpdateManyWithoutPokemonNestedInput
+    pinnedByUsers?: UserPinnedPokemonUpdateManyWithoutPokemonNestedInput
   }
 
   export type PokemonUncheckedUpdateInput = {
@@ -18969,6 +20350,7 @@ export namespace Prisma {
     guessShinyGames?: GuessShinyGameUncheckedUpdateManyWithoutPokemonNestedInput
     pokedokuAnswerCells?: PokedokuGameCellUncheckedUpdateManyWithoutAnswerPokemonNestedInput
     tradeItems?: TradeItemUncheckedUpdateManyWithoutPokemonNestedInput
+    pinnedByUsers?: UserPinnedPokemonUncheckedUpdateManyWithoutPokemonNestedInput
   }
 
   export type PokemonCreateManyInput = {
@@ -19092,6 +20474,46 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     pokemonId?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type UserPinnedPokemonCreateInput = {
+    slot: number
+    user: UserCreateNestedOneWithoutPinnedPokemonsInput
+    pokemon: PokemonCreateNestedOneWithoutPinnedByUsersInput
+  }
+
+  export type UserPinnedPokemonUncheckedCreateInput = {
+    userId: number
+    slot: number
+    pokemonId: number
+  }
+
+  export type UserPinnedPokemonUpdateInput = {
+    slot?: IntFieldUpdateOperationsInput | number
+    user?: UserUpdateOneRequiredWithoutPinnedPokemonsNestedInput
+    pokemon?: PokemonUpdateOneRequiredWithoutPinnedByUsersNestedInput
+  }
+
+  export type UserPinnedPokemonUncheckedUpdateInput = {
+    userId?: IntFieldUpdateOperationsInput | number
+    slot?: IntFieldUpdateOperationsInput | number
+    pokemonId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type UserPinnedPokemonCreateManyInput = {
+    userId: number
+    slot: number
+    pokemonId: number
+  }
+
+  export type UserPinnedPokemonUpdateManyMutationInput = {
+    slot?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type UserPinnedPokemonUncheckedUpdateManyInput = {
+    userId?: IntFieldUpdateOperationsInput | number
+    slot?: IntFieldUpdateOperationsInput | number
+    pokemonId?: IntFieldUpdateOperationsInput | number
   }
 
   export type PokemonTypeCreateInput = {
@@ -19747,6 +21169,12 @@ export namespace Prisma {
     none?: UserPokemonWhereInput
   }
 
+  export type UserPinnedPokemonListRelationFilter = {
+    every?: UserPinnedPokemonWhereInput
+    some?: UserPinnedPokemonWhereInput
+    none?: UserPinnedPokemonWhereInput
+  }
+
   export type GuessPokemonGameListRelationFilter = {
     every?: GuessPokemonGameWhereInput
     some?: GuessPokemonGameWhereInput
@@ -19784,6 +21212,10 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type UserPinnedPokemonOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type GuessPokemonGameOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -19810,6 +21242,8 @@ export namespace Prisma {
     lootboxes?: SortOrder
     admin?: SortOrder
     refreshToken?: SortOrder
+    profilePokemonId?: SortOrder
+    profileBgColor?: SortOrder
   }
 
   export type UserAvgOrderByAggregateInput = {
@@ -19817,6 +21251,7 @@ export namespace Prisma {
     level?: SortOrder
     xp?: SortOrder
     lootboxes?: SortOrder
+    profilePokemonId?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -19829,6 +21264,8 @@ export namespace Prisma {
     lootboxes?: SortOrder
     admin?: SortOrder
     refreshToken?: SortOrder
+    profilePokemonId?: SortOrder
+    profileBgColor?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -19841,6 +21278,8 @@ export namespace Prisma {
     lootboxes?: SortOrder
     admin?: SortOrder
     refreshToken?: SortOrder
+    profilePokemonId?: SortOrder
+    profileBgColor?: SortOrder
   }
 
   export type UserSumOrderByAggregateInput = {
@@ -19848,6 +21287,7 @@ export namespace Prisma {
     level?: SortOrder
     xp?: SortOrder
     lootboxes?: SortOrder
+    profilePokemonId?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -20086,6 +21526,41 @@ export namespace Prisma {
     userId?: SortOrder
     pokemonId?: SortOrder
     quantity?: SortOrder
+  }
+
+  export type UserPinnedPokemonUserIdSlotCompoundUniqueInput = {
+    userId: number
+    slot: number
+  }
+
+  export type UserPinnedPokemonCountOrderByAggregateInput = {
+    userId?: SortOrder
+    slot?: SortOrder
+    pokemonId?: SortOrder
+  }
+
+  export type UserPinnedPokemonAvgOrderByAggregateInput = {
+    userId?: SortOrder
+    slot?: SortOrder
+    pokemonId?: SortOrder
+  }
+
+  export type UserPinnedPokemonMaxOrderByAggregateInput = {
+    userId?: SortOrder
+    slot?: SortOrder
+    pokemonId?: SortOrder
+  }
+
+  export type UserPinnedPokemonMinOrderByAggregateInput = {
+    userId?: SortOrder
+    slot?: SortOrder
+    pokemonId?: SortOrder
+  }
+
+  export type UserPinnedPokemonSumOrderByAggregateInput = {
+    userId?: SortOrder
+    slot?: SortOrder
+    pokemonId?: SortOrder
   }
 
   export type TypeScalarRelationFilter = {
@@ -20660,6 +22135,13 @@ export namespace Prisma {
     connect?: UserPokemonWhereUniqueInput | UserPokemonWhereUniqueInput[]
   }
 
+  export type UserPinnedPokemonCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserPinnedPokemonCreateWithoutUserInput, UserPinnedPokemonUncheckedCreateWithoutUserInput> | UserPinnedPokemonCreateWithoutUserInput[] | UserPinnedPokemonUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserPinnedPokemonCreateOrConnectWithoutUserInput | UserPinnedPokemonCreateOrConnectWithoutUserInput[]
+    createMany?: UserPinnedPokemonCreateManyUserInputEnvelope
+    connect?: UserPinnedPokemonWhereUniqueInput | UserPinnedPokemonWhereUniqueInput[]
+  }
+
   export type GuessPokemonGameCreateNestedManyWithoutUserInput = {
     create?: XOR<GuessPokemonGameCreateWithoutUserInput, GuessPokemonGameUncheckedCreateWithoutUserInput> | GuessPokemonGameCreateWithoutUserInput[] | GuessPokemonGameUncheckedCreateWithoutUserInput[]
     connectOrCreate?: GuessPokemonGameCreateOrConnectWithoutUserInput | GuessPokemonGameCreateOrConnectWithoutUserInput[]
@@ -20707,6 +22189,13 @@ export namespace Prisma {
     connectOrCreate?: UserPokemonCreateOrConnectWithoutUserInput | UserPokemonCreateOrConnectWithoutUserInput[]
     createMany?: UserPokemonCreateManyUserInputEnvelope
     connect?: UserPokemonWhereUniqueInput | UserPokemonWhereUniqueInput[]
+  }
+
+  export type UserPinnedPokemonUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserPinnedPokemonCreateWithoutUserInput, UserPinnedPokemonUncheckedCreateWithoutUserInput> | UserPinnedPokemonCreateWithoutUserInput[] | UserPinnedPokemonUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserPinnedPokemonCreateOrConnectWithoutUserInput | UserPinnedPokemonCreateOrConnectWithoutUserInput[]
+    createMany?: UserPinnedPokemonCreateManyUserInputEnvelope
+    connect?: UserPinnedPokemonWhereUniqueInput | UserPinnedPokemonWhereUniqueInput[]
   }
 
   export type GuessPokemonGameUncheckedCreateNestedManyWithoutUserInput = {
@@ -20797,6 +22286,20 @@ export namespace Prisma {
     update?: UserPokemonUpdateWithWhereUniqueWithoutUserInput | UserPokemonUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: UserPokemonUpdateManyWithWhereWithoutUserInput | UserPokemonUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: UserPokemonScalarWhereInput | UserPokemonScalarWhereInput[]
+  }
+
+  export type UserPinnedPokemonUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserPinnedPokemonCreateWithoutUserInput, UserPinnedPokemonUncheckedCreateWithoutUserInput> | UserPinnedPokemonCreateWithoutUserInput[] | UserPinnedPokemonUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserPinnedPokemonCreateOrConnectWithoutUserInput | UserPinnedPokemonCreateOrConnectWithoutUserInput[]
+    upsert?: UserPinnedPokemonUpsertWithWhereUniqueWithoutUserInput | UserPinnedPokemonUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserPinnedPokemonCreateManyUserInputEnvelope
+    set?: UserPinnedPokemonWhereUniqueInput | UserPinnedPokemonWhereUniqueInput[]
+    disconnect?: UserPinnedPokemonWhereUniqueInput | UserPinnedPokemonWhereUniqueInput[]
+    delete?: UserPinnedPokemonWhereUniqueInput | UserPinnedPokemonWhereUniqueInput[]
+    connect?: UserPinnedPokemonWhereUniqueInput | UserPinnedPokemonWhereUniqueInput[]
+    update?: UserPinnedPokemonUpdateWithWhereUniqueWithoutUserInput | UserPinnedPokemonUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserPinnedPokemonUpdateManyWithWhereWithoutUserInput | UserPinnedPokemonUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserPinnedPokemonScalarWhereInput | UserPinnedPokemonScalarWhereInput[]
   }
 
   export type GuessPokemonGameUpdateManyWithoutUserNestedInput = {
@@ -20895,6 +22398,20 @@ export namespace Prisma {
     update?: UserPokemonUpdateWithWhereUniqueWithoutUserInput | UserPokemonUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: UserPokemonUpdateManyWithWhereWithoutUserInput | UserPokemonUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: UserPokemonScalarWhereInput | UserPokemonScalarWhereInput[]
+  }
+
+  export type UserPinnedPokemonUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserPinnedPokemonCreateWithoutUserInput, UserPinnedPokemonUncheckedCreateWithoutUserInput> | UserPinnedPokemonCreateWithoutUserInput[] | UserPinnedPokemonUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserPinnedPokemonCreateOrConnectWithoutUserInput | UserPinnedPokemonCreateOrConnectWithoutUserInput[]
+    upsert?: UserPinnedPokemonUpsertWithWhereUniqueWithoutUserInput | UserPinnedPokemonUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserPinnedPokemonCreateManyUserInputEnvelope
+    set?: UserPinnedPokemonWhereUniqueInput | UserPinnedPokemonWhereUniqueInput[]
+    disconnect?: UserPinnedPokemonWhereUniqueInput | UserPinnedPokemonWhereUniqueInput[]
+    delete?: UserPinnedPokemonWhereUniqueInput | UserPinnedPokemonWhereUniqueInput[]
+    connect?: UserPinnedPokemonWhereUniqueInput | UserPinnedPokemonWhereUniqueInput[]
+    update?: UserPinnedPokemonUpdateWithWhereUniqueWithoutUserInput | UserPinnedPokemonUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserPinnedPokemonUpdateManyWithWhereWithoutUserInput | UserPinnedPokemonUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserPinnedPokemonScalarWhereInput | UserPinnedPokemonScalarWhereInput[]
   }
 
   export type GuessPokemonGameUncheckedUpdateManyWithoutUserNestedInput = {
@@ -21009,6 +22526,13 @@ export namespace Prisma {
     connect?: TradeItemWhereUniqueInput | TradeItemWhereUniqueInput[]
   }
 
+  export type UserPinnedPokemonCreateNestedManyWithoutPokemonInput = {
+    create?: XOR<UserPinnedPokemonCreateWithoutPokemonInput, UserPinnedPokemonUncheckedCreateWithoutPokemonInput> | UserPinnedPokemonCreateWithoutPokemonInput[] | UserPinnedPokemonUncheckedCreateWithoutPokemonInput[]
+    connectOrCreate?: UserPinnedPokemonCreateOrConnectWithoutPokemonInput | UserPinnedPokemonCreateOrConnectWithoutPokemonInput[]
+    createMany?: UserPinnedPokemonCreateManyPokemonInputEnvelope
+    connect?: UserPinnedPokemonWhereUniqueInput | UserPinnedPokemonWhereUniqueInput[]
+  }
+
   export type UserPokemonUncheckedCreateNestedManyWithoutPokemonInput = {
     create?: XOR<UserPokemonCreateWithoutPokemonInput, UserPokemonUncheckedCreateWithoutPokemonInput> | UserPokemonCreateWithoutPokemonInput[] | UserPokemonUncheckedCreateWithoutPokemonInput[]
     connectOrCreate?: UserPokemonCreateOrConnectWithoutPokemonInput | UserPokemonCreateOrConnectWithoutPokemonInput[]
@@ -21063,6 +22587,13 @@ export namespace Prisma {
     connectOrCreate?: TradeItemCreateOrConnectWithoutPokemonInput | TradeItemCreateOrConnectWithoutPokemonInput[]
     createMany?: TradeItemCreateManyPokemonInputEnvelope
     connect?: TradeItemWhereUniqueInput | TradeItemWhereUniqueInput[]
+  }
+
+  export type UserPinnedPokemonUncheckedCreateNestedManyWithoutPokemonInput = {
+    create?: XOR<UserPinnedPokemonCreateWithoutPokemonInput, UserPinnedPokemonUncheckedCreateWithoutPokemonInput> | UserPinnedPokemonCreateWithoutPokemonInput[] | UserPinnedPokemonUncheckedCreateWithoutPokemonInput[]
+    connectOrCreate?: UserPinnedPokemonCreateOrConnectWithoutPokemonInput | UserPinnedPokemonCreateOrConnectWithoutPokemonInput[]
+    createMany?: UserPinnedPokemonCreateManyPokemonInputEnvelope
+    connect?: UserPinnedPokemonWhereUniqueInput | UserPinnedPokemonWhereUniqueInput[]
   }
 
   export type UserPokemonUpdateManyWithoutPokemonNestedInput = {
@@ -21177,6 +22708,20 @@ export namespace Prisma {
     deleteMany?: TradeItemScalarWhereInput | TradeItemScalarWhereInput[]
   }
 
+  export type UserPinnedPokemonUpdateManyWithoutPokemonNestedInput = {
+    create?: XOR<UserPinnedPokemonCreateWithoutPokemonInput, UserPinnedPokemonUncheckedCreateWithoutPokemonInput> | UserPinnedPokemonCreateWithoutPokemonInput[] | UserPinnedPokemonUncheckedCreateWithoutPokemonInput[]
+    connectOrCreate?: UserPinnedPokemonCreateOrConnectWithoutPokemonInput | UserPinnedPokemonCreateOrConnectWithoutPokemonInput[]
+    upsert?: UserPinnedPokemonUpsertWithWhereUniqueWithoutPokemonInput | UserPinnedPokemonUpsertWithWhereUniqueWithoutPokemonInput[]
+    createMany?: UserPinnedPokemonCreateManyPokemonInputEnvelope
+    set?: UserPinnedPokemonWhereUniqueInput | UserPinnedPokemonWhereUniqueInput[]
+    disconnect?: UserPinnedPokemonWhereUniqueInput | UserPinnedPokemonWhereUniqueInput[]
+    delete?: UserPinnedPokemonWhereUniqueInput | UserPinnedPokemonWhereUniqueInput[]
+    connect?: UserPinnedPokemonWhereUniqueInput | UserPinnedPokemonWhereUniqueInput[]
+    update?: UserPinnedPokemonUpdateWithWhereUniqueWithoutPokemonInput | UserPinnedPokemonUpdateWithWhereUniqueWithoutPokemonInput[]
+    updateMany?: UserPinnedPokemonUpdateManyWithWhereWithoutPokemonInput | UserPinnedPokemonUpdateManyWithWhereWithoutPokemonInput[]
+    deleteMany?: UserPinnedPokemonScalarWhereInput | UserPinnedPokemonScalarWhereInput[]
+  }
+
   export type UserPokemonUncheckedUpdateManyWithoutPokemonNestedInput = {
     create?: XOR<UserPokemonCreateWithoutPokemonInput, UserPokemonUncheckedCreateWithoutPokemonInput> | UserPokemonCreateWithoutPokemonInput[] | UserPokemonUncheckedCreateWithoutPokemonInput[]
     connectOrCreate?: UserPokemonCreateOrConnectWithoutPokemonInput | UserPokemonCreateOrConnectWithoutPokemonInput[]
@@ -21289,6 +22834,20 @@ export namespace Prisma {
     deleteMany?: TradeItemScalarWhereInput | TradeItemScalarWhereInput[]
   }
 
+  export type UserPinnedPokemonUncheckedUpdateManyWithoutPokemonNestedInput = {
+    create?: XOR<UserPinnedPokemonCreateWithoutPokemonInput, UserPinnedPokemonUncheckedCreateWithoutPokemonInput> | UserPinnedPokemonCreateWithoutPokemonInput[] | UserPinnedPokemonUncheckedCreateWithoutPokemonInput[]
+    connectOrCreate?: UserPinnedPokemonCreateOrConnectWithoutPokemonInput | UserPinnedPokemonCreateOrConnectWithoutPokemonInput[]
+    upsert?: UserPinnedPokemonUpsertWithWhereUniqueWithoutPokemonInput | UserPinnedPokemonUpsertWithWhereUniqueWithoutPokemonInput[]
+    createMany?: UserPinnedPokemonCreateManyPokemonInputEnvelope
+    set?: UserPinnedPokemonWhereUniqueInput | UserPinnedPokemonWhereUniqueInput[]
+    disconnect?: UserPinnedPokemonWhereUniqueInput | UserPinnedPokemonWhereUniqueInput[]
+    delete?: UserPinnedPokemonWhereUniqueInput | UserPinnedPokemonWhereUniqueInput[]
+    connect?: UserPinnedPokemonWhereUniqueInput | UserPinnedPokemonWhereUniqueInput[]
+    update?: UserPinnedPokemonUpdateWithWhereUniqueWithoutPokemonInput | UserPinnedPokemonUpdateWithWhereUniqueWithoutPokemonInput[]
+    updateMany?: UserPinnedPokemonUpdateManyWithWhereWithoutPokemonInput | UserPinnedPokemonUpdateManyWithWhereWithoutPokemonInput[]
+    deleteMany?: UserPinnedPokemonScalarWhereInput | UserPinnedPokemonScalarWhereInput[]
+  }
+
   export type PokemonTypeCreateNestedManyWithoutTypeInput = {
     create?: XOR<PokemonTypeCreateWithoutTypeInput, PokemonTypeUncheckedCreateWithoutTypeInput> | PokemonTypeCreateWithoutTypeInput[] | PokemonTypeUncheckedCreateWithoutTypeInput[]
     connectOrCreate?: PokemonTypeCreateOrConnectWithoutTypeInput | PokemonTypeCreateOrConnectWithoutTypeInput[]
@@ -21357,6 +22916,34 @@ export namespace Prisma {
     upsert?: PokemonUpsertWithoutOwnersInput
     connect?: PokemonWhereUniqueInput
     update?: XOR<XOR<PokemonUpdateToOneWithWhereWithoutOwnersInput, PokemonUpdateWithoutOwnersInput>, PokemonUncheckedUpdateWithoutOwnersInput>
+  }
+
+  export type UserCreateNestedOneWithoutPinnedPokemonsInput = {
+    create?: XOR<UserCreateWithoutPinnedPokemonsInput, UserUncheckedCreateWithoutPinnedPokemonsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPinnedPokemonsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type PokemonCreateNestedOneWithoutPinnedByUsersInput = {
+    create?: XOR<PokemonCreateWithoutPinnedByUsersInput, PokemonUncheckedCreateWithoutPinnedByUsersInput>
+    connectOrCreate?: PokemonCreateOrConnectWithoutPinnedByUsersInput
+    connect?: PokemonWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutPinnedPokemonsNestedInput = {
+    create?: XOR<UserCreateWithoutPinnedPokemonsInput, UserUncheckedCreateWithoutPinnedPokemonsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPinnedPokemonsInput
+    upsert?: UserUpsertWithoutPinnedPokemonsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPinnedPokemonsInput, UserUpdateWithoutPinnedPokemonsInput>, UserUncheckedUpdateWithoutPinnedPokemonsInput>
+  }
+
+  export type PokemonUpdateOneRequiredWithoutPinnedByUsersNestedInput = {
+    create?: XOR<PokemonCreateWithoutPinnedByUsersInput, PokemonUncheckedCreateWithoutPinnedByUsersInput>
+    connectOrCreate?: PokemonCreateOrConnectWithoutPinnedByUsersInput
+    upsert?: PokemonUpsertWithoutPinnedByUsersInput
+    connect?: PokemonWhereUniqueInput
+    update?: XOR<XOR<PokemonUpdateToOneWithWhereWithoutPinnedByUsersInput, PokemonUpdateWithoutPinnedByUsersInput>, PokemonUncheckedUpdateWithoutPinnedByUsersInput>
   }
 
   export type PokemonCreateNestedOneWithoutTypesInput = {
@@ -22023,6 +23610,26 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type UserPinnedPokemonCreateWithoutUserInput = {
+    slot: number
+    pokemon: PokemonCreateNestedOneWithoutPinnedByUsersInput
+  }
+
+  export type UserPinnedPokemonUncheckedCreateWithoutUserInput = {
+    slot: number
+    pokemonId: number
+  }
+
+  export type UserPinnedPokemonCreateOrConnectWithoutUserInput = {
+    where: UserPinnedPokemonWhereUniqueInput
+    create: XOR<UserPinnedPokemonCreateWithoutUserInput, UserPinnedPokemonUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserPinnedPokemonCreateManyUserInputEnvelope = {
+    data: UserPinnedPokemonCreateManyUserInput | UserPinnedPokemonCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type GuessPokemonGameCreateWithoutUserInput = {
     gameId?: string
     maxAttempts?: number
@@ -22211,6 +23818,31 @@ export namespace Prisma {
     userId?: IntFilter<"UserPokemon"> | number
     pokemonId?: IntFilter<"UserPokemon"> | number
     quantity?: IntFilter<"UserPokemon"> | number
+  }
+
+  export type UserPinnedPokemonUpsertWithWhereUniqueWithoutUserInput = {
+    where: UserPinnedPokemonWhereUniqueInput
+    update: XOR<UserPinnedPokemonUpdateWithoutUserInput, UserPinnedPokemonUncheckedUpdateWithoutUserInput>
+    create: XOR<UserPinnedPokemonCreateWithoutUserInput, UserPinnedPokemonUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserPinnedPokemonUpdateWithWhereUniqueWithoutUserInput = {
+    where: UserPinnedPokemonWhereUniqueInput
+    data: XOR<UserPinnedPokemonUpdateWithoutUserInput, UserPinnedPokemonUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserPinnedPokemonUpdateManyWithWhereWithoutUserInput = {
+    where: UserPinnedPokemonScalarWhereInput
+    data: XOR<UserPinnedPokemonUpdateManyMutationInput, UserPinnedPokemonUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type UserPinnedPokemonScalarWhereInput = {
+    AND?: UserPinnedPokemonScalarWhereInput | UserPinnedPokemonScalarWhereInput[]
+    OR?: UserPinnedPokemonScalarWhereInput[]
+    NOT?: UserPinnedPokemonScalarWhereInput | UserPinnedPokemonScalarWhereInput[]
+    userId?: IntFilter<"UserPinnedPokemon"> | number
+    slot?: IntFilter<"UserPinnedPokemon"> | number
+    pokemonId?: IntFilter<"UserPinnedPokemon"> | number
   }
 
   export type GuessPokemonGameUpsertWithWhereUniqueWithoutUserInput = {
@@ -22544,6 +24176,26 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type UserPinnedPokemonCreateWithoutPokemonInput = {
+    slot: number
+    user: UserCreateNestedOneWithoutPinnedPokemonsInput
+  }
+
+  export type UserPinnedPokemonUncheckedCreateWithoutPokemonInput = {
+    userId: number
+    slot: number
+  }
+
+  export type UserPinnedPokemonCreateOrConnectWithoutPokemonInput = {
+    where: UserPinnedPokemonWhereUniqueInput
+    create: XOR<UserPinnedPokemonCreateWithoutPokemonInput, UserPinnedPokemonUncheckedCreateWithoutPokemonInput>
+  }
+
+  export type UserPinnedPokemonCreateManyPokemonInputEnvelope = {
+    data: UserPinnedPokemonCreateManyPokemonInput | UserPinnedPokemonCreateManyPokemonInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserPokemonUpsertWithWhereUniqueWithoutPokemonInput = {
     where: UserPokemonWhereUniqueInput
     update: XOR<UserPokemonUpdateWithoutPokemonInput, UserPokemonUncheckedUpdateWithoutPokemonInput>
@@ -22718,6 +24370,22 @@ export namespace Prisma {
     quantity?: IntFilter<"TradeItem"> | number
   }
 
+  export type UserPinnedPokemonUpsertWithWhereUniqueWithoutPokemonInput = {
+    where: UserPinnedPokemonWhereUniqueInput
+    update: XOR<UserPinnedPokemonUpdateWithoutPokemonInput, UserPinnedPokemonUncheckedUpdateWithoutPokemonInput>
+    create: XOR<UserPinnedPokemonCreateWithoutPokemonInput, UserPinnedPokemonUncheckedCreateWithoutPokemonInput>
+  }
+
+  export type UserPinnedPokemonUpdateWithWhereUniqueWithoutPokemonInput = {
+    where: UserPinnedPokemonWhereUniqueInput
+    data: XOR<UserPinnedPokemonUpdateWithoutPokemonInput, UserPinnedPokemonUncheckedUpdateWithoutPokemonInput>
+  }
+
+  export type UserPinnedPokemonUpdateManyWithWhereWithoutPokemonInput = {
+    where: UserPinnedPokemonScalarWhereInput
+    data: XOR<UserPinnedPokemonUpdateManyMutationInput, UserPinnedPokemonUncheckedUpdateManyWithoutPokemonInput>
+  }
+
   export type PokemonTypeCreateWithoutTypeInput = {
     pokemon: PokemonCreateNestedOneWithoutTypesInput
   }
@@ -22761,8 +24429,11 @@ export namespace Prisma {
     lootboxes?: number
     admin?: boolean
     refreshToken?: string | null
+    profilePokemonId?: number
+    profileBgColor?: string
     sentTrades?: TradeCreateNestedManyWithoutFromUserInput
     receivedTrades?: TradeCreateNestedManyWithoutToUserInput
+    pinnedPokemons?: UserPinnedPokemonCreateNestedManyWithoutUserInput
     guessPokemonGames?: GuessPokemonGameCreateNestedManyWithoutUserInput
     guessShinyGames?: GuessShinyGameCreateNestedManyWithoutUserInput
     pokedokuGames?: PokedokuGameCreateNestedManyWithoutUserInput
@@ -22779,8 +24450,11 @@ export namespace Prisma {
     lootboxes?: number
     admin?: boolean
     refreshToken?: string | null
+    profilePokemonId?: number
+    profileBgColor?: string
     sentTrades?: TradeUncheckedCreateNestedManyWithoutFromUserInput
     receivedTrades?: TradeUncheckedCreateNestedManyWithoutToUserInput
+    pinnedPokemons?: UserPinnedPokemonUncheckedCreateNestedManyWithoutUserInput
     guessPokemonGames?: GuessPokemonGameUncheckedCreateNestedManyWithoutUserInput
     guessShinyGames?: GuessShinyGameUncheckedCreateNestedManyWithoutUserInput
     pokedokuGames?: PokedokuGameUncheckedCreateNestedManyWithoutUserInput
@@ -22812,6 +24486,7 @@ export namespace Prisma {
     guessShinyGames?: GuessShinyGameCreateNestedManyWithoutPokemonInput
     pokedokuAnswerCells?: PokedokuGameCellCreateNestedManyWithoutAnswerPokemonInput
     tradeItems?: TradeItemCreateNestedManyWithoutPokemonInput
+    pinnedByUsers?: UserPinnedPokemonCreateNestedManyWithoutPokemonInput
   }
 
   export type PokemonUncheckedCreateWithoutOwnersInput = {
@@ -22835,6 +24510,7 @@ export namespace Prisma {
     guessShinyGames?: GuessShinyGameUncheckedCreateNestedManyWithoutPokemonInput
     pokedokuAnswerCells?: PokedokuGameCellUncheckedCreateNestedManyWithoutAnswerPokemonInput
     tradeItems?: TradeItemUncheckedCreateNestedManyWithoutPokemonInput
+    pinnedByUsers?: UserPinnedPokemonUncheckedCreateNestedManyWithoutPokemonInput
   }
 
   export type PokemonCreateOrConnectWithoutOwnersInput = {
@@ -22862,8 +24538,11 @@ export namespace Prisma {
     lootboxes?: IntFieldUpdateOperationsInput | number
     admin?: BoolFieldUpdateOperationsInput | boolean
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePokemonId?: IntFieldUpdateOperationsInput | number
+    profileBgColor?: StringFieldUpdateOperationsInput | string
     sentTrades?: TradeUpdateManyWithoutFromUserNestedInput
     receivedTrades?: TradeUpdateManyWithoutToUserNestedInput
+    pinnedPokemons?: UserPinnedPokemonUpdateManyWithoutUserNestedInput
     guessPokemonGames?: GuessPokemonGameUpdateManyWithoutUserNestedInput
     guessShinyGames?: GuessShinyGameUpdateManyWithoutUserNestedInput
     pokedokuGames?: PokedokuGameUpdateManyWithoutUserNestedInput
@@ -22880,8 +24559,11 @@ export namespace Prisma {
     lootboxes?: IntFieldUpdateOperationsInput | number
     admin?: BoolFieldUpdateOperationsInput | boolean
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePokemonId?: IntFieldUpdateOperationsInput | number
+    profileBgColor?: StringFieldUpdateOperationsInput | string
     sentTrades?: TradeUncheckedUpdateManyWithoutFromUserNestedInput
     receivedTrades?: TradeUncheckedUpdateManyWithoutToUserNestedInput
+    pinnedPokemons?: UserPinnedPokemonUncheckedUpdateManyWithoutUserNestedInput
     guessPokemonGames?: GuessPokemonGameUncheckedUpdateManyWithoutUserNestedInput
     guessShinyGames?: GuessShinyGameUncheckedUpdateManyWithoutUserNestedInput
     pokedokuGames?: PokedokuGameUncheckedUpdateManyWithoutUserNestedInput
@@ -22919,6 +24601,7 @@ export namespace Prisma {
     guessShinyGames?: GuessShinyGameUpdateManyWithoutPokemonNestedInput
     pokedokuAnswerCells?: PokedokuGameCellUpdateManyWithoutAnswerPokemonNestedInput
     tradeItems?: TradeItemUpdateManyWithoutPokemonNestedInput
+    pinnedByUsers?: UserPinnedPokemonUpdateManyWithoutPokemonNestedInput
   }
 
   export type PokemonUncheckedUpdateWithoutOwnersInput = {
@@ -22935,6 +24618,215 @@ export namespace Prisma {
     spAtk?: IntFieldUpdateOperationsInput | number
     spDef?: IntFieldUpdateOperationsInput | number
     speed?: IntFieldUpdateOperationsInput | number
+    types?: PokemonTypeUncheckedUpdateManyWithoutPokemonNestedInput
+    evolutionsFrom?: EvolutiveChainUncheckedUpdateManyWithoutFromPokemonNestedInput
+    evolutionsTo?: EvolutiveChainUncheckedUpdateManyWithoutToPokemonNestedInput
+    guessPokemonGames?: GuessPokemonGameUncheckedUpdateManyWithoutPokemonNestedInput
+    guessShinyGames?: GuessShinyGameUncheckedUpdateManyWithoutPokemonNestedInput
+    pokedokuAnswerCells?: PokedokuGameCellUncheckedUpdateManyWithoutAnswerPokemonNestedInput
+    tradeItems?: TradeItemUncheckedUpdateManyWithoutPokemonNestedInput
+    pinnedByUsers?: UserPinnedPokemonUncheckedUpdateManyWithoutPokemonNestedInput
+  }
+
+  export type UserCreateWithoutPinnedPokemonsInput = {
+    name: string
+    email: string
+    password: string
+    level?: number
+    xp?: number
+    lootboxes?: number
+    admin?: boolean
+    refreshToken?: string | null
+    profilePokemonId?: number
+    profileBgColor?: string
+    sentTrades?: TradeCreateNestedManyWithoutFromUserInput
+    receivedTrades?: TradeCreateNestedManyWithoutToUserInput
+    pokemons?: UserPokemonCreateNestedManyWithoutUserInput
+    guessPokemonGames?: GuessPokemonGameCreateNestedManyWithoutUserInput
+    guessShinyGames?: GuessShinyGameCreateNestedManyWithoutUserInput
+    pokedokuGames?: PokedokuGameCreateNestedManyWithoutUserInput
+    passwordResetTokens?: PasswordResetTokenCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutPinnedPokemonsInput = {
+    id?: number
+    name: string
+    email: string
+    password: string
+    level?: number
+    xp?: number
+    lootboxes?: number
+    admin?: boolean
+    refreshToken?: string | null
+    profilePokemonId?: number
+    profileBgColor?: string
+    sentTrades?: TradeUncheckedCreateNestedManyWithoutFromUserInput
+    receivedTrades?: TradeUncheckedCreateNestedManyWithoutToUserInput
+    pokemons?: UserPokemonUncheckedCreateNestedManyWithoutUserInput
+    guessPokemonGames?: GuessPokemonGameUncheckedCreateNestedManyWithoutUserInput
+    guessShinyGames?: GuessShinyGameUncheckedCreateNestedManyWithoutUserInput
+    pokedokuGames?: PokedokuGameUncheckedCreateNestedManyWithoutUserInput
+    passwordResetTokens?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutPinnedPokemonsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutPinnedPokemonsInput, UserUncheckedCreateWithoutPinnedPokemonsInput>
+  }
+
+  export type PokemonCreateWithoutPinnedByUsersInput = {
+    name: string
+    generation: number
+    urlImage?: string | null
+    urlShinyImage?: string | null
+    legendary?: boolean
+    myth?: boolean
+    hp: number
+    atk: number
+    def: number
+    spAtk: number
+    spDef: number
+    speed: number
+    owners?: UserPokemonCreateNestedManyWithoutPokemonInput
+    types?: PokemonTypeCreateNestedManyWithoutPokemonInput
+    evolutionsFrom?: EvolutiveChainCreateNestedManyWithoutFromPokemonInput
+    evolutionsTo?: EvolutiveChainCreateNestedManyWithoutToPokemonInput
+    guessPokemonGames?: GuessPokemonGameCreateNestedManyWithoutPokemonInput
+    guessShinyGames?: GuessShinyGameCreateNestedManyWithoutPokemonInput
+    pokedokuAnswerCells?: PokedokuGameCellCreateNestedManyWithoutAnswerPokemonInput
+    tradeItems?: TradeItemCreateNestedManyWithoutPokemonInput
+  }
+
+  export type PokemonUncheckedCreateWithoutPinnedByUsersInput = {
+    id?: number
+    name: string
+    generation: number
+    urlImage?: string | null
+    urlShinyImage?: string | null
+    legendary?: boolean
+    myth?: boolean
+    hp: number
+    atk: number
+    def: number
+    spAtk: number
+    spDef: number
+    speed: number
+    owners?: UserPokemonUncheckedCreateNestedManyWithoutPokemonInput
+    types?: PokemonTypeUncheckedCreateNestedManyWithoutPokemonInput
+    evolutionsFrom?: EvolutiveChainUncheckedCreateNestedManyWithoutFromPokemonInput
+    evolutionsTo?: EvolutiveChainUncheckedCreateNestedManyWithoutToPokemonInput
+    guessPokemonGames?: GuessPokemonGameUncheckedCreateNestedManyWithoutPokemonInput
+    guessShinyGames?: GuessShinyGameUncheckedCreateNestedManyWithoutPokemonInput
+    pokedokuAnswerCells?: PokedokuGameCellUncheckedCreateNestedManyWithoutAnswerPokemonInput
+    tradeItems?: TradeItemUncheckedCreateNestedManyWithoutPokemonInput
+  }
+
+  export type PokemonCreateOrConnectWithoutPinnedByUsersInput = {
+    where: PokemonWhereUniqueInput
+    create: XOR<PokemonCreateWithoutPinnedByUsersInput, PokemonUncheckedCreateWithoutPinnedByUsersInput>
+  }
+
+  export type UserUpsertWithoutPinnedPokemonsInput = {
+    update: XOR<UserUpdateWithoutPinnedPokemonsInput, UserUncheckedUpdateWithoutPinnedPokemonsInput>
+    create: XOR<UserCreateWithoutPinnedPokemonsInput, UserUncheckedCreateWithoutPinnedPokemonsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutPinnedPokemonsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutPinnedPokemonsInput, UserUncheckedUpdateWithoutPinnedPokemonsInput>
+  }
+
+  export type UserUpdateWithoutPinnedPokemonsInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    level?: IntFieldUpdateOperationsInput | number
+    xp?: IntFieldUpdateOperationsInput | number
+    lootboxes?: IntFieldUpdateOperationsInput | number
+    admin?: BoolFieldUpdateOperationsInput | boolean
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePokemonId?: IntFieldUpdateOperationsInput | number
+    profileBgColor?: StringFieldUpdateOperationsInput | string
+    sentTrades?: TradeUpdateManyWithoutFromUserNestedInput
+    receivedTrades?: TradeUpdateManyWithoutToUserNestedInput
+    pokemons?: UserPokemonUpdateManyWithoutUserNestedInput
+    guessPokemonGames?: GuessPokemonGameUpdateManyWithoutUserNestedInput
+    guessShinyGames?: GuessShinyGameUpdateManyWithoutUserNestedInput
+    pokedokuGames?: PokedokuGameUpdateManyWithoutUserNestedInput
+    passwordResetTokens?: PasswordResetTokenUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutPinnedPokemonsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    level?: IntFieldUpdateOperationsInput | number
+    xp?: IntFieldUpdateOperationsInput | number
+    lootboxes?: IntFieldUpdateOperationsInput | number
+    admin?: BoolFieldUpdateOperationsInput | boolean
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePokemonId?: IntFieldUpdateOperationsInput | number
+    profileBgColor?: StringFieldUpdateOperationsInput | string
+    sentTrades?: TradeUncheckedUpdateManyWithoutFromUserNestedInput
+    receivedTrades?: TradeUncheckedUpdateManyWithoutToUserNestedInput
+    pokemons?: UserPokemonUncheckedUpdateManyWithoutUserNestedInput
+    guessPokemonGames?: GuessPokemonGameUncheckedUpdateManyWithoutUserNestedInput
+    guessShinyGames?: GuessShinyGameUncheckedUpdateManyWithoutUserNestedInput
+    pokedokuGames?: PokedokuGameUncheckedUpdateManyWithoutUserNestedInput
+    passwordResetTokens?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type PokemonUpsertWithoutPinnedByUsersInput = {
+    update: XOR<PokemonUpdateWithoutPinnedByUsersInput, PokemonUncheckedUpdateWithoutPinnedByUsersInput>
+    create: XOR<PokemonCreateWithoutPinnedByUsersInput, PokemonUncheckedCreateWithoutPinnedByUsersInput>
+    where?: PokemonWhereInput
+  }
+
+  export type PokemonUpdateToOneWithWhereWithoutPinnedByUsersInput = {
+    where?: PokemonWhereInput
+    data: XOR<PokemonUpdateWithoutPinnedByUsersInput, PokemonUncheckedUpdateWithoutPinnedByUsersInput>
+  }
+
+  export type PokemonUpdateWithoutPinnedByUsersInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    generation?: IntFieldUpdateOperationsInput | number
+    urlImage?: NullableStringFieldUpdateOperationsInput | string | null
+    urlShinyImage?: NullableStringFieldUpdateOperationsInput | string | null
+    legendary?: BoolFieldUpdateOperationsInput | boolean
+    myth?: BoolFieldUpdateOperationsInput | boolean
+    hp?: IntFieldUpdateOperationsInput | number
+    atk?: IntFieldUpdateOperationsInput | number
+    def?: IntFieldUpdateOperationsInput | number
+    spAtk?: IntFieldUpdateOperationsInput | number
+    spDef?: IntFieldUpdateOperationsInput | number
+    speed?: IntFieldUpdateOperationsInput | number
+    owners?: UserPokemonUpdateManyWithoutPokemonNestedInput
+    types?: PokemonTypeUpdateManyWithoutPokemonNestedInput
+    evolutionsFrom?: EvolutiveChainUpdateManyWithoutFromPokemonNestedInput
+    evolutionsTo?: EvolutiveChainUpdateManyWithoutToPokemonNestedInput
+    guessPokemonGames?: GuessPokemonGameUpdateManyWithoutPokemonNestedInput
+    guessShinyGames?: GuessShinyGameUpdateManyWithoutPokemonNestedInput
+    pokedokuAnswerCells?: PokedokuGameCellUpdateManyWithoutAnswerPokemonNestedInput
+    tradeItems?: TradeItemUpdateManyWithoutPokemonNestedInput
+  }
+
+  export type PokemonUncheckedUpdateWithoutPinnedByUsersInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    generation?: IntFieldUpdateOperationsInput | number
+    urlImage?: NullableStringFieldUpdateOperationsInput | string | null
+    urlShinyImage?: NullableStringFieldUpdateOperationsInput | string | null
+    legendary?: BoolFieldUpdateOperationsInput | boolean
+    myth?: BoolFieldUpdateOperationsInput | boolean
+    hp?: IntFieldUpdateOperationsInput | number
+    atk?: IntFieldUpdateOperationsInput | number
+    def?: IntFieldUpdateOperationsInput | number
+    spAtk?: IntFieldUpdateOperationsInput | number
+    spDef?: IntFieldUpdateOperationsInput | number
+    speed?: IntFieldUpdateOperationsInput | number
+    owners?: UserPokemonUncheckedUpdateManyWithoutPokemonNestedInput
     types?: PokemonTypeUncheckedUpdateManyWithoutPokemonNestedInput
     evolutionsFrom?: EvolutiveChainUncheckedUpdateManyWithoutFromPokemonNestedInput
     evolutionsTo?: EvolutiveChainUncheckedUpdateManyWithoutToPokemonNestedInput
@@ -22964,6 +24856,7 @@ export namespace Prisma {
     guessShinyGames?: GuessShinyGameCreateNestedManyWithoutPokemonInput
     pokedokuAnswerCells?: PokedokuGameCellCreateNestedManyWithoutAnswerPokemonInput
     tradeItems?: TradeItemCreateNestedManyWithoutPokemonInput
+    pinnedByUsers?: UserPinnedPokemonCreateNestedManyWithoutPokemonInput
   }
 
   export type PokemonUncheckedCreateWithoutTypesInput = {
@@ -22987,6 +24880,7 @@ export namespace Prisma {
     guessShinyGames?: GuessShinyGameUncheckedCreateNestedManyWithoutPokemonInput
     pokedokuAnswerCells?: PokedokuGameCellUncheckedCreateNestedManyWithoutAnswerPokemonInput
     tradeItems?: TradeItemUncheckedCreateNestedManyWithoutPokemonInput
+    pinnedByUsers?: UserPinnedPokemonUncheckedCreateNestedManyWithoutPokemonInput
   }
 
   export type PokemonCreateOrConnectWithoutTypesInput = {
@@ -23039,6 +24933,7 @@ export namespace Prisma {
     guessShinyGames?: GuessShinyGameUpdateManyWithoutPokemonNestedInput
     pokedokuAnswerCells?: PokedokuGameCellUpdateManyWithoutAnswerPokemonNestedInput
     tradeItems?: TradeItemUpdateManyWithoutPokemonNestedInput
+    pinnedByUsers?: UserPinnedPokemonUpdateManyWithoutPokemonNestedInput
   }
 
   export type PokemonUncheckedUpdateWithoutTypesInput = {
@@ -23062,6 +24957,7 @@ export namespace Prisma {
     guessShinyGames?: GuessShinyGameUncheckedUpdateManyWithoutPokemonNestedInput
     pokedokuAnswerCells?: PokedokuGameCellUncheckedUpdateManyWithoutAnswerPokemonNestedInput
     tradeItems?: TradeItemUncheckedUpdateManyWithoutPokemonNestedInput
+    pinnedByUsers?: UserPinnedPokemonUncheckedUpdateManyWithoutPokemonNestedInput
   }
 
   export type TypeUpsertWithoutPokemonInput = {
@@ -23104,6 +25000,7 @@ export namespace Prisma {
     guessShinyGames?: GuessShinyGameCreateNestedManyWithoutPokemonInput
     pokedokuAnswerCells?: PokedokuGameCellCreateNestedManyWithoutAnswerPokemonInput
     tradeItems?: TradeItemCreateNestedManyWithoutPokemonInput
+    pinnedByUsers?: UserPinnedPokemonCreateNestedManyWithoutPokemonInput
   }
 
   export type PokemonUncheckedCreateWithoutEvolutionsFromInput = {
@@ -23127,6 +25024,7 @@ export namespace Prisma {
     guessShinyGames?: GuessShinyGameUncheckedCreateNestedManyWithoutPokemonInput
     pokedokuAnswerCells?: PokedokuGameCellUncheckedCreateNestedManyWithoutAnswerPokemonInput
     tradeItems?: TradeItemUncheckedCreateNestedManyWithoutPokemonInput
+    pinnedByUsers?: UserPinnedPokemonUncheckedCreateNestedManyWithoutPokemonInput
   }
 
   export type PokemonCreateOrConnectWithoutEvolutionsFromInput = {
@@ -23154,6 +25052,7 @@ export namespace Prisma {
     guessShinyGames?: GuessShinyGameCreateNestedManyWithoutPokemonInput
     pokedokuAnswerCells?: PokedokuGameCellCreateNestedManyWithoutAnswerPokemonInput
     tradeItems?: TradeItemCreateNestedManyWithoutPokemonInput
+    pinnedByUsers?: UserPinnedPokemonCreateNestedManyWithoutPokemonInput
   }
 
   export type PokemonUncheckedCreateWithoutEvolutionsToInput = {
@@ -23177,6 +25076,7 @@ export namespace Prisma {
     guessShinyGames?: GuessShinyGameUncheckedCreateNestedManyWithoutPokemonInput
     pokedokuAnswerCells?: PokedokuGameCellUncheckedCreateNestedManyWithoutAnswerPokemonInput
     tradeItems?: TradeItemUncheckedCreateNestedManyWithoutPokemonInput
+    pinnedByUsers?: UserPinnedPokemonUncheckedCreateNestedManyWithoutPokemonInput
   }
 
   export type PokemonCreateOrConnectWithoutEvolutionsToInput = {
@@ -23215,6 +25115,7 @@ export namespace Prisma {
     guessShinyGames?: GuessShinyGameUpdateManyWithoutPokemonNestedInput
     pokedokuAnswerCells?: PokedokuGameCellUpdateManyWithoutAnswerPokemonNestedInput
     tradeItems?: TradeItemUpdateManyWithoutPokemonNestedInput
+    pinnedByUsers?: UserPinnedPokemonUpdateManyWithoutPokemonNestedInput
   }
 
   export type PokemonUncheckedUpdateWithoutEvolutionsFromInput = {
@@ -23238,6 +25139,7 @@ export namespace Prisma {
     guessShinyGames?: GuessShinyGameUncheckedUpdateManyWithoutPokemonNestedInput
     pokedokuAnswerCells?: PokedokuGameCellUncheckedUpdateManyWithoutAnswerPokemonNestedInput
     tradeItems?: TradeItemUncheckedUpdateManyWithoutPokemonNestedInput
+    pinnedByUsers?: UserPinnedPokemonUncheckedUpdateManyWithoutPokemonNestedInput
   }
 
   export type PokemonUpsertWithoutEvolutionsToInput = {
@@ -23271,6 +25173,7 @@ export namespace Prisma {
     guessShinyGames?: GuessShinyGameUpdateManyWithoutPokemonNestedInput
     pokedokuAnswerCells?: PokedokuGameCellUpdateManyWithoutAnswerPokemonNestedInput
     tradeItems?: TradeItemUpdateManyWithoutPokemonNestedInput
+    pinnedByUsers?: UserPinnedPokemonUpdateManyWithoutPokemonNestedInput
   }
 
   export type PokemonUncheckedUpdateWithoutEvolutionsToInput = {
@@ -23294,6 +25197,7 @@ export namespace Prisma {
     guessShinyGames?: GuessShinyGameUncheckedUpdateManyWithoutPokemonNestedInput
     pokedokuAnswerCells?: PokedokuGameCellUncheckedUpdateManyWithoutAnswerPokemonNestedInput
     tradeItems?: TradeItemUncheckedUpdateManyWithoutPokemonNestedInput
+    pinnedByUsers?: UserPinnedPokemonUncheckedUpdateManyWithoutPokemonNestedInput
   }
 
   export type UserCreateWithoutGuessPokemonGamesInput = {
@@ -23305,9 +25209,12 @@ export namespace Prisma {
     lootboxes?: number
     admin?: boolean
     refreshToken?: string | null
+    profilePokemonId?: number
+    profileBgColor?: string
     sentTrades?: TradeCreateNestedManyWithoutFromUserInput
     receivedTrades?: TradeCreateNestedManyWithoutToUserInput
     pokemons?: UserPokemonCreateNestedManyWithoutUserInput
+    pinnedPokemons?: UserPinnedPokemonCreateNestedManyWithoutUserInput
     guessShinyGames?: GuessShinyGameCreateNestedManyWithoutUserInput
     pokedokuGames?: PokedokuGameCreateNestedManyWithoutUserInput
     passwordResetTokens?: PasswordResetTokenCreateNestedManyWithoutUserInput
@@ -23323,9 +25230,12 @@ export namespace Prisma {
     lootboxes?: number
     admin?: boolean
     refreshToken?: string | null
+    profilePokemonId?: number
+    profileBgColor?: string
     sentTrades?: TradeUncheckedCreateNestedManyWithoutFromUserInput
     receivedTrades?: TradeUncheckedCreateNestedManyWithoutToUserInput
     pokemons?: UserPokemonUncheckedCreateNestedManyWithoutUserInput
+    pinnedPokemons?: UserPinnedPokemonUncheckedCreateNestedManyWithoutUserInput
     guessShinyGames?: GuessShinyGameUncheckedCreateNestedManyWithoutUserInput
     pokedokuGames?: PokedokuGameUncheckedCreateNestedManyWithoutUserInput
     passwordResetTokens?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
@@ -23356,6 +25266,7 @@ export namespace Prisma {
     guessShinyGames?: GuessShinyGameCreateNestedManyWithoutPokemonInput
     pokedokuAnswerCells?: PokedokuGameCellCreateNestedManyWithoutAnswerPokemonInput
     tradeItems?: TradeItemCreateNestedManyWithoutPokemonInput
+    pinnedByUsers?: UserPinnedPokemonCreateNestedManyWithoutPokemonInput
   }
 
   export type PokemonUncheckedCreateWithoutGuessPokemonGamesInput = {
@@ -23379,6 +25290,7 @@ export namespace Prisma {
     guessShinyGames?: GuessShinyGameUncheckedCreateNestedManyWithoutPokemonInput
     pokedokuAnswerCells?: PokedokuGameCellUncheckedCreateNestedManyWithoutAnswerPokemonInput
     tradeItems?: TradeItemUncheckedCreateNestedManyWithoutPokemonInput
+    pinnedByUsers?: UserPinnedPokemonUncheckedCreateNestedManyWithoutPokemonInput
   }
 
   export type PokemonCreateOrConnectWithoutGuessPokemonGamesInput = {
@@ -23406,9 +25318,12 @@ export namespace Prisma {
     lootboxes?: IntFieldUpdateOperationsInput | number
     admin?: BoolFieldUpdateOperationsInput | boolean
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePokemonId?: IntFieldUpdateOperationsInput | number
+    profileBgColor?: StringFieldUpdateOperationsInput | string
     sentTrades?: TradeUpdateManyWithoutFromUserNestedInput
     receivedTrades?: TradeUpdateManyWithoutToUserNestedInput
     pokemons?: UserPokemonUpdateManyWithoutUserNestedInput
+    pinnedPokemons?: UserPinnedPokemonUpdateManyWithoutUserNestedInput
     guessShinyGames?: GuessShinyGameUpdateManyWithoutUserNestedInput
     pokedokuGames?: PokedokuGameUpdateManyWithoutUserNestedInput
     passwordResetTokens?: PasswordResetTokenUpdateManyWithoutUserNestedInput
@@ -23424,9 +25339,12 @@ export namespace Prisma {
     lootboxes?: IntFieldUpdateOperationsInput | number
     admin?: BoolFieldUpdateOperationsInput | boolean
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePokemonId?: IntFieldUpdateOperationsInput | number
+    profileBgColor?: StringFieldUpdateOperationsInput | string
     sentTrades?: TradeUncheckedUpdateManyWithoutFromUserNestedInput
     receivedTrades?: TradeUncheckedUpdateManyWithoutToUserNestedInput
     pokemons?: UserPokemonUncheckedUpdateManyWithoutUserNestedInput
+    pinnedPokemons?: UserPinnedPokemonUncheckedUpdateManyWithoutUserNestedInput
     guessShinyGames?: GuessShinyGameUncheckedUpdateManyWithoutUserNestedInput
     pokedokuGames?: PokedokuGameUncheckedUpdateManyWithoutUserNestedInput
     passwordResetTokens?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -23463,6 +25381,7 @@ export namespace Prisma {
     guessShinyGames?: GuessShinyGameUpdateManyWithoutPokemonNestedInput
     pokedokuAnswerCells?: PokedokuGameCellUpdateManyWithoutAnswerPokemonNestedInput
     tradeItems?: TradeItemUpdateManyWithoutPokemonNestedInput
+    pinnedByUsers?: UserPinnedPokemonUpdateManyWithoutPokemonNestedInput
   }
 
   export type PokemonUncheckedUpdateWithoutGuessPokemonGamesInput = {
@@ -23486,6 +25405,7 @@ export namespace Prisma {
     guessShinyGames?: GuessShinyGameUncheckedUpdateManyWithoutPokemonNestedInput
     pokedokuAnswerCells?: PokedokuGameCellUncheckedUpdateManyWithoutAnswerPokemonNestedInput
     tradeItems?: TradeItemUncheckedUpdateManyWithoutPokemonNestedInput
+    pinnedByUsers?: UserPinnedPokemonUncheckedUpdateManyWithoutPokemonNestedInput
   }
 
   export type UserCreateWithoutGuessShinyGamesInput = {
@@ -23497,9 +25417,12 @@ export namespace Prisma {
     lootboxes?: number
     admin?: boolean
     refreshToken?: string | null
+    profilePokemonId?: number
+    profileBgColor?: string
     sentTrades?: TradeCreateNestedManyWithoutFromUserInput
     receivedTrades?: TradeCreateNestedManyWithoutToUserInput
     pokemons?: UserPokemonCreateNestedManyWithoutUserInput
+    pinnedPokemons?: UserPinnedPokemonCreateNestedManyWithoutUserInput
     guessPokemonGames?: GuessPokemonGameCreateNestedManyWithoutUserInput
     pokedokuGames?: PokedokuGameCreateNestedManyWithoutUserInput
     passwordResetTokens?: PasswordResetTokenCreateNestedManyWithoutUserInput
@@ -23515,9 +25438,12 @@ export namespace Prisma {
     lootboxes?: number
     admin?: boolean
     refreshToken?: string | null
+    profilePokemonId?: number
+    profileBgColor?: string
     sentTrades?: TradeUncheckedCreateNestedManyWithoutFromUserInput
     receivedTrades?: TradeUncheckedCreateNestedManyWithoutToUserInput
     pokemons?: UserPokemonUncheckedCreateNestedManyWithoutUserInput
+    pinnedPokemons?: UserPinnedPokemonUncheckedCreateNestedManyWithoutUserInput
     guessPokemonGames?: GuessPokemonGameUncheckedCreateNestedManyWithoutUserInput
     pokedokuGames?: PokedokuGameUncheckedCreateNestedManyWithoutUserInput
     passwordResetTokens?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
@@ -23548,6 +25474,7 @@ export namespace Prisma {
     guessPokemonGames?: GuessPokemonGameCreateNestedManyWithoutPokemonInput
     pokedokuAnswerCells?: PokedokuGameCellCreateNestedManyWithoutAnswerPokemonInput
     tradeItems?: TradeItemCreateNestedManyWithoutPokemonInput
+    pinnedByUsers?: UserPinnedPokemonCreateNestedManyWithoutPokemonInput
   }
 
   export type PokemonUncheckedCreateWithoutGuessShinyGamesInput = {
@@ -23571,6 +25498,7 @@ export namespace Prisma {
     guessPokemonGames?: GuessPokemonGameUncheckedCreateNestedManyWithoutPokemonInput
     pokedokuAnswerCells?: PokedokuGameCellUncheckedCreateNestedManyWithoutAnswerPokemonInput
     tradeItems?: TradeItemUncheckedCreateNestedManyWithoutPokemonInput
+    pinnedByUsers?: UserPinnedPokemonUncheckedCreateNestedManyWithoutPokemonInput
   }
 
   export type PokemonCreateOrConnectWithoutGuessShinyGamesInput = {
@@ -23598,9 +25526,12 @@ export namespace Prisma {
     lootboxes?: IntFieldUpdateOperationsInput | number
     admin?: BoolFieldUpdateOperationsInput | boolean
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePokemonId?: IntFieldUpdateOperationsInput | number
+    profileBgColor?: StringFieldUpdateOperationsInput | string
     sentTrades?: TradeUpdateManyWithoutFromUserNestedInput
     receivedTrades?: TradeUpdateManyWithoutToUserNestedInput
     pokemons?: UserPokemonUpdateManyWithoutUserNestedInput
+    pinnedPokemons?: UserPinnedPokemonUpdateManyWithoutUserNestedInput
     guessPokemonGames?: GuessPokemonGameUpdateManyWithoutUserNestedInput
     pokedokuGames?: PokedokuGameUpdateManyWithoutUserNestedInput
     passwordResetTokens?: PasswordResetTokenUpdateManyWithoutUserNestedInput
@@ -23616,9 +25547,12 @@ export namespace Prisma {
     lootboxes?: IntFieldUpdateOperationsInput | number
     admin?: BoolFieldUpdateOperationsInput | boolean
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePokemonId?: IntFieldUpdateOperationsInput | number
+    profileBgColor?: StringFieldUpdateOperationsInput | string
     sentTrades?: TradeUncheckedUpdateManyWithoutFromUserNestedInput
     receivedTrades?: TradeUncheckedUpdateManyWithoutToUserNestedInput
     pokemons?: UserPokemonUncheckedUpdateManyWithoutUserNestedInput
+    pinnedPokemons?: UserPinnedPokemonUncheckedUpdateManyWithoutUserNestedInput
     guessPokemonGames?: GuessPokemonGameUncheckedUpdateManyWithoutUserNestedInput
     pokedokuGames?: PokedokuGameUncheckedUpdateManyWithoutUserNestedInput
     passwordResetTokens?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -23655,6 +25589,7 @@ export namespace Prisma {
     guessPokemonGames?: GuessPokemonGameUpdateManyWithoutPokemonNestedInput
     pokedokuAnswerCells?: PokedokuGameCellUpdateManyWithoutAnswerPokemonNestedInput
     tradeItems?: TradeItemUpdateManyWithoutPokemonNestedInput
+    pinnedByUsers?: UserPinnedPokemonUpdateManyWithoutPokemonNestedInput
   }
 
   export type PokemonUncheckedUpdateWithoutGuessShinyGamesInput = {
@@ -23678,6 +25613,7 @@ export namespace Prisma {
     guessPokemonGames?: GuessPokemonGameUncheckedUpdateManyWithoutPokemonNestedInput
     pokedokuAnswerCells?: PokedokuGameCellUncheckedUpdateManyWithoutAnswerPokemonNestedInput
     tradeItems?: TradeItemUncheckedUpdateManyWithoutPokemonNestedInput
+    pinnedByUsers?: UserPinnedPokemonUncheckedUpdateManyWithoutPokemonNestedInput
   }
 
   export type UserCreateWithoutPokedokuGamesInput = {
@@ -23689,9 +25625,12 @@ export namespace Prisma {
     lootboxes?: number
     admin?: boolean
     refreshToken?: string | null
+    profilePokemonId?: number
+    profileBgColor?: string
     sentTrades?: TradeCreateNestedManyWithoutFromUserInput
     receivedTrades?: TradeCreateNestedManyWithoutToUserInput
     pokemons?: UserPokemonCreateNestedManyWithoutUserInput
+    pinnedPokemons?: UserPinnedPokemonCreateNestedManyWithoutUserInput
     guessPokemonGames?: GuessPokemonGameCreateNestedManyWithoutUserInput
     guessShinyGames?: GuessShinyGameCreateNestedManyWithoutUserInput
     passwordResetTokens?: PasswordResetTokenCreateNestedManyWithoutUserInput
@@ -23707,9 +25646,12 @@ export namespace Prisma {
     lootboxes?: number
     admin?: boolean
     refreshToken?: string | null
+    profilePokemonId?: number
+    profileBgColor?: string
     sentTrades?: TradeUncheckedCreateNestedManyWithoutFromUserInput
     receivedTrades?: TradeUncheckedCreateNestedManyWithoutToUserInput
     pokemons?: UserPokemonUncheckedCreateNestedManyWithoutUserInput
+    pinnedPokemons?: UserPinnedPokemonUncheckedCreateNestedManyWithoutUserInput
     guessPokemonGames?: GuessPokemonGameUncheckedCreateNestedManyWithoutUserInput
     guessShinyGames?: GuessShinyGameUncheckedCreateNestedManyWithoutUserInput
     passwordResetTokens?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
@@ -23773,9 +25715,12 @@ export namespace Prisma {
     lootboxes?: IntFieldUpdateOperationsInput | number
     admin?: BoolFieldUpdateOperationsInput | boolean
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePokemonId?: IntFieldUpdateOperationsInput | number
+    profileBgColor?: StringFieldUpdateOperationsInput | string
     sentTrades?: TradeUpdateManyWithoutFromUserNestedInput
     receivedTrades?: TradeUpdateManyWithoutToUserNestedInput
     pokemons?: UserPokemonUpdateManyWithoutUserNestedInput
+    pinnedPokemons?: UserPinnedPokemonUpdateManyWithoutUserNestedInput
     guessPokemonGames?: GuessPokemonGameUpdateManyWithoutUserNestedInput
     guessShinyGames?: GuessShinyGameUpdateManyWithoutUserNestedInput
     passwordResetTokens?: PasswordResetTokenUpdateManyWithoutUserNestedInput
@@ -23791,9 +25736,12 @@ export namespace Prisma {
     lootboxes?: IntFieldUpdateOperationsInput | number
     admin?: BoolFieldUpdateOperationsInput | boolean
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePokemonId?: IntFieldUpdateOperationsInput | number
+    profileBgColor?: StringFieldUpdateOperationsInput | string
     sentTrades?: TradeUncheckedUpdateManyWithoutFromUserNestedInput
     receivedTrades?: TradeUncheckedUpdateManyWithoutToUserNestedInput
     pokemons?: UserPokemonUncheckedUpdateManyWithoutUserNestedInput
+    pinnedPokemons?: UserPinnedPokemonUncheckedUpdateManyWithoutUserNestedInput
     guessPokemonGames?: GuessPokemonGameUncheckedUpdateManyWithoutUserNestedInput
     guessShinyGames?: GuessShinyGameUncheckedUpdateManyWithoutUserNestedInput
     passwordResetTokens?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -23857,6 +25805,7 @@ export namespace Prisma {
     guessPokemonGames?: GuessPokemonGameCreateNestedManyWithoutPokemonInput
     guessShinyGames?: GuessShinyGameCreateNestedManyWithoutPokemonInput
     tradeItems?: TradeItemCreateNestedManyWithoutPokemonInput
+    pinnedByUsers?: UserPinnedPokemonCreateNestedManyWithoutPokemonInput
   }
 
   export type PokemonUncheckedCreateWithoutPokedokuAnswerCellsInput = {
@@ -23880,6 +25829,7 @@ export namespace Prisma {
     guessPokemonGames?: GuessPokemonGameUncheckedCreateNestedManyWithoutPokemonInput
     guessShinyGames?: GuessShinyGameUncheckedCreateNestedManyWithoutPokemonInput
     tradeItems?: TradeItemUncheckedCreateNestedManyWithoutPokemonInput
+    pinnedByUsers?: UserPinnedPokemonUncheckedCreateNestedManyWithoutPokemonInput
   }
 
   export type PokemonCreateOrConnectWithoutPokedokuAnswerCellsInput = {
@@ -23946,6 +25896,7 @@ export namespace Prisma {
     guessPokemonGames?: GuessPokemonGameUpdateManyWithoutPokemonNestedInput
     guessShinyGames?: GuessShinyGameUpdateManyWithoutPokemonNestedInput
     tradeItems?: TradeItemUpdateManyWithoutPokemonNestedInput
+    pinnedByUsers?: UserPinnedPokemonUpdateManyWithoutPokemonNestedInput
   }
 
   export type PokemonUncheckedUpdateWithoutPokedokuAnswerCellsInput = {
@@ -23969,6 +25920,7 @@ export namespace Prisma {
     guessPokemonGames?: GuessPokemonGameUncheckedUpdateManyWithoutPokemonNestedInput
     guessShinyGames?: GuessShinyGameUncheckedUpdateManyWithoutPokemonNestedInput
     tradeItems?: TradeItemUncheckedUpdateManyWithoutPokemonNestedInput
+    pinnedByUsers?: UserPinnedPokemonUncheckedUpdateManyWithoutPokemonNestedInput
   }
 
   export type UserCreateWithoutPasswordResetTokensInput = {
@@ -23980,9 +25932,12 @@ export namespace Prisma {
     lootboxes?: number
     admin?: boolean
     refreshToken?: string | null
+    profilePokemonId?: number
+    profileBgColor?: string
     sentTrades?: TradeCreateNestedManyWithoutFromUserInput
     receivedTrades?: TradeCreateNestedManyWithoutToUserInput
     pokemons?: UserPokemonCreateNestedManyWithoutUserInput
+    pinnedPokemons?: UserPinnedPokemonCreateNestedManyWithoutUserInput
     guessPokemonGames?: GuessPokemonGameCreateNestedManyWithoutUserInput
     guessShinyGames?: GuessShinyGameCreateNestedManyWithoutUserInput
     pokedokuGames?: PokedokuGameCreateNestedManyWithoutUserInput
@@ -23998,9 +25953,12 @@ export namespace Prisma {
     lootboxes?: number
     admin?: boolean
     refreshToken?: string | null
+    profilePokemonId?: number
+    profileBgColor?: string
     sentTrades?: TradeUncheckedCreateNestedManyWithoutFromUserInput
     receivedTrades?: TradeUncheckedCreateNestedManyWithoutToUserInput
     pokemons?: UserPokemonUncheckedCreateNestedManyWithoutUserInput
+    pinnedPokemons?: UserPinnedPokemonUncheckedCreateNestedManyWithoutUserInput
     guessPokemonGames?: GuessPokemonGameUncheckedCreateNestedManyWithoutUserInput
     guessShinyGames?: GuessShinyGameUncheckedCreateNestedManyWithoutUserInput
     pokedokuGames?: PokedokuGameUncheckedCreateNestedManyWithoutUserInput
@@ -24031,9 +25989,12 @@ export namespace Prisma {
     lootboxes?: IntFieldUpdateOperationsInput | number
     admin?: BoolFieldUpdateOperationsInput | boolean
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePokemonId?: IntFieldUpdateOperationsInput | number
+    profileBgColor?: StringFieldUpdateOperationsInput | string
     sentTrades?: TradeUpdateManyWithoutFromUserNestedInput
     receivedTrades?: TradeUpdateManyWithoutToUserNestedInput
     pokemons?: UserPokemonUpdateManyWithoutUserNestedInput
+    pinnedPokemons?: UserPinnedPokemonUpdateManyWithoutUserNestedInput
     guessPokemonGames?: GuessPokemonGameUpdateManyWithoutUserNestedInput
     guessShinyGames?: GuessShinyGameUpdateManyWithoutUserNestedInput
     pokedokuGames?: PokedokuGameUpdateManyWithoutUserNestedInput
@@ -24049,9 +26010,12 @@ export namespace Prisma {
     lootboxes?: IntFieldUpdateOperationsInput | number
     admin?: BoolFieldUpdateOperationsInput | boolean
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePokemonId?: IntFieldUpdateOperationsInput | number
+    profileBgColor?: StringFieldUpdateOperationsInput | string
     sentTrades?: TradeUncheckedUpdateManyWithoutFromUserNestedInput
     receivedTrades?: TradeUncheckedUpdateManyWithoutToUserNestedInput
     pokemons?: UserPokemonUncheckedUpdateManyWithoutUserNestedInput
+    pinnedPokemons?: UserPinnedPokemonUncheckedUpdateManyWithoutUserNestedInput
     guessPokemonGames?: GuessPokemonGameUncheckedUpdateManyWithoutUserNestedInput
     guessShinyGames?: GuessShinyGameUncheckedUpdateManyWithoutUserNestedInput
     pokedokuGames?: PokedokuGameUncheckedUpdateManyWithoutUserNestedInput
@@ -24066,8 +26030,11 @@ export namespace Prisma {
     lootboxes?: number
     admin?: boolean
     refreshToken?: string | null
+    profilePokemonId?: number
+    profileBgColor?: string
     receivedTrades?: TradeCreateNestedManyWithoutToUserInput
     pokemons?: UserPokemonCreateNestedManyWithoutUserInput
+    pinnedPokemons?: UserPinnedPokemonCreateNestedManyWithoutUserInput
     guessPokemonGames?: GuessPokemonGameCreateNestedManyWithoutUserInput
     guessShinyGames?: GuessShinyGameCreateNestedManyWithoutUserInput
     pokedokuGames?: PokedokuGameCreateNestedManyWithoutUserInput
@@ -24084,8 +26051,11 @@ export namespace Prisma {
     lootboxes?: number
     admin?: boolean
     refreshToken?: string | null
+    profilePokemonId?: number
+    profileBgColor?: string
     receivedTrades?: TradeUncheckedCreateNestedManyWithoutToUserInput
     pokemons?: UserPokemonUncheckedCreateNestedManyWithoutUserInput
+    pinnedPokemons?: UserPinnedPokemonUncheckedCreateNestedManyWithoutUserInput
     guessPokemonGames?: GuessPokemonGameUncheckedCreateNestedManyWithoutUserInput
     guessShinyGames?: GuessShinyGameUncheckedCreateNestedManyWithoutUserInput
     pokedokuGames?: PokedokuGameUncheckedCreateNestedManyWithoutUserInput
@@ -24106,8 +26076,11 @@ export namespace Prisma {
     lootboxes?: number
     admin?: boolean
     refreshToken?: string | null
+    profilePokemonId?: number
+    profileBgColor?: string
     sentTrades?: TradeCreateNestedManyWithoutFromUserInput
     pokemons?: UserPokemonCreateNestedManyWithoutUserInput
+    pinnedPokemons?: UserPinnedPokemonCreateNestedManyWithoutUserInput
     guessPokemonGames?: GuessPokemonGameCreateNestedManyWithoutUserInput
     guessShinyGames?: GuessShinyGameCreateNestedManyWithoutUserInput
     pokedokuGames?: PokedokuGameCreateNestedManyWithoutUserInput
@@ -24124,8 +26097,11 @@ export namespace Prisma {
     lootboxes?: number
     admin?: boolean
     refreshToken?: string | null
+    profilePokemonId?: number
+    profileBgColor?: string
     sentTrades?: TradeUncheckedCreateNestedManyWithoutFromUserInput
     pokemons?: UserPokemonUncheckedCreateNestedManyWithoutUserInput
+    pinnedPokemons?: UserPinnedPokemonUncheckedCreateNestedManyWithoutUserInput
     guessPokemonGames?: GuessPokemonGameUncheckedCreateNestedManyWithoutUserInput
     guessShinyGames?: GuessShinyGameUncheckedCreateNestedManyWithoutUserInput
     pokedokuGames?: PokedokuGameUncheckedCreateNestedManyWithoutUserInput
@@ -24180,8 +26156,11 @@ export namespace Prisma {
     lootboxes?: IntFieldUpdateOperationsInput | number
     admin?: BoolFieldUpdateOperationsInput | boolean
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePokemonId?: IntFieldUpdateOperationsInput | number
+    profileBgColor?: StringFieldUpdateOperationsInput | string
     receivedTrades?: TradeUpdateManyWithoutToUserNestedInput
     pokemons?: UserPokemonUpdateManyWithoutUserNestedInput
+    pinnedPokemons?: UserPinnedPokemonUpdateManyWithoutUserNestedInput
     guessPokemonGames?: GuessPokemonGameUpdateManyWithoutUserNestedInput
     guessShinyGames?: GuessShinyGameUpdateManyWithoutUserNestedInput
     pokedokuGames?: PokedokuGameUpdateManyWithoutUserNestedInput
@@ -24198,8 +26177,11 @@ export namespace Prisma {
     lootboxes?: IntFieldUpdateOperationsInput | number
     admin?: BoolFieldUpdateOperationsInput | boolean
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePokemonId?: IntFieldUpdateOperationsInput | number
+    profileBgColor?: StringFieldUpdateOperationsInput | string
     receivedTrades?: TradeUncheckedUpdateManyWithoutToUserNestedInput
     pokemons?: UserPokemonUncheckedUpdateManyWithoutUserNestedInput
+    pinnedPokemons?: UserPinnedPokemonUncheckedUpdateManyWithoutUserNestedInput
     guessPokemonGames?: GuessPokemonGameUncheckedUpdateManyWithoutUserNestedInput
     guessShinyGames?: GuessShinyGameUncheckedUpdateManyWithoutUserNestedInput
     pokedokuGames?: PokedokuGameUncheckedUpdateManyWithoutUserNestedInput
@@ -24226,8 +26208,11 @@ export namespace Prisma {
     lootboxes?: IntFieldUpdateOperationsInput | number
     admin?: BoolFieldUpdateOperationsInput | boolean
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePokemonId?: IntFieldUpdateOperationsInput | number
+    profileBgColor?: StringFieldUpdateOperationsInput | string
     sentTrades?: TradeUpdateManyWithoutFromUserNestedInput
     pokemons?: UserPokemonUpdateManyWithoutUserNestedInput
+    pinnedPokemons?: UserPinnedPokemonUpdateManyWithoutUserNestedInput
     guessPokemonGames?: GuessPokemonGameUpdateManyWithoutUserNestedInput
     guessShinyGames?: GuessShinyGameUpdateManyWithoutUserNestedInput
     pokedokuGames?: PokedokuGameUpdateManyWithoutUserNestedInput
@@ -24244,8 +26229,11 @@ export namespace Prisma {
     lootboxes?: IntFieldUpdateOperationsInput | number
     admin?: BoolFieldUpdateOperationsInput | boolean
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePokemonId?: IntFieldUpdateOperationsInput | number
+    profileBgColor?: StringFieldUpdateOperationsInput | string
     sentTrades?: TradeUncheckedUpdateManyWithoutFromUserNestedInput
     pokemons?: UserPokemonUncheckedUpdateManyWithoutUserNestedInput
+    pinnedPokemons?: UserPinnedPokemonUncheckedUpdateManyWithoutUserNestedInput
     guessPokemonGames?: GuessPokemonGameUncheckedUpdateManyWithoutUserNestedInput
     guessShinyGames?: GuessShinyGameUncheckedUpdateManyWithoutUserNestedInput
     pokedokuGames?: PokedokuGameUncheckedUpdateManyWithoutUserNestedInput
@@ -24312,6 +26300,7 @@ export namespace Prisma {
     guessPokemonGames?: GuessPokemonGameCreateNestedManyWithoutPokemonInput
     guessShinyGames?: GuessShinyGameCreateNestedManyWithoutPokemonInput
     pokedokuAnswerCells?: PokedokuGameCellCreateNestedManyWithoutAnswerPokemonInput
+    pinnedByUsers?: UserPinnedPokemonCreateNestedManyWithoutPokemonInput
   }
 
   export type PokemonUncheckedCreateWithoutTradeItemsInput = {
@@ -24335,6 +26324,7 @@ export namespace Prisma {
     guessPokemonGames?: GuessPokemonGameUncheckedCreateNestedManyWithoutPokemonInput
     guessShinyGames?: GuessShinyGameUncheckedCreateNestedManyWithoutPokemonInput
     pokedokuAnswerCells?: PokedokuGameCellUncheckedCreateNestedManyWithoutAnswerPokemonInput
+    pinnedByUsers?: UserPinnedPokemonUncheckedCreateNestedManyWithoutPokemonInput
   }
 
   export type PokemonCreateOrConnectWithoutTradeItemsInput = {
@@ -24403,6 +26393,7 @@ export namespace Prisma {
     guessPokemonGames?: GuessPokemonGameUpdateManyWithoutPokemonNestedInput
     guessShinyGames?: GuessShinyGameUpdateManyWithoutPokemonNestedInput
     pokedokuAnswerCells?: PokedokuGameCellUpdateManyWithoutAnswerPokemonNestedInput
+    pinnedByUsers?: UserPinnedPokemonUpdateManyWithoutPokemonNestedInput
   }
 
   export type PokemonUncheckedUpdateWithoutTradeItemsInput = {
@@ -24426,6 +26417,7 @@ export namespace Prisma {
     guessPokemonGames?: GuessPokemonGameUncheckedUpdateManyWithoutPokemonNestedInput
     guessShinyGames?: GuessShinyGameUncheckedUpdateManyWithoutPokemonNestedInput
     pokedokuAnswerCells?: PokedokuGameCellUncheckedUpdateManyWithoutAnswerPokemonNestedInput
+    pinnedByUsers?: UserPinnedPokemonUncheckedUpdateManyWithoutPokemonNestedInput
   }
 
   export type TradeCreateManyFromUserInput = {
@@ -24449,6 +26441,11 @@ export namespace Prisma {
   export type UserPokemonCreateManyUserInput = {
     pokemonId: number
     quantity?: number
+  }
+
+  export type UserPinnedPokemonCreateManyUserInput = {
+    slot: number
+    pokemonId: number
   }
 
   export type GuessPokemonGameCreateManyUserInput = {
@@ -24561,6 +26558,21 @@ export namespace Prisma {
   export type UserPokemonUncheckedUpdateManyWithoutUserInput = {
     pokemonId?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type UserPinnedPokemonUpdateWithoutUserInput = {
+    slot?: IntFieldUpdateOperationsInput | number
+    pokemon?: PokemonUpdateOneRequiredWithoutPinnedByUsersNestedInput
+  }
+
+  export type UserPinnedPokemonUncheckedUpdateWithoutUserInput = {
+    slot?: IntFieldUpdateOperationsInput | number
+    pokemonId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type UserPinnedPokemonUncheckedUpdateManyWithoutUserInput = {
+    slot?: IntFieldUpdateOperationsInput | number
+    pokemonId?: IntFieldUpdateOperationsInput | number
   }
 
   export type GuessPokemonGameUpdateWithoutUserInput = {
@@ -24749,6 +26761,11 @@ export namespace Prisma {
     tradeIdFk: number
     ownerUserId: number
     quantity: number
+  }
+
+  export type UserPinnedPokemonCreateManyPokemonInput = {
+    userId: number
+    slot: number
   }
 
   export type UserPokemonUpdateWithoutPokemonInput = {
@@ -24946,6 +26963,21 @@ export namespace Prisma {
     tradeIdFk?: IntFieldUpdateOperationsInput | number
     ownerUserId?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type UserPinnedPokemonUpdateWithoutPokemonInput = {
+    slot?: IntFieldUpdateOperationsInput | number
+    user?: UserUpdateOneRequiredWithoutPinnedPokemonsNestedInput
+  }
+
+  export type UserPinnedPokemonUncheckedUpdateWithoutPokemonInput = {
+    userId?: IntFieldUpdateOperationsInput | number
+    slot?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type UserPinnedPokemonUncheckedUpdateManyWithoutPokemonInput = {
+    userId?: IntFieldUpdateOperationsInput | number
+    slot?: IntFieldUpdateOperationsInput | number
   }
 
   export type PokemonTypeCreateManyTypeInput = {

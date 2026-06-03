@@ -1,0 +1,204 @@
+.profile-customize {
+  padding: 24px 28px;
+  border-radius: 22px;
+  background: var(--color-card);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.07);
+}
+
+.profile-customize__head {
+  margin-bottom: 16px;
+}
+
+.profile-customize__title {
+  margin: 0 0 6px;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--color-text);
+}
+
+.profile-customize__subtitle {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+.profile-customize__flash {
+  margin: 0 0 14px;
+  font-size: 14px;
+  color: #1f9d55;
+}
+
+.profile-customize__preview {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 20px;
+  padding: 18px;
+  border-radius: 18px;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--preview-bg, #f1f1f1) 55%, #fff),
+    #fff
+  );
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.profile-customize__preview-avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--preview-bg, #f1f1f1);
+  border: 3px solid #fff;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.profile-customize__preview-avatar img {
+  width: 115%;
+  height: 115%;
+  object-fit: contain;
+  transform: translateY(8%);
+}
+
+.profile-customize__preview-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.profile-customize__preview-id {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--color-text);
+}
+
+.profile-customize__field {
+  margin-bottom: 18px;
+}
+
+.profile-customize__label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.profile-customize__swatches {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-customize__swatch {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 12px;
+  border: 2px solid rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.profile-customize__swatch.is-active {
+  transform: scale(1.08);
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 4px var(--color-primary);
+}
+
+.profile-customize__color-input {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #fff;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.profile-customize__color-input input {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.profile-customize__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.profile-customize__search {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 14px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.profile-customize__search input {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  font: inherit;
+}
+
+.profile-customize__avatar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+  gap: 8px;
+  max-height: 52vh;
+  overflow: auto;
+}
+
+.profile-customize__avatar-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 4px;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  background: rgba(0, 0, 0, 0.03);
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--color-text-muted);
+}
+
+.profile-customize__avatar-option img {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+}
+
+.profile-customize__avatar-option.is-selected {
+  border-color: var(--color-primary);
+  background: rgba(220, 40, 40, 0.08);
+  color: var(--color-primary);
+}
+
+.profile-customize__avatar-option:hover {
+  border-color: rgba(187, 0, 0, 0.35);
+}
