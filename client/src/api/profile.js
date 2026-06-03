@@ -49,3 +49,39 @@ export async function updatePassword(token, { password, newPwd, newPwdConf }) {
 
   return result;
 }
+
+export async function updateAppearance(token, { pokemonId, bgColor }) {
+  const data = await api('/profile/update-appearance', {
+    method: 'POST',
+    body: { pokemonId, bgColor },
+    token,
+  });
+
+  return parseProfileResult(data.result, 'Failed to update appearance');
+}
+
+export async function updatePinnedPokemons(token, pokemonIds) {
+  const data = await api('/profile/update-pinned', {
+    method: 'POST',
+    body: { pokemonIds },
+    token,
+  });
+
+  return parseProfileResult(data.result, 'Failed to update pinned Pokémon');
+}
+
+export async function fetchAvatarOptions() {
+  const data = await api('/profile/avatar-options', {
+    method: 'GET',
+  });
+
+  if (data.result?.message) {
+    throw new Error(data.result.message);
+  }
+
+  if (!Array.isArray(data.result?.options)) {
+    throw new Error('Failed to load avatar options');
+  }
+
+  return data.result.options;
+}

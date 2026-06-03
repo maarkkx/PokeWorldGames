@@ -53,3 +53,16 @@
 .pwg-button--ghost:hover:not(:disabled) {
   background: rgba(255, 255, 255, 0.12);
 }
+
+.pwg-button--secondary {
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--color-primary);
+  font-size: 14px;
+  padding: 12px 22px;
+  border: 2px solid rgba(187, 0, 0, 0.22);
+}
+
+.pwg-button--secondary:hover:not(:disabled) {
+  background: rgba(220, 40, 40, 0.08);
+  border-color: var(--color-primary);
+}

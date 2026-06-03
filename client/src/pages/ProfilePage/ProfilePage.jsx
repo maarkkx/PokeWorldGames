@@ -2,9 +2,11 @@ import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ApiError } from '../../api/client.js';
 import { updatePassword, updateUsername } from '../../api/profile.js';
+import ProfileCustomize from '../../components/profile/ProfileCustomize.jsx';
+import ProfileHero from '../../components/profile/ProfileHero.jsx';
+import ProfilePinnedTeam from '../../components/profile/ProfilePinnedTeam.jsx';
 import AppLayout from '../../components/layout/AppLayout.jsx';
 import Button from '../../components/ui/Button.jsx';
-import ProgressBar from '../../components/ui/ProgressBar.jsx';
 import TextField from '../../components/ui/TextField.jsx';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { useI18n } from '../../context/I18nContext.jsx';
@@ -33,6 +35,7 @@ export default function ProfilePage() {
   const [passwordError, setPasswordError] = useState('');
   const [passwordSuccess, setPasswordSuccess] = useState('');
   const [isSavingPassword, setIsSavingPassword] = useState(false);
+  const [pageError, setPageError] = useState('');
 
   const handleApiError = useCallback(
     (err) => {
@@ -46,6 +49,13 @@ export default function ProfilePage() {
     [logout, t],
   );
 
+  const reportPageError = useCallback(
+    (err) => {
+      setPageError(handleApiError(err));
+    },
+    [handleApiError],
+  );
+
   useEffect(() => {
     if (user?.name) {
       setUsername(user.name);
@@ -55,7 +65,6 @@ export default function ProfilePage() {
   const level = user?.level ?? 1;
   const lootboxes = user?.lootboxes ?? 0;
   const { levelXp, progress } = getLevelProgress(user?.xp ?? 0);
-  const nextXp = XP_PER_LEVEL - levelXp;
   const displayName = user?.name ?? t(KEYS.common.trainerFallback);
 
   async function handleUsernameSubmit(event) {
@@ -122,7 +131,7 @@ export default function ProfilePage() {
 
         <header className="profile-intro">
           <div className="profile-intro__copy">
-            <h1 className="profile-intro__title">{t(KEYS.profile.title)}</h1>
+            <h1 className="profile-intro__title visually-hidden">{t(KEYS.profile.title)}</h1>
             <p className="profile-intro__subtitle">{t(KEYS.profile.subtitle)}</p>
           </div>
           <nav className="profile-intro__nav" aria-label={t(KEYS.profile.navAria)}>
@@ -135,55 +144,61 @@ export default function ProfilePage() {
           </nav>
         </header>
 
-        <div className="profile-layout">
-          <section className="profile-card" aria-label={t(KEYS.profile.summaryAria)}>
-            <h2 className="profile-card__title">{t(KEYS.profile.summaryTitle)}</h2>
+        {pageError ? (
+          <p className="profile-page__banner profile-page__banner--error" role="alert">
+            {pageError}
+          </p>
+        ) : null}
 
-            <dl className="profile-stats">
-              <div className="profile-stat">
-                <dt>{t(KEYS.profile.statUsername)}</dt>
-                <dd>{displayName}</dd>
-              </div>
-              <div className="profile-stat profile-stat--wide">
-                <dt>{t(KEYS.profile.statEmail)}</dt>
-                <dd>{user?.email ?? '—'}</dd>
-                <p className="profile-stat__hint">{t(KEYS.profile.emailReadOnlyHint)}</p>
-              </div>
-              <div className="profile-stat">
-                <dt>{t(KEYS.profile.statLevel)}</dt>
-                <dd>{t(KEYS.common.levelShort, { level })}</dd>
-              </div>
-              <div className="profile-stat">
-                <dt>{t(KEYS.profile.statXp)}</dt>
-                <dd>
-                  {t(KEYS.profile.xpProgress, { current: levelXp, max: XP_PER_LEVEL })}
-                </dd>
-              </div>
-              <div className="profile-stat">
-                <dt>{t(KEYS.profile.statLootboxes)}</dt>
-                <dd>{lootboxes}</dd>
-              </div>
-            </dl>
+        <ProfileHero
+          displayName={displayName}
+          email={user?.email}
+          level={level}
+          levelXp={levelXp}
+          progress={progress}
+          lootboxes={lootboxes}
+          profile={user?.profile}
+        />
 
-            <div className="profile-progress" aria-label={t(KEYS.profile.progressAria)}>
-              <div className="profile-progress__head">
-                <h3 className="profile-progress__title">{t(KEYS.profile.progressTitle)}</h3>
-                <span className="profile-progress__value">
-                  {t(KEYS.profile.xpProgress, { current: levelXp, max: XP_PER_LEVEL })}
-                </span>
-              </div>
-              <ProgressBar progress={progress} size="md" />
-              <p className="profile-progress__next">
-                {t(KEYS.profile.nextGoal, { xp: nextXp, level: level + 1 })}
-              </p>
-            </div>
-          </section>
+        <div className="profile-page__grid">
+          <div className="profile-page__main">
+            <ProfilePinnedTeam
+              token={token}
+              pinnedPokemons={user?.pinnedPokemons}
+              onUpdated={() => {
+                setPageError('');
+                return refreshProfile();
+              }}
+              onError={reportPageError}
+            />
+            <ProfileCustomize
+              token={token}
+              profile={user?.profile}
+              onUpdated={() => {
+                setPageError('');
+                return refreshProfile();
+              }}
+              onError={reportPageError}
+            />
+          </div>
 
-          <div className="profile-forms">
-            <section className="profile-card profile-card--form">
-              <h2 className="profile-card__title">{t(KEYS.profile.usernameTitle)}</h2>
+          <aside className="profile-page__aside">
+            <section className="profile-card profile-card--account">
+              <header className="profile-card__head">
+                <h2 className="profile-card__title">{t(KEYS.profile.accountTitle)}</h2>
+                <p className="profile-card__hint">{t(KEYS.profile.accountSubtitle)}</p>
+              </header>
+
+              <div className="profile-account-stats">
+                <div className="profile-stat">
+                  <span className="profile-stat__label">{t(KEYS.profile.statEmail)}</span>
+                  <span className="profile-stat__value">{user?.email ?? '—'}</span>
+                  <p className="profile-stat__hint">{t(KEYS.profile.emailReadOnlyHint)}</p>
+                </div>
+              </div>
 
               <form className="profile-form" onSubmit={handleUsernameSubmit}>
+                <h3 className="profile-form__section-title">{t(KEYS.profile.usernameTitle)}</h3>
                 <TextField
                   id="profile-username"
                   label={t(KEYS.profile.usernameLabel)}
@@ -217,12 +232,9 @@ export default function ProfilePage() {
                     : t(KEYS.profile.saveUsername)}
                 </Button>
               </form>
-            </section>
 
-            <section className="profile-card profile-card--form">
-              <h2 className="profile-card__title">{t(KEYS.profile.passwordTitle)}</h2>
-
-              <form className="profile-form" onSubmit={handlePasswordSubmit}>
+              <form className="profile-form profile-form--password" onSubmit={handlePasswordSubmit}>
+                <h3 className="profile-form__section-title">{t(KEYS.profile.passwordTitle)}</h3>
                 <TextField
                   id="profile-current-password"
                   label={t(KEYS.profile.currentPasswordLabel)}
@@ -285,7 +297,7 @@ export default function ProfilePage() {
                 </Button>
               </form>
             </section>
-          </div>
+          </aside>
         </div>
       </div>
     </AppLayout>
