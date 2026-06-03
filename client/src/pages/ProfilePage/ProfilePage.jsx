@@ -152,7 +152,6 @@ export default function ProfilePage() {
 
         <ProfileHero
           displayName={displayName}
-          email={user?.email}
           level={level}
           levelXp={levelXp}
           progress={progress}
