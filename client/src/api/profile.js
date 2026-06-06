@@ -70,6 +70,38 @@ export async function updatePinnedPokemons(token, pokemonIds) {
   return parseProfileResult(data.result, 'Failed to update pinned Pokémon');
 }
 
+function parseUsersPayload(users) {
+  if (users?.message) {
+    throw new Error(users.message);
+  }
+
+  if (!Array.isArray(users)) {
+    return [];
+  }
+
+  return users.filter((entry) => entry?.name);
+}
+
+export async function searchUsers(token, query) {
+  const data = await api('/profile/search_users', {
+    method: 'POST',
+    body: { query },
+    token,
+  });
+
+  return parseUsersPayload(data.users);
+}
+
+export async function fetchPublicProfile(token, username) {
+  const data = await api('/profile/show_public', {
+    method: 'POST',
+    body: { user: username },
+    token,
+  });
+
+  return parseProfileResult(data.result, 'Failed to load trainer profile');
+}
+
 export async function fetchAvatarOptions() {
   const data = await api('/profile/avatar-options', {
     method: 'GET',

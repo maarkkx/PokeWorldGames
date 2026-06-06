@@ -1,4 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useDebouncedValue } from '../../utils/useDebouncedValue.js';
+import AvatarPickerGrid from './AvatarPickerGrid.jsx';
 import { updateAppearance } from '../../api/profile.js';
 import { useI18n } from '../../context/I18nContext.jsx';
 import { KEYS } from '../../i18n/keys.js';
@@ -16,7 +18,9 @@ export default function ProfileCustomize({ token, profile, onUpdated, onError })
   const [pokemonId, setPokemonId] = useState(profile?.pokemonId ?? 1);
   const [bgColor, setBgColor] = useState(profile?.bgColor ?? '#F1F1F1');
   const [isAvatarOpen, setIsAvatarOpen] = useState(false);
+  const [isAvatarGridReady, setIsAvatarGridReady] = useState(false);
   const [search, setSearch] = useState('');
+  const debouncedSearch = useDebouncedValue(search, 180);
   const [isSaving, setIsSaving] = useState(false);
   const [success, setSuccess] = useState('');
 
@@ -29,13 +33,26 @@ export default function ProfileCustomize({ token, profile, onUpdated, onError })
 
   const previewUrl = buildProfileAvatarUrl(pokemonId);
 
+  useEffect(() => {
+    if (!isAvatarOpen) {
+      setIsAvatarGridReady(false);
+      return undefined;
+    }
+
+    const frameId = window.requestAnimationFrame(() => {
+      setIsAvatarGridReady(true);
+    });
+
+    return () => window.cancelAnimationFrame(frameId);
+  }, [isAvatarOpen]);
+
   const filteredOptions = useMemo(() => {
-    const query = search.trim();
+    const query = debouncedSearch.trim();
     if (!query) {
       return avatarOptions;
     }
     return avatarOptions.filter((option) => String(option.id).includes(query));
-  }, [avatarOptions, search]);
+  }, [avatarOptions, debouncedSearch]);
 
   const isDirty =
     pokemonId !== (profile?.pokemonId ?? 1) ||
@@ -132,26 +149,21 @@ export default function ProfileCustomize({ token, profile, onUpdated, onError })
               inputMode="numeric"
             />
           </label>
-          <div className="profile-customize__avatar-grid" role="list">
-            {filteredOptions.map((option) => (
-              <button
-                key={option.id}
-                type="button"
-                role="listitem"
-                className={`profile-customize__avatar-option${
-                  option.id === pokemonId ? ' is-selected' : ''
-                }`}
-                onClick={() => {
-                  setPokemonId(option.id);
-                  setIsAvatarOpen(false);
-                  setSearch('');
-                }}
-              >
-                <img src={option.avatarUrl} alt="" loading="lazy" />
-                <span>#{option.id}</span>
-              </button>
-            ))}
-          </div>
+          {isAvatarGridReady ? (
+            <AvatarPickerGrid
+              options={filteredOptions}
+              selectedId={pokemonId}
+              onSelect={(id) => {
+                setPokemonId(id);
+                setIsAvatarOpen(false);
+                setSearch('');
+              }}
+            />
+          ) : (
+            <p className="profile-customize__grid-loading" role="status">
+              {t(KEYS.common.loading)}
+            </p>
+          )}
         </ProfileModal>
       ) : null}
     </section>

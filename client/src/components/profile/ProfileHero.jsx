@@ -12,16 +12,22 @@ export default function ProfileHero({
   progress,
   lootboxes,
   profile,
+  readOnly = false,
+  showEmail = true,
+  kickerKey = KEYS.profile.title,
+  summaryAriaKey = KEYS.profile.summaryAria,
+  aside = null,
 }) {
   const { t } = useI18n();
   const bgColor = profile?.bgColor ?? '#F1F1F1';
   const avatarUrl = profile?.avatarUrl;
+  const showLootboxes = !readOnly && lootboxes != null;
 
   return (
     <section
-      className="profile-hero"
+      className={`profile-hero${readOnly ? ' profile-hero--readonly' : ''}${aside ? ' profile-hero--with-aside' : ''}`}
       style={{ '--profile-accent': bgColor }}
-      aria-label={t(KEYS.profile.summaryAria)}
+      aria-label={t(summaryAriaKey)}
     >
       <div className="profile-hero__mesh" aria-hidden="true" />
       <div className="profile-hero__inner">
@@ -48,17 +54,19 @@ export default function ProfileHero({
         </div>
 
         <div className="profile-hero__content">
-          <p className="profile-hero__kicker">{t(KEYS.profile.title)}</p>
+          <p className="profile-hero__kicker">{t(kickerKey)}</p>
           <h1 className="profile-hero__name">{displayName}</h1>
-          {email ? <p className="profile-hero__email">{email}</p> : null}
+          {showEmail && email ? <p className="profile-hero__email">{email}</p> : null}
 
           <div className="profile-hero__chips">
             <span className="profile-hero__chip">
               {t(KEYS.profile.heroXpChip, { current: levelXp, max: XP_PER_LEVEL })}
             </span>
-            <span className="profile-hero__chip profile-hero__chip--loot">
-              {t(KEYS.profile.heroLootboxes, { count: lootboxes })}
-            </span>
+            {showLootboxes ? (
+              <span className="profile-hero__chip profile-hero__chip--loot">
+                {t(KEYS.profile.heroLootboxes, { count: lootboxes })}
+              </span>
+            ) : null}
           </div>
 
           <div className="profile-hero__progress">
@@ -75,6 +83,8 @@ export default function ProfileHero({
             </p>
           </div>
         </div>
+
+        {aside ? <div className="profile-hero__aside">{aside}</div> : null}
       </div>
     </section>
   );

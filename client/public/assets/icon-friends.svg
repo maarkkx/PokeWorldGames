@@ -1,0 +1,8 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="friends icon">
+<circle cx="9" cy="7" r="4" fill="var(--stroke-0, #939292)"/>
+<path d="M2 21c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="var(--stroke-0, #939292)" stroke-width="2" stroke-linecap="round"/>
+<circle cx="19" cy="8" r="3.5" fill="var(--stroke-0, #939292)"/>
+<path d="M14 21c0-3.038 2.462-5.5 5.5-5.5S25 17.962 25 21" stroke="var(--stroke-0, #939292)" stroke-width="2" stroke-linecap="round"/>
+</g>
+</svg>

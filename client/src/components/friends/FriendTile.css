@@ -1,0 +1,125 @@
+.friend-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  padding: 16px 14px 14px;
+  border-radius: 16px;
+  background: var(--color-card);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.friend-tile:hover {
+  transform: translateY(-3px);
+  border-color: rgba(220, 40, 40, 0.18);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1);
+}
+
+.friend-tile__link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+}
+
+.friend-tile__avatar {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 2px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  margin-bottom: 10px;
+}
+
+.friend-tile__avatar img {
+  width: 118%;
+  height: 118%;
+  object-fit: contain;
+  transform: translateY(8%);
+}
+
+.friend-tile__name {
+  margin: 0 0 4px;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--color-text);
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.friend-tile:hover .friend-tile__name {
+  color: var(--color-primary);
+}
+
+.friend-tile__level {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.friend-tile__remove {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--color-primary);
+  border: 1px solid rgba(187, 0, 0, 0.2);
+  cursor: pointer;
+  opacity: 0;
+  transition:
+    opacity 0.15s ease,
+    background 0.15s ease;
+}
+
+.friend-tile:hover .friend-tile__remove,
+.friend-tile__remove:focus-visible {
+  opacity: 1;
+}
+
+.friend-tile__remove svg {
+  width: 14px;
+  height: 14px;
+}
+
+.friend-tile__remove:hover:not(:disabled) {
+  background: rgba(220, 40, 40, 0.1);
+  border-color: var(--color-primary);
+}
+
+.friend-tile__remove:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.friend-tile__remove:focus-visible {
+  outline: 3px solid rgba(220, 40, 40, 0.28);
+  outline-offset: 1px;
+}
+
+@media (hover: none) {
+  .friend-tile__remove {
+    opacity: 1;
+  }
+}

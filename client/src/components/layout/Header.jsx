@@ -7,6 +7,7 @@ import { getLevelProgress } from '../../utils/xp.js';
 import BrandLogo from '../ui/BrandLogo.jsx';
 import ProgressBar from '../ui/ProgressBar.jsx';
 import LanguageSwitcher from './LanguageSwitcher.jsx';
+import HeaderUserSearch from './HeaderUserSearch.jsx';
 import './Header.css';
 
 export default function Header() {
@@ -19,7 +20,9 @@ export default function Header() {
   return (
     <header className="app-header">
       <div className="app-header__inner">
-        <BrandLogo variant="header" to={ROUTES.home} />
+        <BrandLogo variant="header" to={ROUTES.home} className="app-header__brand" />
+
+        <HeaderUserSearch />
 
         <div className="app-header__end">
           <LanguageSwitcher />

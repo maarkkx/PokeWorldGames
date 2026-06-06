@@ -9,6 +9,7 @@ import ranking from './modules/rankings/router';
 import pokedex from './modules/pokedex/router';
 import profile from './modules/profile/router'
 import trade from './modules/trade/router';
+import friends from './modules/friends/router';
 
 const app = express();
 
@@ -40,6 +41,9 @@ app.use('/profile', profile)
 
 //trade
 app.use('/trade', trade)
+
+//friends
+app.use('/friends', friends)
 
 registerClientApp(app);
 

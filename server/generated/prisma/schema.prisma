@@ -19,19 +19,21 @@ enum GameStatus {
 //------------------------
 
 model User {
-  id               Int     @id @default(autoincrement())
-  name             String
-  email            String  @unique
-  password         String // Hasheada
-  level            Int     @default(1)
-  xp               Int     @default(0)
-  lootboxes        Int     @default(0)
-  admin            Boolean @default(false)
-  refreshToken     String? @map("refresh_token") //para el jwt
-  profilePokemonId Int     @default(1) @map("profile_pokemon_id") // PokeAPI official-artwork id 1–151
-  profileBgColor   String  @default("#F1F1F1") @map("profile_bg_color")
-  sentTrades       Trade[] @relation("TradeFromUser")
-  receivedTrades   Trade[] @relation("TradeToUser")
+  id                  Int          @id @default(autoincrement())
+  name                String
+  email               String       @unique
+  password            String // Hasheada
+  level               Int          @default(1)
+  xp                  Int          @default(0)
+  lootboxes           Int          @default(0)
+  admin               Boolean      @default(false)
+  refreshToken        String?      @map("refresh_token") //para el jwt
+  profilePokemonId    Int          @default(1) @map("profile_pokemon_id") // PokeAPI official-artwork id 1–151
+  profileBgColor      String       @default("#F1F1F1") @map("profile_bg_color")
+  sentTrades          Trade[]      @relation("TradeFromUser")
+  receivedTrades      Trade[]      @relation("TradeToUser")
+  sentFriendships     Friendship[] @relation("FriendshipFrom")
+  receivedFriendships Friendship[] @relation("FriendshipTo")
 
   // relacion n:m con pokemon
   pokemons UserPokemon[]
@@ -253,6 +255,12 @@ enum TradeStatus {
   CANCELLED
 }
 
+enum FriendshipStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+}
+
 model Trade {
   id         Int         @id @default(autoincrement())
   tradeId    String      @unique @default(cuid()) @map("id_trade")
@@ -282,4 +290,21 @@ model TradeItem {
   pokemon Pokemon @relation(fields: [pokemonId], references: [id], onDelete: Restrict)
 
   @@map("trade_items")
+}
+
+model Friendship {
+  id         Int              @id @default(autoincrement())
+  fromUserId Int              @map("from_user_id")
+  toUserId   Int              @map("to_user_id")
+  status     FriendshipStatus @default(PENDING)
+  createdAt  DateTime         @default(now()) @map("created_at")
+  updatedAt  DateTime         @updatedAt @map("updated_at")
+
+  fromUser User @relation("FriendshipFrom", fields: [fromUserId], references: [id], onDelete: Cascade)
+  toUser   User @relation("FriendshipTo", fields: [toUserId], references: [id], onDelete: Cascade)
+
+  @@unique([fromUserId, toUserId])
+  @@index([toUserId, status])
+  @@index([fromUserId, status])
+  @@map("friendships")
 }

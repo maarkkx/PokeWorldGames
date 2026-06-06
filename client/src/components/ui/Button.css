@@ -66,3 +66,32 @@
   background: rgba(220, 40, 40, 0.08);
   border-color: var(--color-primary);
 }
+
+.pwg-button--compact,
+.pwg-button--compact-secondary {
+  font-size: 13px;
+  font-weight: 700;
+  padding: 7px 14px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+.pwg-button--compact {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+.pwg-button--compact:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--color-primary) 75%, #000);
+}
+
+.pwg-button--compact-secondary {
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--color-primary);
+  border: 1px solid rgba(187, 0, 0, 0.22);
+}
+
+.pwg-button--compact-secondary:hover:not(:disabled) {
+  background: rgba(220, 40, 40, 0.08);
+  border-color: var(--color-primary);
+}

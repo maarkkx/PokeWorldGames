@@ -9,8 +9,10 @@ import GamesPage from './pages/GamesPage/GamesPage.jsx';
 import GuessPokemonPage from './pages/GuessPokemonPage/GuessPokemonPage.jsx';
 import GuessShinyPage from './pages/GuessShinyPage/GuessShinyPage.jsx';
 import ProfilePage from './pages/ProfilePage/ProfilePage.jsx';
+import TrainerProfilePage from './pages/TrainerProfilePage/TrainerProfilePage.jsx';
 import RankingPage from './pages/RankingPage/RankingPage.jsx';
 import TradePage from './pages/TradePage/TradePage.jsx';
+import FriendsPage from './pages/FriendsPage/FriendsPage.jsx';
 import LootboxPage from './pages/LootboxPage/LootboxPage.jsx';
 import PokedexPage from './pages/PokedexPage/PokedexPage.jsx';
 
@@ -60,6 +62,14 @@ export default function App() {
             }
           />
           <Route
+            path="/friends"
+            element={
+              <ProtectedRoute>
+                <FriendsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="/lootboxes"
             element={
               <ProtectedRoute>
@@ -88,6 +98,14 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <ProfilePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/trainers/:username"
+            element={
+              <ProtectedRoute>
+                <TrainerProfilePage />
               </ProtectedRoute>
             }
           />

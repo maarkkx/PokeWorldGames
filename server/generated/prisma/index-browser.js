@@ -256,6 +256,15 @@ exports.Prisma.TradeItemScalarFieldEnum = {
   quantity: 'quantity'
 };
 
+exports.Prisma.FriendshipScalarFieldEnum = {
+  id: 'id',
+  fromUserId: 'fromUserId',
+  toUserId: 'toUserId',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -284,6 +293,12 @@ exports.TradeStatus = exports.$Enums.TradeStatus = {
   CANCELLED: 'CANCELLED'
 };
 
+exports.FriendshipStatus = exports.$Enums.FriendshipStatus = {
+  PENDING: 'PENDING',
+  ACCEPTED: 'ACCEPTED',
+  REJECTED: 'REJECTED'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Pokemon: 'Pokemon',
@@ -298,7 +313,8 @@ exports.Prisma.ModelName = {
   PokedokuGameCell: 'PokedokuGameCell',
   PasswordResetToken: 'PasswordResetToken',
   Trade: 'Trade',
-  TradeItem: 'TradeItem'
+  TradeItem: 'TradeItem',
+  Friendship: 'Friendship'
 };
 
 /**
