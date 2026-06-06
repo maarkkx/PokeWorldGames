@@ -1,0 +1,74 @@
+.friend-card {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: var(--color-card);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.friend-card__main {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  color: inherit;
+  min-width: 0;
+  flex: 1;
+}
+
+.friend-card__main:hover .friend-card__name {
+  color: var(--color-primary);
+}
+
+.friend-card__avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.friend-card__avatar img {
+  width: 118%;
+  height: 118%;
+  object-fit: contain;
+  transform: translateY(6%);
+}
+
+.friend-card__info {
+  min-width: 0;
+}
+
+.friend-card__name {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--color-text);
+  transition: color 0.15s ease;
+}
+
+.friend-card__level {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.friend-card__actions {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-end;
+  align-self: center;
+  gap: 6px;
+  flex-shrink: 0;
+  margin-left: auto;
+}
