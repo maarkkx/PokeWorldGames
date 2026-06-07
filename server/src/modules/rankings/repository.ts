@@ -1,5 +1,14 @@
 import prisma from '../../../prisma/client';
 
+const rankingUserSelect = {
+  id: true,
+  name: true,
+  level: true,
+  xp: true,
+  profilePokemonId: true,
+  profileBgColor: true,
+} as const;
+
 //top 10 jguadores con mas lvl
 export async function top10LvlPlayers() {
   return await prisma.user.findMany({
@@ -7,12 +16,7 @@ export async function top10LvlPlayers() {
       level: 'desc'
     }, 
     take: 10,
-    select: {
-      id: true,
-      name: true,
-      level: true,
-      xp: true
-    }
+    select: rankingUserSelect,
   })
 }
 
@@ -37,12 +41,7 @@ export async function getTop10UsersByTotalPokemons() {
         in: ranking.map((r) => r.userId)
       }
     },
-    select: {
-      id: true,
-      name: true,
-      level: true,
-      xp: true
-    }
+    select: rankingUserSelect,
   })
 
   const usersMap = new Map(users.map((user) => [user.id, user]))
@@ -74,12 +73,7 @@ export async function getTop10UsersByUniquePokemons() {
         in: ranking.map((r) => r.userId)
       }
     },
-    select: {
-      id: true,
-      name: true,
-      level: true,
-      xp: true
-    }
+    select: rankingUserSelect,
   })
 
   const usersMap = new Map(users.map((user) => [user.id, user]))

@@ -18,6 +18,7 @@ export default function TradeInventoryFilters({
   targetUsername,
   gridColumns,
   onGridColumnsChange,
+  variant = 'trade',
 }) {
   const { t } = useI18n();
 
@@ -38,6 +39,8 @@ export default function TradeInventoryFilters({
 
   const exactTypes = Boolean(filters.exactTypes);
   const maxTypes = exactTypes ? MAX_EXACT_TYPE_COUNT : POKEMON_TYPES.length;
+
+  const showOwnership = variant !== 'inventory';
 
   const ownershipOptions =
     perspective === PERSPECTIVE.TARGET
@@ -122,20 +125,22 @@ export default function TradeInventoryFilters({
         </select>
       </label>
 
-      <label className="trade-inventory-filters__field">
-        <span className="trade-inventory-filters__label">{t(KEYS.trade.filterOwnership)}</span>
-        <select
-          className="trade-inventory-filters__select"
-          value={filters.ownership}
-          onChange={(event) => updateField('ownership', event.target.value)}
-        >
-          {ownershipOptions.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-      </label>
+      {showOwnership ? (
+        <label className="trade-inventory-filters__field">
+          <span className="trade-inventory-filters__label">{t(KEYS.trade.filterOwnership)}</span>
+          <select
+            className="trade-inventory-filters__select"
+            value={filters.ownership}
+            onChange={(event) => updateField('ownership', event.target.value)}
+          >
+            {ownershipOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </label>
+      ) : null}
 
       <label className="trade-inventory-filters__field">
         <span className="trade-inventory-filters__label">{t(KEYS.trade.gridColumns)}</span>

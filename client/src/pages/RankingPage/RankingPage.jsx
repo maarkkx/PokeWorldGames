@@ -40,17 +40,24 @@ function getLeaderValue(entries, getValue) {
   return Math.max(...entries.map(getValue), 1);
 }
 
-function TrainerAvatar({ name, rank }) {
+function TrainerAvatar({ name, rank, profile, size = 'sm' }) {
   const initials = String(name ?? '?')
     .slice(0, 2)
     .toUpperCase();
+  const avatarUrl = profile?.avatarUrl;
+  const bgColor = profile?.bgColor;
 
   return (
     <span
-      className={`ranking-avatar ranking-avatar--rank-${Math.min(rank, 3) || 'default'}`}
+      className={`ranking-avatar ranking-avatar--${size} ranking-avatar--rank-${Math.min(rank, 3) || 'default'}`}
+      style={bgColor ? { backgroundColor: bgColor } : undefined}
       aria-hidden="true"
     >
-      {initials}
+      {avatarUrl ? (
+        <img src={avatarUrl} alt="" loading="lazy" decoding="async" />
+      ) : (
+        initials
+      )}
     </span>
   );
 }
@@ -110,7 +117,7 @@ const RankingPodium = memo(function RankingPodium({ entries, userId, t }) {
               <div className="ranking-podium__pedestal">
                 <div className="ranking-podium__body">
                   <RankDisplay rank={rank} />
-                  <TrainerAvatar name={entry.name} rank={rank} />
+                  <TrainerAvatar name={entry.name} rank={rank} profile={entry.profile} size="lg" />
                   <Link className="ranking-podium__name" to={ROUTES.trainerProfile(entry.name)}>
                     {entry.name}
                   </Link>
@@ -206,7 +213,7 @@ const RankingBoard = memo(function RankingBoard({
                       <RankDisplay rank={rank} />
                     </td>
                     <td className="ranking-row__trainer">
-                      <TrainerAvatar name={entry.name} rank={rank} />
+                      <TrainerAvatar name={entry.name} rank={rank} profile={entry.profile} />
                       <Link className="ranking-row__name" to={ROUTES.trainerProfile(entry.name)}>
                         {entry.name}
                       </Link>

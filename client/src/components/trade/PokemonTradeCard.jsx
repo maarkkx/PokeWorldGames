@@ -9,6 +9,7 @@ export default function PokemonTradeCard({
   onToggle,
   onQuantityChange,
   disabled = false,
+  readOnly = false,
   quantityBadgeAria,
   decreaseAria,
   increaseAria,
@@ -20,17 +21,17 @@ export default function PokemonTradeCard({
   const formattedId = String(pokemon.id).padStart(3, '0');
   const types = Array.isArray(pokemon.types) ? pokemon.types : [];
 
-  return (
-    <article
-      className={`pokemon-trade-card${selected ? ' is-selected' : ''}${disabled ? ' is-disabled' : ''}`}
-    >
-      <button
-        type="button"
-        className="pokemon-trade-card__main"
-        onClick={onToggle}
-        disabled={disabled}
-        aria-pressed={selected}
-      >
+  const cardClassName = [
+    'pokemon-trade-card',
+    selected ? 'is-selected' : '',
+    disabled ? 'is-disabled' : '',
+    readOnly ? 'pokemon-trade-card--readonly' : '',
+  ]
+    .filter(Boolean)
+    .join(' ');
+
+  const mainContent = (
+    <>
         <div className="pokemon-trade-card__visual">
           {pokemon.urlImage ? (
             <img src={pokemon.urlImage} alt="" loading="lazy" />
@@ -64,9 +65,26 @@ export default function PokemonTradeCard({
             })}
           </ul>
         </div>
-      </button>
+    </>
+  );
 
-      {selected ? (
+  return (
+    <article className={cardClassName}>
+      {readOnly ? (
+        <div className="pokemon-trade-card__main">{mainContent}</div>
+      ) : (
+        <button
+          type="button"
+          className="pokemon-trade-card__main"
+          onClick={onToggle}
+          disabled={disabled}
+          aria-pressed={selected}
+        >
+          {mainContent}
+        </button>
+      )}
+
+      {!readOnly && selected ? (
         <div className="pokemon-trade-card__stepper">
           <button
             type="button"

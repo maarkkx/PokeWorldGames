@@ -568,10 +568,24 @@
   height: 30px;
   border-radius: 10px;
   flex-shrink: 0;
+  overflow: hidden;
   font-size: 11px;
   font-weight: 900;
   color: var(--color-primary);
   background: rgba(220, 40, 40, 0.1);
+}
+
+.ranking-avatar--lg {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+}
+
+.ranking-avatar img {
+  width: 118%;
+  height: 118%;
+  object-fit: contain;
+  transform: translateY(8%);
 }
 
 .ranking-avatar--rank-1 {
