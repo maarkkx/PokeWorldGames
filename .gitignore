@@ -8,6 +8,7 @@ dist/
 .env
 .env.*
 !.env.example
+server/firebase-service-account.json
 
 # Configs
 /server/src/config/mailer.ts
@@ -50,3 +51,5 @@ dist-ssr
 .agents
 node_modules
 .vite
+
+firebase-service-account.json

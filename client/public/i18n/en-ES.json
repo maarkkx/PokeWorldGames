@@ -135,7 +135,18 @@
     "signInLink": "Sign in",
     "signInFailed": "Could not sign in.",
     "registerFailed": "Registration could not be completed.",
-    "registerSuccess": "Account created. You can sign in now."
+    "registerSuccess": "Account created. You can sign in now.",
+    "continueWithGoogle": "Continue with Google",
+    "orContinueWith": "or continue with",
+    "signingInWithGoogle": "Connecting with Google...",
+    "googleSignInFailed": "Could not sign in with Google.",
+    "useGoogleSignIn": "This account uses Google. Sign in with Google.",
+    "googleAccountLinkedElsewhere": "This account is already linked to a different Google account.",
+    "firebaseNotConfigured": "Google sign-in is not configured. Add VITE_FIREBASE_* variables to client/.env and restart Vite.",
+    "firebaseAuthNotEnabled": "Firebase Authentication is not enabled. In Firebase Console go to Build → Authentication → Get started, and enable Google as a sign-in provider.",
+    "firebaseAdminNotConfigured": "The server is missing Firebase configuration. Check FIREBASE_PROJECT_ID and FIREBASE_SERVICE_ACCOUNT_PATH in server/.env.",
+    "firebaseServiceAccountMissing": "server/firebase-service-account.json was not found. Download the key from Firebase Console and save it with that filename.",
+    "googleUserPersistFailed": "Google sign-in worked, but the user could not be saved. Check that the database migration has been applied."
   },
   "validation": {
     "usernameInvalid": "Username must be 4–20 alphanumeric characters.",
@@ -340,6 +351,7 @@
     "navAria": "Ranking navigation",
     "backToHome": "Back to home",
     "boardsAria": "Global ranking boards",
+    "boardTabsAria": "Choose ranking category",
     "refresh": "Refresh",
     "refreshing": "Refreshing...",
     "loadError": "Could not load rankings. Try again.",
@@ -369,7 +381,13 @@
     "helpTitle": "How it works",
     "helpLevel": "Level — top 10 by account level (highest XP wins ties).",
     "helpTotal": "Most Pokémon — top 10 by sum of quantities in each trainer's inventory.",
-    "helpUnique": "Unique species — top 10 by count of different Pokémon species owned."
+    "helpUnique": "Unique species — top 10 by count of different Pokémon species owned.",
+    "podiumAria": "Podium of the top three trainers by level",
+    "podiumKicker": "Hall of fame",
+    "podiumTitle": "Champions podium",
+    "liveBoards": "Live leaderboards",
+    "yourStanding": "Your progress",
+    "yourStandingAria": "Summary of your trainer progress"
   },
   "home": {
     "pageLabel": "Home",

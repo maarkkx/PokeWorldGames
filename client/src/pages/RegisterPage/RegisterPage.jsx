@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { register } from '../../api/auth.js';
 import { useI18n } from '../../context/I18nContext.jsx';
+import GoogleSignInButton from '../../components/auth/GoogleSignInButton.jsx';
 import { KEYS } from '../../i18n/keys.js';
 import { validateRegisterForm } from '../../utils/validation.js';
 import LanguageSwitcher from '../../components/layout/LanguageSwitcher.jsx';
@@ -101,6 +102,16 @@ export default function RegisterPage() {
             {submitting ? t(KEYS.auth.creatingAccount) : t(KEYS.auth.signUp)}
           </Button>
         </form>
+
+        <div className="auth-page__divider" role="presentation">
+          <span>{t(KEYS.auth.orContinueWith)}</span>
+        </div>
+
+        <GoogleSignInButton
+          disabled={submitting}
+          onSuccess={() => navigate('/')}
+          onError={(message) => setError(message)}
+        />
 
         <p className="auth-page__switch">
           {t(KEYS.auth.hasAccount)}{' '}

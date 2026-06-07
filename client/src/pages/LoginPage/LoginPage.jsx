@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { useI18n } from '../../context/I18nContext.jsx';
+import GoogleSignInButton from '../../components/auth/GoogleSignInButton.jsx';
 import { KEYS } from '../../i18n/keys.js';
+import { mapAuthErrorMessage } from '../../utils/authErrors.js';
 import { validateLoginForm } from '../../utils/validation.js';
 import LanguageSwitcher from '../../components/layout/LanguageSwitcher.jsx';
 import BrandLogo from '../../components/ui/BrandLogo.jsx';
@@ -39,7 +41,7 @@ export default function LoginPage() {
       await login(email, password);
       navigate('/');
     } catch (submitError) {
-      setError(submitError.message ?? t(KEYS.auth.signInFailed));
+      setError(mapAuthErrorMessage(submitError, t, KEYS) ?? t(KEYS.auth.signInFailed));
     } finally {
       setSubmitting(false);
     }
@@ -87,6 +89,16 @@ export default function LoginPage() {
             {submitting ? t(KEYS.auth.signingIn) : t(KEYS.auth.signIn)}
           </Button>
         </form>
+
+        <div className="auth-page__divider" role="presentation">
+          <span>{t(KEYS.auth.orContinueWith)}</span>
+        </div>
+
+        <GoogleSignInButton
+          disabled={submitting}
+          onSuccess={() => navigate('/')}
+          onError={(message) => setError(message)}
+        />
 
         <p className="auth-page__switch">
           {t(KEYS.auth.noAccount)}{' '}
