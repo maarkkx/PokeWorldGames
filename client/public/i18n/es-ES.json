@@ -135,7 +135,18 @@
     "signInLink": "Inicia sesión",
     "signInFailed": "No se pudo iniciar sesión.",
     "registerFailed": "No se pudo completar el registro.",
-    "registerSuccess": "Cuenta creada. Ya puedes iniciar sesión."
+    "registerSuccess": "Cuenta creada. Ya puedes iniciar sesión.",
+    "continueWithGoogle": "Continuar con Google",
+    "orContinueWith": "o continúa con",
+    "signingInWithGoogle": "Conectando con Google...",
+    "googleSignInFailed": "No se pudo iniciar sesión con Google.",
+    "useGoogleSignIn": "Esta cuenta usa Google. Inicia sesión con Google.",
+    "googleAccountLinkedElsewhere": "Esta cuenta ya está vinculada a otra cuenta de Google.",
+    "firebaseNotConfigured": "El inicio de sesión con Google no está configurado. Añade las variables VITE_FIREBASE_* en client/.env y reinicia Vite.",
+    "firebaseAuthNotEnabled": "Firebase Authentication no está activado. En Firebase Console ve a Compilación → Authentication → Comenzar, y activa Google como proveedor.",
+    "firebaseAdminNotConfigured": "El servidor no tiene Firebase configurado. Revisa FIREBASE_PROJECT_ID y FIREBASE_SERVICE_ACCOUNT_PATH en server/.env.",
+    "firebaseServiceAccountMissing": "No se encuentra server/firebase-service-account.json. Descarga la clave en Firebase Console y guárdala con ese nombre.",
+    "googleUserPersistFailed": "Google inició sesión, pero no se pudo guardar el usuario. Comprueba que la migración de base de datos esté aplicada."
   },
   "validation": {
     "usernameInvalid": "El usuario debe tener entre 4 y 20 caracteres alfanuméricos.",
@@ -340,6 +351,7 @@
     "navAria": "Navegación del ranking",
     "backToHome": "Volver al inicio",
     "boardsAria": "Tablas de ranking global",
+    "boardTabsAria": "Elegir categoría de ranking",
     "refresh": "Actualizar",
     "refreshing": "Actualizando...",
     "loadError": "No se pudieron cargar los rankings. Inténtalo de nuevo.",
@@ -369,7 +381,13 @@
     "helpTitle": "Cómo funciona",
     "helpLevel": "Nivel — top 10 por nivel de cuenta (gana el XP más alto en empates).",
     "helpTotal": "Más Pokémon — top 10 por suma de cantidades en el inventario de cada entrenador.",
-    "helpUnique": "Especies únicas — top 10 por número de especies distintas capturadas."
+    "helpUnique": "Especies únicas — top 10 por número de especies distintas capturadas.",
+    "podiumAria": "Podio de los tres mejores entrenadores por nivel",
+    "podiumKicker": "Salón de la fama",
+    "podiumTitle": "Podio de campeones",
+    "liveBoards": "Clasificaciones en vivo",
+    "yourStanding": "Tu progreso",
+    "yourStandingAria": "Resumen de tu progreso como entrenador"
   },
   "home": {
     "pageLabel": "Inicio",

@@ -1,9 +1,10 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import { login as loginRequest } from '../api/auth.js';
+import { login as loginRequest, loginWithGoogleIdToken } from '../api/auth.js';
 import { fetchProfile } from '../api/profile.js';
+import { getFirebaseAuthBundle, isFirebaseConfigured } from '../config/firebase.js';
+import { isGooglePopupCancelled } from '../utils/authErrors.js';
 import { clearStorage, readStorage, writeStorage } from '../utils/storage.js';
 
-//context para compartir datos con los componentes
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
@@ -17,7 +18,6 @@ export function AuthProvider({ children }) {
     return profile;
   }, []);
 
-  //Comprobar que la sesion es valida
   useEffect(() => {
     if (!token) {
       setLoading(false);
@@ -55,7 +55,33 @@ export function AuthProvider({ children }) {
     return profile;
   }, [loadProfile]);
 
-  const logout = useCallback(() => {
+  const loginWithGoogle = useCallback(async () => {
+    if (!isFirebaseConfigured()) {
+      throw new Error('Firebase is not configured');
+    }
+
+    const { auth, googleProvider, signInWithPopup } = await getFirebaseAuthBundle();
+    const credential = await signInWithPopup(auth, googleProvider);
+    const idToken = await credential.user.getIdToken();
+    const nextToken = await loginWithGoogleIdToken(idToken);
+    writeStorage(nextToken);
+    setToken(nextToken);
+    setLoading(true);
+    const profile = await loadProfile(nextToken);
+    setLoading(false);
+    return profile;
+  }, [loadProfile]);
+
+  const logout = useCallback(async () => {
+    if (isFirebaseConfigured()) {
+      try {
+        const { auth, signOut } = await getFirebaseAuthBundle();
+        await signOut(auth);
+      } catch {
+        // Ignore Firebase logout errors; local session must still clear.
+      }
+    }
+
     clearStorage();
     setToken(null);
     setUser(null);
@@ -77,10 +103,12 @@ export function AuthProvider({ children }) {
       loading,
       isAuthenticated: Boolean(token),
       login,
+      loginWithGoogle,
       logout,
       refreshProfile,
+      isGoogleSignInAvailable: isFirebaseConfigured(),
     }),
-    [token, user, loading, login, logout, refreshProfile],
+    [token, user, loading, login, loginWithGoogle, logout, refreshProfile],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
@@ -95,3 +123,5 @@ export function useAuth() {
 
   return context;
 }
+
+export { isGooglePopupCancelled };

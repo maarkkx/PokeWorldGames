@@ -2526,6 +2526,8 @@ export namespace Prisma {
     name: string | null
     email: string | null
     password: string | null
+    googleId: string | null
+    authProvider: string | null
     level: number | null
     xp: number | null
     lootboxes: number | null
@@ -2540,6 +2542,8 @@ export namespace Prisma {
     name: string | null
     email: string | null
     password: string | null
+    googleId: string | null
+    authProvider: string | null
     level: number | null
     xp: number | null
     lootboxes: number | null
@@ -2554,6 +2558,8 @@ export namespace Prisma {
     name: number
     email: number
     password: number
+    googleId: number
+    authProvider: number
     level: number
     xp: number
     lootboxes: number
@@ -2586,6 +2592,8 @@ export namespace Prisma {
     name?: true
     email?: true
     password?: true
+    googleId?: true
+    authProvider?: true
     level?: true
     xp?: true
     lootboxes?: true
@@ -2600,6 +2608,8 @@ export namespace Prisma {
     name?: true
     email?: true
     password?: true
+    googleId?: true
+    authProvider?: true
     level?: true
     xp?: true
     lootboxes?: true
@@ -2614,6 +2624,8 @@ export namespace Prisma {
     name?: true
     email?: true
     password?: true
+    googleId?: true
+    authProvider?: true
     level?: true
     xp?: true
     lootboxes?: true
@@ -2714,7 +2726,9 @@ export namespace Prisma {
     id: number
     name: string
     email: string
-    password: string
+    password: string | null
+    googleId: string | null
+    authProvider: string
     level: number
     xp: number
     lootboxes: number
@@ -2748,6 +2762,8 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     password?: boolean
+    googleId?: boolean
+    authProvider?: boolean
     level?: boolean
     xp?: boolean
     lootboxes?: boolean
@@ -2773,6 +2789,8 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     password?: boolean
+    googleId?: boolean
+    authProvider?: boolean
     level?: boolean
     xp?: boolean
     lootboxes?: boolean
@@ -2787,6 +2805,8 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     password?: boolean
+    googleId?: boolean
+    authProvider?: boolean
     level?: boolean
     xp?: boolean
     lootboxes?: boolean
@@ -2801,6 +2821,8 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     password?: boolean
+    googleId?: boolean
+    authProvider?: boolean
     level?: boolean
     xp?: boolean
     lootboxes?: boolean
@@ -2810,7 +2832,7 @@ export namespace Prisma {
     profileBgColor?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "level" | "xp" | "lootboxes" | "admin" | "refreshToken" | "profilePokemonId" | "profileBgColor", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "googleId" | "authProvider" | "level" | "xp" | "lootboxes" | "admin" | "refreshToken" | "profilePokemonId" | "profileBgColor", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sentTrades?: boolean | User$sentTradesArgs<ExtArgs>
     receivedTrades?: boolean | User$receivedTradesArgs<ExtArgs>
@@ -2845,7 +2867,9 @@ export namespace Prisma {
       id: number
       name: string
       email: string
-      password: string
+      password: string | null
+      googleId: string | null
+      authProvider: string
       level: number
       xp: number
       lootboxes: number
@@ -3290,6 +3314,8 @@ export namespace Prisma {
     readonly name: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
+    readonly googleId: FieldRef<"User", 'String'>
+    readonly authProvider: FieldRef<"User", 'String'>
     readonly level: FieldRef<"User", 'Int'>
     readonly xp: FieldRef<"User", 'Int'>
     readonly lootboxes: FieldRef<"User", 'Int'>
@@ -20135,6 +20161,8 @@ export namespace Prisma {
     name: 'name',
     email: 'email',
     password: 'password',
+    googleId: 'googleId',
+    authProvider: 'authProvider',
     level: 'level',
     xp: 'xp',
     lootboxes: 'lootboxes',
@@ -20464,7 +20492,9 @@ export namespace Prisma {
     id?: IntFilter<"User"> | number
     name?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
-    password?: StringFilter<"User"> | string
+    password?: StringNullableFilter<"User"> | string | null
+    googleId?: StringNullableFilter<"User"> | string | null
+    authProvider?: StringFilter<"User"> | string
     level?: IntFilter<"User"> | number
     xp?: IntFilter<"User"> | number
     lootboxes?: IntFilter<"User"> | number
@@ -20488,7 +20518,9 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
-    password?: SortOrder
+    password?: SortOrderInput | SortOrder
+    googleId?: SortOrderInput | SortOrder
+    authProvider?: SortOrder
     level?: SortOrder
     xp?: SortOrder
     lootboxes?: SortOrder
@@ -20511,11 +20543,13 @@ export namespace Prisma {
   export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: number
     email?: string
+    googleId?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     name?: StringFilter<"User"> | string
-    password?: StringFilter<"User"> | string
+    password?: StringNullableFilter<"User"> | string | null
+    authProvider?: StringFilter<"User"> | string
     level?: IntFilter<"User"> | number
     xp?: IntFilter<"User"> | number
     lootboxes?: IntFilter<"User"> | number
@@ -20533,13 +20567,15 @@ export namespace Prisma {
     guessShinyGames?: GuessShinyGameListRelationFilter
     pokedokuGames?: PokedokuGameListRelationFilter
     passwordResetTokens?: PasswordResetTokenListRelationFilter
-  }, "id" | "email">
+  }, "id" | "email" | "googleId">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
-    password?: SortOrder
+    password?: SortOrderInput | SortOrder
+    googleId?: SortOrderInput | SortOrder
+    authProvider?: SortOrder
     level?: SortOrder
     xp?: SortOrder
     lootboxes?: SortOrder
@@ -20561,7 +20597,9 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"User"> | number
     name?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
-    password?: StringWithAggregatesFilter<"User"> | string
+    password?: StringNullableWithAggregatesFilter<"User"> | string | null
+    googleId?: StringNullableWithAggregatesFilter<"User"> | string | null
+    authProvider?: StringWithAggregatesFilter<"User"> | string
     level?: IntWithAggregatesFilter<"User"> | number
     xp?: IntWithAggregatesFilter<"User"> | number
     lootboxes?: IntWithAggregatesFilter<"User"> | number
@@ -21533,7 +21571,9 @@ export namespace Prisma {
   export type UserCreateInput = {
     name: string
     email: string
-    password: string
+    password?: string | null
+    googleId?: string | null
+    authProvider?: string
     level?: number
     xp?: number
     lootboxes?: number
@@ -21557,7 +21597,9 @@ export namespace Prisma {
     id?: number
     name: string
     email: string
-    password: string
+    password?: string | null
+    googleId?: string | null
+    authProvider?: string
     level?: number
     xp?: number
     lootboxes?: number
@@ -21580,7 +21622,9 @@ export namespace Prisma {
   export type UserUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    authProvider?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
     xp?: IntFieldUpdateOperationsInput | number
     lootboxes?: IntFieldUpdateOperationsInput | number
@@ -21604,7 +21648,9 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    authProvider?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
     xp?: IntFieldUpdateOperationsInput | number
     lootboxes?: IntFieldUpdateOperationsInput | number
@@ -21628,7 +21674,9 @@ export namespace Prisma {
     id?: number
     name: string
     email: string
-    password: string
+    password?: string | null
+    googleId?: string | null
+    authProvider?: string
     level?: number
     xp?: number
     lootboxes?: number
@@ -21641,7 +21689,9 @@ export namespace Prisma {
   export type UserUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    authProvider?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
     xp?: IntFieldUpdateOperationsInput | number
     lootboxes?: IntFieldUpdateOperationsInput | number
@@ -21655,7 +21705,9 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    authProvider?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
     xp?: IntFieldUpdateOperationsInput | number
     lootboxes?: IntFieldUpdateOperationsInput | number
@@ -22605,11 +22657,6 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type StringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -22623,6 +22670,11 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type TradeListRelationFilter = {
@@ -22715,6 +22767,8 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    googleId?: SortOrder
+    authProvider?: SortOrder
     level?: SortOrder
     xp?: SortOrder
     lootboxes?: SortOrder
@@ -22737,6 +22791,8 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    googleId?: SortOrder
+    authProvider?: SortOrder
     level?: SortOrder
     xp?: SortOrder
     lootboxes?: SortOrder
@@ -22751,6 +22807,8 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    googleId?: SortOrder
+    authProvider?: SortOrder
     level?: SortOrder
     xp?: SortOrder
     lootboxes?: SortOrder
@@ -22802,14 +22860,6 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
-
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -22826,6 +22876,14 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type PokemonTypeListRelationFilter = {
@@ -23797,6 +23855,10 @@ export namespace Prisma {
     set?: string
   }
 
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -23807,10 +23869,6 @@ export namespace Prisma {
 
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
   }
 
   export type TradeUpdateManyWithoutFromUserNestedInput = {
@@ -24964,11 +25022,6 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type NestedStringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -24981,6 +25034,11 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -25027,14 +25085,6 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
-
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -25061,6 +25111,14 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedEnumGameStatusFilter<$PrismaModel = never> = {
@@ -26189,7 +26247,9 @@ export namespace Prisma {
   export type UserCreateWithoutPokemonsInput = {
     name: string
     email: string
-    password: string
+    password?: string | null
+    googleId?: string | null
+    authProvider?: string
     level?: number
     xp?: number
     lootboxes?: number
@@ -26212,7 +26272,9 @@ export namespace Prisma {
     id?: number
     name: string
     email: string
-    password: string
+    password?: string | null
+    googleId?: string | null
+    authProvider?: string
     level?: number
     xp?: number
     lootboxes?: number
@@ -26302,7 +26364,9 @@ export namespace Prisma {
   export type UserUpdateWithoutPokemonsInput = {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    authProvider?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
     xp?: IntFieldUpdateOperationsInput | number
     lootboxes?: IntFieldUpdateOperationsInput | number
@@ -26325,7 +26389,9 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    authProvider?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
     xp?: IntFieldUpdateOperationsInput | number
     lootboxes?: IntFieldUpdateOperationsInput | number
@@ -26405,7 +26471,9 @@ export namespace Prisma {
   export type UserCreateWithoutPinnedPokemonsInput = {
     name: string
     email: string
-    password: string
+    password?: string | null
+    googleId?: string | null
+    authProvider?: string
     level?: number
     xp?: number
     lootboxes?: number
@@ -26428,7 +26496,9 @@ export namespace Prisma {
     id?: number
     name: string
     email: string
-    password: string
+    password?: string | null
+    googleId?: string | null
+    authProvider?: string
     level?: number
     xp?: number
     lootboxes?: number
@@ -26518,7 +26588,9 @@ export namespace Prisma {
   export type UserUpdateWithoutPinnedPokemonsInput = {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    authProvider?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
     xp?: IntFieldUpdateOperationsInput | number
     lootboxes?: IntFieldUpdateOperationsInput | number
@@ -26541,7 +26613,9 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    authProvider?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
     xp?: IntFieldUpdateOperationsInput | number
     lootboxes?: IntFieldUpdateOperationsInput | number
@@ -26985,7 +27059,9 @@ export namespace Prisma {
   export type UserCreateWithoutGuessPokemonGamesInput = {
     name: string
     email: string
-    password: string
+    password?: string | null
+    googleId?: string | null
+    authProvider?: string
     level?: number
     xp?: number
     lootboxes?: number
@@ -27008,7 +27084,9 @@ export namespace Prisma {
     id?: number
     name: string
     email: string
-    password: string
+    password?: string | null
+    googleId?: string | null
+    authProvider?: string
     level?: number
     xp?: number
     lootboxes?: number
@@ -27098,7 +27176,9 @@ export namespace Prisma {
   export type UserUpdateWithoutGuessPokemonGamesInput = {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    authProvider?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
     xp?: IntFieldUpdateOperationsInput | number
     lootboxes?: IntFieldUpdateOperationsInput | number
@@ -27121,7 +27201,9 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    authProvider?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
     xp?: IntFieldUpdateOperationsInput | number
     lootboxes?: IntFieldUpdateOperationsInput | number
@@ -27201,7 +27283,9 @@ export namespace Prisma {
   export type UserCreateWithoutGuessShinyGamesInput = {
     name: string
     email: string
-    password: string
+    password?: string | null
+    googleId?: string | null
+    authProvider?: string
     level?: number
     xp?: number
     lootboxes?: number
@@ -27224,7 +27308,9 @@ export namespace Prisma {
     id?: number
     name: string
     email: string
-    password: string
+    password?: string | null
+    googleId?: string | null
+    authProvider?: string
     level?: number
     xp?: number
     lootboxes?: number
@@ -27314,7 +27400,9 @@ export namespace Prisma {
   export type UserUpdateWithoutGuessShinyGamesInput = {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    authProvider?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
     xp?: IntFieldUpdateOperationsInput | number
     lootboxes?: IntFieldUpdateOperationsInput | number
@@ -27337,7 +27425,9 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    authProvider?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
     xp?: IntFieldUpdateOperationsInput | number
     lootboxes?: IntFieldUpdateOperationsInput | number
@@ -27417,7 +27507,9 @@ export namespace Prisma {
   export type UserCreateWithoutPokedokuGamesInput = {
     name: string
     email: string
-    password: string
+    password?: string | null
+    googleId?: string | null
+    authProvider?: string
     level?: number
     xp?: number
     lootboxes?: number
@@ -27440,7 +27532,9 @@ export namespace Prisma {
     id?: number
     name: string
     email: string
-    password: string
+    password?: string | null
+    googleId?: string | null
+    authProvider?: string
     level?: number
     xp?: number
     lootboxes?: number
@@ -27511,7 +27605,9 @@ export namespace Prisma {
   export type UserUpdateWithoutPokedokuGamesInput = {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    authProvider?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
     xp?: IntFieldUpdateOperationsInput | number
     lootboxes?: IntFieldUpdateOperationsInput | number
@@ -27534,7 +27630,9 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    authProvider?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
     xp?: IntFieldUpdateOperationsInput | number
     lootboxes?: IntFieldUpdateOperationsInput | number
@@ -27732,7 +27830,9 @@ export namespace Prisma {
   export type UserCreateWithoutPasswordResetTokensInput = {
     name: string
     email: string
-    password: string
+    password?: string | null
+    googleId?: string | null
+    authProvider?: string
     level?: number
     xp?: number
     lootboxes?: number
@@ -27755,7 +27855,9 @@ export namespace Prisma {
     id?: number
     name: string
     email: string
-    password: string
+    password?: string | null
+    googleId?: string | null
+    authProvider?: string
     level?: number
     xp?: number
     lootboxes?: number
@@ -27793,7 +27895,9 @@ export namespace Prisma {
   export type UserUpdateWithoutPasswordResetTokensInput = {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    authProvider?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
     xp?: IntFieldUpdateOperationsInput | number
     lootboxes?: IntFieldUpdateOperationsInput | number
@@ -27816,7 +27920,9 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    authProvider?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
     xp?: IntFieldUpdateOperationsInput | number
     lootboxes?: IntFieldUpdateOperationsInput | number
@@ -27838,7 +27944,9 @@ export namespace Prisma {
   export type UserCreateWithoutSentTradesInput = {
     name: string
     email: string
-    password: string
+    password?: string | null
+    googleId?: string | null
+    authProvider?: string
     level?: number
     xp?: number
     lootboxes?: number
@@ -27861,7 +27969,9 @@ export namespace Prisma {
     id?: number
     name: string
     email: string
-    password: string
+    password?: string | null
+    googleId?: string | null
+    authProvider?: string
     level?: number
     xp?: number
     lootboxes?: number
@@ -27888,7 +27998,9 @@ export namespace Prisma {
   export type UserCreateWithoutReceivedTradesInput = {
     name: string
     email: string
-    password: string
+    password?: string | null
+    googleId?: string | null
+    authProvider?: string
     level?: number
     xp?: number
     lootboxes?: number
@@ -27911,7 +28023,9 @@ export namespace Prisma {
     id?: number
     name: string
     email: string
-    password: string
+    password?: string | null
+    googleId?: string | null
+    authProvider?: string
     level?: number
     xp?: number
     lootboxes?: number
@@ -27972,7 +28086,9 @@ export namespace Prisma {
   export type UserUpdateWithoutSentTradesInput = {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    authProvider?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
     xp?: IntFieldUpdateOperationsInput | number
     lootboxes?: IntFieldUpdateOperationsInput | number
@@ -27995,7 +28111,9 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    authProvider?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
     xp?: IntFieldUpdateOperationsInput | number
     lootboxes?: IntFieldUpdateOperationsInput | number
@@ -28028,7 +28146,9 @@ export namespace Prisma {
   export type UserUpdateWithoutReceivedTradesInput = {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    authProvider?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
     xp?: IntFieldUpdateOperationsInput | number
     lootboxes?: IntFieldUpdateOperationsInput | number
@@ -28051,7 +28171,9 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    authProvider?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
     xp?: IntFieldUpdateOperationsInput | number
     lootboxes?: IntFieldUpdateOperationsInput | number
@@ -28253,7 +28375,9 @@ export namespace Prisma {
   export type UserCreateWithoutSentFriendshipsInput = {
     name: string
     email: string
-    password: string
+    password?: string | null
+    googleId?: string | null
+    authProvider?: string
     level?: number
     xp?: number
     lootboxes?: number
@@ -28276,7 +28400,9 @@ export namespace Prisma {
     id?: number
     name: string
     email: string
-    password: string
+    password?: string | null
+    googleId?: string | null
+    authProvider?: string
     level?: number
     xp?: number
     lootboxes?: number
@@ -28303,7 +28429,9 @@ export namespace Prisma {
   export type UserCreateWithoutReceivedFriendshipsInput = {
     name: string
     email: string
-    password: string
+    password?: string | null
+    googleId?: string | null
+    authProvider?: string
     level?: number
     xp?: number
     lootboxes?: number
@@ -28326,7 +28454,9 @@ export namespace Prisma {
     id?: number
     name: string
     email: string
-    password: string
+    password?: string | null
+    googleId?: string | null
+    authProvider?: string
     level?: number
     xp?: number
     lootboxes?: number
@@ -28364,7 +28494,9 @@ export namespace Prisma {
   export type UserUpdateWithoutSentFriendshipsInput = {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    authProvider?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
     xp?: IntFieldUpdateOperationsInput | number
     lootboxes?: IntFieldUpdateOperationsInput | number
@@ -28387,7 +28519,9 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    authProvider?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
     xp?: IntFieldUpdateOperationsInput | number
     lootboxes?: IntFieldUpdateOperationsInput | number
@@ -28420,7 +28554,9 @@ export namespace Prisma {
   export type UserUpdateWithoutReceivedFriendshipsInput = {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    authProvider?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
     xp?: IntFieldUpdateOperationsInput | number
     lootboxes?: IntFieldUpdateOperationsInput | number
@@ -28443,7 +28579,9 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    authProvider?: StringFieldUpdateOperationsInput | string
     level?: IntFieldUpdateOperationsInput | number
     xp?: IntFieldUpdateOperationsInput | number
     lootboxes?: IntFieldUpdateOperationsInput | number
