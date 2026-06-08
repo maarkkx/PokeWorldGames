@@ -43,10 +43,13 @@ const INITIAL_STATE = {
   columns: [],
   cells: [],
   usedPokemonIds: [],
+  remainingLives: 9,
+  correctCount: 0,
   selectedPosition: null,
   searchQuery: '',
   searchResults: [],
   feedback: '',
+  feedbackIsError: false,
   lastXpEarned: 0,
   error: '',
   canResume: false,
@@ -69,10 +72,13 @@ function applyGameSession(prev, session) {
     columns: session.columns,
     cells: session.cells,
     usedPokemonIds: session.usedPokemonIds,
+    remainingLives: session.remainingLives ?? 9,
+    correctCount: session.correctCount ?? 0,
     selectedPosition: null,
     searchQuery: '',
     searchResults: [],
     feedback: '',
+    feedbackIsError: false,
     lastXpEarned: 0,
     error: '',
     canResume: false,
@@ -289,18 +295,19 @@ export default function PokedokuPage() {
             : cell,
         );
 
-        const nextUsedIds = result.correct
-          ? [...new Set([...prev.usedPokemonIds, pokemon.id])]
-          : prev.usedPokemonIds;
+        const nextUsedIds = [...new Set([...prev.usedPokemonIds, pokemon.id])];
 
         return {
           ...prev,
           cells: nextCells,
           usedPokemonIds: nextUsedIds,
+          remainingLives: result.remainingLives ?? prev.remainingLives,
+          correctCount: result.correctCount ?? prev.correctCount,
           selectedPosition: null,
           searchQuery: '',
           searchResults: [],
           feedback: result.message,
+          feedbackIsError: !result.correct && result.status === 'ACTIVE',
           lastXpEarned: result.xpEarned ?? 0,
           phase:
             result.status === 'WON'
@@ -311,7 +318,7 @@ export default function PokedokuPage() {
         };
       });
 
-      if (result.status === 'WON') {
+      if ((result.xpEarned ?? 0) > 0) {
         await refreshProfile();
       }
     } catch (err) {
@@ -390,6 +397,9 @@ export default function PokedokuPage() {
                   <span className="pokedoku-hud__badge">{t(KEYS.pokedoku.pageLabel)}</span>
                   <p className="pokedoku-hud__progress-text">
                     {t(KEYS.pokedoku.progress, { filled: filledCount, total: 9 })}
+                  </p>
+                  <p className="pokedoku-hud__lives" aria-label={t(KEYS.pokedoku.livesAria)}>
+                    {t(KEYS.pokedoku.lives, { remaining: state.remainingLives, total: 9 })}
                   </p>
                 </div>
                 <ProgressBar
@@ -553,7 +563,14 @@ export default function PokedokuPage() {
               ) : null}
 
               {state.feedback ? (
-                <p className="pokedoku-feedback pokedoku-feedback--inline pokedoku-feedback--success" role="status">
+                <p
+                  className={`pokedoku-feedback pokedoku-feedback--inline ${
+                    state.feedbackIsError
+                      ? 'pokedoku-feedback--error'
+                      : 'pokedoku-feedback--success'
+                  }`}
+                  role="status"
+                >
                   {state.feedback}
                 </p>
               ) : null}
@@ -575,14 +592,28 @@ export default function PokedokuPage() {
               role="status"
             >
               <p>
-                {state.phase === PHASE.WON ? t(KEYS.pokedoku.wonTitle) : t(KEYS.pokedoku.lostTitle)}
+                {state.phase === PHASE.WON
+                  ? t(KEYS.pokedoku.wonTitle)
+                  : t(KEYS.pokedoku.lostTitle)}
               </p>
               {state.phase === PHASE.WON ? (
                 <p className="pokedoku-feedback__hint">
                   {t(KEYS.pokedoku.xpEarned, { count: state.lastXpEarned })}
                 </p>
               ) : (
-                <p className="pokedoku-feedback__hint">{t(KEYS.pokedoku.lostHint)}</p>
+                <>
+                  <p className="pokedoku-feedback__hint">
+                    {t(KEYS.pokedoku.partialSummary, {
+                      correct: state.correctCount,
+                      total: 9,
+                    })}
+                  </p>
+                  {state.lastXpEarned > 0 ? (
+                    <p className="pokedoku-feedback__hint">
+                      {t(KEYS.pokedoku.xpEarned, { count: state.lastXpEarned })}
+                    </p>
+                  ) : null}
+                </>
               )}
             </div>
 

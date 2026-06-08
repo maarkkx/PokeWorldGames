@@ -22,6 +22,8 @@ function parseGamePayload(data) {
     columns: payload.columns ?? [],
     cells: payload.cells ?? [],
     usedPokemonIds: payload.usedPokemonIds ?? [],
+    remainingLives: payload.remainingLives ?? 9,
+    correctCount: payload.correctCount ?? 0,
   };
 }
 
@@ -42,6 +44,8 @@ function parseAnswerPayload(data) {
     status: response.status,
     xpEarned: response.xpEarned ?? 0,
     correct: response.correct ?? false,
+    correctCount: response.correctCount ?? 0,
+    remainingLives: response.remainingLives ?? 0,
     pokemon: response.pokemon ?? null,
   };
 }
