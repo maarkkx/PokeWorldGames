@@ -1,0 +1,81 @@
+.trainer-friend-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 16px 20px;
+  border-radius: 18px;
+  background: var(--color-card);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
+}
+
+.trainer-friend-actions--compact {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  align-items: flex-end;
+  gap: 8px;
+  min-width: 120px;
+}
+
+.trainer-friend-actions__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.trainer-friend-actions--compact .trainer-friend-actions__row {
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.trainer-friend-actions__row--stacked {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.trainer-friend-actions__badge {
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--color-primary);
+  background: rgba(220, 40, 40, 0.08);
+}
+
+.trainer-friend-actions--compact .trainer-friend-actions__badge {
+  padding: 5px 10px;
+  font-size: 11px;
+}
+
+.trainer-friend-actions__flash {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: right;
+  max-width: 200px;
+}
+
+.trainer-friend-actions--compact .trainer-friend-actions__flash {
+  font-size: 11px;
+  max-width: 160px;
+}
+
+.trainer-friend-actions__flash--ok {
+  color: #1f9d55;
+}
+
+.trainer-friend-actions__flash--error {
+  color: var(--color-error-text);
+}

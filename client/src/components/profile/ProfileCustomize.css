@@ -164,12 +164,20 @@
   font: inherit;
 }
 
+.profile-customize__grid-loading {
+  margin: 24px 0;
+  text-align: center;
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
 .profile-customize__avatar-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
   gap: 8px;
   max-height: 52vh;
   overflow: auto;
+  overscroll-behavior: contain;
 }
 
 .profile-customize__avatar-option {
@@ -185,6 +193,8 @@
   font-size: 10px;
   font-weight: 800;
   color: var(--color-text-muted);
+  content-visibility: auto;
+  contain-intrinsic-size: 80px 80px;
 }
 
 .profile-customize__avatar-option img {
@@ -201,4 +211,10 @@
 
 .profile-customize__avatar-option:hover {
   border-color: rgba(187, 0, 0, 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-customize__swatch {
+    transition: none;
+  }
 }

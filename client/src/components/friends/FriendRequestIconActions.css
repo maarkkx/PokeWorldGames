@@ -1,0 +1,63 @@
+.friend-request-icon-actions {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.friend-request-icon-actions__btn {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.12s ease;
+}
+
+.friend-request-icon-actions__btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.friend-request-icon-actions__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.friend-request-icon-actions__btn--accept {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+.friend-request-icon-actions__btn--accept:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--color-primary) 75%, #000);
+}
+
+.friend-request-icon-actions__btn--reject {
+  background: var(--color-white);
+  color: var(--color-primary);
+  border: 1px solid rgba(187, 0, 0, 0.28);
+}
+
+.friend-request-icon-actions__btn--reject:hover:not(:disabled) {
+  background: rgba(220, 40, 40, 0.08);
+  border-color: var(--color-primary);
+}
+
+.friend-request-icon-actions__btn:focus-visible {
+  outline: 3px solid rgba(220, 40, 40, 0.28);
+  outline-offset: 2px;
+}
+
+.friend-request-icon-actions__btn:active:not(:disabled) {
+  transform: scale(0.96);
+}

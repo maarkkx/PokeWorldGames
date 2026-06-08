@@ -1,15 +1,18 @@
-import { useEffect } from 'react';
+import { memo, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import './ProfileModal.css';
 
-export default function ProfileModal({ title, onClose, children, footer, closeLabel = 'Close' }) {
+function ProfileModal({ title, onClose, children, footer, closeLabel = 'Close' }) {
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
+
   useEffect(() => {
     const previous = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
 
     function onKeyDown(event) {
       if (event.key === 'Escape') {
-        onClose();
+        onCloseRef.current();
       }
     }
 
@@ -18,7 +21,7 @@ export default function ProfileModal({ title, onClose, children, footer, closeLa
       document.body.style.overflow = previous;
       window.removeEventListener('keydown', onKeyDown);
     };
-  }, [onClose]);
+  }, []);
 
   return createPortal(
     <div className="profile-modal" role="presentation" onMouseDown={onClose}>
@@ -49,3 +52,5 @@ export default function ProfileModal({ title, onClose, children, footer, closeLa
     document.body,
   );
 }
+
+export default memo(ProfileModal);

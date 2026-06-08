@@ -31,6 +31,15 @@ export const DEFAULT_INVENTORY_FILTERS = {
   ownership: OWNERSHIP_FILTER.ALL,
 };
 
+/** Pokédex inventory view — same filters as trade without ownership comparison. */
+export const POKEDEX_INVENTORY_DEFAULT_FILTERS = {
+  nameQuery: '',
+  types: [],
+  exactTypes: false,
+  sortBy: SORT_BY.POKEDEX,
+  sortDir: SORT_DIR.ASC,
+};
+
 function getPokemonTypeNames(entry) {
   return (entry.pokemon?.types ?? [])
     .map((typeEntry) => typeEntry?.name?.toLowerCase())

@@ -14,6 +14,19 @@ export async function login(email, password) {
   return data.token;
 }
 
+export async function loginWithGoogleIdToken(idToken) {
+  const data = await api('/auth/google_login', {
+    method: 'POST',
+    body: { idToken },
+  });
+
+  if (!data.success || !data.token) {
+    throw new Error(data.message ?? 'Google sign-in failed');
+  }
+
+  return data.token;
+}
+
 //request para hacer register
 export async function register({ name, email, password, confirmPassword }) {
   const data = await api('/auth/register', {

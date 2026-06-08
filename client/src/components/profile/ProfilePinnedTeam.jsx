@@ -28,6 +28,10 @@ export default function ProfilePinnedTeam({
   pinnedPokemons,
   onUpdated,
   onError,
+  readOnly = false,
+  titleKey = KEYS.profile.teamTitle,
+  subtitleKey = KEYS.profile.teamSubtitle,
+  teamAriaKey = KEYS.profile.teamAria,
 }) {
   const { t } = useI18n();
   const [isPickerOpen, setIsPickerOpen] = useState(false);
@@ -101,15 +105,20 @@ export default function ProfilePinnedTeam({
   );
 
   return (
-    <section className="profile-team" aria-label={t(KEYS.profile.teamAria)}>
+    <section
+      className={`profile-team${readOnly ? ' profile-team--readonly' : ''}`}
+      aria-label={t(teamAriaKey)}
+    >
       <header className="profile-team__head">
         <div>
-          <h2 className="profile-team__title">{t(KEYS.profile.teamTitle)}</h2>
-          <p className="profile-team__subtitle">{t(KEYS.profile.teamSubtitle)}</p>
+          <h2 className="profile-team__title">{t(titleKey)}</h2>
+          <p className="profile-team__subtitle">{t(subtitleKey)}</p>
         </div>
-        <Button type="button" variant="secondary" onClick={openPicker}>
-          {t(KEYS.profile.teamEdit)}
-        </Button>
+        {!readOnly ? (
+          <Button type="button" variant="secondary" onClick={openPicker}>
+            {t(KEYS.profile.teamEdit)}
+          </Button>
+        ) : null}
       </header>
 
       {success ? (
@@ -145,7 +154,7 @@ export default function ProfilePinnedTeam({
         ))}
       </ol>
 
-      {isPickerOpen ? (
+      {!readOnly && isPickerOpen ? (
         <ProfileModal
           title={t(KEYS.profile.teamPickerTitle)}
           closeLabel={t(KEYS.profile.avatarModalClose)}

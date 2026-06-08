@@ -14,6 +14,13 @@ export async function loginUser(email: string, password: string) {
 		};
 	}
 
+	if (!user.password) {
+		return {
+			success: false,
+			message: "Use Google sign-in"
+		};
+	}
+
 	//comprobacion de la contraseña
 	const isMatch = await bcrypt.compare(password, user.password);
 	if (!isMatch) {

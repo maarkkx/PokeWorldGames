@@ -8,6 +8,7 @@ export async function getUserByEmail(email: string) {
 			name: true,
 			email: true,
 			password: true,
+			authProvider: true,
 			admin: true
 		}
 	});

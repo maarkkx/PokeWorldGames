@@ -95,7 +95,7 @@ export async function resumeGame(userId: number): Promise<object> {
     const activeGame = await repository.getActiveGameWithPokemonByUserId(userId);
 
     if (!activeGame) {
-      throw new Error('There is no active game');
+      return { message: 'There is no active game' };
     }
 
     if (!activeGame.pokemon?.urlImage) {

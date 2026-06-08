@@ -18,6 +18,12 @@ const GUESS_SHINY_BULLETS = [
   KEYS.games.guessShiny.bulletXp,
 ];
 
+const POKEDOKU_BULLETS = [
+  KEYS.games.pokedoku.bulletGrid,
+  KEYS.games.pokedoku.bulletConditions,
+  KEYS.games.pokedoku.bulletXp,
+];
+
 export default function GamesPage() {
   const { t } = useI18n();
 
@@ -67,6 +73,30 @@ export default function GamesPage() {
               </ul>
               <div className="game-mode-card__actions">
                 <Button className="game-mode-card__cta" to={ROUTES.guessShiny}>
+                  {t(KEYS.games.play)}
+                </Button>
+              </div>
+            </div>
+          </article>
+
+          <article className="game-mode-card">
+            <div className="game-mode-card__visual game-mode-card__visual--pokedoku" aria-hidden="true">
+              <div className="pokedoku-grid-preview">
+                {Array.from({ length: 9 }, (_, index) => (
+                  <span key={index} className="pokedoku-grid-preview__cell" />
+                ))}
+              </div>
+            </div>
+            <div className="game-mode-card__body">
+              <h2 className="game-mode-card__title">{t(KEYS.games.pokedoku.title)}</h2>
+              <p className="game-mode-card__desc">{t(KEYS.games.pokedoku.description)}</p>
+              <ul className="game-mode-card__bullets">
+                {POKEDOKU_BULLETS.map((key) => (
+                  <li key={key}>{t(key)}</li>
+                ))}
+              </ul>
+              <div className="game-mode-card__actions">
+                <Button className="game-mode-card__cta" to={ROUTES.pokedoku}>
                   {t(KEYS.games.play)}
                 </Button>
               </div>

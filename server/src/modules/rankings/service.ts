@@ -1,4 +1,11 @@
 import * as repository from './repository';
+import { formatRankingEntry, type RankingUserRow } from './format';
+
+function mapRankingEntries(entries: Array<Partial<RankingUserRow>>) {
+  return entries
+    .map((entry) => formatRankingEntry(entry))
+    .filter((entry): entry is NonNullable<ReturnType<typeof formatRankingEntry>> => entry != null);
+}
 
 export async function getAllRankings() {
   try {
@@ -21,9 +28,9 @@ export async function getAllRankings() {
     }
 
     return {
-      level,
-      numberPokemons,
-      uniquePokemons
+      level: mapRankingEntries(level),
+      numberPokemons: mapRankingEntries(numberPokemons),
+      uniquePokemons: mapRankingEntries(uniquePokemons),
     }
 
   } catch (error) {

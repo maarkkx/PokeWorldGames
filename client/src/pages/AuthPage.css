@@ -86,3 +86,40 @@
 .auth-page__switch a:hover {
   text-decoration: underline;
 }
+
+.auth-page__divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 24px 0 16px;
+  color: var(--color-text-muted);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.auth-page__divider::before,
+.auth-page__divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.auth-google-button {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 16px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+.auth-google-button__icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}

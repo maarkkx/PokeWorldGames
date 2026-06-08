@@ -39,6 +39,20 @@
   padding: 32px 36px;
 }
 
+.profile-hero--with-aside .profile-hero__inner {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: start;
+}
+
+.profile-hero__aside {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding-top: 4px;
+  flex-shrink: 0;
+}
+
 .profile-hero__avatar-wrap {
   position: relative;
   flex-shrink: 0;
@@ -149,11 +163,18 @@
 }
 
 @media (max-width: 720px) {
-  .profile-hero__inner {
+  .profile-hero__inner,
+  .profile-hero--with-aside .profile-hero__inner {
     grid-template-columns: 1fr;
     justify-items: center;
     text-align: center;
     padding: 28px 22px;
+  }
+
+  .profile-hero__aside {
+    align-items: center;
+    width: 100%;
+    padding-top: 12px;
   }
 
   .profile-hero__chips {

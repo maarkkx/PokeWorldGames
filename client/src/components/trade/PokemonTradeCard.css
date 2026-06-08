@@ -35,6 +35,15 @@
   opacity: 0.55;
 }
 
+.pokemon-trade-card--readonly .pokemon-trade-card__main {
+  cursor: default;
+}
+
+.pokemon-trade-card--readonly:hover {
+  transform: none;
+  box-shadow: var(--shadow-card);
+}
+
 .pokemon-trade-card__main {
   display: flex;
   flex-direction: column;
