@@ -6,9 +6,12 @@ import {
   GoogleAuthProvider,
   onAuthStateChanged,
   setPersistence,
+  signInWithPopup,
   signInWithRedirect,
   signOut,
 } from 'firebase/auth';
+
+export const GOOGLE_REDIRECT_PENDING_KEY = 'pwg-google-redirect-pending';
 
 const requiredKeys = [
   'VITE_FIREBASE_API_KEY',
@@ -43,6 +46,7 @@ function createAuthBundle() {
   return {
     auth,
     googleProvider,
+    signInWithPopup,
     signInWithRedirect,
     getRedirectResult,
     onAuthStateChanged,
@@ -68,6 +72,22 @@ export function prefetchFirebaseAuth() {
   if (isFirebaseConfigured()) {
     getFirebaseAuthBundle();
   }
+}
+
+export function isGoogleRedirectPending() {
+  try {
+    return sessionStorage.getItem(GOOGLE_REDIRECT_PENDING_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+
+export function markGoogleRedirectPending() {
+  sessionStorage.setItem(GOOGLE_REDIRECT_PENDING_KEY, '1');
+}
+
+export function clearGoogleRedirectPending() {
+  sessionStorage.removeItem(GOOGLE_REDIRECT_PENDING_KEY);
 }
 
 /** Single shared call per page load (StrictMode-safe). */

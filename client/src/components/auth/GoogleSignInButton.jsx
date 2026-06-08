@@ -38,7 +38,11 @@ export default function GoogleSignInButton({ disabled = false, onSuccess, onErro
     setSubmitting(true);
 
     try {
-      await loginWithGoogle();
+      const result = await loginWithGoogle();
+      if (result?.redirected) {
+        return;
+      }
+
       onSuccess?.();
     } catch (submitError) {
       if (isGoogleSignInCancelled(submitError)) {
