@@ -1,7 +1,14 @@
-export function isGooglePopupCancelled(error) {
+export function isGoogleSignInCancelled(error) {
   const code = error?.code ?? '';
-  return code === 'auth/popup-closed-by-user' || code === 'auth/cancelled-popup-request';
+  return (
+    code === 'auth/popup-closed-by-user' ||
+    code === 'auth/cancelled-popup-request' ||
+    code === 'auth/user-cancelled'
+  );
 }
+
+/** @deprecated Use isGoogleSignInCancelled */
+export const isGooglePopupCancelled = isGoogleSignInCancelled;
 
 export function mapAuthErrorMessage(error, t, KEYS) {
   const code = typeof error === 'string' ? '' : error?.code ?? '';

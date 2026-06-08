@@ -1,8 +1,12 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { login as loginRequest, loginWithGoogleIdToken } from '../api/auth.js';
 import { fetchProfile } from '../api/profile.js';
-import { getFirebaseAuthBundle, isFirebaseConfigured } from '../config/firebase.js';
-import { isGooglePopupCancelled } from '../utils/authErrors.js';
+import {
+  getFirebaseAuthBundle,
+  isFirebaseConfigured,
+  prefetchFirebaseAuth,
+} from '../config/firebase.js';
+import { isGoogleSignInCancelled } from '../utils/authErrors.js';
 import { clearStorage, readStorage, writeStorage } from '../utils/storage.js';
 
 const AuthContext = createContext(null);
@@ -11,12 +15,70 @@ export function AuthProvider({ children }) {
   const [token, setToken] = useState(() => readStorage());
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(Boolean(readStorage()));
+  const [googleRedirectError, setGoogleRedirectError] = useState('');
 
   const loadProfile = useCallback(async (activeToken) => {
     const profile = await fetchProfile(activeToken);
     setUser(profile);
     return profile;
   }, []);
+
+  const persistGoogleSession = useCallback(
+    async (idToken) => {
+      const nextToken = await loginWithGoogleIdToken(idToken);
+      writeStorage(nextToken);
+      setToken(nextToken);
+      setLoading(true);
+      const profile = await loadProfile(nextToken);
+      setLoading(false);
+      return profile;
+    },
+    [loadProfile],
+  );
+
+  useEffect(() => {
+    prefetchFirebaseAuth();
+  }, []);
+
+  useEffect(() => {
+    if (!isFirebaseConfigured()) {
+      return;
+    }
+
+    let cancelled = false;
+
+    async function completeGoogleRedirect() {
+      try {
+        const { auth, getRedirectResult: resolveRedirectResult } = getFirebaseAuthBundle();
+        const result = await resolveRedirectResult(auth);
+
+        if (cancelled || !result) {
+          return;
+        }
+
+        setLoading(true);
+        setGoogleRedirectError('');
+        const idToken = await result.user.getIdToken();
+        await persistGoogleSession(idToken);
+      } catch (error) {
+        if (cancelled || isGoogleSignInCancelled(error)) {
+          return;
+        }
+
+        setGoogleRedirectError(error instanceof Error ? error : new Error(String(error)));
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
+    }
+
+    completeGoogleRedirect();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [persistGoogleSession]);
 
   useEffect(() => {
     if (!token) {
@@ -60,23 +122,17 @@ export function AuthProvider({ children }) {
       throw new Error('Firebase is not configured');
     }
 
-    const { auth, googleProvider, signInWithPopup } = await getFirebaseAuthBundle();
-    const credential = await signInWithPopup(auth, googleProvider);
-    const idToken = await credential.user.getIdToken();
-    const nextToken = await loginWithGoogleIdToken(idToken);
-    writeStorage(nextToken);
-    setToken(nextToken);
-    setLoading(true);
-    const profile = await loadProfile(nextToken);
-    setLoading(false);
-    return profile;
-  }, [loadProfile]);
+    setGoogleRedirectError('');
+    const { auth, googleProvider, signInWithRedirect: startGoogleRedirect } =
+      getFirebaseAuthBundle();
+    await startGoogleRedirect(auth, googleProvider);
+  }, []);
 
   const logout = useCallback(async () => {
     if (isFirebaseConfigured()) {
       try {
-        const { auth, signOut } = await getFirebaseAuthBundle();
-        await signOut(auth);
+        const { auth, signOut: firebaseSignOut } = getFirebaseAuthBundle();
+        await firebaseSignOut(auth);
       } catch {
         // Ignore Firebase logout errors; local session must still clear.
       }
@@ -96,6 +152,10 @@ export function AuthProvider({ children }) {
     return loadProfile(token);
   }, [token, loadProfile]);
 
+  const clearGoogleRedirectError = useCallback(() => {
+    setGoogleRedirectError('');
+  }, []);
+
   const value = useMemo(
     () => ({
       token,
@@ -107,8 +167,20 @@ export function AuthProvider({ children }) {
       logout,
       refreshProfile,
       isGoogleSignInAvailable: isFirebaseConfigured(),
+      googleRedirectError,
+      clearGoogleRedirectError,
     }),
-    [token, user, loading, login, loginWithGoogle, logout, refreshProfile],
+    [
+      token,
+      user,
+      loading,
+      login,
+      loginWithGoogle,
+      logout,
+      refreshProfile,
+      googleRedirectError,
+      clearGoogleRedirectError,
+    ],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
@@ -124,4 +196,4 @@ export function useAuth() {
   return context;
 }
 
-export { isGooglePopupCancelled };
+export { isGoogleSignInCancelled as isGooglePopupCancelled } from '../utils/authErrors.js';

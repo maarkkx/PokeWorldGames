@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { register } from '../../api/auth.js';
+import { useAuth } from '../../context/AuthContext.jsx';
 import { useI18n } from '../../context/I18nContext.jsx';
 import GoogleSignInButton from '../../components/auth/GoogleSignInButton.jsx';
 import { KEYS } from '../../i18n/keys.js';
+import { mapAuthErrorMessage } from '../../utils/authErrors.js';
 import { validateRegisterForm } from '../../utils/validation.js';
 import LanguageSwitcher from '../../components/layout/LanguageSwitcher.jsx';
 import BrandLogo from '../../components/ui/BrandLogo.jsx';
@@ -13,6 +15,7 @@ import '../AuthPage.css';
 
 export default function RegisterPage() {
   const navigate = useNavigate();
+  const { googleRedirectError, clearGoogleRedirectError } = useAuth();
   const { t } = useI18n();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -20,6 +23,15 @@ export default function RegisterPage() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (!googleRedirectError) {
+      return;
+    }
+
+    setError(mapAuthErrorMessage(googleRedirectError, t, KEYS));
+    clearGoogleRedirectError();
+  }, [googleRedirectError, clearGoogleRedirectError, t]);
 
   async function handleSubmit(event) {
     event.preventDefault();

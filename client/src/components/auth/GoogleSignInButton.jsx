@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useI18n } from '../../context/I18nContext.jsx';
-import { isGooglePopupCancelled, useAuth } from '../../context/AuthContext.jsx';
+import { isGoogleSignInCancelled } from '../../utils/authErrors.js';
+import { useAuth } from '../../context/AuthContext.jsx';
 import { KEYS } from '../../i18n/keys.js';
 import { mapAuthErrorMessage } from '../../utils/authErrors.js';
 import Button from '../ui/Button.jsx';
@@ -40,7 +41,7 @@ export default function GoogleSignInButton({ disabled = false, onSuccess, onErro
       await loginWithGoogle();
       onSuccess?.();
     } catch (submitError) {
-      if (isGooglePopupCancelled(submitError)) {
+      if (isGoogleSignInCancelled(submitError)) {
         return;
       }
 

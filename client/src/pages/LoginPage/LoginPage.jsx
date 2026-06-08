@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { useI18n } from '../../context/I18nContext.jsx';
@@ -15,12 +15,21 @@ import '../AuthPage.css';
 export default function LoginPage() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { login } = useAuth();
+  const { login, googleRedirectError, clearGoogleRedirectError } = useAuth();
   const { t } = useI18n();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (!googleRedirectError) {
+      return;
+    }
+
+    setError(mapAuthErrorMessage(googleRedirectError, t, KEYS));
+    clearGoogleRedirectError();
+  }, [googleRedirectError, clearGoogleRedirectError, t]);
 
   const successMessageKey = location.state?.messageKey;
   const successMessage = successMessageKey ? t(successMessageKey) : null;
