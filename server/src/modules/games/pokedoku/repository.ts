@@ -137,7 +137,7 @@ export async function updateGameStatus(
   });
 }
 
-export async function countAnsweredCells(gameInternalId: number) {
+export async function countCorrectCells(gameInternalId: number) {
   return prisma.pokedokuGameCell.count({
     where: {
       gameInternalId,
@@ -147,17 +147,29 @@ export async function countAnsweredCells(gameInternalId: number) {
   });
 }
 
-export async function searchPokemonForCell(
-  row: PuzzleCondition,
-  column: PuzzleCondition,
-  query: string,
-  excludeIds: number[],
-  limit = 8,
-) {
+export async function countAnsweredCells(gameInternalId: number) {
+  return prisma.pokedokuGameCell.count({
+    where: {
+      gameInternalId,
+      answerPokemonId: { not: null },
+    },
+  });
+}
+
+export async function countWrongCells(gameInternalId: number) {
+  return prisma.pokedokuGameCell.count({
+    where: {
+      gameInternalId,
+      answerPokemonId: { not: null },
+      isCorrect: false,
+    },
+  });
+}
+
+export async function searchPokemonByName(query: string, excludeIds: number[], limit = 8) {
   return prisma.pokemon.findMany({
     where: {
       AND: [
-        buildPokemonWhereForConditions(row, column),
         {
           name: {
             contains: query,

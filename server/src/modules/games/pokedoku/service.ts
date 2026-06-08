@@ -1,5 +1,9 @@
 import * as expManager from '../experience_manager/manager';
-import { CELL_COUNT, TOTAL_WIN_XP } from './constants';
+import {
+  CELL_COUNT,
+  MAX_LIVES,
+  calculatePokedokuXp,
+} from './constants';
 import { generatePuzzle, pokemonMatchesCellConditions, type PuzzleCondition } from './puzzle_generator';
 import * as repository from './repository';
 import type { GameWithCells } from './repository';
@@ -19,6 +23,14 @@ type CellDTO = {
     urlImage: string | null;
   } | null;
 };
+
+function countWrongFromCells(cells: GameWithCells['cells']): number {
+  return cells.filter((cell) => cell.answerPokemonId != null && cell.isCorrect === false).length;
+}
+
+function countCorrectFromCells(cells: GameWithCells['cells']): number {
+  return cells.filter((cell) => cell.isCorrect === true).length;
+}
 
 function extractRowsFromCells(cells: GameWithCells['cells']): ConditionDTO[] {
   return [1, 4, 7].map((position) => {
@@ -70,6 +82,9 @@ function buildGamePayload(game: GameWithCells) {
     .map((cell) => cell.answerPokemonId)
     .filter((pokemonId): pokemonId is number => pokemonId != null);
 
+  const wrongCount = countWrongFromCells(game.cells);
+  const correctCount = countCorrectFromCells(game.cells);
+
   return {
     gameId: game.gameId,
     status: game.status,
@@ -77,6 +92,8 @@ function buildGamePayload(game: GameWithCells) {
     columns: extractColumnsFromCells(game.cells),
     cells: game.cells.map(mapCellToDTO),
     usedPokemonIds,
+    remainingLives: MAX_LIVES - wrongCount,
+    correctCount,
   };
 }
 
@@ -93,6 +110,38 @@ function getCellConditions(cell: GameWithCells['cells'][number]): {
       type: cell.columnConditionType,
       value: cell.columnConditionValue,
     },
+  };
+}
+
+async function finalizeGame(
+  gameId: string,
+  gameInternalId: number,
+  userId: number,
+): Promise<{
+  status: 'WON' | 'LOST';
+  xpEarned: number;
+  correctCount: number;
+  remainingLives: number;
+}> {
+  const correctCount = await repository.countCorrectCells(gameInternalId);
+  const wrongCount = await repository.countWrongCells(gameInternalId);
+  const xpEarned = calculatePokedokuXp(correctCount);
+  const status = correctCount === CELL_COUNT ? 'WON' : 'LOST';
+
+  await repository.updateGameStatus(gameId, {
+    status,
+    xpEarned,
+  });
+
+  if (xpEarned > 0) {
+    await expManager.addXP(userId, xpEarned);
+  }
+
+  return {
+    status,
+    xpEarned,
+    correctCount,
+    remainingLives: MAX_LIVES - wrongCount,
   };
 }
 
@@ -173,9 +222,8 @@ export async function searchPokemonForCell(
       throw new Error('Cell already answered');
     }
 
-    const { row, column } = getCellConditions(cell);
     const excludeIds = await repository.getUsedPokemonIds(game.id);
-    const results = await repository.searchPokemonForCell(row, column, trimmed, excludeIds, 8);
+    const results = await repository.searchPokemonByName(trimmed, excludeIds, 8);
 
     return {
       names: results.map((pokemon) => pokemon.name),
@@ -245,37 +293,34 @@ export async function submitAnswer(
       answeredAt,
     });
 
-    if (!isCorrect) {
-      await repository.updateGameStatus(gameId, {
-        status: 'LOST',
-        xpEarned: 0,
-      });
+    const answeredCount = await repository.countAnsweredCells(game.id);
+    const wrongCount = await repository.countWrongCells(game.id);
+    const remainingLives = MAX_LIVES - wrongCount;
+
+    if (answeredCount >= CELL_COUNT) {
+      const result = await finalizeGame(gameId, game.id, userId);
 
       return {
-        message: 'Incorrect answer',
+        message: isCorrect ? 'Correct!' : 'Incorrect answer',
         position,
-        status: 'LOST',
-        xpEarned: 0,
-        correct: false,
+        status: result.status,
+        xpEarned: result.xpEarned,
+        correct: isCorrect,
+        correctCount: result.correctCount,
+        remainingLives: result.remainingLives,
         pokemon,
       };
     }
 
-    const correctCount = await repository.countAnsweredCells(game.id);
-
-    if (correctCount >= CELL_COUNT) {
-      await repository.updateGameStatus(gameId, {
-        status: 'WON',
-        xpEarned: TOTAL_WIN_XP,
-      });
-      await expManager.addXP(userId, TOTAL_WIN_XP);
-
+    if (!isCorrect) {
       return {
-        message: 'Correct!',
+        message: 'Incorrect answer',
         position,
-        status: 'WON',
-        xpEarned: TOTAL_WIN_XP,
-        correct: true,
+        status: 'ACTIVE',
+        xpEarned: 0,
+        correct: false,
+        correctCount: await repository.countCorrectCells(game.id),
+        remainingLives,
         pokemon,
       };
     }
@@ -286,6 +331,8 @@ export async function submitAnswer(
       status: 'ACTIVE',
       xpEarned: 0,
       correct: true,
+      correctCount: await repository.countCorrectCells(game.id),
+      remainingLives,
       pokemon,
     };
   } catch (error) {
