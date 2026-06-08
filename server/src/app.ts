@@ -3,6 +3,7 @@ import { corsMiddleware } from './middleware/cors';
 import { registerClientApp } from './middleware/serveClient';
 import guessRouter from './modules/games/guess_pokemon/router';
 import shinyRouter from './modules/games/guess_shiny/router';
+import pokedokuRouter from './modules/games/pokedoku/router';
 import auth from './modules/auth/router';
 import lootbox from './modules/lootbox/router';
 import ranking from './modules/rankings/router';
@@ -23,6 +24,7 @@ app.get('/', (_req, res) => {
 //Juegos
 app.use('/guess-pokemon', guessRouter);
 app.use('/guess-shiny', shinyRouter);
+app.use('/pokedoku', pokedokuRouter);
 
 //User
 app.use('/auth', auth);

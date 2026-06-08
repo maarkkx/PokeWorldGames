@@ -17,6 +17,7 @@ export const ROUTES = {
   guessPokemon: '/games/guess-pokemon',
   guessPokemonRules: '/games/guess-pokemon/rules',
   guessShiny: '/games/guess-shiny',
+  pokedoku: '/games/pokedoku',
   trade: '/trade',
   friends: '/friends',
   lootboxes: '/lootboxes',
