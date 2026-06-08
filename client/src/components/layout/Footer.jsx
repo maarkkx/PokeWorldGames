@@ -32,7 +32,6 @@ export default function Footer() {
           <div className="app-footer__col">
             <p className="app-footer__col-title">{t(KEYS.footer.support)}</p>
             <FooterLinkItem>{t(KEYS.footer.helpCenter)}</FooterLinkItem>
-            <FooterLinkItem>{t(KEYS.footer.gameRules)}</FooterLinkItem>
             <FooterLinkItem>{t(KEYS.footer.tradeSafety)}</FooterLinkItem>
             <FooterLinkItem>{t(KEYS.footer.bugReport)}</FooterLinkItem>
           </div>
