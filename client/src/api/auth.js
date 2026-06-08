@@ -1,4 +1,4 @@
-import { api } from './client.js';
+import { api, ApiError } from './client.js';
 
 //request para hacer login
 export async function login(email, password) {
@@ -15,16 +15,24 @@ export async function login(email, password) {
 }
 
 export async function loginWithGoogleIdToken(idToken) {
-  const data = await api('/auth/google_login', {
-    method: 'POST',
-    body: { idToken },
-  });
+  try {
+    const data = await api('/auth/google_login', {
+      method: 'POST',
+      body: { idToken },
+    });
 
-  if (!data.success || !data.token) {
-    throw new Error(data.message ?? 'Google sign-in failed');
+    if (!data.success || !data.token) {
+      throw new Error(data.message ?? 'Google sign-in failed');
+    }
+
+    return data.token;
+  } catch (error) {
+    if (error instanceof ApiError) {
+      throw new Error(error.message || 'Google sign-in failed');
+    }
+
+    throw error;
   }
-
-  return data.token;
 }
 
 //request para hacer register

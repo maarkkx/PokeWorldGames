@@ -1,21 +1,60 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { login as loginRequest, loginWithGoogleIdToken } from '../api/auth.js';
 import { fetchProfile } from '../api/profile.js';
 import {
   getFirebaseAuthBundle,
   isFirebaseConfigured,
   prefetchFirebaseAuth,
+  resetGoogleRedirectState,
+  resolveGoogleRedirectResult,
 } from '../config/firebase.js';
 import { isGoogleSignInCancelled } from '../utils/authErrors.js';
 import { clearStorage, readStorage, writeStorage } from '../utils/storage.js';
 
 const AuthContext = createContext(null);
 
+function waitForFirebaseUser(auth, onAuthStateChanged, timeoutMs = 5000) {
+  if (auth.currentUser) {
+    return Promise.resolve(auth.currentUser);
+  }
+
+  return new Promise((resolve) => {
+    let settled = false;
+
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (!user || settled) {
+        return;
+      }
+
+      settled = true;
+      unsubscribe();
+      resolve(user);
+    });
+
+    window.setTimeout(() => {
+      if (settled) {
+        return;
+      }
+
+      settled = true;
+      unsubscribe();
+      resolve(auth.currentUser);
+    }, timeoutMs);
+  });
+}
+
 export function AuthProvider({ children }) {
   const [token, setToken] = useState(() => readStorage());
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(Boolean(readStorage()));
+  const [loading, setLoading] = useState(() => {
+    if (readStorage()) {
+      return true;
+    }
+
+    return isFirebaseConfigured();
+  });
   const [googleRedirectError, setGoogleRedirectError] = useState('');
+  const googleExchangeRef = useRef(false);
 
   const loadProfile = useCallback(async (activeToken) => {
     const profile = await fetchProfile(activeToken);
@@ -23,51 +62,71 @@ export function AuthProvider({ children }) {
     return profile;
   }, []);
 
-  const persistGoogleSession = useCallback(
-    async (idToken) => {
+  const exchangeFirebaseUser = useCallback(async (firebaseUser) => {
+    if (googleExchangeRef.current || readStorage()) {
+      return false;
+    }
+
+    googleExchangeRef.current = true;
+
+    try {
+      setLoading(true);
+      setGoogleRedirectError('');
+      const idToken = await firebaseUser.getIdToken();
       const nextToken = await loginWithGoogleIdToken(idToken);
       writeStorage(nextToken);
       setToken(nextToken);
-      setLoading(true);
-      const profile = await loadProfile(nextToken);
-      setLoading(false);
-      return profile;
-    },
-    [loadProfile],
-  );
+      return true;
+    } catch (error) {
+      googleExchangeRef.current = false;
+
+      if (!isGoogleSignInCancelled(error)) {
+        setGoogleRedirectError(error instanceof Error ? error : new Error(String(error)));
+      }
+
+      return false;
+    }
+  }, []);
 
   useEffect(() => {
     prefetchFirebaseAuth();
   }, []);
 
   useEffect(() => {
-    if (!isFirebaseConfigured()) {
-      return;
+    if (!isFirebaseConfigured() || readStorage()) {
+      return undefined;
     }
 
     let cancelled = false;
 
     async function completeGoogleRedirect() {
+      setLoading(true);
+
       try {
-        const { auth, getRedirectResult: resolveRedirectResult } = getFirebaseAuthBundle();
-        const result = await resolveRedirectResult(auth);
+        const { auth, onAuthStateChanged: watchAuthState } = getFirebaseAuthBundle();
+        const redirectResult = await resolveGoogleRedirectResult(auth);
 
-        if (cancelled || !result) {
+        if (cancelled || readStorage()) {
           return;
         }
 
-        setLoading(true);
-        setGoogleRedirectError('');
-        const idToken = await result.user.getIdToken();
-        await persistGoogleSession(idToken);
+        if (redirectResult?.user) {
+          await exchangeFirebaseUser(redirectResult.user);
+          return;
+        }
+
+        const firebaseUser = await waitForFirebaseUser(auth, watchAuthState);
+        if (cancelled || readStorage() || !firebaseUser) {
+          return;
+        }
+
+        await exchangeFirebaseUser(firebaseUser);
       } catch (error) {
-        if (cancelled || isGoogleSignInCancelled(error)) {
-          return;
+        if (!cancelled && !isGoogleSignInCancelled(error)) {
+          setGoogleRedirectError(error instanceof Error ? error : new Error(String(error)));
         }
-
-        setGoogleRedirectError(error instanceof Error ? error : new Error(String(error)));
       } finally {
-        if (!cancelled) {
+        if (!cancelled && !readStorage()) {
           setLoading(false);
         }
       }
@@ -78,12 +137,15 @@ export function AuthProvider({ children }) {
     return () => {
       cancelled = true;
     };
-  }, [persistGoogleSession]);
+  }, [exchangeFirebaseUser]);
 
   useEffect(() => {
     if (!token) {
-      setLoading(false);
-      return;
+      if (!isFirebaseConfigured()) {
+        setLoading(false);
+      }
+
+      return undefined;
     }
 
     let cancelled = false;
@@ -94,6 +156,7 @@ export function AuthProvider({ children }) {
           clearStorage();
           setToken(null);
           setUser(null);
+          googleExchangeRef.current = false;
         }
       })
       .finally(() => {
@@ -123,12 +186,25 @@ export function AuthProvider({ children }) {
     }
 
     setGoogleRedirectError('');
-    const { auth, googleProvider, signInWithRedirect: startGoogleRedirect } =
-      getFirebaseAuthBundle();
+    googleExchangeRef.current = false;
+    resetGoogleRedirectState();
+
+    const {
+      auth,
+      googleProvider,
+      signInWithRedirect: startGoogleRedirect,
+      setPersistence,
+      browserLocalPersistence,
+    } = getFirebaseAuthBundle();
+
+    await setPersistence(auth, browserLocalPersistence);
     await startGoogleRedirect(auth, googleProvider);
   }, []);
 
   const logout = useCallback(async () => {
+    googleExchangeRef.current = false;
+    resetGoogleRedirectState();
+
     if (isFirebaseConfigured()) {
       try {
         const { auth, signOut: firebaseSignOut } = getFirebaseAuthBundle();

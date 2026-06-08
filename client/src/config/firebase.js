@@ -1,8 +1,11 @@
 import { getApp, getApps, initializeApp } from 'firebase/app';
 import {
+  browserLocalPersistence,
   getAuth,
   getRedirectResult,
   GoogleAuthProvider,
+  onAuthStateChanged,
+  setPersistence,
   signInWithRedirect,
   signOut,
 } from 'firebase/auth';
@@ -23,6 +26,7 @@ export function isFirebaseConfigured() {
 }
 
 let authBundle = null;
+let redirectResultPromise = null;
 
 function createAuthBundle() {
   const firebaseConfig = {
@@ -41,6 +45,9 @@ function createAuthBundle() {
     googleProvider,
     signInWithRedirect,
     getRedirectResult,
+    onAuthStateChanged,
+    setPersistence,
+    browserLocalPersistence,
     signOut,
   };
 }
@@ -61,4 +68,17 @@ export function prefetchFirebaseAuth() {
   if (isFirebaseConfigured()) {
     getFirebaseAuthBundle();
   }
+}
+
+/** Single shared call per page load (StrictMode-safe). */
+export function resolveGoogleRedirectResult(auth) {
+  if (!redirectResultPromise) {
+    redirectResultPromise = getRedirectResult(auth);
+  }
+
+  return redirectResultPromise;
+}
+
+export function resetGoogleRedirectState() {
+  redirectResultPromise = null;
 }
