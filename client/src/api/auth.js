@@ -51,6 +51,13 @@ export async function register({ name, email, password, confirmPassword }) {
   return result.user;
 }
 
+function isForgetPasswordTimeout(error) {
+  return (
+    (error instanceof ApiError && error.message === 'REQUEST_TIMEOUT') ||
+    (error instanceof Error && error.message === 'signal timed out')
+  );
+}
+
 export async function forgetPassword(email) {
   try {
     const data = await api('/auth/forget_password', {
@@ -64,6 +71,11 @@ export async function forgetPassword(email) {
 
     return data;
   } catch (error) {
+    // SMTP can outlive the client timeout; the server may still send the email.
+    if (isForgetPasswordTimeout(error)) {
+      return { message: 'Email send' };
+    }
+
     if (error instanceof ApiError) {
       throw new Error(error.message || 'Unexpected error');
     }
