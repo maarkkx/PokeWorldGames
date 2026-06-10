@@ -3,6 +3,12 @@ import transporter from '../../../config/mailer';
 export async function sendResetPasswordEmail(to: string, token: string) {
   const resetUrl = `${process.env.FRONTEND_URL}/reset-password?token=${token}`;
 
+  if (!process.env.SMTP_HOST || !process.env.MAIL_FROM) {
+    console.warn('[reset-password] SMTP not configured; email not sent to', to);
+    console.warn('[reset-password] Dev reset link:', resetUrl);
+    return;
+  }
+
   const info = await transporter.sendMail({
     from: process.env.MAIL_FROM,
     to,

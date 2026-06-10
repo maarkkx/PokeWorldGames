@@ -63,12 +63,13 @@ export async function api(path, { method = 'GET', body, token } = {}) {
       signal: createTimeoutSignal(REQUEST_TIMEOUT_MS),
     });
   } catch (error) {
-    if (error instanceof Error && error.name === 'AbortError') {
-      throw new ApiError(
-        'El servidor tardó demasiado en responder. Inténtalo de nuevo en unos segundos.',
-        0,
-        {},
-      );
+    if (
+      error instanceof Error &&
+      (error.name === 'AbortError' ||
+        error.name === 'TimeoutError' ||
+        error.message === 'signal timed out')
+    ) {
+      throw new ApiError('REQUEST_TIMEOUT', 0, {});
     }
 
     throw error;

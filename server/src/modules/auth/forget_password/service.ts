@@ -34,7 +34,10 @@ export async function requestPasswordReset(email: string) {
     const expiresAt = new Date(Date.now() + 1000 * 60 * 30);
 
     await repository.createPasswordResetRequest(user.id, tokenHash, expiresAt);
-    await sendResetPasswordEmail(email, token);
+
+    void sendResetPasswordEmail(email, token).catch((error) => {
+      console.error('Failed to send reset password email:', error);
+    });
 
     return { message: 'Email send' };
   } catch (error) {

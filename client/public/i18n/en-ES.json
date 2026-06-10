@@ -161,7 +161,8 @@
     "resetPasswordFailed": "Could not reset the password.",
     "resetTokenMissing": "The recovery link is invalid or has expired.",
     "resetTokenInvalid": "The recovery link is invalid or has expired.",
-    "backToSignIn": "Back to sign in"
+    "backToSignIn": "Back to sign in",
+    "requestTimeout": "The server took too long to respond. Please try again in a few seconds."
   },
   "validation": {
     "usernameInvalid": "Username must be 4–20 alphanumeric characters.",

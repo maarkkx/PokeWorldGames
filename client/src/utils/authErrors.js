@@ -73,5 +73,9 @@ export function mapAuthErrorMessage(error, t, KEYS) {
     return null;
   }
 
+  if (message === 'REQUEST_TIMEOUT' || message === 'signal timed out') {
+    return t(KEYS.auth.requestTimeout);
+  }
+
   return message;
 }

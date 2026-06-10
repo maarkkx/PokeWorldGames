@@ -161,7 +161,8 @@
     "resetPasswordFailed": "No se pudo restablecer la contraseña.",
     "resetTokenMissing": "El enlace de recuperación no es válido o ha caducado.",
     "resetTokenInvalid": "El enlace de recuperación no es válido o ha caducado.",
-    "backToSignIn": "Volver a iniciar sesión"
+    "backToSignIn": "Volver a iniciar sesión",
+    "requestTimeout": "El servidor tardó demasiado en responder. Inténtalo de nuevo en unos segundos."
   },
   "validation": {
     "usernameInvalid": "El usuario debe tener entre 4 y 20 caracteres alfanuméricos.",

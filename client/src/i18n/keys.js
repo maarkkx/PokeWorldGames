@@ -163,6 +163,7 @@ export const KEYS = {
     resetTokenMissing: 'auth.resetTokenMissing',
     resetTokenInvalid: 'auth.resetTokenInvalid',
     backToSignIn: 'auth.backToSignIn',
+    requestTimeout: 'auth.requestTimeout',
   },
   validation: {
     usernameInvalid: 'validation.usernameInvalid',
