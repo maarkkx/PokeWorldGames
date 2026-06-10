@@ -36,7 +36,7 @@ export async function requestPasswordReset(email: string) {
     await repository.createPasswordResetRequest(user.id, tokenHash, expiresAt);
 
     void sendResetPasswordEmail(email, token).catch((error) => {
-      console.error('Failed to send reset password email:', error);
+      console.error('[reset-password] Failed to send email to', email, error);
     });
 
     return { message: 'Email send' };

@@ -1,11 +1,12 @@
-import transporter from '../../../config/mailer';
+import { getFrontendUrl } from '../../../config/frontendUrl';
+import transporter, { isSmtpConfigured } from '../../../config/mailer';
 
 export async function sendResetPasswordEmail(to: string, token: string) {
-  const resetUrl = `${process.env.FRONTEND_URL}/reset-password?token=${token}`;
+  const resetUrl = `${getFrontendUrl()}/reset-password?token=${token}`;
 
-  if (!process.env.SMTP_HOST || !process.env.MAIL_FROM) {
+  if (!isSmtpConfigured()) {
     console.warn('[reset-password] SMTP not configured; email not sent to', to);
-    console.warn('[reset-password] Dev reset link:', resetUrl);
+    console.warn('[reset-password] Reset link:', resetUrl);
     return;
   }
 
@@ -26,5 +27,6 @@ export async function sendResetPasswordEmail(to: string, token: string) {
     `,
   });
 
+  console.log('[reset-password] Email sent to', to, 'messageId:', info.messageId);
   return info;
 }
