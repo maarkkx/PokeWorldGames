@@ -26,4 +26,8 @@ export const ROUTES = {
   profile: '/profile',
   trainerProfile: (username) =>
     `/trainers/${encodeURIComponent(String(username ?? '').trim())}`,
+  login: '/login',
+  register: '/register',
+  forgotPassword: '/forgot-password',
+  resetPassword: '/reset-password',
 };

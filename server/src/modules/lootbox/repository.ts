@@ -14,6 +14,7 @@ export async function userLootboxes(id: number) {
   }
 }
 
+//Filtro para eliminar las id excluidas (para que no salgan 2 pokemons repetidos en una caja)
 function buildExcludeFilter(excludeIds: number[]) {
   if (excludeIds.length === 0) {
     return {};

@@ -36,6 +36,30 @@ export function validateLoginForm({ email, password }) {
   return null;
 }
 
+export function validateForgotPasswordForm({ email }) {
+  if (!regexEmail.test(email)) {
+    return KEYS.validation.emailInvalid;
+  }
+
+  return null;
+}
+
+export function validateResetPasswordForm({ newPassword, confirmPassword }) {
+  if (!newPassword) {
+    return KEYS.validation.newPasswordRequired;
+  }
+
+  if (!regexPassword.test(newPassword)) {
+    return KEYS.validation.passwordInvalid;
+  }
+
+  if (newPassword !== confirmPassword) {
+    return KEYS.validation.passwordsMismatch;
+  }
+
+  return null;
+}
+
 export function validateGuessAnswer(answer) {
   if (!answer?.trim()) {
     return KEYS.validation.answerRequired;

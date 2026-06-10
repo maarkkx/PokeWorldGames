@@ -1,6 +1,6 @@
 import * as repository from './repository';
 
-/** 0,5% por apertura: un hueco aleatorio es legendario/mítico. */
+// 0,5% por apertura: un hueco aleatorio es legendario/mítico.
 const LOOTBOX_LEGENDARY_BONUS_CHANCE = 0.005;
 const LEGENDARY_MYTHIC_PER_SLOT_CHANCE = 0.00005;
 
@@ -10,6 +10,7 @@ type LootboxPokemon = {
   url_image: string | null;
 };
 
+//cantidad de pokemons que salen en la lootbox
 function rollLootboxDice(): { roll: number; pokemonCount: number } {
   const roll = Math.floor(Math.random() * 10) + 1;
 
@@ -23,6 +24,7 @@ function rollLootboxDice(): { roll: number; pokemonCount: number } {
 
   return { roll, pokemonCount: 3 };
 }
+
 
 async function pickLootboxPokemon(
   excludeIds: number[],
@@ -44,6 +46,7 @@ async function pickLootboxPokemon(
 }
 
 async function generateLootboxPokemons(count: number) {
+  //si sale mas bajo toca legendario
   const hasLegendaryBonus = Math.random() < LOOTBOX_LEGENDARY_BONUS_CHANCE;
   const legendaryBonusIndex = hasLegendaryBonus
     ? Math.floor(Math.random() * count)

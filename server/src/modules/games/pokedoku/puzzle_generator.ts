@@ -26,6 +26,7 @@ export type GeneratedPuzzle = {
   }>;
 };
 
+//crea el formato para las condiciones
 export function buildPokemonWhereForCondition(
   condition: PuzzleCondition,
 ): Prisma.PokemonWhereInput {
@@ -41,6 +42,7 @@ export function buildPokemonWhereForCondition(
         },
       };
 
+    //transforma la condicion en numero
     case CONDITION_TYPE.GENERATION: {
       const generation = Number.parseInt(condition.value, 10);
       if (!Number.isFinite(generation)) {
@@ -49,6 +51,7 @@ export function buildPokemonWhereForCondition(
       return { generation };
     }
 
+    //guarda true o false
     case CONDITION_TYPE.LEGENDARY:
       return { legendary: condition.value === 'true' };
 
@@ -60,6 +63,7 @@ export function buildPokemonWhereForCondition(
   }
 }
 
+//crea el formato para las condiciones
 export function buildPokemonWhereForConditions(
   row: PuzzleCondition,
   column: PuzzleCondition,
@@ -69,6 +73,7 @@ export function buildPokemonWhereForConditions(
   };
 }
 
+//cuenta cuantos pokemons hay disponibles apra cada casilla
 export async function countPokemonMatchingConditions(
   row: PuzzleCondition,
   column: PuzzleCondition,
@@ -78,6 +83,7 @@ export async function countPokemonMatchingConditions(
   });
 }
 
+//validar respuesta
 export async function pokemonMatchesCellConditions(
   pokemonId: number,
   row: PuzzleCondition,
@@ -93,10 +99,12 @@ export async function pokemonMatchesCellConditions(
   return count > 0;
 }
 
+//evitar que se repitan casillas
 function conditionKey(condition: PuzzleCondition): string {
   return `${condition.type}:${condition.value}`;
 }
 
+//evita que se repitan condiciones
 function pickRandomUnique<T>(items: T[], count: number): T[] {
   const pool = [...items];
   const picked: T[] = [];
@@ -109,6 +117,7 @@ function pickRandomUnique<T>(items: T[], count: number): T[] {
   return picked;
 }
 
+//construye la lista de condiciones
 async function buildConditionPool(): Promise<PuzzleCondition[]> {
   const conditions: PuzzleCondition[] = [];
 
@@ -125,10 +134,12 @@ async function buildConditionPool(): Promise<PuzzleCondition[]> {
       }),
     });
 
+    //comprueba que haya mas de 3 pokemons en cada condicion
     if (count >= MIN_POKEMON_PER_CONDITION) {
       conditions.push({ type: CONDITION_TYPE.TYPE, value: type.name });
     }
   }
+
 
   for (let generation = 1; generation <= 9; generation += 1) {
     const count = await prisma.pokemon.count({
@@ -164,6 +175,11 @@ async function buildConditionPool(): Promise<PuzzleCondition[]> {
   return conditions;
 }
 
+//crea las 9 casillas
+//        col[0] col[2] col[3]
+//fila [0]  1      2      3
+//fila [1]  4      5      6
+//fila [2]  7      8      9
 function buildCellsFromConditions(
   rows: PuzzleCondition[],
   columns: PuzzleCondition[],
@@ -188,6 +204,7 @@ function buildCellsFromConditions(
   return cells;
 }
 
+//comprueba que el puzzle se pueda resolver haciendo un count (minimo 3 pokemons por casilla)
 async function isValidPuzzle(rows: PuzzleCondition[], columns: PuzzleCondition[]): Promise<boolean> {
   for (const row of rows) {
     for (const column of columns) {
@@ -201,9 +218,12 @@ async function isValidPuzzle(rows: PuzzleCondition[], columns: PuzzleCondition[]
   return true;
 }
 
+
 export async function generatePuzzle(): Promise<GeneratedPuzzle> {
+  //construye las condiciones
   const pool = await buildConditionPool();
 
+  //comprobacion de que hay suficientes condiciones
   if (pool.length < CELL_COUNT) {
     throw new Error('Not enough conditions to generate a puzzle');
   }

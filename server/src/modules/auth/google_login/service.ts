@@ -11,6 +11,7 @@ type AuthUser = {
   admin: boolean;
 };
 
+//token de session (dura 1 dia)
 function issueToken(user: AuthUser) {
   const token = jwt.sign(
     {
@@ -31,7 +32,9 @@ function issueToken(user: AuthUser) {
   };
 }
 
+
 export async function googleLogin(idToken: string) {
+  //comprobacion que el token existe
   if (!idToken || typeof idToken !== 'string') {
     return {
       success: false as const,
@@ -39,6 +42,7 @@ export async function googleLogin(idToken: string) {
     };
   }
 
+  //comprobar que el servidor tiene acceso al servicio
   if (!isFirebaseAdminConfigured()) {
     return {
       success: false as const,
@@ -53,6 +57,7 @@ export async function googleLogin(idToken: string) {
   } catch (error) {
     console.log(error);
     const message = error instanceof Error ? error.message : 'Invalid Firebase token';
+
     if (message.includes('Firebase Admin SDK is not configured')) {
       return {
         success: false as const,
@@ -65,6 +70,7 @@ export async function googleLogin(idToken: string) {
         message: 'Firebase service account file not found',
       };
     }
+    
     return {
       success: false as const,
       message: 'Invalid Firebase token',
@@ -97,6 +103,7 @@ export async function googleLogin(idToken: string) {
 
     const byEmail = await repository.getUserByEmail(normalizedEmail);
     if (byEmail) {
+      //comprueba que el mail no este asociado a otra cuenta de google
       if (byEmail.googleId && byEmail.googleId !== uid) {
         return {
           success: false as const,

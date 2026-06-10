@@ -1,5 +1,6 @@
 import type { NextFunction, Request, Response } from 'express';
 
+//buscar origenes permitidos en .env
 function parseAllowedOrigins(): string[] {
   const raw = process.env.CORS_ORIGINS?.trim();
   if (!raw) {
@@ -11,6 +12,7 @@ function parseAllowedOrigins(): string[] {
 
 const allowedOrigins = parseAllowedOrigins();
 
+//en cada peticion recoge origin y comprueba si esta permitido que acceda
 export function corsMiddleware(req: Request, res: Response, next: NextFunction) {
   const origin = req.headers.origin;
 

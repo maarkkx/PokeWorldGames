@@ -146,7 +146,22 @@
     "firebaseAuthNotEnabled": "Firebase Authentication is not enabled. In Firebase Console go to Build → Authentication → Get started, and enable Google as a sign-in provider.",
     "firebaseAdminNotConfigured": "The server is missing Firebase configuration. Check FIREBASE_PROJECT_ID and FIREBASE_SERVICE_ACCOUNT_PATH in server/.env.",
     "firebaseServiceAccountMissing": "server/firebase-service-account.json was not found. Download the key from Firebase Console and save it with that filename.",
-    "googleUserPersistFailed": "Google sign-in worked, but the user could not be saved. Check that the database migration has been applied."
+    "googleUserPersistFailed": "Google sign-in worked, but the user could not be saved. Check that the database migration has been applied.",
+    "forgotPasswordLink": "Forgot your password?",
+    "forgotPasswordSubtitle": "Recover access to your account",
+    "forgotPasswordHint": "Enter your email and we will send you a link to reset your password.",
+    "sendResetLink": "Send reset link",
+    "sendingResetLink": "Sending reset link...",
+    "resetLinkSent": "If an account exists for that email, you will receive a link shortly.",
+    "forgotPasswordFailed": "Could not send the recovery link.",
+    "resetPasswordSubtitle": "Choose a new password",
+    "resetPassword": "Reset password",
+    "resettingPassword": "Resetting password...",
+    "resetPasswordSuccess": "Password updated. You can sign in now.",
+    "resetPasswordFailed": "Could not reset the password.",
+    "resetTokenMissing": "The recovery link is invalid or has expired.",
+    "resetTokenInvalid": "The recovery link is invalid or has expired.",
+    "backToSignIn": "Back to sign in"
   },
   "validation": {
     "usernameInvalid": "Username must be 4–20 alphanumeric characters.",

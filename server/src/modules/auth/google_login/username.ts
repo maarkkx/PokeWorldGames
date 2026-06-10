@@ -1,10 +1,12 @@
 import { regexUser } from '../constants/constants';
 import * as repository from './repository';
 
+//Limpiar caracteres que no sean numeros o letras
 function sanitizeBase(value: string): string {
   return value.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
 }
 
+//crear username a partir del email (para oauth)
 function buildUsernameBase(email: string, displayName?: string | null): string {
   const localPart = email.split('@')[0] ?? 'user';
   let base = sanitizeBase(localPart);
@@ -35,6 +37,7 @@ function buildUsernameBase(email: string, displayName?: string | null): string {
   return base.slice(0, 20);
 }
 
+//comprobar si el user esta repetido, en caso de que si añade un sufix hasta que no este repetido
 export async function generateUniqueUsername(
   email: string,
   displayName?: string | null,

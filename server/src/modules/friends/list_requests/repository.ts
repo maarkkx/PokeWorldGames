@@ -9,6 +9,7 @@ const userSelect = {
   profileBgColor: true,
 } as const;
 
+//listas de solicitudes PENDING enviadas y recibidas
 export async function listPendingForUser(userId: number) {
   const [received, sent] = await Promise.all([
     prisma.friendship.findMany({

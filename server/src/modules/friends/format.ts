@@ -13,6 +13,7 @@ type FriendshipRow = {
   status: FriendshipStatus;
 };
 
+//datos que recibe el frontend para enseñar el perfil de un amigo
 export function formatFriendUser(user: {
   id: number;
   name: string;
@@ -28,6 +29,7 @@ export function formatFriendUser(user: {
   };
 }
 
+//para poder saber que boton de la ui mostrar (enivar solicitud, aceptar, etc)
 export function resolveFriendshipForViewer(
   viewerId: number,
   profileUserId: number,
@@ -38,6 +40,7 @@ export function resolveFriendshipForViewer(
   direction: 'sent' | 'received' | null;
 } {
   if (viewerId === profileUserId) {
+    //no puedes enviartela a ti mismo
     return {
       status: FRIENDSHIP_UI_STATUS.SELF,
       requestId: null,
@@ -77,7 +80,7 @@ export function resolveFriendshipForViewer(
     };
   }
 
-  // REJECTED — treat as none so UI can send again
+
   return {
     status: FRIENDSHIP_UI_STATUS.NONE,
     requestId: null,
@@ -85,6 +88,7 @@ export function resolveFriendshipForViewer(
   };
 }
 
+//lista de amigos
 export function formatFriendshipRecord(
   row: FriendshipRow,
   viewerId: number

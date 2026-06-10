@@ -46,5 +46,32 @@ export function mapAuthErrorMessage(error, t, KEYS) {
     return t(KEYS.auth.googleAccountLinkedElsewhere);
   }
 
+  if (message === 'Invalid or expired token') {
+    return t(KEYS.auth.resetTokenInvalid);
+  }
+
+  if (message === 'Token is required') {
+    return t(KEYS.auth.resetTokenInvalid);
+  }
+
+  if (message === 'Email is required') {
+    return t(KEYS.validation.emailInvalid);
+  }
+
+  if (message === 'Password is required') {
+    return t(KEYS.validation.passwordRequired);
+  }
+
+  if (
+    message ===
+    'The password must be at least 8 characters long, contain 1 uppercase letter, 1 number and 1 symbol'
+  ) {
+    return t(KEYS.validation.passwordInvalid);
+  }
+
+  if (message === 'Unexpected error' || message === 'Internal server error') {
+    return null;
+  }
+
   return message;
 }

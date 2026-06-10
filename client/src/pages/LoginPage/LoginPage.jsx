@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { ROUTES } from '../../config/nav.js';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { useI18n } from '../../context/I18nContext.jsx';
 import GoogleSignInButton from '../../components/auth/GoogleSignInButton.jsx';
@@ -91,6 +92,10 @@ export default function LoginPage() {
             autoComplete="current-password"
             required
           />
+
+          <p className="auth-page__forgot">
+            <Link to={ROUTES.forgotPassword}>{t(KEYS.auth.forgotPasswordLink)}</Link>
+          </p>
 
           {error ? <p className="auth-page__error">{error}</p> : null}
 

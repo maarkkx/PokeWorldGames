@@ -9,6 +9,7 @@ const userSelect = {
   profileBgColor: true,
 } as const;
 
+//solo los amigos aceptados
 export async function listAcceptedFriends(userId: number) {
   return prisma.friendship.findMany({
     where: {

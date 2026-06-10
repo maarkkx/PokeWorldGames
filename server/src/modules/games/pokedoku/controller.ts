@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import * as envs from '../../../config/envs';
 import * as service from './service';
 
+//Coge el header con el token y lo decodea
 function readUserId(req: Request): number | null {
   const authHeader = req.headers.authorization;
   if (!authHeader) {

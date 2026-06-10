@@ -50,3 +50,45 @@ export async function register({ name, email, password, confirmPassword }) {
 
   return result.user;
 }
+
+export async function forgetPassword(email) {
+  try {
+    const data = await api('/auth/forget_password', {
+      method: 'POST',
+      body: { email },
+    });
+
+    if (data.message !== 'Email send') {
+      throw new Error(data.message ?? 'Unexpected error');
+    }
+
+    return data;
+  } catch (error) {
+    if (error instanceof ApiError) {
+      throw new Error(error.message || 'Unexpected error');
+    }
+
+    throw error;
+  }
+}
+
+export async function resetPasswordWithToken(token, newPassword) {
+  try {
+    const data = await api('/auth/reset_password', {
+      method: 'POST',
+      body: { token, newPassword },
+    });
+
+    if (!data.success) {
+      throw new Error(data.message ?? 'Unexpected error');
+    }
+
+    return data;
+  } catch (error) {
+    if (error instanceof ApiError) {
+      throw new Error(error.message || 'Unexpected error');
+    }
+
+    throw error;
+  }
+}

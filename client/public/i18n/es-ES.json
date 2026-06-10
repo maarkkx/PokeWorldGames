@@ -146,7 +146,22 @@
     "firebaseAuthNotEnabled": "Firebase Authentication no está activado. En Firebase Console ve a Compilación → Authentication → Comenzar, y activa Google como proveedor.",
     "firebaseAdminNotConfigured": "El servidor no tiene Firebase configurado. Revisa FIREBASE_PROJECT_ID y FIREBASE_SERVICE_ACCOUNT_PATH en server/.env.",
     "firebaseServiceAccountMissing": "No se encuentra server/firebase-service-account.json. Descarga la clave en Firebase Console y guárdala con ese nombre.",
-    "googleUserPersistFailed": "Google inició sesión, pero no se pudo guardar el usuario. Comprueba que la migración de base de datos esté aplicada."
+    "googleUserPersistFailed": "Google inició sesión, pero no se pudo guardar el usuario. Comprueba que la migración de base de datos esté aplicada.",
+    "forgotPasswordLink": "¿Olvidaste tu contraseña?",
+    "forgotPasswordSubtitle": "Recupera el acceso a tu cuenta",
+    "forgotPasswordHint": "Introduce tu correo y te enviaremos un enlace para restablecer la contraseña.",
+    "sendResetLink": "Enviar enlace",
+    "sendingResetLink": "Enviando enlace...",
+    "resetLinkSent": "Si existe una cuenta con ese correo, recibirás un enlace en breve.",
+    "forgotPasswordFailed": "No se pudo enviar el enlace de recuperación.",
+    "resetPasswordSubtitle": "Elige una nueva contraseña",
+    "resetPassword": "Restablecer contraseña",
+    "resettingPassword": "Restableciendo contraseña...",
+    "resetPasswordSuccess": "Contraseña actualizada. Ya puedes iniciar sesión.",
+    "resetPasswordFailed": "No se pudo restablecer la contraseña.",
+    "resetTokenMissing": "El enlace de recuperación no es válido o ha caducado.",
+    "resetTokenInvalid": "El enlace de recuperación no es válido o ha caducado.",
+    "backToSignIn": "Volver a iniciar sesión"
   },
   "validation": {
     "usernameInvalid": "El usuario debe tener entre 4 y 20 caracteres alfanuméricos.",

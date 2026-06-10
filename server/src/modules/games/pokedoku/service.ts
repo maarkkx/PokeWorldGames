@@ -24,6 +24,7 @@ type CellDTO = {
   } | null;
 };
 
+//Guarda las casillas correctas y incorrectas
 function countWrongFromCells(cells: GameWithCells['cells']): number {
   return cells.filter((cell) => cell.answerPokemonId != null && cell.isCorrect === false).length;
 }
@@ -32,6 +33,7 @@ function countCorrectFromCells(cells: GameWithCells['cells']): number {
   return cells.filter((cell) => cell.isCorrect === true).length;
 }
 
+//Construir las cabeceras de cada fila
 function extractRowsFromCells(cells: GameWithCells['cells']): ConditionDTO[] {
   return [1, 4, 7].map((position) => {
     const cell = cells.find((entry) => entry.position === position);
@@ -46,6 +48,7 @@ function extractRowsFromCells(cells: GameWithCells['cells']): ConditionDTO[] {
   });
 }
 
+//Construir las cabeceras de cada columna
 function extractColumnsFromCells(cells: GameWithCells['cells']): ConditionDTO[] {
   return [1, 2, 3].map((position) => {
     const cell = cells.find((entry) => entry.position === position);
@@ -60,6 +63,7 @@ function extractColumnsFromCells(cells: GameWithCells['cells']): ConditionDTO[] 
   });
 }
 
+//transforma la celda al formato del frontend
 function mapCellToDTO(cell: GameWithCells['cells'][number]): CellDTO {
   const answered = cell.answerPokemonId != null;
 
@@ -77,6 +81,7 @@ function mapCellToDTO(cell: GameWithCells['cells'][number]): CellDTO {
   };
 }
 
+//object para el frontend con todo el game
 function buildGamePayload(game: GameWithCells) {
   const usedPokemonIds = game.cells
     .map((cell) => cell.answerPokemonId)
@@ -88,15 +93,16 @@ function buildGamePayload(game: GameWithCells) {
   return {
     gameId: game.gameId,
     status: game.status,
-    rows: extractRowsFromCells(game.cells),
-    columns: extractColumnsFromCells(game.cells),
-    cells: game.cells.map(mapCellToDTO),
+    rows: extractRowsFromCells(game.cells), //3 condiciones
+    columns: extractColumnsFromCells(game.cells), //3 condiciones
+    cells: game.cells.map(mapCellToDTO), //las 9 cells
     usedPokemonIds,
     remainingLives: MAX_LIVES - wrongCount,
     correctCount,
   };
 }
 
+//fguncion para coger las condiciones de una celda
 function getCellConditions(cell: GameWithCells['cells'][number]): {
   row: PuzzleCondition;
   column: PuzzleCondition;
@@ -123,16 +129,21 @@ async function finalizeGame(
   correctCount: number;
   remainingLives: number;
 }> {
+  //count de los aciertos y fallos
   const correctCount = await repository.countCorrectCells(gameInternalId);
   const wrongCount = await repository.countWrongCells(gameInternalId);
-  const xpEarned = calculatePokedokuXp(correctCount);
-  const status = correctCount === CELL_COUNT ? 'WON' : 'LOST';
 
+  //calcula la experiencia llamando a la funcion
+  const xpEarned = calculatePokedokuXp(correctCount);
+
+  //update del status
+  const status = correctCount === CELL_COUNT ? 'WON' : 'LOST';
   await repository.updateGameStatus(gameId, {
     status,
     xpEarned,
   });
 
+  //añade la xp
   if (xpEarned > 0) {
     await expManager.addXP(userId, xpEarned);
   }
@@ -146,6 +157,7 @@ async function finalizeGame(
 }
 
 export async function startGame(userId: number): Promise<object> {
+  //comprueba si ya hay un game activo
   try {
     const activeGame = await repository.getActiveGameByUserId(userId);
     if (activeGame) {
@@ -190,25 +202,25 @@ export async function searchPokemonForCell(
   query: string,
 ): Promise<object> {
   try {
+    //comprueba que hayan 2 caracteres o mas para hacer la busqueda
     const trimmed = query?.trim();
-
     if (!trimmed || trimmed.length < 2) {
       return { names: [] };
     }
 
+    //comprueba que la posicion de la casilla exista
     if (!Number.isInteger(position) || position < 1 || position > CELL_COUNT) {
       throw new Error('Invalid cell position');
     }
 
+    //comprobaciones de la partida
     const game = await repository.getGameWithCellsByGameId(gameId);
     if (!game) {
       throw new Error('Game not found');
     }
-
     if (game.userId !== userId) {
       throw new Error('Not your game');
     }
-
     if (game.status !== 'ACTIVE') {
       throw new Error('Game already finished');
     }
@@ -222,9 +234,13 @@ export async function searchPokemonForCell(
       throw new Error('Cell already answered');
     }
 
+    //eliminar pokemons usados en el game
     const excludeIds = await repository.getUsedPokemonIds(game.id);
+
+    //buscar el pokemons con las 2 letras excluyendo los ya utilizados
     const results = await repository.searchPokemonByName(trimmed, excludeIds, 8);
 
+    //devuelve los 8 primeros pokemons
     return {
       names: results.map((pokemon) => pokemon.name),
       pokemons: results,
@@ -243,47 +259,42 @@ export async function submitAnswer(
   pokemonId: number,
 ): Promise<object> {
   try {
+    //comprobaciones
     if (!Number.isInteger(position) || position < 1 || position > CELL_COUNT) {
       throw new Error('Invalid cell position');
     }
-
     if (!Number.isInteger(pokemonId) || pokemonId < 1) {
       throw new Error('Invalid pokemon id');
     }
-
     const game = await repository.getGameWithCellsByGameId(gameId);
     if (!game) {
       throw new Error('Game not found');
     }
-
     if (game.userId !== userId) {
       throw new Error('Not your game');
     }
-
     if (game.status !== 'ACTIVE') {
       return { message: 'Game already finished', status: game.status };
     }
-
     const cell = game.cells.find((entry) => entry.position === position);
     if (!cell) {
       throw new Error('Cell not found');
     }
-
     if (cell.answerPokemonId != null) {
       throw new Error('Cell already answered');
     }
-
     const usedPokemonIds = await repository.getUsedPokemonIds(game.id);
     if (usedPokemonIds.includes(pokemonId)) {
       throw new Error('Pokemon already used in this game');
     }
-
     const pokemon = await repository.getPokemonById(pokemonId);
     if (!pokemon) {
       throw new Error('Pokemon not found');
     }
 
+    //get de las condiciones de las casillas
     const { row, column } = getCellConditions(cell);
+    //comprueba que el pokemon cumpla los requisitos
     const isCorrect = await pokemonMatchesCellConditions(pokemonId, row, column);
     const answeredAt = new Date();
 

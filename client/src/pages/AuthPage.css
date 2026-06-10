@@ -70,6 +70,29 @@
   padding-bottom: 16px;
 }
 
+.auth-page__hint {
+  margin: 0;
+  font-size: 14px;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.auth-page__forgot {
+  margin: -6px 0 0;
+  text-align: right;
+  font-size: 14px;
+}
+
+.auth-page__forgot a {
+  color: var(--color-primary);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.auth-page__forgot a:hover {
+  text-decoration: underline;
+}
+
 .auth-page__switch {
   margin: 24px 0 0;
   text-align: center;

@@ -1,10 +1,13 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { ROUTES } from './config/nav.js';
 import { AuthProvider } from './context/AuthContext.jsx';
 import ProtectedRoute from './components/routing/ProtectedRoute.jsx';
 import PublicRoute from './components/routing/PublicRoute.jsx';
 import HomePage from './pages/HomePage/HomePage.jsx';
 import LoginPage from './pages/LoginPage/LoginPage.jsx';
 import RegisterPage from './pages/RegisterPage/RegisterPage.jsx';
+import ForgotPasswordPage from './pages/ForgotPasswordPage/ForgotPasswordPage.jsx';
+import ResetPasswordPage from './pages/ResetPasswordPage/ResetPasswordPage.jsx';
 import GamesPage from './pages/GamesPage/GamesPage.jsx';
 import GuessPokemonPage from './pages/GuessPokemonPage/GuessPokemonPage.jsx';
 import GuessShinyPage from './pages/GuessShinyPage/GuessShinyPage.jsx';
@@ -119,7 +122,7 @@ export default function App() {
             }
           />
           <Route
-            path="/login"
+            path={ROUTES.login}
             element={
               <PublicRoute>
                 <LoginPage />
@@ -127,10 +130,26 @@ export default function App() {
             }
           />
           <Route
-            path="/register"
+            path={ROUTES.register}
             element={
               <PublicRoute>
                 <RegisterPage />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path={ROUTES.forgotPassword}
+            element={
+              <PublicRoute>
+                <ForgotPasswordPage />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path={ROUTES.resetPassword}
+            element={
+              <PublicRoute>
+                <ResetPasswordPage />
               </PublicRoute>
             }
           />

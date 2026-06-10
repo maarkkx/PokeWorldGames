@@ -9,15 +9,20 @@ export async function removeFriend(
   const { requestId, friendUserName } = payload;
 
   let row = null;
-
+  
+  //comprobar que la relacion existe
   if (requestId) {
     row = await shared.findFriendshipById(requestId);
+
   } else if (friendUserName?.trim()) {
     const friend = await shared.findUserByName(friendUserName.trim());
+
     if (!friend) {
       throw new Error('User does not exist');
     }
+
     row = await shared.findFriendshipBetween(userId, friend.id);
+
   } else {
     throw new Error('requestId or friendUserName is required');
   }
