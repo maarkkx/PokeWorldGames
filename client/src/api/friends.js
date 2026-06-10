@@ -1,18 +1,5 @@
 import { api } from './client.js';
 
-function parseMessagePayload(data, key) {
-  if (data?.message) {
-    throw new Error(data.message);
-  }
-
-  const value = data?.[key];
-  if (value?.message) {
-    throw new Error(value.message);
-  }
-
-  return value;
-}
-
 export async function sendFriendRequest(token, toUserName) {
   const data = await api('/friends/send_request', {
     method: 'POST',

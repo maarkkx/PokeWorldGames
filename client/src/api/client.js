@@ -18,8 +18,8 @@ function resolveErrorMessage(response, data) {
 
   if (response.status === 404) {
     return import.meta.env.DEV
-      ? 'No se encontró el API. Comprueba que el backend esté en marcha (puerto 3000).'
-      : 'No se encontró el API. Si el front está en otro dominio, define VITE_API_URL al hacer el build.';
+      ? 'No se encontró la API. Comprueba que el backend esté en marcha (puerto 3000).'
+      : 'No se encontró la API. Si el front está en otro dominio, define VITE_API_URL al hacer el build.';
   }
 
   return response.statusText;

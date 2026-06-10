@@ -71,7 +71,7 @@ export async function forgetPassword(email) {
 
     return data;
   } catch (error) {
-    // SMTP can outlive the client timeout; the server may still send the email.
+    //si hay error por timeout que enseñe mensaje de que se ha enviado el correo
     if (isForgetPasswordTimeout(error)) {
       return { message: 'Email send' };
     }

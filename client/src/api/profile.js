@@ -1,5 +1,6 @@
 import { api } from './client.js';
 
+//return del objeto en caso de que no haya error
 function parseProfileResult(result, fallbackMessage) {
   if (result?.message) {
     throw new Error(result.message);
@@ -8,6 +9,7 @@ function parseProfileResult(result, fallbackMessage) {
   return result;
 }
 
+//return del perfil del usuario logueado
 export async function fetchProfile(token) {
   const data = await api('/profile/show', {
     method: 'POST',
@@ -70,6 +72,7 @@ export async function updatePinnedPokemons(token, pokemonIds) {
   return parseProfileResult(data.result, 'Failed to update pinned Pokémon');
 }
 
+//return de los users si no da errores
 function parseUsersPayload(users) {
   if (users?.message) {
     throw new Error(users.message);
@@ -82,6 +85,7 @@ function parseUsersPayload(users) {
   return users.filter((entry) => entry?.name);
 }
 
+
 export async function searchUsers(token, query) {
   const data = await api('/profile/search_users', {
     method: 'POST',
@@ -92,6 +96,7 @@ export async function searchUsers(token, query) {
   return parseUsersPayload(data.users);
 }
 
+//get perfil de otra persona
 export async function fetchPublicProfile(token, username) {
   const data = await api('/profile/show_public', {
     method: 'POST',
@@ -101,6 +106,7 @@ export async function fetchPublicProfile(token, username) {
 
   return parseProfileResult(data.result, 'Failed to load trainer profile');
 }
+
 
 export async function fetchAvatarOptions() {
   const data = await api('/profile/avatar-options', {
