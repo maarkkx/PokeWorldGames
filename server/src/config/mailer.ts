@@ -18,6 +18,8 @@ const transporter = nodemailer.createTransport({
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
   },
+  // Cloud hosts (Railway, Render, etc.) often lack IPv6 routing; Gmail resolves to IPv6 first.
+  family: 4,
   connectionTimeout: 10_000,
   greetingTimeout: 10_000,
   socketTimeout: 10_000,
@@ -25,7 +27,9 @@ const transporter = nodemailer.createTransport({
 
 export function logSmtpStatus(): void {
   if (isSmtpConfigured()) {
-    console.log('[config] SMTP configured for password reset emails');
+    console.log(
+      `[config] SMTP configured (${process.env.SMTP_HOST}:${process.env.SMTP_PORT}, IPv4 only)`
+    );
     return;
   }
 
