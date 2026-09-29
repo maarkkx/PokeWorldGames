@@ -1,14 +1,9 @@
 import "dotenv/config";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "../generated/prisma";
+import { getRuntimeDatabaseUrl } from "./dbUrl";
 
-const connectionString = process.env.DATABASE_URL;
-
-if (!connectionString) {
-  throw new Error("DATABASE_URL no está definida en .env");
-}
-
-const adapter = new PrismaPg({ connectionString });
+const adapter = new PrismaPg({ connectionString: getRuntimeDatabaseUrl() });
 const prisma = new PrismaClient({ adapter });
 
 export default prisma;
